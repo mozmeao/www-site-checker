@@ -1,0 +1,12 @@
+.cache
+.coverage
+.docker-build*
+.DS_Store
+.env
+.eslintcache
+.idea
+.vscode/
+*~
+test-results.xml
+venv
+TODO.txt

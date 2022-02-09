@@ -1,0 +1,102 @@
+# The allowlist has a per-site setup, so that links from SiteA do not have to be allowed from SiteB
+
+# Remember that any scalar strings with escaped characters must be single-quoted
+
+bedrock_base_config: &bedrock_base_config
+  allowed_outbound_url_regexes:
+    # === Broad, trusted cases ===
+    - '^(\/|#).*' # Relative URLs and in-page anchors are OK
+
+    # === Mozilla-run things ===
+    - '^http[s]{0,1}:\/\/[^\/]+.mozilla.org\/(.*)' # TODO: test this regex thoroughly
+    - '^http[s]{0,1}:\/\/[^\/]+.firefox.com\/(.*)' # TODO: test this regex thoroughly
+
+    - '^http[s]{0,1}:\/\/mzl.la\/(.*)'
+    - '^http[s]{0,1}:\/\/getpocket.com\/(.*)'
+    - '^http[s]{0,1}:\/\/bugzil.la\/(\d*)$' # TODO: test this regex thoroughly
+
+    # pages linked to from our own security advisories - eg https://www.mozilla.org/en-US/security/advisories/mfsa2006-50/ -> mfsa2006-01.html
+    - '^mfsa\d{4}-\d{2}(.html){0,1}$'
+
+    # === Trusted third-party sites ===
+
+    # CVEs at mitre.org
+    - '^http[s]{0,1}:\/\/(www.){0,1}cve.mitre.org\/cgi-bin\/cvename.cgi\?name=(CVE|CAN)-\d{4}-\d{4,5}$'
+
+    # CVEs at NIST
+    - '^http[s]{0,1}:\/\/nvd.nist.gov\/nvd.cfm\?cvename=CVE-\d{4}-\d{4}$'
+
+    # === Special cases ===
+
+    # Limited traversal allowed for references to releasenotes pages on /firefox/releases/
+    - '^(..\/)([0-9]*.[0-9a-z]*.{0,1}[a-z0-9]*)\/releasenotes\/.*'
+
+    # Legacy release notes, eg `1.0.3.html`` linked from www.mozilla.org/en-US/firefox/releases/, that get redirected:
+    - '^([0-1]{1}.\d{1}.{0,1}\d{0,2}.{0,1}\d{0,2}).html$'
+
+  allowed_outbound_url_literals:
+    # Internals
+    - "about:plugins"
+
+    # Things we're using to get stuff done
+    - "https://docs.google.com/forms/d/1rwLVzr1Fql9ZtAKkG_z5jcRczn2uy84zqwBX9gX52OY/viewform" # Google Form for Credits-page request
+
+    # Trusted third-party URLs
+    - "http://commonspace.wordpress.com/" # Mark Surman's blog
+    - "http://commonspace.wordpress.com/category/hybrid/" # Mark Surman's blog
+    - "http://citizencodeofconduct.org/"
+    - "http://code.google.com/p/ots/"
+    - "http://code.google.com/apis/safebrowsing/firefox3_privacy.html"
+    - "http://code.google.com/p/chromium/issues/detail?id=78524"
+    - "http://copybuzz.com/copyright/interview-raegan-macdonald/"
+    - "http://creativecommons.org/licenses/by-sa/3.0/"
+    - "http://creativecommons.org/privacy"
+    - "http://creativecommons.org/publicdomain/zero/1.0/"
+
+    # RFCs
+    - "http://www.ietf.org/rfc/rfc0959.txt"
+    - "http://www.ietf.org/rfc/rfc2616.txt"
+    - "http://www.ietf.org/rfc/rfc3986.txt"
+    - "http://www.ietf.org/rfc/rfc6125.txt"
+
+    # Security advisories
+    - "http://secunia.com/advisories/10419/"
+    - "http://secunia.com/advisories/12712"
+    - "http://secunia.com/advisories/13129/"
+    - "http://secunia.com/advisories/13258"
+    - "http://secunia.com/advisories/13599"
+    - "http://secunia.com/advisories/15489/"
+    - "http://secunia.com/advisories/15549/"
+    - "http://secunia.com/advisories/15601/"
+    - "http://secunia.com/advisories/19802/"
+    - "http://secunia.com/advisories/19873"
+    - "http://secunia.com/advisories/26201/"
+    - "http://secunia.com/advisories/37242"
+
+bedrock_cdn:
+  <<: *bedrock_base_config
+  hostname: www.mozilla.org
+
+origin_us:
+  <<: *bedrock_base_config
+  hostname: bedrock.gcp.moz.works
+
+origin_fr:
+  <<: *bedrock_base_config
+  hostname: bedrock.prod.fr.moz.works
+#
+#
+# # Example additional site
+# other_base_config: &other_base_config
+#   allowed_outbound_url_regexes:
+#     - 'http[s]{0,1}:\/\/[^\/]+.example.com\/(.*)'
+#   allowed_outbound_url_literals:
+#     - 'https://other-example.com/two'
+
+# other_site_1:
+#   <<: *other_base_config
+#   hostname: www.example.org
+
+# other_site_2:
+#   <<: *other_base_config
+#   hostname: mirror.example.org

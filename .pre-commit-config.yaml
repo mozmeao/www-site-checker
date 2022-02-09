@@ -1,0 +1,40 @@
+# Global excludes, override per repo below if different excludes required.
+# exclude: >
+#   (?x)^(
+#     DIRNAME_OR_FILENAME_HERE
+#     | DIRNAME_OR_FILENAME_HERE
+#     | DIRNAME_OR_FILENAME_HERE
+#   )
+repos:
+  # Note: hooks that add content must run before ones which check formatting, lint, etc
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.1.10
+    hooks:
+      - id: insert-license
+        language: python
+        files: \.py$
+        args:
+          - --license-filepath
+          - license_header/mpl2_header.txt
+          - --comment-style
+          - "|#|"
+      - id: insert-license
+        files: \.sh$
+        args:
+          - --license-filepath
+          - license_header/mpl2_header.txt
+  - repo: https://github.com/psf/black
+    rev: 21.12b0
+    hooks:
+      - id: black
+        language_version: python3
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.9.2
+    hooks:
+      - id: flake8
+  #        TODO Add this and fix issues found
+  #        additional_dependencies: [flake8-bugbear]

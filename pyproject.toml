@@ -1,0 +1,11 @@
+[tool.black]
+line-length = 150  # To match flake8
+target-version = ['py39']
+include = '\.pyi?$'
+
+[tool.isort]
+combine_as_imports = true
+default_section = 'THIRDPARTY'
+include_trailing_comma = true
+profile = 'black'
+sections = 'FUTURE,STDLIB,THIRDPARTY,LOCALFOLDER'
