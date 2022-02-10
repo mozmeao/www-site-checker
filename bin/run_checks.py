@@ -12,13 +12,16 @@ import os
 import re
 from collections import defaultdict
 from functools import cache
-from typing import Dict, Iterable, List
+from typing import Dict, Iterable, List, Tuple
 from urllib.parse import urlparse
 
 import click
 import requests
 from bs4 import BeautifulSoup
+from requests.exceptions import ChunkedEncodingError
 from yaml import safe_load
+
+URL_RETRY_LIMIT = 3
 
 
 @click.command()
@@ -79,33 +82,50 @@ def run_checks(
 
     if results:
         if nested_results_path and flat_results_path:
-            click.echo(f"Unexpected outbound URLs found! Simple report: {flat_results_path} Nested report: {nested_results_path} ")
+            click.echo(f"Unexpected outbound URLs found!\nSimple report: {flat_results_path}\nNested report: {nested_results_path} ")
         raise Exception("Unexpected oubound URLs detected.")
 
     click.echo("Checks completed and no unexpected outbound URLs found")
 
 
-def _dump_to_file(results: Dict) -> None:
+def _get_url_with_retry(url, try_count=0, limit=URL_RETRY_LIMIT) -> requests.Response:
+    exceptions_to_retry = (ChunkedEncodingError,)
+    try:
+        resp = requests.get(url)
+        resp.raise_for_status()
+        return resp
+
+    except exceptions_to_retry as re:
+        if try_count < limit:
+            click.echo(f"Retrying after {re}")
+            return _get_url_with_retry(url, try_count=try_count + 1)
+        else:
+            click.echo(f"Max retries ({URL_RETRY_LIMIT}) reached. Raising exception {re}")
+            raise re
+
+
+def _dump_to_file(results: Dict[str, set]) -> Tuple[str]:
     _output_path = _get_output_path()
     _now = datetime.datetime.utcnow().isoformat()
     flat_output_filepath = os.path.join(_output_path, f"flat_{_now}.txt")
     nested_output_filepath = os.path.join(_output_path, f"nested_{_now}.txt")
 
-    # results is a dictionary where the values are a {set}
-    fp_nested = open(nested_output_filepath)
-    for unexpected_url, occurrences in results.items():
-        line = "\n\n{unexpected_url}\n, {occurrences}".format(
-            unexpected_url=unexpected_url,
-            occurrences="\n\t\t".join(occurrences),
-        )
-        fp_nested.write(line.encode("utf-8"))
-    fp_nested.close()
-    click.echo(f"Nested debug data dumped to {nested_output_filepath}")
-
-    fp_flat = open(flat_output_filepath)
-    fp_flat.write("\n".join([key for key in results.keys()]).encode("utf-8"))
+    fp_flat = open(flat_output_filepath, "w")
+    fp_flat.write("\n".join([key for key in results.keys()]))
     fp_flat.close
-    click.echo(f"Flat list of unexpected URLs dumped to {flat_output_filepath}")
+    click.echo(f"List of unexpected URLs dumped to {flat_output_filepath}")
+
+    fp_nested = open(nested_output_filepath, "w")
+    for unexpected_url, occurrences in results.items():
+        line = "\n{unexpected_url}\nFound in:\n\t{occurrences}".format(
+            unexpected_url=unexpected_url,
+            occurrences="\n\t".join(occurrences),
+        )
+        fp_nested.write(line)
+    fp_nested.close()
+
+    click.echo(f"List of unexpected URLs plus the page URLs that reference them dumped to {nested_output_filepath}")
+    return flat_output_filepath, nested_output_filepath
 
 
 def _get_output_path() -> os.PathLike:
@@ -115,7 +135,7 @@ def _get_output_path() -> os.PathLike:
     working_dir = os.getcwd()
     if str(working_dir).endswith("/bin"):
         path_components = [working_dir, ".."] + path_components
-    return os.path.join("./", *path_components)
+    return os.path.join("", *path_components)
 
 
 def _get_allowlist_path() -> os.PathLike:
@@ -123,7 +143,7 @@ def _get_allowlist_path() -> os.PathLike:
     working_dir = os.getcwd()
     if str(working_dir).endswith("/bin"):
         path_components = [working_dir, ".."] + path_components
-    return os.path.join("./", *path_components)
+    return os.path.join("", *path_components)
 
 
 @cache
@@ -179,8 +199,7 @@ def _check_pages(urls: List[str], config: Dict) -> Dict:
 
     for page_url in urls:
         click.echo(f"Pulling down {page_url}")
-        resp = requests.get(page_url)
-        resp.raise_for_status()
+        resp = _get_url_with_retry(page_url)
         content = resp.text
         soup = BeautifulSoup(content, "html5lib")
         anchor_tags = soup.find_all("a")
@@ -230,8 +249,7 @@ def _get_urls_from_sitemap(sitemap_url: str) -> List[str]:
 
     urls = []
 
-    resp = requests.get(sitemap_url)
-    resp.raise_for_status()
+    resp = _get_url_with_retry(sitemap_url)
 
     sitemap_xml = resp.text
     soup = BeautifulSoup(sitemap_xml, "lxml")

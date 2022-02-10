@@ -1,8 +1,9 @@
 name: "Scheduled checks" # Note that this name appears in the README's badge
 on:
   push:
-  schedule:
-    - cron: "15 * * * *"
+  # TEMPORARILY DISABLED
+  # schedule:
+  #   - cron: "15 * * * *"
 jobs:
   run_on_cdn:
     runs-on: ubuntu-latest
@@ -13,4 +14,9 @@ jobs:
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Run checker
-        run: python bin/run_checks.py --sitemap-url=https://www.mozilla.org/sitemap.xml --dump
+        run: python bin/run_checks.py --sitemap-url=https://www.mozilla.org/sitemap.xml
+      - name: Upload output files
+        uses: actions/upload-artifact@v2
+        with:
+          name: scan-results
+          path: output
