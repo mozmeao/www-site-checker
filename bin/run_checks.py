@@ -7,11 +7,11 @@ This is a tool to help verify the content of the specified website.
 Run the specified checks on specified URLs and issue a report
 """
 
+import datetime
 import os
 import re
 from collections import defaultdict
 from functools import cache
-from tempfile import NamedTemporaryFile
 from typing import Dict, Iterable, List
 from urllib.parse import urlparse
 
@@ -86,21 +86,36 @@ def run_checks(
 
 
 def _dump_to_file(results: Dict) -> None:
+    _output_path = _get_output_path()
+    _now = datetime.datetime.utcnow().isoformat()
+    flat_output_filepath = os.path.join(_output_path, f"flat_{_now}.txt")
+    nested_output_filepath = os.path.join(_output_path, f"nested_{_now}.txt")
+
     # results is a dictionary where the values are a {set}
-    fp = NamedTemporaryFile(delete=False)
+    fp_nested = open(nested_output_filepath)
     for unexpected_url, occurrences in results.items():
         line = "\n\n{unexpected_url}\n, {occurrences}".format(
             unexpected_url=unexpected_url,
             occurrences="\n\t\t".join(occurrences),
         )
-        fp.write(line.encode("utf-8"))
-    fp.close()
-    click.echo(f"Nested debug data dumped to {fp.name}")
+        fp_nested.write(line.encode("utf-8"))
+    fp_nested.close()
+    click.echo(f"Nested debug data dumped to {nested_output_filepath}")
 
-    fp2 = NamedTemporaryFile(delete=False)
-    fp2.write("\n".join([key for key in results.keys()]).encode("utf-8"))
-    fp2.close
-    click.echo(f"Flat list of unexpected URLs dumped to {fp2.name}")
+    fp_flat = open(flat_output_filepath)
+    fp_flat.write("\n".join([key for key in results.keys()]).encode("utf-8"))
+    fp_flat.close
+    click.echo(f"Flat list of unexpected URLs dumped to {flat_output_filepath}")
+
+
+def _get_output_path() -> os.PathLike:
+    path_components = [
+        "output",
+    ]
+    working_dir = os.getcwd()
+    if str(working_dir).endswith("/bin"):
+        path_components = [working_dir, ".."] + path_components
+    return os.path.join("./", *path_components)
 
 
 def _get_allowlist_path() -> os.PathLike:

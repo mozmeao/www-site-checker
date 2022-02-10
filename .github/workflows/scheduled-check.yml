@@ -1,0 +1,16 @@
+name: "Scheduled checks" # Note that this name appears in the README's badge
+on:
+  push:
+  schedule:
+    - cron: "15 * * * *"
+jobs:
+  run_on_cdn:
+    runs-on: ubuntu-latest
+    name: Check main CDN
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: python bin/run_checks.py --sitemap-url=https://www.mozilla.org/sitemap.xml --dump
