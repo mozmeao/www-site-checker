@@ -4,3 +4,4 @@ html5lib==1.1
 lxml==4.7.1
 PyYAML==6.0
 requests==2.27.1
+sentry-sdk==1.5.4

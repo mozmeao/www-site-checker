@@ -6,8 +6,8 @@
 This is a tool to help verify the content of the specified website.
 Run the specified checks on specified URLs and issue a report
 """
-
 import datetime
+import logging
 import os
 import re
 from collections import defaultdict
@@ -17,9 +17,25 @@ from urllib.parse import urlparse
 
 import click
 import requests
+import sentry_sdk
 from bs4 import BeautifulSoup
 from requests.exceptions import ChunkedEncodingError
+from sentry_sdk.integrations.logging import LoggingIntegration
 from yaml import safe_load
+
+GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
+SENTRY_DSN = os.environ.get("SENTRY_DSN")
+if SENTRY_DSN:
+    # Set up Sentry logging if we can.
+    sentry_logging = LoggingIntegration(
+        level=logging.DEBUG,  # Capture debug and above as breadcrumbs
+        event_level=logging.ERROR,  # Send errors and above as events
+    )
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[sentry_logging],
+    )
+
 
 URL_RETRY_LIMIT = 3
 
@@ -81,11 +97,11 @@ def run_checks(
         flat_results_path, nested_results_path = _dump_to_file(results)
 
     if results:
-        if nested_results_path and flat_results_path:
-            click.echo(f"Unexpected outbound URLs found!\nSimple report: {flat_results_path}\nNested report: {nested_results_path} ")
-        raise Exception("Unexpected oubound URLs detected.")
-
-    click.echo("Checks completed and no unexpected outbound URLs found")
+        click.echo(f"Unexpected outbound URLs found on {hostname}!")
+        if SENTRY_DSN:
+            sentry_sdk.capture_message(f"Unexpected oubound URLs found on {hostname} - see Github Action in {GITHUB_REPOSITORY} for output data")
+    else:
+        click.echo("Checks completed and no unexpected outbound URLs found")
 
 
 def _get_url_with_retry(url, try_count=0, limit=URL_RETRY_LIMIT) -> requests.Response:
@@ -217,11 +233,7 @@ def _check_pages(urls: List[str], config: Dict) -> Dict:
                     unlisted_outbound_urls[_url].add(page_url)
 
         # TODO: OPTIMISE THE ABOVE - it's marvellously inefficient
-
         # TODO: find URLS in rendered content, too
-
-    print(f"unlisted_outbound_urls: {len(unlisted_outbound_urls)}")
-
     return unlisted_outbound_urls
 
 
