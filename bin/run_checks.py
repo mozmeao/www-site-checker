@@ -139,7 +139,7 @@ def _get_output_path() -> os.PathLike:
 
 
 def _get_allowlist_path() -> os.PathLike:
-    path_components = ["data", "allowlist.yml"]
+    path_components = ["data", "allowlist.yaml"]
     working_dir = os.getcwd()
     if str(working_dir).endswith("/bin"):
         path_components = [working_dir, ".."] + path_components
