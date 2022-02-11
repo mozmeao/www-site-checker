@@ -122,7 +122,7 @@ def _get_url_with_retry(url, try_count=0, limit=URL_RETRY_LIMIT) -> requests.Res
 
 def _dump_to_file(results: Dict[str, set]) -> Tuple[str]:
     _output_path = _get_output_path()
-    _now = datetime.datetime.utcnow().isoformat()
+    _now = datetime.datetime.utcnow().isoformat().replace(":", "-")  # Github actions doesn't like colons in filenames
     flat_output_filepath = os.path.join(_output_path, f"flat_{_now}.txt")
     nested_output_filepath = os.path.join(_output_path, f"nested_{_now}.txt")
 
