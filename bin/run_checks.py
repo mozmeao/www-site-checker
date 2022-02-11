@@ -99,7 +99,10 @@ def run_checks(
     if results:
         click.echo(f"Unexpected outbound URLs found on {hostname}!")
         if SENTRY_DSN:
-            sentry_sdk.capture_message(f"Unexpected oubound URLs found on {hostname} - see Github Action in {GITHUB_REPOSITORY} for output data")
+            sentry_sdk.capture_message(
+                message=f"Unexpected oubound URLs found on {hostname} - see Github Action in {GITHUB_REPOSITORY} for output data",
+                level="warning",
+            )
     else:
         click.echo("Checks completed and no unexpected outbound URLs found")
 
