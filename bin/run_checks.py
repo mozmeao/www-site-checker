@@ -8,6 +8,7 @@ Run the specified checks on specified URLs and issue a report
 """
 import datetime
 import logging
+import math
 import os
 import re
 from collections import defaultdict
@@ -25,6 +26,7 @@ from yaml import safe_load
 
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
+
 if SENTRY_DSN:
     # Set up Sentry logging if we can.
     sentry_logging = LoggingIntegration(
@@ -38,6 +40,7 @@ if SENTRY_DSN:
 
 
 URL_RETRY_LIMIT = 3
+DEFAULT_BATCH__NOOP = "1:1"
 
 
 @click.command()
@@ -50,7 +53,7 @@ URL_RETRY_LIMIT = 3
     "--maintain-hostname",
     default=False,
     is_flag=True,
-    help=("If the sitemap points to a different domain (eg a CDN domain), override it and replace it with the hostname that served the " "sitemap,"),
+    help=("If the sitemap points to a different domain (eg a CDN domain), override it and replace it with the hostname that served the sitemap"),
 )
 @click.option(
     "--specific-url",
@@ -59,28 +62,36 @@ URL_RETRY_LIMIT = 3
     multiple=True,
 )
 @click.option(
-    "--dump",
-    default=True,
+    "--nodump",
+    default=False,
     is_flag=True,
-    help="Dump the results of unexpected links to a file",
+    help="Do not dump the results of unexpected links to a file",
+)
+@click.option(
+    "--batch",
+    default="1:1",
+    help=(
+        "Batch the sitemap URLs and work on one of them. Format is {chunk_number}:{total_chunks}. "
+        "For example --batch=1:2 means chop the overall set into two and work on the first batch, "
+        "2:3 means do the second batch of three, 4:4 means do the final batch of four, etc"
+    ),
 )
 def run_checks(
     sitemap_url: str,
     maintain_hostname: bool,
     specific_url: Iterable,
-    dump: bool,
+    nodump: bool,
+    batch: str,
 ) -> None:
 
-    # Let's tidy up that variable name
+    # Let's tidy up that variable name we get from the input option
     specific_urls = specific_url
 
     if not sitemap_url and not specific_urls:
         raise Exception("No sitemap or input URLs specified")
 
     host_url = sitemap_url or specific_urls[0]
-
     hostname = urlparse(host_url).netloc
-
     config = _get_allowlist_config(hostname)
 
     urls_to_check = _build_urls_to_check(
@@ -89,13 +100,14 @@ def run_checks(
         maintain_hostname=maintain_hostname,
     )
 
+    # Do we need to chunk these down?
+    if batch != DEFAULT_BATCH__NOOP:
+        urls_to_check = _get_batched_urls(urls_to_check, batch)
+
     results = _check_pages(urls_to_check, config)
 
-    flat_results_path, nested_results_path = None, None
-
-    if dump:
-        flat_results_path, nested_results_path = _dump_to_file(results)
-
+    if not nodump:
+        _dump_to_file(results)
     if results:
         click.echo(f"Unexpected outbound URLs found on {hostname}!")
         if SENTRY_DSN:
@@ -105,6 +117,20 @@ def run_checks(
             )
     else:
         click.echo("Checks completed and no unexpected outbound URLs found")
+
+
+def _get_batched_urls(urls_to_check: List[str], batch: str) -> List[str]:
+    # TODO: optimise to avoid making a new list - just return the indices and work with them in a loop
+    url_count = len(urls_to_check)
+    chunk_num, total_chunks = [int(x) for x in batch.split(":")]
+    if chunk_num > total_chunks:
+        raise Exception(f"--batch parameter {batch} was nonsensical")
+
+    chunk_size = math.ceil(url_count / total_chunks)  # better to make the chunk one element
+    start_index = (chunk_num - 1) * chunk_size
+    end_index = start_index + chunk_size
+    click.echo(f"Working on batch {chunk_num}/{total_chunks}: {chunk_size} items")
+    return urls_to_check[start_index:end_index]
 
 
 def _get_url_with_retry(url, try_count=0, limit=URL_RETRY_LIMIT) -> requests.Response:
