@@ -106,15 +106,16 @@ def run_checks(
 
     results = _check_pages(urls_to_check, config)
 
-    if not nodump:
+    if not nodump:  # ugh, apologies
         batch_label = "all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0]
         _dump_to_file(results=results, batch_label=batch_label)
+
     if results:
         click.echo(f"Unexpected outbound URLs found on {hostname}!")
         if SENTRY_DSN:
             sentry_sdk.capture_message(
                 message=f"Unexpected oubound URLs found on {hostname} - see Github Action in {GITHUB_REPOSITORY} for output data",
-                level="warning",
+                level="error",
             )
     else:
         click.echo("Checks completed and no unexpected outbound URLs found")
