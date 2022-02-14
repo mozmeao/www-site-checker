@@ -9,6 +9,7 @@ bedrock_base_config: &bedrock_base_config
 
     # === Mozilla-run things ===
     - '^http[s]{0,1}:\/\/[^\/]+.mozilla.org\/(.*)' # TODO: test this regex thoroughly
+    - '^http[s]{0,1}:\/\/[^\/]+.mozilla.com\/(.*)' # TODO: test this regex thoroughly
     - '^http[s]{0,1}:\/\/[^\/]+.firefox.com\/(.*)' # TODO: test this regex thoroughly
 
     - '^http[s]{0,1}:\/\/mzl.la\/(.*)'
