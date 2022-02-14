@@ -8,6 +8,7 @@ on:
 env:
   # TODO: flip this to the production DSN once we're done testing
   SENTRY_DSN: https://c7764face5354517befaee2e56b63cfb@sentry.prod.mozaws.net/122
+  SLACK_NOTIFICATION_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATION_WEBHOOK_URL }}
 
 jobs:
   run_on_cdn_1_4:

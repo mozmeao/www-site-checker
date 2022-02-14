@@ -22,10 +22,12 @@ import sentry_sdk
 from bs4 import BeautifulSoup
 from requests.exceptions import ChunkedEncodingError
 from sentry_sdk.integrations.logging import LoggingIntegration
+from slack_sdk.webhook import WebhookClient as SlackWebhookClient
 from yaml import safe_load
 
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
+SLACK_NOTIFICATION_WEBHOOK_URL = os.environ.get("SLACK_NOTIFICATION_WEBHOOK_URL")
 
 if SENTRY_DSN:
     # Set up Sentry logging if we can.
@@ -116,11 +118,16 @@ def run_checks(
             hostname=hostname,
             batch_label="all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0],
         )
+        message = f"THIS IS A TEST: Unexpected oubound URLs found on {hostname} - see Github Action in {GITHUB_REPOSITORY} for output data"
         if SENTRY_DSN:
             sentry_sdk.capture_message(
-                message=f"Unexpected oubound URLs found on {hostname} - see Github Action in {GITHUB_REPOSITORY} for output data",
+                message=message,
                 level="error",
             )
+        if SLACK_NOTIFICATION_WEBHOOK_URL:
+            slack_client = SlackWebhookClient(SLACK_NOTIFICATION_WEBHOOK_URL)
+            slack_client.send(text=message)
+
     else:
         click.echo("Checks completed and no unexpected outbound URLs found")
 

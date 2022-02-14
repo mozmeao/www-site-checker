@@ -133,6 +133,10 @@ six==1.16.0 \
     --hash=sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926 \
     --hash=sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254
     # via html5lib
+slack-sdk==3.14.1 \
+    --hash=sha256:306d3647509fcfbd4ebe5dba19386ead329e85d297366805dbeac543bbd60904 \
+    --hash=sha256:b1a007072d2e98978cf906ff3452641ea4ab185e4eddbc27b087bbd9a8043ff0
+    # via -r requirements.in
 soupsieve==2.3.1 \
     --hash=sha256:1a3cca2617c6b38c0343ed661b1fa5de5637f257d4fe22bd9f1338010a1efefb \
     --hash=sha256:b8d49b1cd4f037c7082a9683dfa1801aa2597fb11c3a1155b7a5b94829b4f1f9
