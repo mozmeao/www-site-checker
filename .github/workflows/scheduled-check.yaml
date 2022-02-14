@@ -8,17 +8,78 @@ on:
 env:
   # TODO: flip this to the production DSN once we're done testing
   SENTRY_DSN: https://c7764face5354517befaee2e56b63cfb@sentry.prod.mozaws.net/122
+
 jobs:
-  run_on_cdn:
+  run_on_cdn_1_4:
     runs-on: ubuntu-latest
-    name: Check main CDN
+    name: Check main CDN - first quarter
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Run checker
-        run: python bin/run_checks.py --sitemap-url=https://www.mozilla.org/sitemap.xml
+        run: >
+          python bin/run_checks.py
+          --sitemap-url=https://www.mozilla.org/sitemap.xml
+          --batch="1:4"
+      - name: Upload output files
+        uses: actions/upload-artifact@v2
+        with:
+          name: scan-results
+          path: output
+
+  run_on_cdn_2_4:
+    runs-on: ubuntu-latest
+    name: Check main CDN - second quarter
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: >
+          python bin/run_checks.py
+          --sitemap-url=https://www.mozilla.org/sitemap.xml
+          --batch="2:4"
+      - name: Upload output files
+        uses: actions/upload-artifact@v2
+        with:
+          name: scan-results
+          path: output
+
+  run_on_cdn_3_4:
+    runs-on: ubuntu-latest
+    name: Check main CDN - third quarter
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: >
+          python bin/run_checks.py
+          --sitemap-url=https://www.mozilla.org/sitemap.xml
+          --batch="3:4"
+      - name: Upload output files
+        uses: actions/upload-artifact@v2
+        with:
+          name: scan-results
+          path: output
+
+  run_on_cdn_4_4:
+    runs-on: ubuntu-latest
+    name: Check main CDN - fourth/final quarter
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: >
+          python bin/run_checks.py
+          --sitemap-url=https://www.mozilla.org/sitemap.xml
+          --batch="4:4"
       - name: Upload output files
         uses: actions/upload-artifact@v2
         with:
