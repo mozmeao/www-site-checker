@@ -80,7 +80,7 @@ bedrock_cdn:
 
 origin_us:
   <<: *bedrock_base_config
-  hostname: bedrock.gcp.moz.works
+  hostname: bedrock-prod.gcp.moz.works
 
 origin_fr:
   <<: *bedrock_base_config
