@@ -279,22 +279,23 @@ def _build_urls_to_check(
 ) -> List[str]:
     urls = []
     if sitemap_url:
-        urls += _get_urls_from_sitemap(sitemap_url)
+        urls += _get_urls_from_sitemap(sitemap_url, maintain_hostname)
     if specific_urls:
         # Don't forget any manually specified URLs
         urls += specific_urls
-    urls = _update_hostname_if_required(
-        maintain_hostname,
-        sitemap_url,
-        urls,
-    )
     click.echo(f"Discovered {len(urls)} URLs to check")
     return urls
 
 
-def _get_urls_from_sitemap(sitemap_url: str) -> List[str]:
+def _get_urls_from_sitemap(
+    sitemap_url: str,
+    maintain_hostname: bool,
+) -> List[str]:
 
     urls = []
+
+    _parsed_origin_sitemap_url = urlparse(sitemap_url)
+    origin_hostname_with_scheme = f"{_parsed_origin_sitemap_url.scheme}://{_parsed_origin_sitemap_url.netloc}"
 
     resp = _get_url_with_retry(sitemap_url)
 
@@ -305,10 +306,18 @@ def _get_urls_from_sitemap(sitemap_url: str) -> List[str]:
     sitemap_nodes = soup.find_all("sitemap")
     if len(sitemap_nodes):
         click.echo(f"Discovered {len(sitemap_nodes)} child sitemaps")
+
     for sitemap_node in sitemap_nodes:
         sitemap_url = sitemap_node.loc.text
+
+        if maintain_hostname:
+            sitemap_url = _update_hostname(
+                origin_hostname_with_scheme=origin_hostname_with_scheme,
+                urls=[sitemap_url],
+            )[0]
+
         click.echo(f"Diving into {sitemap_url}")
-        urls.extend(_get_urls_from_sitemap(sitemap_url))
+        urls.extend(_get_urls_from_sitemap(sitemap_url, maintain_hostname))
 
     # look for regular URL nodes, which may or may not co-exist alongside sitemap nodes
     url_nodes = soup.find_all("url")
@@ -316,25 +325,26 @@ def _get_urls_from_sitemap(sitemap_url: str) -> List[str]:
         click.echo(f"Adding {len(url_nodes)} URLs")
         urls.extend([url.loc.text for url in url_nodes])
 
+    # Also remember to update the hostname on the final set of URLs, if required
+    if maintain_hostname:
+        urls = _update_hostname(
+            origin_hostname_with_scheme=origin_hostname_with_scheme,
+            urls=urls,
+        )
     return urls
 
 
-def _update_hostname_if_required(maintain_hostname: bool, sitemap_url: str, urls: List[str]) -> List[str]:
+def _update_hostname(origin_hostname_with_scheme: str, urls: List[str]) -> List[str]:
     """If the urls start with a different hostname than in the sitemap_url,
     replace it in each of them.
 
     This is so that if sitemap_url is on an origin server but its sitemap references
     the CDN domain, we can actually hit the origin to test its pages directly."""
 
-    if not maintain_hostname:
-        return urls
-    parsed_original = urlparse(sitemap_url)
-    origin_hostname_with_scheme = f"{parsed_original.scheme}://{parsed_original.netloc}"
-
     # This assumes all URLs in the sitemap have the same hostname, so we can use the first
     # as our source of truth. This doesn't seem unreasonable.
-    parsed_current = urlparse(urls[0])
-    candidate_hostname_with_scheme = f"{parsed_current.scheme}://{parsed_current.netloc}"
+    _parsed_sample = urlparse(urls[0])
+    candidate_hostname_with_scheme = f"{_parsed_sample.scheme}://{_parsed_sample.netloc}"
 
     if origin_hostname_with_scheme == candidate_hostname_with_scheme:
         click.echo(f"No need to replace the hostname on this batch of URLs: {candidate_hostname_with_scheme}")
