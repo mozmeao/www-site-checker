@@ -62,12 +62,6 @@ DEFAULT_BATCH__NOOP = "1:1"
     multiple=True,
 )
 @click.option(
-    "--nodump",
-    default=False,
-    is_flag=True,
-    help="Do not dump the results of unexpected links to a file",
-)
-@click.option(
     "--batch",
     default="1:1",
     help=(
@@ -85,7 +79,6 @@ def run_checks(
     sitemap_url: str,
     maintain_hostname: bool,
     specific_url: Iterable,
-    nodump: bool,
     batch: str,
     allowlist: str,
 ) -> None:
@@ -116,9 +109,8 @@ def run_checks(
 
     results = _check_pages(urls_to_check, config)
 
-    if not nodump:  # ugh, apologies
-        batch_label = "all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0]
-        _dump_to_file(results=results, batch_label=batch_label)
+    batch_label = "all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0]
+    _dump_to_file(results=results, batch_label=batch_label)
 
     if results:
         click.echo(f"Unexpected outbound URLs found on {hostname}!")
