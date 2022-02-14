@@ -109,11 +109,13 @@ def run_checks(
 
     results = _check_pages(urls_to_check, config)
 
-    batch_label = "all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0]
-    _dump_to_file(results=results, batch_label=batch_label)
-
     if results:
         click.echo(f"Unexpected outbound URLs found on {hostname}!")
+        _dump_to_file(
+            results=results,
+            hostname=hostname,
+            batch_label="all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0],
+        )
         if SENTRY_DSN:
             sentry_sdk.capture_message(
                 message=f"Unexpected oubound URLs found on {hostname} - see Github Action in {GITHUB_REPOSITORY} for output data",
@@ -153,11 +155,16 @@ def _get_url_with_retry(url, try_count=0, limit=URL_RETRY_LIMIT) -> requests.Res
             raise re
 
 
-def _dump_to_file(results: Dict[str, set], batch_label: str) -> Tuple[str]:
+def _dump_to_file(
+    results: Dict[str, set],
+    hostname: str,
+    batch_label: str,
+) -> Tuple[str]:
     _output_path = _get_output_path()
     _now = datetime.datetime.utcnow().isoformat().replace(":", "-")  # Github actions doesn't like colons in filenames
-    flat_output_filepath = os.path.join(_output_path, f"flat_{batch_label}_{_now}.txt")
-    nested_output_filepath = os.path.join(_output_path, f"nested_{batch_label}_{_now}.txt")
+    _base_filename = f"{hostname}_{batch_label}_{_now}.txt"
+    flat_output_filepath = os.path.join(_output_path, f"flat_{_base_filename}")
+    nested_output_filepath = os.path.join(_output_path, f"nested_{_base_filename}")
 
     fp_flat = open(flat_output_filepath, "w")
     fp_flat.write("\n".join([key for key in results.keys()]))
