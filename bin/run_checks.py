@@ -76,12 +76,18 @@ DEFAULT_BATCH__NOOP = "1:1"
         "2:3 means do the second batch of three, 4:4 means do the final batch of four, etc"
     ),
 )
+@click.option(
+    "--allowlist",
+    default="data/allowlist.yaml",
+    help="Path to a YAML-formatted allowlist. If none is provided, the default of data/allowlist.yml will be used",
+)
 def run_checks(
     sitemap_url: str,
     maintain_hostname: bool,
     specific_url: Iterable,
     nodump: bool,
     batch: str,
+    allowlist: str,
 ) -> None:
 
     # Let's tidy up that variable name we get from the input option
@@ -92,7 +98,11 @@ def run_checks(
 
     host_url = sitemap_url or specific_urls[0]
     hostname = urlparse(host_url).netloc
-    config = _get_allowlist_config(hostname)
+
+    config = _get_allowlist_config(
+        hostname,
+        allowlist_pathname=allowlist,
+    )
 
     urls_to_check = _build_urls_to_check(
         sitemap_url=sitemap_url,
@@ -176,6 +186,7 @@ def _dump_to_file(results: Dict[str, set], batch_label: str) -> Tuple[str]:
 
 
 def _get_output_path() -> os.PathLike:
+    # Get the path, allowing for this being called from the project root or the bin/ dir
     path_components = [
         "output",
     ]
@@ -185,8 +196,9 @@ def _get_output_path() -> os.PathLike:
     return os.path.join("", *path_components)
 
 
-def _get_allowlist_path() -> os.PathLike:
-    path_components = ["data", "allowlist.yaml"]
+def _get_allowlist_path(allowlist_pathname: str) -> os.PathLike:
+    # Get the path, allowing for this being called from the project root or the bin/ dir
+    path_components = allowlist_pathname.split("/")
     working_dir = os.getcwd()
     if str(working_dir).endswith("/bin"):
         path_components = [working_dir, ".."] + path_components
@@ -194,9 +206,9 @@ def _get_allowlist_path() -> os.PathLike:
 
 
 @cache
-def _get_allowlist_config(hostname) -> dict:
+def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
     click.echo("Loading allowlist from file")
-    fp = open(_get_allowlist_path())
+    fp = open(_get_allowlist_path(allowlist_pathname))
     config_data = safe_load(fp)
 
     site_config = None
