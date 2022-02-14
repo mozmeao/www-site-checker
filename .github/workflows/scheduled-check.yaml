@@ -85,3 +85,163 @@ jobs:
         with:
           name: scan-results
           path: output
+
+  run_on_origin_us_1_4:
+    runs-on: ubuntu-latest
+    name: Check US origin server - first quarter
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: >
+          python bin/run_checks.py
+          --sitemap-url=https://bedrock-prod.gcp.moz.works/sitemap.xml
+          --maintain-hostname
+          --batch="1:4"
+      - name: Upload output files
+        uses: actions/upload-artifact@v2
+        with:
+          name: scan-results
+          path: output
+
+  run_on_origin_us_2_4:
+    runs-on: ubuntu-latest
+    name: Check US origin server - second quarter
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: >
+          python bin/run_checks.py
+          --sitemap-url=https://bedrock-prod.gcp.moz.works/sitemap.xml
+          --maintain-hostname
+          --batch="2:4"
+      - name: Upload output files
+        uses: actions/upload-artifact@v2
+        with:
+          name: scan-results
+          path: output
+
+  run_on_origin_us_3_4:
+    runs-on: ubuntu-latest
+    name: Check US origin server - third quarter
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: >
+          python bin/run_checks.py
+          --sitemap-url=https://bedrock-prod.gcp.moz.works/sitemap.xml
+          --maintain-hostname
+          --batch="3:4"
+      - name: Upload output files
+        uses: actions/upload-artifact@v2
+        with:
+          name: scan-results
+          path: output
+
+  run_on_origin_us_4_4:
+    runs-on: ubuntu-latest
+    name: Check US origin server - fourth/final quarter
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: >
+          python bin/run_checks.py
+          --sitemap-url=https://bedrock-prod.gcp.moz.works/sitemap.xml
+          --maintain-hostname
+          --batch="4:4"
+      - name: Upload output files
+        uses: actions/upload-artifact@v2
+        with:
+          name: scan-results
+          path: output
+
+  run_on_origin_eu_1_4:
+    runs-on: ubuntu-latest
+    name: Check EU origin server - first quarter
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: >
+          python bin/run_checks.py
+          --sitemap-url=https://bedrock.prod.fr.moz.works/sitemap.xml
+          --maintain-hostname
+          --batch="1:4"
+      - name: Upload output files
+        uses: actions/upload-artifact@v2
+        with:
+          name: scan-results
+          path: output
+
+  run_on_origin_eu_2_4:
+    runs-on: ubuntu-latest
+    name: Check EU origin server - second quarter
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: >
+          python bin/run_checks.py
+          --sitemap-url=https://bedrock.prod.fr.moz.works/sitemap.xml
+          --maintain-hostname
+          --batch="2:4"
+      - name: Upload output files
+        uses: actions/upload-artifact@v2
+        with:
+          name: scan-results
+          path: output
+
+  run_on_origin_eu_3_4:
+    runs-on: ubuntu-latest
+    name: Check EU origin server - third quarter
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: >
+          python bin/run_checks.py
+          --sitemap-url=https://bedrock.prod.fr.moz.works/sitemap.xml
+          --maintain-hostname
+          --batch="3:4"
+      - name: Upload output files
+        uses: actions/upload-artifact@v2
+        with:
+          name: scan-results
+          path: output
+
+  run_on_origin_eu_4_4:
+    runs-on: ubuntu-latest
+    name: Check EU origin server - fourth/final quarter
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: >
+          python bin/run_checks.py
+          --sitemap-url=https://bedrock.prod.fr.moz.works/sitemap.xml
+          --maintain-hostname
+          --batch="4:4"
+      - name: Upload output files
+        uses: actions/upload-artifact@v2
+        with:
+          name: scan-results
+          path: output
