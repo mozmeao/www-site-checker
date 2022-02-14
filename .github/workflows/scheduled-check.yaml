@@ -246,3 +246,32 @@ jobs:
         with:
           name: scan-results
           path: output
+
+  alert_if_report_files_exist:
+    runs-on: ubuntu-latest
+    needs:
+      - run_on_cdn_1_4
+      - run_on_cdn_2_4
+      - run_on_cdn_3_4
+      - run_on_cdn_4_4
+      - run_on_origin_us_1_4
+      - run_on_origin_us_2_4
+      - run_on_origin_us_3_4
+      - run_on_origin_us_4_4
+      - run_on_origin_eu_1_4
+      - run_on_origin_eu_2_4
+      - run_on_origin_eu_3_4
+      - run_on_origin_eu_4_4
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Download artifacts, if they exist
+        id: download-scan-results
+        uses: actions/download-artifact@v2
+        with:
+          name: scan-results
+          path: output
+      - name: Fail the job if scan-results exists
+        run: python bin/check_for_output.py
