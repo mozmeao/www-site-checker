@@ -20,6 +20,15 @@ bedrock_base_config: &bedrock_base_config
     # pages linked to from our own security advisories - eg https://www.mozilla.org/en-US/security/advisories/mfsa2006-50/ -> mfsa2006-01.html
     - '^mfsa\d{4}-\d{2}(.html){0,1}$'
 
+    # mailto links to Mozilla itself
+    - "^mailto:[^@]+@mozilla.(com|org)$"
+
+    # === Mobile downloads, via adjust.com
+    - '^https:\/\/app.adjust.com\/2uo1qc\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Ffirefox-private-safe-browser%2Fid989804926&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
+    - '^https:\/\/app\.adjust\.com\/2uo1qc\?redirect=https%3A%2F%2Fplay\.google\.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dorg\.mozilla\.firefox&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
+    - '^https:\/\/app.adjust.com\/m54twk\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Fpocket-save-read-grow%2Fid309601447&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
+    - '^https:\/\/app\.adjust\.com\/m54twk\?redirect=https%3A%2F%2Fplay\.google\.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom\.ideashower\.readitlater\.pro&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
+
     # === Trusted third-party sites ===
 
     # CVEs at mitre.org
@@ -39,6 +48,9 @@ bedrock_base_config: &bedrock_base_config
   allowed_outbound_url_literals:
     # Internals
     - "about:plugins"
+
+    # App store links not covered by the regexes above
+    - "https://app.adjust.com/qywno6t?redirect=https%3A%2F%2Fitunes.apple.com%2Fapp%2Fid1314000270%3Fmt%3D8"
 
     # Things we're using to get stuff done
     - "https://docs.google.com/forms/d/1rwLVzr1Fql9ZtAKkG_z5jcRczn2uy84zqwBX9gX52OY/viewform" # Google Form for Credits-page request
