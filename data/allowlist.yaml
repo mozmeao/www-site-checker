@@ -8,9 +8,9 @@ bedrock_base_config: &bedrock_base_config
     - '^(\/|#).*' # Relative URLs and in-page anchors are OK
 
     # === Mozilla-run things ===
-    - '^https?:\/\/[^\/]+.mozilla.org\/(.*)' # TODO: test this regex thoroughly
-    - '^https?:\/\/[^\/]+.mozilla.com\/(.*)' # TODO: test this regex thoroughly
-    - '^https?:\/\/[^\/]+.firefox.com\/(.*)' # TODO: test this regex thoroughly
+    - '^https?:\/\/[^\/]+.mozilla.org($|\/(.*))' # TODO: test this regex thoroughly
+    - '^https?:\/\/[^\/]+.mozilla.com($|\/(.*))' # TODO: test this regex thoroughly
+    - '^https?:\/\/[^\/]+.firefox.com($|\/(.*))' # TODO: test this regex thoroughly
 
     - '^https?:\/\/mzl.la\/(.*)'
     - '^https?:\/\/getpocket.com\/(.*)'
