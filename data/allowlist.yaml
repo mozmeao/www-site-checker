@@ -41,9 +41,13 @@ bedrock_base_config: &bedrock_base_config
 
     # Limited traversal allowed for references to releasenotes pages on /firefox/releases/
     - '^(..\/)([0-9]*.[0-9a-z]*.{0,1}[a-z0-9]*)\/releasenotes\/.*'
+    - '^..\/2.0.0.\d{1,2}\/releasenotes\/.*'
 
     # Legacy release notes, eg `1.0.3.html`` linked from www.mozilla.org/en-US/firefox/releases/, that get redirected:
     - '^([0-1]{1}.\d{1}.{0,1}\d{0,2}.{0,1}\d{0,2}).html$'
+
+    # References back up the tree from within security advisory pages
+    - '^..\/200\d{1,2}\/mfsa200\d{1,2}-\d{2}.html$'
 
   allowed_outbound_url_literals:
     # Internals
@@ -67,11 +71,22 @@ bedrock_base_config: &bedrock_base_config
     - "http://creativecommons.org/privacy"
     - "http://creativecommons.org/publicdomain/zero/1.0/"
 
-    # RFCs
+    # RFCs, etc
+    - "http://tools.ietf.org/html/rfc5280#section-4.2.1.12"
+    - "http://tools.ietf.org/html/rfc5280#section-6.1.4"
+    - "http://tools.ietf.org/html/rfc6265#section-4.1.1"
     - "http://www.ietf.org/rfc/rfc0959.txt"
     - "http://www.ietf.org/rfc/rfc2616.txt"
     - "http://www.ietf.org/rfc/rfc3986.txt"
     - "http://www.ietf.org/rfc/rfc6125.txt"
+    - "https://tools.ietf.org/html/4287"
+    - "https://tools.ietf.org/html/draft-ietf-httpbis-alt-svc-04"
+    - "https://tools.ietf.org/html/rfc3279#section-2.2.1"
+    - "https://tools.ietf.org/html/rfc3279#section-2.3.1"
+    - "https://tools.ietf.org/html/rfc4055#section-6"
+    - "https://tools.ietf.org/html/rfc5480#section-2.1.1"
+    - "https://tools.ietf.org/html/rfc5758#section-3.2"
+    - "https://tools.ietf.org/html/rfc8017#appendix-A.1"
 
     # Security advisories
     - "http://secunia.com/advisories/10419/"
@@ -86,6 +101,49 @@ bedrock_base_config: &bedrock_base_config
     - "http://secunia.com/advisories/19873"
     - "http://secunia.com/advisories/26201/"
     - "http://secunia.com/advisories/37242"
+    - "http://www.kb.cert.org/vuls/id/403150"
+    - "http://www.kb.cert.org/vuls/id/783400"
+    - "http://www.kb.cert.org/vuls/id/845620"
+    - "http://www.zerodayinitiative.com/"
+    - "http://www.zerodayinitiative.com/advisories/ZDI-06-009.html"
+    - "http://www.zerodayinitiative.com/advisories/ZDI-06-010.html"
+    - "http://www.zerodayinitiative.com/advisories/ZDI-06-011.html"
+    - "http://www.zerodayinitiative.com/advisories/ZDI-06-025.html"
+    - "http://www.zerodayinitiative.com/advisories/ZDI-06-051.html"
+
+    # Social accounts
+    - "https://www.instagram.com/firefox/"
+    - "https://www.instagram.com/mozilla/"
+    - "https://www.instagram.com/unfcktheinternet/"
+
+    # Specific YouTube videos
+    - "https://www.youtube.com/t/terms"
+    - "https://www.youtube.com/user/firefoxchannel"
+    - "https://www.youtube.com/watch?v=6Ck1d6qo8a0"
+    - "https://www.youtube.com/watch?v=A_dZVbYJtsk"
+    - "https://www.youtube.com/watch?v=baPF-sOXP24"
+    - "https://www.youtube.com/watch?v=f_f5wNw-2c0"
+    - "https://www.youtube.com/watch?v=kw9LiqF-lNw"
+    - "https://www.youtube.com/watch?v=LuEX_Wih8g4"
+    - "https://www.youtube.com/watch?v=T2jykykN3yc"
+    - "https://www.youtube.com/watch?v=t3NKmmWfklU"
+    - "https://www.youtube.com/watch?v=ug6tA6fhhdQ"
+    - "https://www.youtube.com/watch?v=Un3u4wuGT8Q"
+    - "https://www.youtube.com/watch?v=zZzl649NcD0"
+
+    # Usenet links
+    - "news://alt.fan.mozilla"
+    - "news://alt.netscape.sucks"
+    - "news://comp.infosystems.www.advocacy"
+    - "news://comp.lang.java.advocacy"
+    - "news://comp.os.linux.advocacy"
+    - "news://comp.os.ms-windows.advocacy"
+    - "news://comp.os.os2.advocacy"
+    - "news://comp.sys.amiga.advocacy"
+    - "news://comp.sys.be.advocacy"
+    - "news://comp.sys.mac.advocacy"
+    - "news://comp.unix.advocacy"
+    - "news://gnu.misc.discuss"
 
 bedrock_cdn:
   <<: *bedrock_base_config
