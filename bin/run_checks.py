@@ -20,7 +20,7 @@ import click
 import requests
 import sentry_sdk
 from bs4 import BeautifulSoup
-from requests.exceptions import ChunkedEncodingError
+from requests.exceptions import ChunkedEncodingError, HTTPError
 from sentry_sdk.integrations.logging import LoggingIntegration
 from yaml import safe_load
 
@@ -141,7 +141,10 @@ def _get_batched_urls(urls_to_check: List[str], batch: str) -> List[str]:
 
 
 def _get_url_with_retry(url, try_count=0, limit=URL_RETRY_LIMIT) -> requests.Response:
-    exceptions_to_retry = (ChunkedEncodingError,)
+    exceptions_to_retry = (
+        ChunkedEncodingError,
+        HTTPError,
+    )
     try:
         resp = requests.get(url)
         resp.raise_for_status()
