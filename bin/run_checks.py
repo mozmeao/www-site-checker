@@ -4,7 +4,9 @@
 
 """
 This is a tool to help verify the content of the specified website.
-Run the specified checks on specified URLs and issue a report
+Run the specified checks on specified URLs and issue a report.
+
+Initially, we're checking that all outbound URLs are ones we expect.
 """
 import datetime
 import logging
@@ -38,7 +40,7 @@ if SENTRY_DSN:
         integrations=[sentry_logging],
     )
 
-DEFAULT_BATCH__NOOP = "1:1"
+DEFAULT_BATCH__NOOP = "1:1"  # By default treat all URLs as a single batch
 UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_for"
 URL_RETRY_LIMIT = 3
 
@@ -53,19 +55,19 @@ URL_RETRY_LIMIT = 3
     "--maintain-hostname",
     default=False,
     is_flag=True,
-    help=("If the sitemap points to a different domain (eg a CDN domain), override it and replace it with the hostname that served the sitemap"),
+    help="If the sitemap points to a different domain (eg a CDN domain), override it and replace it with the hostname that served the sitemap",
 )
 @click.option(
     "--specific-url",
     default=None,
-    help="Specific URL to check. This flag can be used multiple times, once per URL",
+    help="Specific URL/page to check. This flag can be used multiple times, once per URL",
     multiple=True,
 )
 @click.option(
     "--batch",
-    default="1:1",
+    default=DEFAULT_BATCH__NOOP,
     help=(
-        "Batch the sitemap URLs and work on one of them. Format is {chunk_number}:{total_chunks}. "
+        "Batch all the gathered URLs and work on one specific batch. Format is {chunk_number}:{total_chunks}. "
         "For example --batch=1:2 means chop the overall set into two and work on the first batch, "
         "2:3 means do the second batch of three, 4:4 means do the final batch of four, etc"
     ),
@@ -75,7 +77,7 @@ URL_RETRY_LIMIT = 3
     default="data/allowlist.yaml",
     help="Path to a YAML-formatted allowlist. If none is provided, the default of data/allowlist.yml will be used",
 )
-def run_checks(
+def check_for_unexpected_outbound_urls(
     sitemap_url: str,
     maintain_hostname: bool,
     specific_url: Iterable,
@@ -89,7 +91,7 @@ def run_checks(
     if not sitemap_url and not specific_urls:
         raise Exception("No sitemap or input URLs specified")
 
-    host_url = sitemap_url or specific_urls[0]
+    host_url = sitemap_url or specific_urls[0]  # TODO: ensure all specific URLs use the same hostname
     hostname = urlparse(host_url).netloc
 
     config = _get_allowlist_config(
@@ -116,8 +118,8 @@ def run_checks(
             hostname=hostname,
             batch_label="all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0],
         )
-        message = f"Unexpected oubound URLs found on {hostname} - see Github Action in {GITHUB_REPOSITORY} for output data"
         if SENTRY_DSN:
+            message = f"Unexpected oubound URLs found on {hostname} - see Github Action in {GITHUB_REPOSITORY} for output data"
             sentry_sdk.capture_message(
                 message=message,
                 level="error",
@@ -130,7 +132,7 @@ def _get_batched_urls(urls_to_check: List[str], batch: str) -> List[str]:
     # TODO: optimise to avoid making a new list - just return the indices and work with them in a loop
     url_count = len(urls_to_check)
     chunk_num, total_chunks = [int(x) for x in batch.split(":")]
-    if chunk_num > total_chunks:
+    if chunk_num < 1 or total_chunks < 1 or chunk_num > total_chunks:
         raise Exception(f"--batch parameter {batch} was nonsensical")
 
     chunk_size = math.ceil(url_count / total_chunks)  # better to make the chunk one element
@@ -140,10 +142,14 @@ def _get_batched_urls(urls_to_check: List[str], batch: str) -> List[str]:
     return urls_to_check[start_index:end_index]
 
 
-def _get_url_with_retry(url, try_count=0, limit=URL_RETRY_LIMIT) -> requests.Response:
+def _get_url_with_retry(
+    url: str,
+    try_count: int = 0,
+    limit: int = URL_RETRY_LIMIT,
+) -> requests.Response:
     exceptions_to_retry = (
         ChunkedEncodingError,
-        HTTPError,
+        HTTPError,  # GOTCHA? This might be too permissive because many Requests exceptions inherit it
     )
     try:
         resp = requests.get(url)
@@ -164,6 +170,11 @@ def _dump_to_file(
     hostname: str,
     batch_label: str,
 ) -> Tuple[str]:
+    """Output two files of results speciifc to the current hostname and batch:
+
+    * flat: just the unexpected urls
+    * nested: for each unexpected URL, show were in the site we found it
+    """
     _output_path = _get_output_path()
     _now = datetime.datetime.utcnow().isoformat().replace(":", "-")  # Github actions doesn't like colons in filenames
     _base_filename = f"{UNEXPECTED_URLS_FILENAME_FRAGMENT}_{hostname}_{batch_label}_{_now}.txt"
@@ -210,6 +221,9 @@ def _get_allowlist_path(allowlist_pathname: str) -> os.PathLike:
 
 @cache
 def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
+    """Load the allowlist from the YAML file, optimise the direct like-for-like lookups
+    and warm up any regexes."""
+
     click.echo("Loading allowlist from file")
     fp = open(_get_allowlist_path(allowlist_pathname))
     config_data = safe_load(fp)
@@ -278,7 +292,7 @@ def _check_pages(urls: List[str], config: Dict) -> Dict:
                 if _url and not _verify_url_allowed(_url, config):
                     unlisted_outbound_urls[_url].add(page_url)
 
-        # TODO: OPTIMISE THE ABOVE - it's marvellously inefficient
+        # TODO: OPTIMISE THE ABOVE
         # TODO: find URLS in rendered content, too
     return unlisted_outbound_urls
 
@@ -288,6 +302,9 @@ def _build_urls_to_check(
     specific_urls: Iterable,
     maintain_hostname: bool,
 ) -> List[str]:
+    """Given a sitemap URL and/or specific URLs to check, put together a list
+    of overall URLs whose content wen want to check"""
+
     urls = []
     if sitemap_url:
         urls += _get_urls_from_sitemap(sitemap_url, maintain_hostname)
@@ -302,6 +319,10 @@ def _get_urls_from_sitemap(
     sitemap_url: str,
     maintain_hostname: bool,
 ) -> List[str]:
+    """Extract URLs to explore from a sitemap, optionally ensuring the hostname in
+    any URLs found is swapped ('maintained') to be the same as that of the source
+    sitemap –- this is needed when checking an origin server whose sitemap returns
+    the CDN's hostname"""
 
     urls = []
 
@@ -346,7 +367,7 @@ def _get_urls_from_sitemap(
 
 
 def _update_hostname(origin_hostname_with_scheme: str, urls: List[str]) -> List[str]:
-    """If the urls start with a different hostname than in the sitemap_url,
+    """If the urls start with a different hostname than the one we're exploring,
     replace it in each of them.
 
     This is so that if sitemap_url is on an origin server but its sitemap references
@@ -364,4 +385,4 @@ def _update_hostname(origin_hostname_with_scheme: str, urls: List[str]) -> List[
 
 
 if __name__ == "__main__":
-    run_checks()
+    check_for_unexpected_outbound_urls()
