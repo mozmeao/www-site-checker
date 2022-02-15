@@ -3,7 +3,7 @@ on:
   push:
   # TEMPORARILY DISABLED
   # schedule:
-  #   - cron: "15 * * * *"
+  #   - cron: "32 2,14 * * *"  # 02:32 UTC and 14:32 every day
 
 env:
   # TODO: flip this to the production DSN once we're done testing
