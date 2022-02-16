@@ -37,7 +37,10 @@ bedrock_base_config: &bedrock_base_config
     # mailto links to Mozilla itself
     - "^mailto:[^@]+@mozilla.(com|org)$"
 
-    # === Mobile downloads, via adjust.com
+    # === Mobile downloads, direct and via adjust.com
+
+    - '^https:\/\/itunes.apple.com\/[a-z]{0,2}\/{0,1}app\/firefox-private-safe-browser\/id989804926($|\?.*)'
+    - '^https:\/\/play.google.com\/store\/apps\/details\?id=org.mozilla.(firefox|firefox_beta|fenix)($|&hl=[a-z]{2}|&referrer=.*)'
     - '^https:\/\/app.adjust.com\/2uo1qc\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Ffirefox-private-safe-browser%2Fid989804926&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
     - '^https:\/\/app\.adjust\.com\/2uo1qc\?redirect=https%3A%2F%2Fplay\.google\.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dorg\.mozilla\.firefox&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
     - '^https:\/\/app.adjust.com\/m54twk\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Fpocket-save-read-grow%2Fid309601447&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
@@ -84,6 +87,7 @@ bedrock_base_config: &bedrock_base_config
     - "http://creativecommons.org/licenses/by-sa/3.0/"
     - "http://creativecommons.org/privacy"
     - "http://creativecommons.org/publicdomain/zero/1.0/"
+    - https://app.adjust.com/qywno6t?redirect=https%3A%2F%2Fitunes.apple.com%2Fapp%2Fid1314000270%3Fmt%3D8
 
     # RFCs, etc
     - "http://tools.ietf.org/html/rfc5280#section-4.2.1.12"
