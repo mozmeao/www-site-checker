@@ -39,14 +39,16 @@ bedrock_base_config: &bedrock_base_config
 
     # === Mobile downloads, direct and via adjust.com
 
-    - '^https:\/\/itunes.apple.com\/[a-z]{0,2}\/{0,1}app\/firefox-private-safe-browser\/id989804926($|\?.*)'
-    - '^https:\/\/play.google.com\/store\/apps\/details\?id=org.mozilla.(firefox|firefox_beta|fenix)($|&hl=[a-z]{2}|&referrer=.*)'
-    - '^https:\/\/app.adjust.com\/2uo1qc\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Ffirefox-private-safe-browser%2Fid989804926&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
+    - '^https:\/\/itunes\.apple\.com\/[a-z]{0,2}\/{0,1}app\/firefox-private-safe-browser\/id989804926($|\?.*)'
+    - '^https:\/\/play\.google\.com\/store\/apps\/details\?id=org.mozilla.(firefox|firefox_beta|fenix)($|&hl=[a-z]{2}|&referrer=.*)'
+    - '^https:\/\/app\.adjust\.com\/2uo1qc\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Ffirefox-private-safe-browser%2Fid989804926&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
     - '^https:\/\/app\.adjust\.com\/2uo1qc\?redirect=https%3A%2F%2Fplay\.google\.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dorg\.mozilla\.firefox&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
-    - '^https:\/\/app.adjust.com\/m54twk\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Fpocket-save-read-grow%2Fid309601447&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
+    - '^https:\/\/app\.adjust\.com\/m54twk\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Fpocket-save-read-grow%2Fid309601447&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
     - '^https:\/\/app\.adjust\.com\/m54twk\?redirect=https%3A%2F%2Fplay\.google\.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom\.ideashower\.readitlater\.pro&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
     - '^https:\/\/app\.adjust\.com\/b8s7qo\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Ffirefox-focus-privacy-browser%2Fid1055677337&campaign=www\.mozilla\.org&adgroup=[a-z-_]+'
     - '^https:\/\/app\.adjust\.com\/b8s7qo\?redirect=https%3A%2F%2Fplay\.google\.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dorg\.mozilla\.focus&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
+    - '^https:\/\/app\.adjust\.com\/jfcx5x\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Fklar-by-firefox%2Fid1073435754&campaign=www\.mozilla\.org&adgroup=[a-z-_]+'
+    - '^https:\/\/app\.adjust\.com\/jfcx5x\?redirect=https%3A%2F%2Fplay\.google\.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dorg\.mozilla\.klar&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
 
     # === Trusted third-party sites ===
 
