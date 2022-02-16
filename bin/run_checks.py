@@ -22,7 +22,7 @@ import click
 import requests
 import sentry_sdk
 from bs4 import BeautifulSoup
-from requests.exceptions import ChunkedEncodingError, HTTPError
+from requests.exceptions import ChunkedEncodingError, ConnectionError, HTTPError
 from sentry_sdk.integrations.logging import LoggingIntegration
 from yaml import safe_load
 
@@ -149,6 +149,7 @@ def _get_url_with_retry(
 ) -> requests.Response:
     exceptions_to_retry = (
         ChunkedEncodingError,
+        ConnectionError,
         HTTPError,  # GOTCHA? This might be too permissive because many Requests exceptions inherit it
     )
     try:
