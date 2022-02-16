@@ -16,7 +16,7 @@ bedrock_base_config: &bedrock_base_config
     - '^https?:\/\/[^\/]+.firefox.com($|\/(.*))'
 
     - '^https?:\/\/[^\/]+.mozilla.design($|\/(.*))'
-    - '^https?:\/\/[^\/]+.mozillians.org($|\/(.*))'
+    - '^https?:\/\/(www\.){0,3}mozillians.org($|\/(.*))'
     - '^https?:\/\/assets.mozilla.net\/(.*)'
     - '^https?:\/\/bugzil.la\/(\d*)$'
     - '^https?:\/\/getpocket.com\/(.*)'
@@ -45,6 +45,8 @@ bedrock_base_config: &bedrock_base_config
     - '^https:\/\/app\.adjust\.com\/2uo1qc\?redirect=https%3A%2F%2Fplay\.google\.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dorg\.mozilla\.firefox&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
     - '^https:\/\/app.adjust.com\/m54twk\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Fpocket-save-read-grow%2Fid309601447&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
     - '^https:\/\/app\.adjust\.com\/m54twk\?redirect=https%3A%2F%2Fplay\.google\.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom\.ideashower\.readitlater\.pro&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
+    - '^https:\/\/app\.adjust\.com\/b8s7qo\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Ffirefox-focus-privacy-browser%2Fid1055677337&campaign=www\.mozilla\.org&adgroup=[a-z-_]+'
+    - '^https:\/\/app\.adjust\.com\/b8s7qo\?redirect=https%3A%2F%2Fplay\.google\.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dorg\.mozilla\.focus&campaign=www\.mozilla\.org&adgroup=[a-z-_]+$'
 
     # === Trusted third-party sites ===
 
@@ -78,9 +80,13 @@ bedrock_base_config: &bedrock_base_config
     - https://monitor.firefox.com?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-products
     - https://www.mozillafestival.org/speakers/virtual-dialogue-and-debates/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=state-of-mozilla-2019
     - https://www.mozillapulse.org/profile/410
+    - https://mozillians.org/user/edit
+    - https://mozilla.design/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=footer&utm_content=resources
+    - https://mozilla.design/mozilla/logo-usage/
 
     # App store links not covered by the regexes above
     - https://app.adjust.com/qywno6t?redirect=https%3A%2F%2Fitunes.apple.com%2Fapp%2Fid1314000270%3Fmt%3D8
+    - https://app.adjust.com/gi0ycmr?redirect=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dmozilla.lockbox
 
     # RFCs, etc
     - http://tools.ietf.org/html/rfc5280#section-4.2.1.12
@@ -471,6 +477,7 @@ bedrock_base_config: &bedrock_base_config
     - http://lucasr.org/2014/12/03/new-tablet-ui-for-firefox-on-android/
     - http://maemo.nokia.com/
     - http://mikx.de/firescrolling2/
+    - https://mozilla.fluxx.io/apply/MOSS
     - http://mozilla-ghana.org
     - http://mozilla-tunisia.org/
     - http://mozillamyanmar.org/
