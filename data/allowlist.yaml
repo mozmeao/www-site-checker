@@ -373,39 +373,39 @@ bedrock_base_config: &bedrock_base_config
     - news://gnu.misc.discuss
 
     # Malformatted or broken links which need fixing
-    # - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1677)
-    # - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1715)
-    # - ./
-    # - (https://www.mozilla.org/privacy/)
-    # - "%(addons)s"
-    # - "%(url)s"
-    # - "%s"
-    # - $https://developer.mozilla.org/docs/Glossary/HTML
-    # - additivos
-    # - applicationes
-    # - chrome://global/skin/about.css
-    # - congresso
-    # - Contribute
-    # - firefox-third-party.html
-    # - "https: // www.google.com/privacy/lsf.html"
-    # - incontros
-    # - libro
-    # - missing-var
-    # - nb-NO
-    # - Principles
-    # - security@mozilla.org
-    # - traciatores
-    # - url
-    # - url('mozorg.about.policy.transparency.index') + '#dfn-natl-security-request'
-    # - varietate
-    # - vr
-    # - www.cybersensei.io
-    # - www.securesoftware.nl
-    # - " https://bugzilla.mozilla.org/buglist.cgi?f1=cf_tracking_fxios&list_id=12692445&o1=substring&resolution=---&resolution=FIXED&resolution=INVALID&resolution=WONTFIX&resolution=DUPLICATE&resolution=WORKSFORME&resolution=INCOMPLETE&resolution=SUPPORT&resolution=EXPIRED&resolution=MOVED&query_based_on=v1.2&query_format=advanced&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&bug_status=RESOLVED&bug_status=VERIFIED&bug_status=CLOSED&v1=1.2&product=Firefox%20for%20iOS&known_name=v1.2"
-    # - " https://mullvad.net/help/why-wireguard/"
-    # - https://android.googlesource.com/platform/frameworks/av/+/\nc87faed60483afb2466e03892bda80b72e5822c7%5E!/#F0
-    # - http://www.onestat.com/html/aboutus_pressbox4.html>hơn 90% người dùng internet</a> đang duyệt web bằng Internet Explorer.\n    Không nhiều người chú ý vào thời điểm đó, nhưng phiên bản đầu tiên của Phoenix (sau đó được đổi tên thành Firefox) cũng được phát hành bởi các thành viên cộng đồng năm đó của Mozilla với mục tiêu cung cấp <a href=
-    # - mailto:cpg-report@mozilla.com>cpg-report@mozilla.com</a>.\n  </p>\n\n  <p>\n  Si se trata de una denuncia<strong>que involucra a un empleado, contratista o proveedor</strong> (por ejemplo, cuando la denuncia la presenta un empleado o involucra a un empleado), en ese caso debes informarnos a través de la <a href=
+    - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1677)
+    - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1715)
+    - ./
+    - (https://www.mozilla.org/privacy/)
+    - "%(addons)s"
+    - "%(url)s"
+    - "%s"
+    - $https://developer.mozilla.org/docs/Glossary/HTML
+    - additivos
+    - applicationes
+    - chrome://global/skin/about.css
+    - congresso
+    - Contribute
+    - firefox-third-party.html
+    - "https: // www.google.com/privacy/lsf.html"
+    - incontros
+    - libro
+    - missing-var
+    - nb-NO
+    - Principles
+    - security@mozilla.org
+    - traciatores
+    - url
+    - url('mozorg.about.policy.transparency.index') + '#dfn-natl-security-request'
+    - varietate
+    - vr
+    - www.cybersensei.io
+    - www.securesoftware.nl
+    - " https://bugzilla.mozilla.org/buglist.cgi?f1=cf_tracking_fxios&list_id=12692445&o1=substring&resolution=---&resolution=FIXED&resolution=INVALID&resolution=WONTFIX&resolution=DUPLICATE&resolution=WORKSFORME&resolution=INCOMPLETE&resolution=SUPPORT&resolution=EXPIRED&resolution=MOVED&query_based_on=v1.2&query_format=advanced&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&bug_status=RESOLVED&bug_status=VERIFIED&bug_status=CLOSED&v1=1.2&product=Firefox%20for%20iOS&known_name=v1.2"
+    - " https://mullvad.net/help/why-wireguard/"
+    - https://android.googlesource.com/platform/frameworks/av/+/\nc87faed60483afb2466e03892bda80b72e5822c7%5E!/#F0
+    - http://www.onestat.com/html/aboutus_pressbox4.html>hơn 90% người dùng internet</a> đang duyệt web bằng Internet Explorer.\n    Không nhiều người chú ý vào thời điểm đó, nhưng phiên bản đầu tiên của Phoenix (sau đó được đổi tên thành Firefox) cũng được phát hành bởi các thành viên cộng đồng năm đó của Mozilla với mục tiêu cung cấp <a href=
+    - mailto:cpg-report@mozilla.com>cpg-report@mozilla.com</a>.\n  </p>\n\n  <p>\n  Si se trata de una denuncia<strong>que involucra a un empleado, contratista o proveedor</strong> (por ejemplo, cuando la denuncia la presenta un empleado o involucra a un empleado), en ese caso debes informarnos a través de la <a href=
 
     # Third-party URLs
     - http://0days.engineer
