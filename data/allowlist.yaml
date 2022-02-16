@@ -1,6 +1,9 @@
 # The allowlist has a per-site setup, so that links from SiteA do not have to be allowed from SiteB
 
-# Remember that any scalar strings with escaped characters must be single-quoted
+# The allowlist doesn't _have_ to be grouped/structured, but it should help
+# with quickly getting a sense for what is included here
+
+# Remember that any scalar strings featuring escaped characters must be single-quoted in YAML
 
 bedrock_base_config: &bedrock_base_config
   allowed_outbound_url_regexes:
@@ -12,10 +15,21 @@ bedrock_base_config: &bedrock_base_config
     - '^https?:\/\/[^\/]+.mozilla.com($|\/(.*))'
     - '^https?:\/\/[^\/]+.firefox.com($|\/(.*))'
 
+    - '^https?:\/\/[^\/]+.mozilla.design($|\/(.*))'
+    - '^https?:\/\/[^\/]+.mozillians.org($|\/(.*))'
     - '^https?:\/\/assets.mozilla.net\/(.*)'
-    - '^https?:\/\/mzl.la\/(.*)'
-    - '^https?:\/\/getpocket.com\/(.*)'
     - '^https?:\/\/bugzil.la\/(\d*)$'
+    - '^https?:\/\/getpocket.com\/(.*)'
+    - '^https?:\/\/mzl.la\/(.*)'
+    - '^https?:\/\/searchfox.org\/(.*)'
+    - '^https?:\/\/videos.cdn.mozilla.net\/(.*)'
+
+    # === Mozilla on Github
+
+    - '^https:\/\/github.com\/(mozilla|mozilla-mobile|mozilla-services|mozilla-tw)\/.*'
+    - '^https?:\/\/mozilla.github.io($|\/(.*))'
+    - '^https?:\/\/mozilladevelopers.github.io($|\/(.*))'
+    - '^https?:\/\/mozillagfx.wordpress.com($|\/(.*))'
 
     # pages linked to from our own security advisories - eg https://www.mozilla.org/en-US/security/advisories/mfsa2006-50/ -> mfsa2006-01.html
     - '^mfsa\d{4}-\d{2}(.html){0,1}$'
