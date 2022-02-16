@@ -257,12 +257,20 @@ def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
 
 def _verify_url_allowed(url: str, config: dict) -> bool:
 
-    # quickest check first
-    if url in config["allowed_outbound_url_literals"]:
+    # Quickest check first - set membership.
+
+    # Temporary measure: adjust for line breaks in hrefs
+    if "\n" in url:
+        _url = url.replace("\n", "\\n")
+    else:
+        _url = url
+
+    if _url in config["allowed_outbound_url_literals"]:
         return True
 
+    # If no luck, try our regex rules
     for compiled_regex in config["allowed_outbound_url_regexes"]:
-        if compiled_regex.match(url):
+        if compiled_regex.match(url):  # NB: testing the original, untweaked URL
             return True
 
     # Belt and braces:
