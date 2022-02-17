@@ -47,6 +47,20 @@ There is a default allowlist in use (`data/allowlist.yaml`) but an alernative ca
 $ python bin/run_checks.py --sitemap-url=https://www.mozilla.org/sitemap.xml --allowlist=/path/to/custom/allowlist.yaml
 ```
 
+If you want or need to check a site whose sitemap points to a _different_ domain (eg you want to check an origin server whose sitemap is hard-coded to refer to the CDN domain, or a localhost setup) you should ensure the server is listed as an option in the allowlist and also pass the `--maintain-hostname` parameter.
+
+For example:
+
+```
+$ python bin/run_checks.py --sitemap-url=http://origin-server.example.com/sitemap.xml --maintain-hostname
+```
+
+or, for localhost
+
+```
+$ python bin/run_checks.py --sitemap-url=http://localhost:8000/sitemap.xml --maintain-hostname
+```
+
 
 
 If you want to test the Sentry integration locally, you can pass a Sentry DSN as an environment variable. Here, we're passing a URL to [Kent - a local 'fake Sentry'](https://github.com/willkg/kent)

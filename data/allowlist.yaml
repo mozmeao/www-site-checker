@@ -85,6 +85,14 @@ origin_us:
 origin_fr:
   <<: *bedrock_base_config
   hostname: bedrock.prod.fr.moz.works
+
+localhost8000:
+  <<: *bedrock_base_config
+  hostname: localhost:8000
+
+localhost8080:
+  <<: *bedrock_base_config
+  hostname: localhost:8080
 #
 #
 # # Example additional site
