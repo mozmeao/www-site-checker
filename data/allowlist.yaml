@@ -8,13 +8,13 @@ bedrock_base_config: &bedrock_base_config
     - '^(\/|#).*' # Relative URLs and in-page anchors are OK
 
     # === Mozilla-run things ===
-    - '^http[s]{0,1}:\/\/[^\/]+.mozilla.org\/(.*)' # TODO: test this regex thoroughly
-    - '^http[s]{0,1}:\/\/[^\/]+.mozilla.com\/(.*)' # TODO: test this regex thoroughly
-    - '^http[s]{0,1}:\/\/[^\/]+.firefox.com\/(.*)' # TODO: test this regex thoroughly
+    - '^https?:\/\/[^\/]+.mozilla.org\/(.*)' # TODO: test this regex thoroughly
+    - '^https?:\/\/[^\/]+.mozilla.com\/(.*)' # TODO: test this regex thoroughly
+    - '^https?:\/\/[^\/]+.firefox.com\/(.*)' # TODO: test this regex thoroughly
 
-    - '^http[s]{0,1}:\/\/mzl.la\/(.*)'
-    - '^http[s]{0,1}:\/\/getpocket.com\/(.*)'
-    - '^http[s]{0,1}:\/\/bugzil.la\/(\d*)$' # TODO: test this regex thoroughly
+    - '^https?:\/\/mzl.la\/(.*)'
+    - '^https?:\/\/getpocket.com\/(.*)'
+    - '^https?:\/\/bugzil.la\/(\d*)$' # TODO: test this regex thoroughly
 
     # pages linked to from our own security advisories - eg https://www.mozilla.org/en-US/security/advisories/mfsa2006-50/ -> mfsa2006-01.html
     - '^mfsa\d{4}-\d{2}(.html){0,1}$'
@@ -22,10 +22,10 @@ bedrock_base_config: &bedrock_base_config
     # === Trusted third-party sites ===
 
     # CVEs at mitre.org
-    - '^http[s]{0,1}:\/\/(www.){0,1}cve.mitre.org\/cgi-bin\/cvename.cgi\?name=(CVE|CAN)-\d{4}-\d{4,5}$'
+    - '^https?:\/\/(www.){0,1}cve.mitre.org\/cgi-bin\/cvename.cgi\?name=(CVE|CAN)-\d{4}-\d{4,5}$'
 
     # CVEs at NIST
-    - '^http[s]{0,1}:\/\/nvd.nist.gov\/nvd.cfm\?cvename=CVE-\d{4}-\d{4}$'
+    - '^https?:\/\/nvd.nist.gov\/nvd.cfm\?cvename=CVE-\d{4}-\d{4}$'
 
     # === Special cases ===
 
@@ -98,7 +98,7 @@ localhost8080:
 # # Example additional site
 # other_base_config: &other_base_config
 #   allowed_outbound_url_regexes:
-#     - 'http[s]{0,1}:\/\/[^\/]+.example.com\/(.*)'
+#     - 'https?:\/\/[^\/]+.example.com\/(.*)'
 #   allowed_outbound_url_literals:
 #     - 'https://other-example.com/two'
 
