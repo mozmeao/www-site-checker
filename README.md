@@ -26,6 +26,8 @@ You can also clone this repo to your local machine and run it there. This is the
 ```
 $ git clone git@github.com:mozmeao/www-site-checker.git
 $ cd www-site-checker
+$ # make a virtualenv, with whatever you prefer, and activate it
+$ pip install -r requirements.txt
 $ python bin/run_checks.py --sitemap-url=https://www.mozilla.org/sitemap.xml
 ```
 The above will start to work through the entire sitemap (and child sitemaps) at that URL
@@ -85,9 +87,9 @@ Checks run via Github Actions will gave a `scan-results` archive in the artifact
 
 If you come across an alert saying there was an unexpected URL detected and you're happy to allow it here's how you make an unexpected URL into an expected one:
 
-### via Githu
+### via Github
 
-* Browse to and edit the `data/allowlist.yaml` file\
+* Browse to and edit the `data/allowlist.yaml` file
 * Add either a new entry to `allowed_outbound_url_literals` or a new _tested_ regex to `allowed_outbound_url_regexes`
 * Raise a new PR against the `main` branch. Github Actions will run the site checks. If your new rule change is valid, the checks will no longer consider that URL to be unexpected
 
