@@ -18,7 +18,7 @@ Roadmap / future checks
 ## Usage
 
 ### Automatic usage
-Currently, checks are set to run when updated code in this repo is pushed or (TO BE RE-ENABLED) on a twice-a-day schedule. If any issues are spotted, alerts are sent to Sentry and Slack (if either is configured) and report files are uploaded as artefacts as a result of the Github Action (more on this below)
+Currently, checks are set to run when updated code in this repo is pushed or (TO BE RE-ENABLED) on a twice-a-day schedule. If any issues are spotted, alerts are sent to Sentry and Slack (if either is configured) and report files are uploaded as artifacts as a result of the Github Action (more on this below)
 
 ### Manual usage and local development
 You can also clone this repo to your local machine and run it there. This is the recommended approach for developing new checks:
@@ -78,7 +78,7 @@ If unexpected URLs are detected, they are output in pairs:
 If the checks were carried out in batches, there may be multiple pairs of output files, with the batch number included in the filename.
 
 Running the checks locally will put files in the `output/` directory.
-Checks run via Github Actions will gave a `scan-results` archive in the artefacts section for the relevant run, which can be downloaded and inspected.
+Checks run via Github Actions will gave a `scan-results` archive in the artifacts section for the relevant run, which can be downloaded and inspected.
 
 
 ## Adding to the default allowlist

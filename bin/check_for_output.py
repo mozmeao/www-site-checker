@@ -41,15 +41,15 @@ def main():
     URLs are found, so the Slack message isn't the only alert.
     """
 
-    artefact_found = False
-    # Do we have any artefacts available? If we _don't_, that's good news
+    artifact_found = False
+    # Do we have any artifacts available? If we _don't_, that's good news
     for filename in os.listdir(_get_output_path()):
         if UNEXPECTED_URLS_FILENAME_FRAGMENT in filename:
-            artefact_found = True
+            artifact_found = True
             break
 
-    if not artefact_found:
-        _print("No artefact detected")
+    if not artifact_found:
+        _print("No artifact detected")
         return
 
     if SLACK_NOTIFICATION_WEBHOOK_URL:
