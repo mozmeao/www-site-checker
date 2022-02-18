@@ -11,9 +11,12 @@ env:
   SLACK_NOTIFICATION_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATION_WEBHOOK_URL }}
 
 jobs:
-  run_on_cdn_1_4:
+  run_on_cdn:
+    strategy:
+      matrix:
+        batch: ["1:4", "2:4", "3:4", "4:4"]
     runs-on: ubuntu-latest
-    name: Check main CDN - first quarter
+    name: Check main CDN - batch ${{ matrix.batch }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -23,73 +26,19 @@ jobs:
         run: >
           python bin/run_checks.py
           --sitemap-url=https://www.mozilla.org/sitemap.xml
-          --batch="1:4"
+          --batch="${{ matrix.batch }}"
       - name: Upload output files
         uses: actions/upload-artifact@v2
         with:
           name: scan-results
           path: output
 
-  run_on_cdn_2_4:
+  run_on_us_origin:
+    strategy:
+      matrix:
+        batch: ["1:4", "2:4", "3:4", "4:4"]
     runs-on: ubuntu-latest
-    name: Check main CDN - second quarter
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - name: Install requirements
-        run: pip install -r requirements.txt
-      - name: Run checker
-        run: >
-          python bin/run_checks.py
-          --sitemap-url=https://www.mozilla.org/sitemap.xml
-          --batch="2:4"
-      - name: Upload output files
-        uses: actions/upload-artifact@v2
-        with:
-          name: scan-results
-          path: output
-
-  run_on_cdn_3_4:
-    runs-on: ubuntu-latest
-    name: Check main CDN - third quarter
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - name: Install requirements
-        run: pip install -r requirements.txt
-      - name: Run checker
-        run: >
-          python bin/run_checks.py
-          --sitemap-url=https://www.mozilla.org/sitemap.xml
-          --batch="3:4"
-      - name: Upload output files
-        uses: actions/upload-artifact@v2
-        with:
-          name: scan-results
-          path: output
-
-  run_on_cdn_4_4:
-    runs-on: ubuntu-latest
-    name: Check main CDN - fourth/final quarter
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - name: Install requirements
-        run: pip install -r requirements.txt
-      - name: Run checker
-        run: >
-          python bin/run_checks.py
-          --sitemap-url=https://www.mozilla.org/sitemap.xml
-          --batch="4:4"
-      - name: Upload output files
-        uses: actions/upload-artifact@v2
-        with:
-          name: scan-results
-          path: output
-
-  run_on_origin_us_1_4:
-    runs-on: ubuntu-latest
-    name: Check US origin server - first quarter
+    name: Check US origin server - batch ${{ matrix.batch }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -100,76 +49,19 @@ jobs:
           python bin/run_checks.py
           --sitemap-url=https://bedrock-prod.gcp.moz.works/sitemap.xml
           --maintain-hostname
-          --batch="1:4"
+          --batch="${{ matrix.batch }}"
       - name: Upload output files
         uses: actions/upload-artifact@v2
         with:
           name: scan-results
           path: output
 
-  run_on_origin_us_2_4:
+  run_on_eu_origin:
+    strategy:
+      matrix:
+        batch: ["1:4", "2:4", "3:4", "4:4"]
     runs-on: ubuntu-latest
-    name: Check US origin server - second quarter
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - name: Install requirements
-        run: pip install -r requirements.txt
-      - name: Run checker
-        run: >
-          python bin/run_checks.py
-          --sitemap-url=https://bedrock-prod.gcp.moz.works/sitemap.xml
-          --maintain-hostname
-          --batch="2:4"
-      - name: Upload output files
-        uses: actions/upload-artifact@v2
-        with:
-          name: scan-results
-          path: output
-
-  run_on_origin_us_3_4:
-    runs-on: ubuntu-latest
-    name: Check US origin server - third quarter
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - name: Install requirements
-        run: pip install -r requirements.txt
-      - name: Run checker
-        run: >
-          python bin/run_checks.py
-          --sitemap-url=https://bedrock-prod.gcp.moz.works/sitemap.xml
-          --maintain-hostname
-          --batch="3:4"
-      - name: Upload output files
-        uses: actions/upload-artifact@v2
-        with:
-          name: scan-results
-          path: output
-
-  run_on_origin_us_4_4:
-    runs-on: ubuntu-latest
-    name: Check US origin server - fourth/final quarter
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - name: Install requirements
-        run: pip install -r requirements.txt
-      - name: Run checker
-        run: >
-          python bin/run_checks.py
-          --sitemap-url=https://bedrock-prod.gcp.moz.works/sitemap.xml
-          --maintain-hostname
-          --batch="4:4"
-      - name: Upload output files
-        uses: actions/upload-artifact@v2
-        with:
-          name: scan-results
-          path: output
-
-  run_on_origin_eu_1_4:
-    runs-on: ubuntu-latest
-    name: Check EU origin server - first quarter
+    name: Check EU origin server - batch ${{ matrix.batch }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -180,67 +72,7 @@ jobs:
           python bin/run_checks.py
           --sitemap-url=https://bedrock.prod.fr.moz.works/sitemap.xml
           --maintain-hostname
-          --batch="1:4"
-      - name: Upload output files
-        uses: actions/upload-artifact@v2
-        with:
-          name: scan-results
-          path: output
-
-  run_on_origin_eu_2_4:
-    runs-on: ubuntu-latest
-    name: Check EU origin server - second quarter
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - name: Install requirements
-        run: pip install -r requirements.txt
-      - name: Run checker
-        run: >
-          python bin/run_checks.py
-          --sitemap-url=https://bedrock.prod.fr.moz.works/sitemap.xml
-          --maintain-hostname
-          --batch="2:4"
-      - name: Upload output files
-        uses: actions/upload-artifact@v2
-        with:
-          name: scan-results
-          path: output
-
-  run_on_origin_eu_3_4:
-    runs-on: ubuntu-latest
-    name: Check EU origin server - third quarter
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - name: Install requirements
-        run: pip install -r requirements.txt
-      - name: Run checker
-        run: >
-          python bin/run_checks.py
-          --sitemap-url=https://bedrock.prod.fr.moz.works/sitemap.xml
-          --maintain-hostname
-          --batch="3:4"
-      - name: Upload output files
-        uses: actions/upload-artifact@v2
-        with:
-          name: scan-results
-          path: output
-
-  run_on_origin_eu_4_4:
-    runs-on: ubuntu-latest
-    name: Check EU origin server - fourth/final quarter
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - name: Install requirements
-        run: pip install -r requirements.txt
-      - name: Run checker
-        run: >
-          python bin/run_checks.py
-          --sitemap-url=https://bedrock.prod.fr.moz.works/sitemap.xml
-          --maintain-hostname
-          --batch="4:4"
+          --batch="${{ matrix.batch }}"
       - name: Upload output files
         uses: actions/upload-artifact@v2
         with:
@@ -250,18 +82,9 @@ jobs:
   alert_if_report_files_exist:
     runs-on: ubuntu-latest
     needs:
-      - run_on_cdn_1_4
-      - run_on_cdn_2_4
-      - run_on_cdn_3_4
-      - run_on_cdn_4_4
-      - run_on_origin_us_1_4
-      - run_on_origin_us_2_4
-      - run_on_origin_us_3_4
-      - run_on_origin_us_4_4
-      - run_on_origin_eu_1_4
-      - run_on_origin_eu_2_4
-      - run_on_origin_eu_3_4
-      - run_on_origin_eu_4_4
+      - run_on_cdn
+      - run_on_us_origin
+      - run_on_eu_origin
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
