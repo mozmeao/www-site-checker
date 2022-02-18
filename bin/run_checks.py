@@ -189,7 +189,7 @@ def _dump_to_file(
 
     fp_nested = open(nested_output_filepath, "w")
     for unexpected_url, occurrences in results.items():
-        line = "\n{unexpected_url}\nFound in:\n\t{occurrences}".format(
+        line = "\nUnexpected URL: {unexpected_url}\nFound in:\n\t{occurrences}\n".format(
             unexpected_url=unexpected_url,
             occurrences="\n\t".join(occurrences),
         )
