@@ -374,8 +374,11 @@ bedrock_base_config: &bedrock_base_config
 
     # Malformatted or broken links which need fixing
     - firefox-third-party.html # This is a 404 and we'll probably leave it as such for now
+    - url # https://github.com/mozilla/bedrock/issues/11219
 
     # Third-party URLs
+    - https://www.securesoftware.nl
+    - https://cybersensei.io/
     - http://0days.engineer
     - http://alancesec.co.in
     - http://andreasgal.com/2014/10/14/openh264-now-in-firefox/
@@ -675,6 +678,7 @@ bedrock_base_config: &bedrock_base_config
     - https://docs.google.com/forms/d/1rwLVzr1Fql9ZtAKkG_z5jcRczn2uy84zqwBX9gX52OY/viewform # Google Form for Credits-page request
     - https://dolske.wordpress.com/2017/06/15/photon-engineering-newsletter-6/
     - https://dutherenverseauborddelatable.wordpress.com/2014/06/26/firefox-the-browser-that-has-your-backup/
+    - https://ec.europa.eu/commission/presscorner/detail/en/IP_21_2663
     - https://economictimes.indiatimes.com/blogs/author/amba-kak/
     - https://edoverflow.com
     - https://en.wikipedia.org/wiki/Address_space_layout_randomization
@@ -696,6 +700,7 @@ bedrock_base_config: &bedrock_base_config
     - https://en.wikipedia.org/wiki/Web_feed
     - https://en.wikipedia.org/wiki/Web_syndication
     - https://en.wikipedia.org/wiki/WebGL
+    - https://en.wikipedia.org/wiki/XUL
     - https://encoding.spec.whatwg.org/
     - https://ewirch.github.io/
     - https://facebook.com/Bijoora
@@ -1131,6 +1136,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.mohamedharon.com
     - https://www.nbcnews.com/tech/tech-news/youtubes-recommendations-still-push-harmful-videos-crowdsourced-study-rcna1355
     - https://www.nds.ruhr-uni-bochum.de/chair/people/jmueller/
+    - https://www.nepad.org/
     - https://www.newamerica.org/oti/policy-papers/the-transparency-reporting-toolkit/
     - https://www.newsweek.com/mozilla-firefox-quantum-download-windows-browser-chrome-711765
     - https://www.nilsand.re/
@@ -1146,6 +1152,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.pinterest.com
     - https://www.popsci.com/technology/best-security-innovations-2021/
     - https://www.qwant.com/
+    - https://www.rapdp.org/
     - https://www.rapdp.org/en
     - https://www.rapdp.org/en/node/98
     - https://www.refactor.com/
@@ -1170,6 +1177,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.theguardian.com/technology/2019/sep/24/firefox-no-uk-plans-to-make-encrypted-browser-tool-its-default
     - https://www.theguardian.com/technology/2021/feb/19/uber-drivers-workers-uk-supreme-court-rules-rights
     - https://www.theguardian.com/world/2018/jul/17/venmo-payments-app-default-privacy-settings-public-information
+    - https://www.thehindu.com/sci-tech/technology/industry-concerned-over-inclusion-of-non-personal-data-expanded-localisation-mandates-jpc-report/article37985361.ece
     - https://www.theverge.com/2018/9/30/17913712/california-net-neutrality-bill-signed-law-jerry-brown
     - https://www.torproject.org/
     - https://www.ubuntu.com/about/about-ubuntu/conduct
