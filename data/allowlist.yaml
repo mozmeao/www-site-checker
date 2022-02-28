@@ -373,33 +373,7 @@ bedrock_base_config: &bedrock_base_config
     - news://gnu.misc.discuss
 
     # Malformatted or broken links which need fixing
-    - ./ # Fix WIP
-    - (https://www.mozilla.org/privacy/) # Fix WIP
-    - "%(addons)s" # https://github.com/mozilla-l10n/www-l10n/pull/271
-    - "%(url)s" # https://github.com/mozilla-l10n/www-l10n/pull/271
-    - "%s" # https://github.com/mozilla-l10n/www-l10n/pull/271
-    - $https://developer.mozilla.org/docs/Glossary/HTML # FIX WIP
-    - additivos # https://github.com/mozilla-l10n/www-l10n/pull/271
-    - applicationes # https://github.com/mozilla-l10n/www-l10n/pull/271
-    - chrome://global/skin/about.css # https://github.com/mozilla/bedrock/issues/11197
-    - congresso # https://github.com/mozilla-l10n/www-l10n/pull/271
-    - Contribute # https://github.com/mozilla-l10n/www-l10n/pull/271
-    - firefox-third-party.html
-    - "https: // www.google.com/privacy/lsf.html" # Fix is WIP
-    - incontros # https://github.com/mozilla-l10n/www-l10n/pull/271
-    - libro # https://github.com/mozilla-l10n/www-l10n/pull/271
-    - missing-var # https://github.com/mozilla-l10n/www-l10n/pull/271
-    - nb-NO # Fix is WIP
-    - Principles # https://github.com/mozilla-l10n/www-l10n/pull/271
-    - security@mozilla.org # Fix is WIP
-    - traciatores # https://github.com/mozilla-l10n/www-l10n/pull/271
-    - url # https://github.com/mozilla/bedrock/issues/11219
-    - url('mozorg.about.policy.transparency.index') + '#dfn-natl-security-request' # Fix is WIP
-    - varietate # https://github.com/mozilla-l10n/www-l10n/pull/271
-    - vr # https://github.com/mozilla-l10n/www-l10n/pull/270
-    - www.cybersensei.io # https://github.com/mozilla/foundation-security-advisories/pull/94
-    - www.securesoftware.nl # https://github.com/mozilla/foundation-security-advisories/pull/94
-    - " https://bugzilla.mozilla.org/buglist.cgi?f1=cf_tracking_fxios&list_id=12692445&o1=substring&resolution=---&resolution=FIXED&resolution=INVALID&resolution=WONTFIX&resolution=DUPLICATE&resolution=WORKSFORME&resolution=INCOMPLETE&resolution=SUPPORT&resolution=EXPIRED&resolution=MOVED&query_based_on=v1.2&query_format=advanced&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&bug_status=RESOLVED&bug_status=VERIFIED&bug_status=CLOSED&v1=1.2&product=Firefox%20for%20iOS&known_name=v1.2" # https://github.com/mozilla/release-notes/pull/18
+    - firefox-third-party.html # This is a 404 and we'll probably leave it as such for now
 
     # Third-party URLs
     - http://0days.engineer
