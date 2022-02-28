@@ -74,6 +74,9 @@ bedrock_base_config: &bedrock_base_config
     # Internals
     - "about:plugins"
 
+    # Relative paths
+    - "../"
+
     # First-party links, not needing a regex rule (yet?)
     - https://www.firefox.com.cn/
     - https://monitor.firefox.com?utm_source=mozilla.org-firefox-accounts&utm_medium=referral&utm_campaign=trailhead&utm_content=product-list-item&entrypoint=mozilla.org-firefox-accounts
