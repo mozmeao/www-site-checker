@@ -57,9 +57,8 @@ def main():
         _action_url = f"{GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}/"
         message = f"Unexpected outbound URL found when scanning page content. See {_action_url} for details and saved report."
         slack_client.send(text=message)
-        sys.exit(message)
-    else:
-        raise Exception("Slack webhook not configured")
+
+    sys.exit(message)
 
 
 if __name__ == "__main__":
