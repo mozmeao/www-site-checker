@@ -1,24 +1,24 @@
 # www-site-checker
 
-This project comprises tooling designed to check on the state of the mozilla.org site.
-
 _CURRENT STATUS: WIP, pre-production_
 
-Current supported checks:
+This project contains tooling designed to check on the state of the mozilla.org website in various ways.
 
-* Outbound URLs from www.mozilla.org - verified by domain and or an allow-list
+Supported checks:
 
-Roadmap / future checks
+* Verify all outbound URLs found on www.mozilla.org. Verification is done by domain and or an allow-list and exceptions are reported loudly.
 
-* Support throttling, if necessary in real use
+Roadmap for future checks and behaviour
+
 * Site-wide smoke test: confirmation of 200 OK from every single page (in dev/stage/prod)
 * HTML validation of all CMS-authored pages
+* Support throttling, if necessary in real use
 
 
 ## Usage
 
 ### Automatic usage
-Currently, checks are set to run when updated code in this repo is pushed or (TO BE RE-ENABLED) on a twice-a-day schedule. If any issues are spotted, alerts are sent to Sentry and Slack (if either is configured) and report files are uploaded as artifacts as a result of the Github Action (more on this below)
+Currently, checks are set to run when updated code in this repo is pushed or on a twice-a-day schedule. If any issues are spotted, alerts are sent to Sentry and Slack (if either is configured) and report files are uploaded as artifacts as a result of the Github Action (more on this below)
 
 ### Manual usage and local development
 You can also clone this repo to your local machine and run it there. This is the recommended approach for developing new checks:

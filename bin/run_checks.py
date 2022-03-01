@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
@@ -225,7 +227,7 @@ def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
     """Load the allowlist from the YAML file, optimise the direct like-for-like lookups
     and warm up any regexes."""
 
-    click.echo("Loading allowlist from file")
+    click.echo(f"Seeking an appropriate allowlist in file {allowlist_pathname}")
     fp = open(_get_allowlist_path(allowlist_pathname))
     config_data = safe_load(fp)
 
@@ -238,20 +240,24 @@ def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
             break
 
     if not site_config:
-        raise Exception(f"Could not find an allowlist for {hostname}")
+        click.echo(f"Could not find an allowlist for {hostname}, so treating all outbound URLs as unexpected")
+        site_config = {
+            "allowed_outbound_url_literals": set(),
+            "allowed_outbound_url_regexes": set(),
+        }
+    else:
+        # While we're here, turn the list of full strings to match into a set, to optimise lookups later.
+        # We _could_ mark this up as sets in YAML, but that gets parsed as {key_x: null, ...} so
+        # still would need cleaning up
+        site_config["allowed_outbound_url_literals"] = set(site_config["allowed_outbound_url_literals"])
 
-    # While we're here, turn the list of full strings to match into a set, to optimise lookups later.
-    # We _could_ mark this up as sets in YAML, but that gets parsed as {key_x: null, ...} so
-    # still would need cleaning up
-    site_config["allowed_outbound_url_literals"] = set(site_config["allowed_outbound_url_literals"])
+        # Also, let's pre-compile our regexes, at least:
+        compiled_regexes = set()
+        for raw_regex in site_config["allowed_outbound_url_regexes"]:
+            compiled_regexes.add(re.compile(raw_regex))
 
-    # Also, let's pre-compile our regexes, at least:
-    compiled_regexes = set()
-    for raw_regex in site_config["allowed_outbound_url_regexes"]:
-        compiled_regexes.add(re.compile(raw_regex))
-
-    # Warning: re-using same key but with [slightly] different data than sourced from YAML
-    site_config["allowed_outbound_url_regexes"] = compiled_regexes
+        # Warning: re-using same key but with [slightly] different data than sourced from YAML
+        site_config["allowed_outbound_url_regexes"] = compiled_regexes
     return site_config
 
 
