@@ -13,3 +13,4 @@ test-results.xml
 venv
 TODO.txt
 output/*
+python_coverage/*
