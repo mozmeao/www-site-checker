@@ -78,16 +78,17 @@ bedrock_base_config: &bedrock_base_config
     - "../"
 
     # First-party links, not needing a regex rule (yet?)
-    - https://www.firefox.com.cn/
     - https://monitor.firefox.com?utm_source=mozilla.org-firefox-accounts&utm_medium=referral&utm_campaign=trailhead&utm_content=product-list-item&entrypoint=mozilla.org-firefox-accounts
     - https://monitor.firefox.com?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=compare-chrome
     - https://monitor.firefox.com?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-home
     - https://monitor.firefox.com?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-products
-    - https://www.mozillafestival.org/speakers/virtual-dialogue-and-debates/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=state-of-mozilla-2019
-    - https://www.mozillapulse.org/profile/410
-    - https://mozillians.org/user/edit
     - https://mozilla.design/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=footer&utm_content=resources
     - https://mozilla.design/mozilla/logo-usage/
+    - https://mozillians.org/user/edit
+    - https://support.allizom.org
+    - https://www.firefox.com.cn/
+    - https://www.mozillafestival.org/speakers/virtual-dialogue-and-debates/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=state-of-mozilla-2019
+    - https://www.mozillapulse.org/profile/410
 
     # App store links not covered by the regexes above
     - https://app.adjust.com/qywno6t?redirect=https%3A%2F%2Fitunes.apple.com%2Fapp%2Fid1314000270%3Fmt%3D8
@@ -765,6 +766,7 @@ bedrock_base_config: &bedrock_base_config
     - https://help.opera.com/opera-tutorials/how-do-i-update-my-opera-browser/
     - https://hivelearningnetworks.org/
     - https://home.cern/topics/birth-web
+    - https://html.spec.whatwg.org/#custom-elements
     - https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-cuechange
     - https://html.spec.whatwg.org/multipage/workers.html
     - https://indianexpress.com/article/opinion/columns/right-to-privacy-justice-krishna-committee-information-theft-big-data-large-concerns-5060033/
@@ -1117,6 +1119,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.linkedin.com/in/daniel-maksimovic-73537882/
     - https://www.linkedin.com/in/gaurav-popalghat-a23605171
     - https://www.linkedin.com/in/hafiizh-7aa6bb31/
+    - https://www.linkedin.com/in/harshbanshpal/
     - https://www.linkedin.com/in/ismailtasdelen/
     - https://www.linkedin.com/in/mohammadhoseinaskari/
     - https://www.linkedin.com/in/mohammed-sherif-635302183
