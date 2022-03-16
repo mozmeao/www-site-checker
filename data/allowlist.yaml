@@ -708,6 +708,7 @@ bedrock_base_config: &bedrock_base_config
     - https://en.wikipedia.org/wiki/XUL
     - https://encoding.spec.whatwg.org/
     - https://ewirch.github.io/
+    - https://extensionworkshop.com/documentation/publish/site-permission-add-on/
     - https://facebook.com/Bijoora
     - https://facebook.com/mozilla
     - https://facebook.com/tkrawool
@@ -1193,6 +1194,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.vox.com/recode/2020/7/8/21311533/sdks-tracking-data-location
     - https://www.vulnerability-lab.com
     - https://www.w3.org/TR/WCAG21/#text-alternatives
+    - https://www.w3.org/TR/webmidi/
     - https://www.warner.senate.gov/public/index.cfm/2019/4/senators-introduce-bipartisan-legislation-to-ban-manipulative-dark-patterns
     - https://www.washingtonpost.com/nation/2019/12/12/she-installed-ring-camera-her-childrens-room-peace-mind-hacker-accessed-it-harassed-her-year-old-daughter/
     - https://www.washingtonpost.com/technology/2020/02/20/hulu-roku-political-ads-streaming/
