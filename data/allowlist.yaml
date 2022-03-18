@@ -348,17 +348,30 @@ bedrock_base_config: &bedrock_base_config
     - https://youtube.com/MozillaDeveloper
     - https://www.youtube.com/t/terms
     - https://www.youtube.com/user/firefoxchannel
+    - https://www.youtube.com/watch?v=1iT0eSSNlC4
+    - https://www.youtube.com/watch?v=2Hukzq_hOQ8
     - https://www.youtube.com/watch?v=6Ck1d6qo8a0
+    - https://www.youtube.com/watch?v=9f0ukTzx0Qw
     - https://www.youtube.com/watch?v=A_dZVbYJtsk
+    - https://www.youtube.com/watch?v=avh4-t2rUDs
+    - https://www.youtube.com/watch?v=avh4-t2rUDs&t=948s
     - https://www.youtube.com/watch?v=baPF-sOXP24
     - https://www.youtube.com/watch?v=f_f5wNw-2c0
+    - https://www.youtube.com/watch?v=F366d5pVLVA
+    - https://www.youtube.com/watch?v=fGyjqHS-poU
     - https://www.youtube.com/watch?v=GH2sjPmlxnM
+    - https://www.youtube.com/watch?v=ka6VPT16Oj8
     - https://www.youtube.com/watch?v=kw9LiqF-lNw
     - https://www.youtube.com/watch?v=LuEX_Wih8g4
+    - https://www.youtube.com/watch?v=nhIVcvHrxcg
+    - https://www.youtube.com/watch?v=OL3DowBM9uc
+    - https://www.youtube.com/watch?v=OL3DowBM9uc&t=10s
     - https://www.youtube.com/watch?v=T2jykykN3yc
     - https://www.youtube.com/watch?v=t3NKmmWfklU
     - https://www.youtube.com/watch?v=ug6tA6fhhdQ
     - https://www.youtube.com/watch?v=Un3u4wuGT8Q
+    - https://www.youtube.com/watch?v=VlKpP43WR1c
+    - https://www.youtube.com/watch?v=WYh71ud9qTg
     - https://www.youtube.com/watch?v=zZzl649NcD0
     - https://youtu.be/F-nFQryDB0s
     - https://youtu.be/M9kBO5bIEyI?t=705
@@ -382,8 +395,6 @@ bedrock_base_config: &bedrock_base_config
     - url # https://github.com/mozilla/bedrock/issues/11219
 
     # Third-party URLs
-    - https://www.securesoftware.nl
-    - https://cybersensei.io/
     - http://0days.engineer
     - http://alancesec.co.in
     - http://andreasgal.com/2014/10/14/openh264-now-in-firefox/
@@ -590,6 +601,7 @@ bedrock_base_config: &bedrock_base_config
     - http://xforce.iss.net/xforce/alerts/id/191
     - http://youtu.be/t3NKmmWfklU
     - https://0patch.zendesk.com/hc/en-us/articles/360011227079-Mozilla-Firefox-73-can-crash-upon-launching-when-0patch-Agent-is-installed
+    - https://2020.internethealthreport.org/
     - https://2fa.directory
     - https://abouthome-snippets-service.readthedocs.io/en/latest/data_collection.html
     - https://acoustic.com/privacy-notice/
@@ -597,6 +609,7 @@ bedrock_base_config: &bedrock_base_config
     - https://addons.mozilla.org
     - https://aframe.io/
     - https://africabusinesscommunities.com/tech/tech-news/kenya-business-and-government-leaders-urged-to-adopt-lead-data-practices/
+    - https://afrilabs.com/ag-2021-agenda/
     - https://aifund.ai/
     - https://aim.yahoo.com/aim/us/en/optout/
     - https://ainowinstitute.org/
@@ -608,6 +621,7 @@ bedrock_base_config: &bedrock_base_config
     - https://app.convercent.com/en-us/LandingPage/4a6ee0c0-5bc1-e611-80d5-000d3ab1117e
     - https://app.onetrust.com/app/#/webform/4ba08202-2ede-4934-a89e-f0b0870f95f0
     - https://ashughes.com/?p=426
+    - https://atf.app.swapcard.com/event/africa-tech-festival-2021
     - https://au.int/sites/default/files/decisions/37590-2019_sharm_el_sheikh_declaration_-_stc-cict-3_oct_2019_ver2410-10pm-1rev-2.pdf
     - https://awebpodcast.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage&utm_content=card
     - https://aws.amazon.com/privacy/
@@ -659,6 +673,7 @@ bedrock_base_config: &bedrock_base_config
     - https://creativecommons.org/licenses/by/3.0/
     - https://creativecommons.org/licenses/by/4.0/
     - https://creativecommons.org/publicdomain/zero/1.0/
+    - https://cybersensei.io/
     - https://detectify.com/
     - https://developer.android.com/guide/components/intents-filters.html
     - https://developer.chrome.com/multidevice/android/intents
@@ -701,6 +716,7 @@ bedrock_base_config: &bedrock_base_config
     - https://en.wikipedia.org/wiki/Mosaic_(web_browser)
     - https://en.wikipedia.org/wiki/Mozilla
     - https://en.wikipedia.org/wiki/Netscape_(web_browser)
+    - https://en.wikipedia.org/wiki/Pinkwashing_(LGBT)
     - https://en.wikipedia.org/wiki/RSS_%28file_format%29
     - https://en.wikipedia.org/wiki/Web_feed
     - https://en.wikipedia.org/wiki/Web_syndication
@@ -732,6 +748,9 @@ bedrock_base_config: &bedrock_base_config
     - https://github.com/crossbeam-rs/crossbeam/security/advisories/GHSA-pqqp-xmhj-wgcw
     - https://github.com/crossbeam-rs/crossbeam/security/advisories/GHSA-v5m7-53cv-f3hx
     - https://github.com/firebug/firebug.next/issues/177
+    - https://github.com/mdn/infra
+    - https://github.com/mdn/kuma
+    - https://github.com/mdn/yari
     - https://github.com/Metnew
     - https://github.com/pocmo/speed-dial
     - https://github.com/sctplab/usrsctp/commit/ffed0925f27d404173c1e3e750d818f432d2c019
@@ -796,6 +815,7 @@ bedrock_base_config: &bedrock_base_config
     - https://matthew.noorenberghe.com/blog/2019/05/password-manager-improvements-firefox-67
     - https://mdsattacks.com/
     - https://mdsattacks.com/#People
+    - https://mediainnovationnetwork.org/east-festival-2021/
     - https://medium.com/@antlam/a-new-mobile-tabs-tray-327ac262eacb
     - https://medium.com/@antlam/firefox-for-android-looks-a-bit-different-8ae8eba41b1f
     - https://medium.com/@antlam/firefox-for-android-on-tablets-f67edc83dd46
@@ -838,6 +858,7 @@ bedrock_base_config: &bedrock_base_config
     - https://posts.specterops.io/the-tale-of-settingcontent-ms-files-f1ea253e4d39
     - https://privacyportal.onetrust.com/webform/1350748f-7139-405c-8188-22740b3b5587/4ba08202-2ede-4934-a89e-f0b0870f95f0
     - https://qatarliving.com/
+    - https://qz.com/work/2016593/linkedin-mozilla-are-fighting-burnout-with-company-vacation-days/
     - https://rakeshmane.com/
     - https://rawsec.net/
     - https://restoreprivacy.com/firefox-privacy/
@@ -1095,6 +1116,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.firstinspires.org/
     - https://www.flickr.com/photos/gen/4784616521/
     - https://www.fluxx.io/privacy-policy
+    - https://www.forbes.com/sites/jackkelly/2021/07/27/companies-are-giving-workers-a-free-week-off-to-improve-morale-mental-health-and-burnout/?sh=1c57c74f2156
     - https://www.foxkeh.com/downloads/
     - https://www.franziskuskiefer.de/post/aes-gcm-speedup/
     - https://www.fsf.org/
@@ -1135,12 +1157,14 @@ bedrock_base_config: &bedrock_base_config
     - https://www.linkedin.com/in/tyler-hawkins-149ba2b2/
     - https://www.linkedin.com/in/yabeow/
     - https://www.linkedin.com/in/yaniv-n-8b4a76193
+    - https://www.linkedin.com/posts/mozilla-corporation_language-hispanicheritagemonth-activity-6854780194650230784-wR_N/
     - https://www.linshunghuang.com/
     - https://www.marketingcloud.com/privacy-policy/website-privacy-statement/
     - https://www.marketplace.org/shows/marketplace-tech/ever-watch-something-on-youtube-and-wished-you-hadnt-youre-not-alone/
     - https://www.microsoft.com/en-ca/download/details.aspx?id=36805
     - https://www.microsoft.com/en-ca/windows/microsoft-edge
     - https://www.microsoft.com/en-us/download/details.aspx?id=10109
+    - https://www.mmg.earth/about-us/
     - https://www.mohamedharon.com
     - https://www.nbcnews.com/tech/tech-news/youtubes-recommendations-still-push-harmful-videos-crowdsourced-study-rcna1355
     - https://www.nds.ruhr-uni-bochum.de/chair/people/jmueller/
@@ -1169,11 +1193,14 @@ bedrock_base_config: &bedrock_base_config
     - https://www.reuters.com/article/us-technology-www/father-of-web-says-tech-giants-may-have-to-be-split-up-idUSKCN1N63MV
     - https://www.rust-lang.org/
     - https://www.rust-lang.org/conduct.html
+    - https://www.securesoftware.nl
     - https://www.sendinblue.com/legal/privacypolicy/
     - https://www.silentrobots.com/
     - https://www.siliconrepublic.com/comms/ip-addresses-running-out
     - https://www.smacktls.com/
     - https://www.softwarefreedom.org/resources/2007/gpl-non-gpl-collaboration.html
+    - https://www.spelman.edu/coe-mws/news-events/the-future-is-intersectional-series/resources-recordings
+    - https://www.spelman.edu/coe-mws/news-events/the-future-is-intersectional-series/resources-recordings
     - https://www.stellalabs.org/
     - https://www.stophateforprofit.org/
     - https://www.stophateforprofit.org/press-release-week-of-action
@@ -1196,11 +1223,13 @@ bedrock_base_config: &bedrock_base_config
     - https://www.w3.org/TR/WCAG21/#text-alternatives
     - https://www.w3.org/TR/webmidi/
     - https://www.warner.senate.gov/public/index.cfm/2019/4/senators-introduce-bipartisan-legislation-to-ban-manipulative-dark-patterns
+    - https://www.washingtonpost.com/business/2021/06/28/employee-burnout-corporate-america/
     - https://www.washingtonpost.com/nation/2019/12/12/she-installed-ring-camera-her-childrens-room-peace-mind-hacker-accessed-it-harassed-her-year-old-daughter/
     - https://www.washingtonpost.com/technology/2020/02/20/hulu-roku-political-ads-streaming/
     - https://www.wayanadweb.com
     - https://www.wealthengine.com/wealthengine-inc-privacy-policy/
     - https://www.webbyawards.com/winners/2018/podcasts-digital-audio/features/best-branded-podcast-or-segment/irl-podcast/
+    - https://www.weforum.org/communities/gfc-on-artificial-intelligence-for-humanity
     - https://www.wikipedia.org
     - https://www.wired.co.uk/article/article-13-eu-copyright-directive-memes
     - https://www.wired.co.uk/article/mozilla-firefox-quantum-browser-vs-google-chrome
