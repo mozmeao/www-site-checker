@@ -1246,6 +1246,16 @@ bedrock_base_config: &bedrock_base_config
     - https://www.zippenhop.com/
     - https://xiph.org/flac/
 
+    # Temporary workarounds while we wait for things to hit production
+    # The following all have trailing spaces in the markup
+    - "https://www.spelman.edu/coe-mws/news-events/the-future-is-intersectional-series/resources-recordings "
+    - "https://www.youtube.com/watch?v=9f0ukTzx0Qw "
+    - "https://www.youtube.com/watch?v=F366d5pVLVA "
+    - "https://www.youtube.com/watch?v=avh4-t2rUDs&t=948s "
+    - "https://www.youtube.com/watch?v=OL3DowBM9uc&t=10s "
+    - "https://www.youtube.com/watch?v=2Hukzq_hOQ8 "
+    - "https://www.youtube.com/watch?v=nhIVcvHrxcg "
+
 bedrock_cdn:
   <<: *bedrock_base_config
   hostname: www.mozilla.org
