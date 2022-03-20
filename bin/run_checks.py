@@ -370,7 +370,12 @@ def _get_urls_from_sitemap(
     url_nodes = soup.find_all("url")
     if url_nodes:
         click.echo(f"Adding {len(url_nodes)} URLs")
-        urls.extend([url.loc.text for url in url_nodes])
+        for url in url_nodes:
+            try:
+                urls.append(url.loc.text)
+            except AttributeError as ae:
+                sentry_sdk.capture_message(f"URL node {url} missing '<loc>' - exception to follow")
+                sentry_sdk.capture_exception(ae)
 
     # Also remember to update the hostname on the final set of URLs, if required
     if maintain_hostname:
