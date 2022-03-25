@@ -89,6 +89,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.firefox.com.cn/
     - https://www.mozillafestival.org/speakers/virtual-dialogue-and-debates/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=state-of-mozilla-2019
     - https://www.mozillapulse.org/profile/410
+    - https://connect.mozilla.org?utm_source=contribute-website&utm_medium=banner&utm_campaign=connect-campaign&utm_content=15032022
 
     # App store links not covered by the regexes above
     - https://app.adjust.com/qywno6t?redirect=https%3A%2F%2Fitunes.apple.com%2Fapp%2Fid1314000270%3Fmt%3D8
