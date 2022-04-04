@@ -168,6 +168,20 @@ def _get_url_with_retry(
             raise re
 
 
+# TODO: De-duplicate and move to shared code
+def _get_output_path() -> os.PathLike:
+    # Get the path, allowing for this being called from the project root or the bin/ dir
+    path_components = [
+        "output",
+    ]
+    working_dir = os.getcwd()
+    working_dir_components = [working_dir]
+    if str(working_dir).endswith("/bin"):
+        working_dir_components.append("..")
+    path_components = working_dir_components + path_components
+    return os.path.join("", *path_components)
+
+
 def _dump_to_file(
     results: Dict[str, set],
     hostname: str,
@@ -200,17 +214,6 @@ def _dump_to_file(
 
     click.echo(f"List of unexpected URLs plus the page URLs that reference them dumped to {nested_output_filepath}")
     return flat_output_filepath, nested_output_filepath
-
-
-def _get_output_path() -> os.PathLike:
-    # Get the path, allowing for this being called from the project root or the bin/ dir
-    path_components = [
-        "output",
-    ]
-    working_dir = os.getcwd()
-    if str(working_dir).endswith("/bin"):
-        path_components = [working_dir, ".."] + path_components
-    return os.path.join("", *path_components)
 
 
 def _get_allowlist_path(allowlist_pathname: str) -> os.PathLike:

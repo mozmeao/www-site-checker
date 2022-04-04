@@ -2,6 +2,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+import pytest
 
 # TO COME - a way to verify that each allowlist config
 # 1) contains the expected rules - so changes to them will break tests
@@ -11,5 +12,6 @@
 # 2) has regexes that work appropriately
 
 
+@pytest.mark.skip("TO COME")
 def test_allowlist():
     assert False, "WRITE ME"
