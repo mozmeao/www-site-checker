@@ -697,6 +697,8 @@ bedrock_base_config: &bedrock_base_config
     - https://docs.google.com/forms/d/191_0cQHpvBAutNRFZSkUjeeHfVRadKPa_v8Ct9x5mDQ/
     - https://docs.google.com/forms/d/1f0xSg9XM8v7YGdZ_FzeE67ggckbAsg6sH1mpQ4buTQE/viewform
     - https://docs.google.com/forms/d/1rwLVzr1Fql9ZtAKkG_z5jcRczn2uy84zqwBX9gX52OY/viewform # Google Form for Credits-page request
+    - https://docs.microsoft.com/windows/win32/win7appqual/appinit-dlls-in-windows-7-and-windows-server-2008-r2
+    - https://docs.microsoft.com/windows/win32/winmsg/hooks
     - https://dolske.wordpress.com/2017/06/15/photon-engineering-newsletter-6/
     - https://dutherenverseauborddelatable.wordpress.com/2014/06/26/firefox-the-browser-that-has-your-backup/
     - https://ec.europa.eu/commission/presscorner/detail/en/IP_21_2663
@@ -753,6 +755,7 @@ bedrock_base_config: &bedrock_base_config
     - https://github.com/mdn/kuma
     - https://github.com/mdn/yari
     - https://github.com/Metnew
+    - https://github.com/microsoft/detours
     - https://github.com/pocmo/speed-dial
     - https://github.com/sctplab/usrsctp/commit/ffed0925f27d404173c1e3e750d818f432d2c019
     - https://github.com/sczi
@@ -764,6 +767,7 @@ bedrock_base_config: &bedrock_base_config
     - https://googleprojectzero.blogspot.com/2018/01/reading-privileged-memory-with-side.html
     - https://googleprojectzero.blogspot.com/2019/02/the-curious-case-of-convexity-confusion.html
     - https://groups.google.com/a/mozilla.org/g/dev-security-policy
+    - https://groups.google.com/a/mozilla.org/g/governance
     - https://groups.google.com/a/mozilla.org/g/governance/
     - https://groups.google.com/forum/#!msg/mozilla.governance/xs7Sfyxc4As/vIsztD7jha8J
     - https://groups.google.com/group/mozilla.announce
