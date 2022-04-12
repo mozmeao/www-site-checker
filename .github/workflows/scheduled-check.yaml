@@ -5,8 +5,7 @@ on:
     - cron: "32 2,14 * * *" # 02:32 UTC and 14:32 every day
 
 env:
-  # TODO: flip this to the production DSN once we're done testing
-  SENTRY_DSN: https://c7764face5354517befaee2e56b63cfb@sentry.prod.mozaws.net/122
+  SENTRY_DSN: https://45ad5d426da7480081831c053ca02cac@o1069899.ingest.sentry.io/6249535
   SLACK_NOTIFICATION_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATION_WEBHOOK_URL }}
 
 jobs:
