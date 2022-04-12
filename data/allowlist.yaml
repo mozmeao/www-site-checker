@@ -851,6 +851,7 @@ bedrock_base_config: &bedrock_base_config
     - https://mozvr.com/
     - https://mp.weixin.qq.com/s/6l8o9b93uI9_ISWdC9TEjQ
     - https://mullvad.net
+    - https://mullvad.net/
     - https://mullvad.net/help/no-logging-data-policy/
     - https://mullvad.net/help/why-wireguard/
     - https://mullvad.net/servers/
