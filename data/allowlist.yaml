@@ -428,6 +428,7 @@ bedrock_base_config: &bedrock_base_config
     - http://dev.w3.org/html5/spec/browsers.html#security-nav
     - http://dev.w3.org/html5/spec/Overview.html
     - http://developer.android.com/reference/android/provider/Browser.html#EXTRA_APPLICATION_ID
+    - http://dgql.org/~nathan/NAB2019.pdf#page=41
     - http://disconnect.me/
     - http://dl.acm.org/citation.cfm?id=2714650
     - http://docs.info.apple.com/article.html?artnum=305149
@@ -458,6 +459,7 @@ bedrock_base_config: &bedrock_base_config
     - http://johnathansimon.com
     - http://jtgi.me/adding-presets-to-firefox-dev-tools/
     - http://kenyalaw.org/kl/fileadmin/pdfdownloads/Acts/2019/TheDataProtectionAct__No24of2019.pdf
+    - http://kth.diva-portal.org/smash/record.jsf?pid=diva2%3A1177210&dswid=-4327
     - http://labs.idefense.com/
     - http://labs.idefense.com/intelligence/vulnerabilities/display.php?id=482
     - http://labs.idefense.com/intelligence/vulnerabilities/display.php?id=483
@@ -621,6 +623,7 @@ bedrock_base_config: &bedrock_base_config
     - https://app.convercent.com/en-us/Anonymous/IssueIntake/Survey?organizationId=11885ec6-e5a6-e811-80e6-000d3ab6ebad&intakeChannelId=2d885ec6-e5a6-e811-80e6-000d3ab6ebad
     - https://app.convercent.com/en-us/LandingPage/4a6ee0c0-5bc1-e611-80d5-000d3ab1117e
     - https://app.onetrust.com/app/#/webform/4ba08202-2ede-4934-a89e-f0b0870f95f0
+    - https://arstechnica.com/tech-policy/2017/03/senate-votes-to-let-isps-sell-your-web-browsing-history-to-advertisers/
     - https://ashughes.com/?p=426
     - https://atf.app.swapcard.com/event/africa-tech-festival-2021
     - https://au.int/sites/default/files/decisions/37590-2019_sharm_el_sheikh_declaration_-_stc-cict-3_oct_2019_ver2410-10pm-1rev-2.pdf
@@ -631,6 +634,7 @@ bedrock_base_config: &bedrock_base_config
     - https://bishopfox.com/
     - https://bitsup.blogspot.com/2015/03/opportunistic-encryption-for-firefox.html
     - https://bjornweb.nl/
+    - https://blog.cloudflare.com/oblivious-dns/
     - https://blog.getpocket.com/2020/06/the-fight-for-racial-equity-justice-and-black-lives/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=state-of-mozilla-2019
     - https://blog.linkedin.com/2012/06/06/linkedin-member-passwords-compromised
     - https://blog.lizardwrangler.com
@@ -642,6 +646,8 @@ bedrock_base_config: &bedrock_base_config
     - https://boingboing.net/2018/08/23/putting-together-a-team.html
     - https://brendaneich.com/2004/06/the-non-world-non-wide-non-web/
     - https://briansmith.org/
+    - https://browser.mt/
+    - https://browserbench.org/Speedometer2.0/
     - https://bughunter.withgoogle.com/profile/3c96630c-9112-4ddb-a029-df2bb893c6c3
     - https://bughunter.withgoogle.com/profile/80ae25f5-877d-4402-94e8-7902cacdb4b9
     - https://bugs.webkit.org/show_bug.cgi?id=61585
@@ -674,14 +680,23 @@ bedrock_base_config: &bedrock_base_config
     - https://creativecommons.org/licenses/by/3.0/
     - https://creativecommons.org/licenses/by/4.0/
     - https://creativecommons.org/publicdomain/zero/1.0/
+    - https://cseweb.ucsd.edu/~lerner/papers/vera-pldi2020.pdf
+    - https://cups.cs.cmu.edu/soups/2012/proceedings/a3_Felt.pdf
     - https://cybersensei.io/
+    - https://datatracker.ietf.org/doc/html/rfc8826
+    - https://datatracker.ietf.org/doc/html/rfc8890
+    - https://dbaron.org/mozilla/visited-privacy
     - https://detectify.com/
+    - https://dev.chromium.org/Home/chromium-security/crlsets
     - https://developer.android.com/guide/components/intents-filters.html
     - https://developer.chrome.com/multidevice/android/intents
     - https://developers.cloudflare.com/1.1.1.1/privacy/firefox/
     - https://developers.google.com/caja/
     - https://developers.google.com/speed/webp/
+    - https://developers.google.com/web/tools/lighthouse
+    - https://developers.google.com/web/updates/2018/10/watch-video-using-picture-in-picture
     - https://disconnect.me/trackerprotection
+    - https://docs.fastly.com/products/compute-at-edge
     - https://docs.google.com/a/mozilla.com/forms/d/e/1FAIpQLScLwANEOvLBE6gnFVoiamqHOYzzkaChpdQJ7f0PlZGmfyy94w/viewform
     - https://docs.google.com/document/d/19n5LhPYOs_mGWCSMB-0POriv6juLJW_KUEeSOcbXOT8/edit
     - https://docs.google.com/document/d/1EBDjGXUxvBWWLkIv5-rdaSCiwrK3a_50wXMNfaCIxgs/
@@ -704,11 +719,13 @@ bedrock_base_config: &bedrock_base_config
     - https://ec.europa.eu/commission/presscorner/detail/en/IP_21_2663
     - https://economictimes.indiatimes.com/blogs/author/amba-kak/
     - https://edoverflow.com
+    - https://educatedguesswork.org/tags/privacy%20preserving%20measurement/
     - https://en.wikipedia.org/wiki/Address_space_layout_randomization
     - https://en.wikipedia.org/wiki/ARPANET
     - https://en.wikipedia.org/wiki/Atom_%28standard%29
     - https://en.wikipedia.org/wiki/AV1
     - https://en.wikipedia.org/wiki/Browser_wars
+    - https://en.wikipedia.org/wiki/Decision_fatigue
     - https://en.wikipedia.org/wiki/Facebook%E2%80%93Cambridge_Analytica_data_scandal
     - https://en.wikipedia.org/wiki/Favicon
     - https://en.wikipedia.org/wiki/Firefox
@@ -716,17 +733,23 @@ bedrock_base_config: &bedrock_base_config
     - https://en.wikipedia.org/wiki/History_of_the_web_browser
     - https://en.wikipedia.org/wiki/Internet_Explorer
     - https://en.wikipedia.org/wiki/Internet_Explorer#Market_adoption_and_usage_share
+    - https://en.wikipedia.org/wiki/List_of_languages_by_number_of_native_speakers#Ethnologue_(2019,_22nd_edition)
+    - https://en.wikipedia.org/wiki/List_of_languages_by_total_number_of_speakers#Ethnologue_(2019,_23rd_edition)
     - https://en.wikipedia.org/wiki/Mosaic_(web_browser)
     - https://en.wikipedia.org/wiki/Mozilla
     - https://en.wikipedia.org/wiki/Netscape_(web_browser)
     - https://en.wikipedia.org/wiki/Pinkwashing_(LGBT)
+    - https://en.wikipedia.org/wiki/Principle_of_least_astonishment
     - https://en.wikipedia.org/wiki/RSS_%28file_format%29
+    - https://en.wikipedia.org/wiki/URL
     - https://en.wikipedia.org/wiki/Web_feed
     - https://en.wikipedia.org/wiki/Web_syndication
     - https://en.wikipedia.org/wiki/WebGL
     - https://en.wikipedia.org/wiki/XUL
     - https://encoding.spec.whatwg.org/
+    - https://energyinnovation.org/2020/03/17/how-much-energy-do-data-centers-really-use/
     - https://ewirch.github.io/
+    - https://extensiblewebmanifesto.org/
     - https://extensionworkshop.com/documentation/publish/site-permission-add-on/
     - https://facebook.com/Bijoora
     - https://facebook.com/mozilla
@@ -757,15 +780,19 @@ bedrock_base_config: &bedrock_base_config
     - https://github.com/Metnew
     - https://github.com/microsoft/detours
     - https://github.com/pocmo/speed-dial
+    - https://github.com/project-everest/hacl-star
     - https://github.com/sctplab/usrsctp/commit/ffed0925f27d404173c1e3e750d818f432d2c019
     - https://github.com/sczi
     - https://github.com/tc39/proposal-class-fields#private-fields
+    - https://github.com/unicode-org/icu4x
+    - https://github.com/unicode-org/message-format-wg
     - https://github.com/w3c/resource-timing/issues/29
     - https://github.com/w3c/webcomponents/
     - https://github.com/whatwg/html/pull/166
     - https://godotengine.org/
     - https://googleprojectzero.blogspot.com/2018/01/reading-privileged-memory-with-side.html
     - https://googleprojectzero.blogspot.com/2019/02/the-curious-case-of-convexity-confusion.html
+    - https://greasyfork.org
     - https://groups.google.com/a/mozilla.org/g/dev-security-policy
     - https://groups.google.com/a/mozilla.org/g/governance
     - https://groups.google.com/a/mozilla.org/g/governance/
@@ -789,10 +816,12 @@ bedrock_base_config: &bedrock_base_config
     - https://help.github.com/articles/generating-ssh-keys/
     - https://help.github.com/en/github/site-policy/github-privacy-statement#our-use-of-cookies-and-tracking
     - https://help.opera.com/opera-tutorials/how-do-i-update-my-opera-browser/
+    - https://hillbrad.github.io/sri-addressable-caching/sri-addressable-caching.html
     - https://hivelearningnetworks.org/
     - https://home.cern/topics/birth-web
     - https://html.spec.whatwg.org/#custom-elements
     - https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-cuechange
+    - https://html.spec.whatwg.org/multipage/origin.html#site
     - https://html.spec.whatwg.org/multipage/workers.html
     - https://indianexpress.com/article/opinion/columns/right-to-privacy-justice-krishna-committee-information-theft-big-data-large-concerns-5060033/
     - https://indianexpress.com/article/technology/tech-news-technology/why-mozilla-is-advocating-for-lean-data-practices-in-india-5510327/
@@ -809,6 +838,7 @@ bedrock_base_config: &bedrock_base_config
     - https://labs.f-secure.com/
     - https://legis.senado.leg.br/sdleg-getter/documento?dm=8127649&ts=1593563111041&disposition=inline
     - https://letsencrypt.org/
+    - https://letsencrypt.org/stats/#percent-pageloads
     - https://linkedin.com/in/andirrahmani
     - https://linkedin.com/in/yarbabin
     - https://lumendatabase.org/
@@ -841,6 +871,7 @@ bedrock_base_config: &bedrock_base_config
     - https://medium.com/mozilla-tech/open-for-business-firefox-quantum-is-ready-for-it-622c74fe13fe
     - https://medium.com/mozilla-tech/the-search-for-the-goldilocks-browser-and-why-firefox-may-be-just-right-for-you-1f520506aa35
     - https://medium.com/read-write-participate/minimum-standards-for-tackling-iot-security-70f90b37f2d5
+    - https://messaginglayersecurity.rocks/
     - https://mg.frama.io
     - https://mikeconley.ca/blog/2018/01/11/making-tab-switching-faster-in-firefox-with-tab-warming/
     - https://miketaylr.com/posts/2015/03/contenteditable-paste.html
@@ -855,16 +886,21 @@ bedrock_base_config: &bedrock_base_config
     - https://mullvad.net/help/no-logging-data-policy/
     - https://mullvad.net/help/why-wireguard/
     - https://mullvad.net/servers/
+    - https://netflixtechblog.com/how-netflix-brings-safer-and-faster-streaming-experience-to-the-living-room-on-crowded-networks-78b8de7f758c
     - https://nextdns.io/privacy
+    - https://nordzilla.github.io/dom-l10n-draft-spec/
     - https://opensource.org/
     - https://p2pu.org/webcraft
     - https://palant.de/
+    - https://patcg.github.io/
+    - https://people.eecs.berkeley.edu/~daw/papers/anduser-soups12.pdf
     - https://policies.google.com/privacy
     - https://policies.google.com/terms
     - https://popcorn.webmaker.org/
     - https://posts.specterops.io/the-tale-of-settingcontent-ms-files-f1ea253e4d39
     - https://privacyportal.onetrust.com/webform/1350748f-7139-405c-8188-22740b3b5587/4ba08202-2ede-4934-a89e-f0b0870f95f0
     - https://qatarliving.com/
+    - https://quicwg.org/
     - https://qz.com/work/2016593/linkedin-mozilla-are-fighting-burnout-with-company-vacation-days/
     - https://rakeshmane.com/
     - https://rawsec.net/
@@ -912,6 +948,7 @@ bedrock_base_config: &bedrock_base_config
     - https://thimble.webmaker.org/
     - https://thunderbird.net
     - https://time.com/collection/time-100-next-2019/5718889/camille-francois/
+    - https://timkadlec.com/remembers/2020-04-21-the-cost-of-javascript-frameworks/
     - https://tokbox.com/support/privacy-policy
     - https://tools.google.com/dlpage/gaoptout
     - https://tools.ietf.org/html/4287
@@ -922,6 +959,9 @@ bedrock_base_config: &bedrock_base_config
     - https://tools.ietf.org/html/rfc5480#section-2.1.1
     - https://tools.ietf.org/html/rfc5758#section-3.2
     - https://tools.ietf.org/html/rfc8017#appendix-A.1
+    - https://tools.ietf.org/html/rfc8291
+    - https://tools.ietf.org/html/rfc8484
+    - https://tools.ietf.org/rfcmarkup?doc=8446
     - https://translate.google.com/about/languages/
     - https://translate.google.com/translate?sl=auto&tl=en&u=https://www.lemauricien.com/actualites/pnq-sur-le-controle-propose-des-reseaux-sociaux-le-pm-renvoie-la-balle-vers-licta/425187/
     - https://twitter.com/@_mohammadowais
@@ -1048,25 +1088,36 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/yendrzei
     - https://twitter.com/yousukezan
     - https://us.pycon.org/2018/about/code-of-conduct/
+    - https://userstyles.org/
     - https://uxplanet.org/how-to-design-notifications-for-better-ux-6fb0711be54d
     - https://variety.com/2019/digital/news/u-s-households-have-an-average-of-11-connected-devices-and-5g-should-push-that-even-higher-1203431225/
     - https://viewsourceconf.org/berlin-2016/code-of-conduct/
     - https://w3c.github.io/fingerprinting-guidance/
     - https://w3c.github.io/navigation-timing
+    - https://w3c.github.io/typography/gap-analysis/language-matrix.html
     - https://w3c.github.io/webappsec-upgrade-insecure-requests/
     - https://w3ctag.github.io/unsanctioned-tracking/
     - https://weakdh.org/
     - https://weakdh.org/imperfect-forward-secrecy.pdf
     - https://web.archive.org/web/20021001071727/wp.netscape.com/newsref/pr/newsrelease558.html
+    - https://web.archive.org/web/20201128180021/https://developer.mozilla.org/en-US/docs/Archive/B2G_OS/API
+    - https://web.dev/vitals/
+    - https://web.dev/why-speed-matters/#performance-is-about-improving-conversions
+    - https://web.dev/why-speed-matters/#performance-is-about-retaining-users
+    - https://webaim.org/projects/million/#intro
+    - https://webauthn.io/
     - https://webcompat.com
     - https://webcompat.com/?utm_source=mozilla.org-contribute&utm_medium=referral&utm_campaign=contribute-page
     - https://webfwd.org/
     - https://webmaker.org
     - https://webmaker.org/
     - https://webmaker.org/#/legal
+    - https://webmasters.googleblog.com/2020/05/evaluating-page-experience.html
     - https://webtransparency.cs.princeton.edu/webcensus/
     - https://whatwg.org/
     - https://whoami.securitybreached.org
+    - https://wicg.github.io/scheduling-apis/
+    - https://wicg.github.io/webusb/
     - https://wikipedia.org/wiki/HTTP_cookie
     - https://wikipedia.org/wiki/URL
     - https://wingolog.org/archives/2014/11/14/generators-in-firefox-now-twenty-two-times-faster
@@ -1080,6 +1131,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.albrightstonebridge.com/
     - https://www.alexa.com/help/privacy
     - https://www.androidpolice.com/2017/10/09/mozilla-testing-another-new-browser-called-firefox-rocket-specifically-indonesia/
+    - https://www.aph.gov.au/DocumentStore.ashx?id=7609a72e-1452-4a20-b76a-87e55d1243bc&subId=666681
     - https://www.apple.com/ios/ios-14/
     - https://www.apple.com/legal/internet-services/itunes/testflight/sren/terms.html
     - https://www.apple.com/rosetta/index.html
@@ -1095,6 +1147,8 @@ bedrock_base_config: &bedrock_base_config
     - https://www.ccadb.org/policy
     - https://www.ceps.eu/publications/software-vulnerability-disclosure-europe-technology-policies-and-legal-challenges
     - https://www.changecopyright.org/
+    - https://www.chromium.org/Home/chromium-security/memory-safety
+    - https://www.chromium.org/teams/web-capabilities-fugu
     - https://www.cleveland.com/expo/news/erry-2018/09/297f2797e8466/digitalc-is-a-finalist-for-a-n.html
     - https://www.cloudflare.com/mozilla/firefox-private-network-privacy-notice/
     - https://www.cnas.org/digital-freedom-forum
@@ -1125,6 +1179,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.flickr.com/photos/gen/4784616521/
     - https://www.fluxx.io/privacy-policy
     - https://www.forbes.com/sites/jackkelly/2021/07/27/companies-are-giving-workers-a-free-week-off-to-improve-morale-mental-health-and-burnout/?sh=1c57c74f2156
+    - https://www.forbes.com/sites/tjmccue/2018/07/30/seo-industry-approaching-80-billion-but-all-you-want-is-more-web-traffic
     - https://www.foxkeh.com/downloads/
     - https://www.franziskuskiefer.de/post/aes-gcm-speedup/
     - https://www.fsf.org/
@@ -1141,7 +1196,10 @@ bedrock_base_config: &bedrock_base_config
     - https://www.grepular.com/
     - https://www.hercampus.com/
     - https://www.iainnicol.com/
+    - https://www.ieee-security.org/TC/SPW2015/W2SP/papers/W2SP_2015_submission_32.pdf
+    - https://www.ietf.org/archive/id/draft-ietf-tls-esni-08.html
     - https://www.inslm.gov.au/sites/default/files/2020-03/tola-transcript-public-hearing-day-1-20-feb-2020.pdf
+    - https://www.jefftk.com/p/shared-cache-is-going-away
     - https://www.leanplum.com/privacy/
     - https://www.lemauricien.com/actualites/pnq-sur-le-controle-propose-des-reseaux-sociaux-le-pm-renvoie-la-balle-vers-licta/425187/
     - https://www.linkedin.com/in/andirrahmani/
@@ -1169,6 +1227,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.linshunghuang.com/
     - https://www.marketingcloud.com/privacy-policy/website-privacy-statement/
     - https://www.marketplace.org/shows/marketplace-tech/ever-watch-something-on-youtube-and-wished-you-hadnt-youre-not-alone/
+    - https://www.mdpi.com/2078-1547/6/1/117
     - https://www.microsoft.com/en-ca/download/details.aspx?id=36805
     - https://www.microsoft.com/en-ca/windows/microsoft-edge
     - https://www.microsoft.com/en-us/download/details.aspx?id=10109
@@ -1180,10 +1239,13 @@ bedrock_base_config: &bedrock_base_config
     - https://www.newamerica.org/oti/policy-papers/the-transparency-reporting-toolkit/
     - https://www.newsweek.com/mozilla-firefox-quantum-download-windows-browser-chrome-711765
     - https://www.nilsand.re/
+    - https://www.nngroup.com/articles/response-times-3-important-limits
+    - https://www.nngroup.com/articles/the-need-for-speed
     - https://www.nytimes.com/2019/07/25/technology/facebook-ad-library.html
     - https://www.nytimes.com/2021/04/19/well/mind/covid-mental-health-languishing.html
     - https://www.nytimes.com/2021/08/08/opinion/tiktok-facebook-youtube-transparency.html
     - https://www.nytimes.com/interactive/2018/12/10/business/location-data-privacy-apps.html
+    - https://www.nytimes.com/interactive/2021/09/03/climate/bitcoin-carbon-footprint-electricity.html
     - https://www.nytimes.com/live/2020/2020-election-misinformation-distortions#researchers-say-a-coordinated-misinformation-campaign-on-twitter-backed-kenyas-president
     - https://www.opera.com/
     - https://www.optimizely.com/opt_out
@@ -1191,16 +1253,20 @@ bedrock_base_config: &bedrock_base_config
     - https://www.pcmag.com/news/7-vpn-services-found-recording-user-logs-despite-no-log-pledge
     - https://www.pinterest.com
     - https://www.popsci.com/technology/best-security-innovations-2021/
+    - https://www.projectfluent.org/
     - https://www.qwant.com/
     - https://www.rapdp.org/
     - https://www.rapdp.org/en
     - https://www.rapdp.org/en/node/98
     - https://www.refactor.com/
+    - https://www.researchgate.net/publication/320225452_Total_Consumer_Power_Consumption_Forecast
     - https://www.reuters.com/article/us-health-coronavirus-india-app/india-makes-source-code-of-contact-tracing-app-public-idUSKBN23231S
     - https://www.reuters.com/article/us-health-coronavirus-india-app/india-orders-coronavirus-tracing-app-for-all-workers-idUSKBN22E07K
     - https://www.reuters.com/article/us-technology-www/father-of-web-says-tech-giants-may-have-to-be-split-up-idUSKCN1N63MV
+    - https://www.rfc-editor.org/rfc/rfc9000.html
     - https://www.rust-lang.org/
     - https://www.rust-lang.org/conduct.html
+    - https://www.science.org/doi/abs/10.1126/science.aba3758
     - https://www.securesoftware.nl
     - https://www.sendinblue.com/legal/privacypolicy/
     - https://www.silentrobots.com/
@@ -1221,15 +1287,21 @@ bedrock_base_config: &bedrock_base_config
     - https://www.theguardian.com/technology/2021/feb/19/uber-drivers-workers-uk-supreme-court-rules-rights
     - https://www.theguardian.com/world/2018/jul/17/venmo-payments-app-default-privacy-settings-public-information
     - https://www.thehindu.com/sci-tech/technology/industry-concerned-over-inclusion-of-non-personal-data-expanded-localisation-mandates-jpc-report/article37985361.ece
+    - https://www.thetradedesk.com/us/about-us/industry-initiatives/unified-id-solution-2-0
     - https://www.theverge.com/2018/9/30/17913712/california-net-neutrality-bill-signed-law-jerry-brown
     - https://www.torproject.org/
     - https://www.ubuntu.com/about/about-ubuntu/conduct
+    - https://www.un.org/development/desa/disabilities/resources/factsheet-on-persons-with-disabilities.html
     - https://www.universalsubtitles.org
     - https://www.verdict.co.uk/google-apple-privacy/
     - https://www.vox.com/recode/2020/7/8/21311533/sdks-tracking-data-location
     - https://www.vulnerability-lab.com
+    - https://www.w3.org/TR/wai-aria-1.1/#combobox
     - https://www.w3.org/TR/WCAG21/#text-alternatives
+    - https://www.w3.org/TR/webgpu/
     - https://www.w3.org/TR/webmidi/
+    - https://www.w3.org/TR/webtransport/
+    - https://www.w3.org/wasm/
     - https://www.warner.senate.gov/public/index.cfm/2019/4/senators-introduce-bipartisan-legislation-to-ban-manipulative-dark-patterns
     - https://www.washingtonpost.com/business/2021/06/28/employee-burnout-corporate-america/
     - https://www.washingtonpost.com/nation/2019/12/12/she-installed-ring-camera-her-childrens-room-peace-mind-hacker-accessed-it-harassed-her-year-old-daughter/
@@ -1237,6 +1309,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.wayanadweb.com
     - https://www.wealthengine.com/wealthengine-inc-privacy-policy/
     - https://www.webbyawards.com/winners/2018/podcasts-digital-audio/features/best-branded-podcast-or-segment/irl-podcast/
+    - https://www.webpagetest.org/
     - https://www.weforum.org/communities/gfc-on-artificial-intelligence-for-humanity
     - https://www.wikipedia.org
     - https://www.wired.co.uk/article/article-13-eu-copyright-directive-memes
@@ -1247,22 +1320,15 @@ bedrock_base_config: &bedrock_base_config
     - https://www.wired.com/story/mozilla-internet-health-report/
     - https://www.wired.com/story/mozilla-privacy-not-included-internet-connected-toys/
     - https://www.wsj.com/articles/bill-would-let-consumers-move-data-among-social-media-11571756143
+    - https://www.wsj.com/articles/bitcoin-miners-are-giving-new-life-to-old-fossil-fuel-power-plants-11621594803
     - https://www.wsj.com/articles/youtubes-search-algorithm-directs-viewers-to-false-and-sexualized-videos-study-finds-11625644803
     - https://www.xfinity.com/privacy/policy/dns
     - https://www.ygitsoftware.com/
+    - https://www.yubico.com/support/security-advisories/ysa-2018-02/
     - https://www.zdnet.com/article/before-the-web-the-internet-in-1991/
     - https://www.zippenhop.com/
     - https://xiph.org/flac/
-
-    # Temporary workarounds while we wait for things to hit production
-    # The following all have trailing spaces in the markup
-    - "https://www.spelman.edu/coe-mws/news-events/the-future-is-intersectional-series/resources-recordings "
-    - "https://www.youtube.com/watch?v=9f0ukTzx0Qw "
-    - "https://www.youtube.com/watch?v=F366d5pVLVA "
-    - "https://www.youtube.com/watch?v=avh4-t2rUDs&t=948s "
-    - "https://www.youtube.com/watch?v=OL3DowBM9uc&t=10s "
-    - "https://www.youtube.com/watch?v=2Hukzq_hOQ8 "
-    - "https://www.youtube.com/watch?v=nhIVcvHrxcg "
+    - https://xsleaks.dev/
 
 bedrock_cdn:
   <<: *bedrock_base_config
