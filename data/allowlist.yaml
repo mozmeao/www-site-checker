@@ -830,6 +830,7 @@ bedrock_base_config: &bedrock_base_config
     - https://internethealthreport.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage&utm_content=card
     - https://internethealthreport.org/2019/?lang=fr&utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage-de&utm_content=card
     - https://irlpodcast.org/
+    - https://jrmuizel.github.io/twitch/volume.html
     - https://jswrenn.com/
     - https://khoros.com/privacy
     - https://koelner-pc-hilfe.de
