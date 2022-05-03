@@ -660,6 +660,7 @@ bedrock_base_config: &bedrock_base_config
     - https://cabforum.org/baseline-requirements-documents/
     - https://cabforum.org/extended-validation/
     - https://cabforum.org/network-security/
+    - https://cabforum.org/network-security-requirements/
     - https://caddyserver.com/
     - https://cliqz.com/en/privacy-browser
     - https://cliqz.com/en/whycliqz/transparency
@@ -683,6 +684,15 @@ bedrock_base_config: &bedrock_base_config
     - https://cseweb.ucsd.edu/~lerner/papers/vera-pldi2020.pdf
     - https://cups.cs.cmu.edu/soups/2012/proceedings/a3_Felt.pdf
     - https://cybersensei.io/
+    - https://datatracker.ietf.org/doc/html/rfc3279#section-2.2.1
+    - https://datatracker.ietf.org/doc/html/rfc3279#section-2.3.1
+    - https://datatracker.ietf.org/doc/html/rfc4055#section-6
+    - https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12
+    - https://datatracker.ietf.org/doc/html/rfc5280#section-6.1.4
+    - https://datatracker.ietf.org/doc/html/rfc5480#section-2.1.1
+    - https://datatracker.ietf.org/doc/html/rfc5758#section-3.2
+    - https://datatracker.ietf.org/doc/html/rfc6962#section-3.1
+    - https://datatracker.ietf.org/doc/html/rfc8017#appendix-A.1
     - https://datatracker.ietf.org/doc/html/rfc8826
     - https://datatracker.ietf.org/doc/html/rfc8890
     - https://dbaron.org/mozilla/visited-privacy
@@ -1123,6 +1133,8 @@ bedrock_base_config: &bedrock_base_config
     - https://wikipedia.org/wiki/URL
     - https://wingolog.org/archives/2014/11/14/generators-in-firefox-now-twenty-two-times-faster
     - https://witness.org/about/board-members/
+    - https://www.acab-c.com/downloads
+    - https://www.acab-c.com/members/
     - https://www.accessnow.org/cms/assets/uploads/2021/05/Mauritius-ICT-Act-Submission.pdf
     - https://www.accessnow.org/transparency-reporting-index/
     - https://www.adjust.com/privacy_policy/
@@ -1131,6 +1143,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.ajl.org/
     - https://www.albrightstonebridge.com/
     - https://www.alexa.com/help/privacy
+    - https://www.allizom.org
     - https://www.androidpolice.com/2017/10/09/mozilla-testing-another-new-browser-called-firefox-rocket-specifically-indonesia/
     - https://www.aph.gov.au/DocumentStore.ashx?id=7609a72e-1452-4a20-b76a-87e55d1243bc&subId=666681
     - https://www.apple.com/ios/ios-14/
@@ -1161,13 +1174,16 @@ bedrock_base_config: &bedrock_base_config
     - https://www.cpacanada.ca/-/media/site/operational/ms-member-services/docs/webtrust/wt100awebtrust-for-ca-221-110120-finalaoda.pdf
     - https://www.cpacanada.ca/-/media/site/operational/ms-member-services/docs/webtrust/wt100bwtbr-25-110120-finalaoda.pdf
     - https://www.cpacanada.ca/-/media/site/operational/ms-member-services/docs/webtrust/wt100cwtev-173-110120-finalaoda.pdf
+    - https://www.cpacanada.ca/en/business-and-accounting-resources/audit-and-assurance/overview-of-webtrust-services/licensed-webtrust-practitioners-international
     - https://www.cpacanada.ca/en/business-and-accounting-resources/audit-and-assurance/overview-of-webtrust-services/principles-and-criteria
     - https://www.cpdpconferences.org/
     - https://www.credo.ai/
     - https://www.damianschwyrz.de
     - https://www.engadget.com/2018/10/23/mozilla-firefox-protonvpn-test/
     - https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.02.02_60/en_31941101v010202p.pdf
+    - https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.03.01_60/en_31941101v010301p.pdf
     - https://www.etsi.org/deliver/etsi_en/319400_319499/31941102/02.02.02_60/en_31941102v020202p.pdf
+    - https://www.etsi.org/deliver/etsi_en/319400_319499/31941102/02.04.01_60/en_31941102v020401p.pdf
     - https://www.facebook.com/Fatality04
     - https://www.facebook.com/groups/224642234231741/
     - https://www.facebook.com/sharer/sharer.php?s=100&p[url]=https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
