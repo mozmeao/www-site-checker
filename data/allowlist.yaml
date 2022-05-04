@@ -1248,6 +1248,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.microsoft.com/en-ca/download/details.aspx?id=36805
     - https://www.microsoft.com/en-ca/windows/microsoft-edge
     - https://www.microsoft.com/en-us/download/details.aspx?id=10109
+    - https://www.microsoft.com/en-us/p/av1-video-extension/9mvzqvxjbq9v?activetab=pivot:overviewtab
     - https://www.mmg.earth/about-us/
     - https://www.mohamedharon.com
     - https://www.nbcnews.com/tech/tech-news/youtubes-recommendations-still-push-harmful-videos-crowdsourced-study-rcna1355
