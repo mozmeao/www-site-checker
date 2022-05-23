@@ -393,7 +393,6 @@ bedrock_base_config: &bedrock_base_config
 
     # Malformatted or broken links which need fixing
     - firefox-third-party.html # This is a 404 and we'll probably leave it as such for now
-    - url # https://github.com/mozilla/bedrock/issues/11219
     - https://twitter.com/https://twitter.com/tomorrowisnew
 
     # Third-party URLs
