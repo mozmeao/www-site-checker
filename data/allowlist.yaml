@@ -394,6 +394,7 @@ bedrock_base_config: &bedrock_base_config
     # Malformatted or broken links which need fixing
     - firefox-third-party.html # This is a 404 and we'll probably leave it as such for now
     - url # https://github.com/mozilla/bedrock/issues/11219
+    - https://twitter.com/https://twitter.com/tomorrowisnew
 
     # Third-party URLs
     - http://0days.engineer
@@ -902,6 +903,7 @@ bedrock_base_config: &bedrock_base_config
     - https://nextdns.io/privacy
     - https://nordzilla.github.io/dom-l10n-draft-spec/
     - https://opensource.org/
+    - https://oreilly.cat/
     - https://p2pu.org/webcraft
     - https://palant.de/
     - https://patcg.github.io/
@@ -977,6 +979,7 @@ bedrock_base_config: &bedrock_base_config
     - https://translate.google.com/about/languages/
     - https://translate.google.com/translate?sl=auto&tl=en&u=https://www.lemauricien.com/actualites/pnq-sur-le-controle-propose-des-reseaux-sociaux-le-pm-renvoie-la-balle-vers-licta/425187/
     - https://twitter.com/@_mohammadowais
+    - https://twitter.com/@0vercl0k
     - https://twitter.com/@0xsobky
     - https://twitter.com/@5hint0
     - https://twitter.com/@agamimaulana
@@ -1000,18 +1003,22 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/@hjy79425575
     - https://twitter.com/@hm_harshit
     - https://twitter.com/@insertscript
+    - https://twitter.com/@j3ssiejjj
     - https://twitter.com/@jensvoid
     - https://twitter.com/@jupenur
     - https://twitter.com/@kanytu
     - https://twitter.com/@kid1ng
     - https://twitter.com/@konarkmodi
+    - https://twitter.com/@l33d0hyun
     - https://twitter.com/@llamakko_cafe
     - https://twitter.com/@luotojesse
     - https://twitter.com/@masthoon
+    - https://twitter.com/@maxpl0it
     - https://twitter.com/@netfuzzer
     - https://twitter.com/@nowaskyjr
     - https://twitter.com/@p4fg
     - https://twitter.com/@proabiral
+    - https://twitter.com/@Pwnrin
     - https://twitter.com/@qab
     - https://twitter.com/@R3dpars3c
     - https://twitter.com/@RandomDhiraj
@@ -1023,8 +1030,10 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/@vladimir_metnew
     - https://twitter.com/@Windowsrcer
     - https://twitter.com/@xorninja
+    - https://twitter.com/@ylemkimon
     - https://twitter.com/@yousukezan
     - https://twitter.com/@zrhoffman
+    - https://twitter.com/@zy9ard3
     - https://twitter.com/0ang3el
     - https://twitter.com/aa5h15h
     - https://twitter.com/agamimaulana
@@ -1056,6 +1065,7 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/JLLeitschuh
     - https://twitter.com/John08369305
     - https://twitter.com/JubaBaghdad
+    - https://twitter.com/Khalid501r
     - https://twitter.com/knowledge_2014
     - https://twitter.com/KumavatShailesh
     - https://twitter.com/l4wio
@@ -1090,6 +1100,7 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/strukt93
     - https://twitter.com/TahakhanTaha
     - https://twitter.com/TinuRock007
+    - https://twitter.com/tomorrowisnew
     - https://twitter.com/washingtonpost/status/1453016457781055492?s=20
     - https://twitter.com/Wayc0de
     - https://twitter.com/webtonull
@@ -1220,7 +1231,9 @@ bedrock_base_config: &bedrock_base_config
     - https://www.jefftk.com/p/shared-cache-is-going-away
     - https://www.leanplum.com/privacy/
     - https://www.lemauricien.com/actualites/pnq-sur-le-controle-propose-des-reseaux-sociaux-le-pm-renvoie-la-balle-vers-licta/425187/
+    - https://www.linkedin.com/in/aarizkhan
     - https://www.linkedin.com/in/andirrahmani/
+    - https://www.linkedin.com/in/anhnt1337/
     - https://www.linkedin.com/in/cehmanish/
     - https://www.linkedin.com/in/daniel-maksimovic-73537882
     - https://www.linkedin.com/in/daniel-maksimovic-73537882/
@@ -1228,6 +1241,8 @@ bedrock_base_config: &bedrock_base_config
     - https://www.linkedin.com/in/hafiizh-7aa6bb31/
     - https://www.linkedin.com/in/harshbanshpal/
     - https://www.linkedin.com/in/ismailtasdelen/
+    - https://www.linkedin.com/in/joaxcar
+    - https://www.linkedin.com/in/mehboob-shaikh-7791a3169
     - https://www.linkedin.com/in/mohammadhoseinaskari/
     - https://www.linkedin.com/in/mohammed-sherif-635302183
     - https://www.linkedin.com/in/mohammedfayez
@@ -1239,6 +1254,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.linkedin.com/in/sourc7/
     - https://www.linkedin.com/in/tony-nasr
     - https://www.linkedin.com/in/tyler-hawkins-149ba2b2/
+    - https://www.linkedin.com/in/wietse-boonstra
     - https://www.linkedin.com/in/yabeow/
     - https://www.linkedin.com/in/yaniv-n-8b4a76193
     - https://www.linkedin.com/posts/mozilla-corporation_language-hispanicheritagemonth-activity-6854780194650230784-wR_N/
