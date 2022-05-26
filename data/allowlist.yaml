@@ -92,8 +92,10 @@ bedrock_base_config: &bedrock_base_config
     - https://connect.mozilla.org?utm_source=contribute-website&utm_medium=banner&utm_campaign=connect-campaign&utm_content=15032022
 
     # App store links not covered by the regexes above
-    - https://app.adjust.com/qywno6t?redirect=https%3A%2F%2Fitunes.apple.com%2Fapp%2Fid1314000270%3Fmt%3D8
     - https://app.adjust.com/gi0ycmr?redirect=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dmozilla.lockbox
+    - https://app.adjust.com/jcn6eyw?campaign=firefox100&adgroup=android-store
+    - https://app.adjust.com/jcn6eyw?campaign=firefox100&adgroup=ios-store
+    - https://app.adjust.com/qywno6t?redirect=https%3A%2F%2Fitunes.apple.com%2Fapp%2Fid1314000270%3Fmt%3D8
 
     # RFCs, etc
     - http://tools.ietf.org/html/rfc5280#section-4.2.1.12
@@ -901,6 +903,7 @@ bedrock_base_config: &bedrock_base_config
     - https://netflixtechblog.com/how-netflix-brings-safer-and-faster-streaming-experience-to-the-living-room-on-crowded-networks-78b8de7f758c
     - https://nextdns.io/privacy
     - https://nordzilla.github.io/dom-l10n-draft-spec/
+    - https://open.spotify.com/show/0vT7LJMeVDxyQ2ZamHKu08?si=_uDRD6bRR_6M5YZyISGXgA
     - https://opensource.org/
     - https://oreilly.cat/
     - https://p2pu.org/webcraft
@@ -1230,6 +1233,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.jefftk.com/p/shared-cache-is-going-away
     - https://www.leanplum.com/privacy/
     - https://www.lemauricien.com/actualites/pnq-sur-le-controle-propose-des-reseaux-sociaux-le-pm-renvoie-la-balle-vers-licta/425187/
+    - https://www.linkedin.com/company/mozilla-corporation/
     - https://www.linkedin.com/in/aarizkhan
     - https://www.linkedin.com/in/andirrahmani/
     - https://www.linkedin.com/in/anhnt1337/
@@ -1323,6 +1327,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.thehindu.com/sci-tech/technology/industry-concerned-over-inclusion-of-non-personal-data-expanded-localisation-mandates-jpc-report/article37985361.ece
     - https://www.thetradedesk.com/us/about-us/industry-initiatives/unified-id-solution-2-0
     - https://www.theverge.com/2018/9/30/17913712/california-net-neutrality-bill-signed-law-jerry-brown
+    - https://www.tiktok.com/@mozilla
     - https://www.torproject.org/
     - https://www.ubuntu.com/about/about-ubuntu/conduct
     - https://www.un.org/development/desa/disabilities/resources/factsheet-on-persons-with-disabilities.html
