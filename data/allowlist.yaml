@@ -96,6 +96,9 @@ bedrock_base_config: &bedrock_base_config
     - https://app.adjust.com/jcn6eyw?campaign=firefox100&adgroup=android-store
     - https://app.adjust.com/jcn6eyw?campaign=firefox100&adgroup=ios-store
     - https://app.adjust.com/qywno6t?redirect=https%3A%2F%2Fitunes.apple.com%2Fapp%2Fid1314000270%3Fmt%3D8
+    
+    - https://apps.apple.com/us/app/firefox-private-network-vpn/id1489407738
+    - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn
 
     # RFCs, etc
     - http://tools.ietf.org/html/rfc5280#section-4.2.1.12
