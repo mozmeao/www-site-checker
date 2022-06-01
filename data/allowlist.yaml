@@ -731,6 +731,9 @@ bedrock_base_config: &bedrock_base_config
     - https://docs.microsoft.com/windows/win32/win7appqual/appinit-dlls-in-windows-7-and-windows-server-2008-r2
     - https://docs.microsoft.com/windows/win32/winmsg/hooks
     - https://dolske.wordpress.com/2017/06/15/photon-engineering-newsletter-6/
+    - https://drafts.csswg.org/css-values/#viewport-variants
+    - https://drafts.csswg.org/css-values/#valdef-length-vi
+    - https://drafts.csswg.org/css-values/#valdef-length-vb
     - https://dutherenverseauborddelatable.wordpress.com/2014/06/26/firefox-the-browser-that-has-your-backup/
     - https://ec.europa.eu/commission/presscorner/detail/en/IP_21_2663
     - https://economictimes.indiatimes.com/blogs/author/amba-kak/
@@ -817,6 +820,7 @@ bedrock_base_config: &bedrock_base_config
     - https://groups.google.com/group/mozilla.governance/browse_thread/thread/2903bc645085b41d/54e8efe5d335ac3f
     - https://groups.google.com/group/mozilla.legal
     - https://gubello.me
+    - https://hackerone.com/abdellah29
     - https://hackerone.com/derision
     - https://hackerone.com/kamikaze?type=user
     - https://hackerone.com/mjyintl
@@ -1124,6 +1128,7 @@ bedrock_base_config: &bedrock_base_config
     - https://w3c.github.io/navigation-timing
     - https://w3c.github.io/typography/gap-analysis/language-matrix.html
     - https://w3c.github.io/webappsec-upgrade-insecure-requests/
+    - https://w3c.github.io/webdriver-bidi/
     - https://w3ctag.github.io/unsanctioned-tracking/
     - https://weakdh.org/
     - https://weakdh.org/imperfect-forward-secrecy.pdf
