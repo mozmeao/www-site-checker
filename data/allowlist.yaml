@@ -399,6 +399,9 @@ bedrock_base_config: &bedrock_base_config
     # Malformatted or broken links which need fixing
     - firefox-third-party.html # This is a 404 and we'll probably leave it as such for now
     - https://twitter.com/https://twitter.com/tomorrowisnew
+    
+    # Temporarily allowed before fixup
+    - https://mozlinks.moztw.org/2014/04/poster.html
 
     # Third-party URLs
     - http://0days.engineer
