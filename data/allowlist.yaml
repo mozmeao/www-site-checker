@@ -398,7 +398,6 @@ bedrock_base_config: &bedrock_base_config
 
     # Malformatted or broken links which need fixing
     - firefox-third-party.html # This is a 404 and we'll probably leave it as such for now
-    - https://twitter.com/https://twitter.com/tomorrowisnew
     
     # Temporarily allowed before fixup
     - https://mozlinks.moztw.org/2014/04/poster.html
@@ -990,6 +989,7 @@ bedrock_base_config: &bedrock_base_config
     - https://tools.ietf.org/rfcmarkup?doc=8446
     - https://translate.google.com/about/languages/
     - https://translate.google.com/translate?sl=auto&tl=en&u=https://www.lemauricien.com/actualites/pnq-sur-le-controle-propose-des-reseaux-sociaux-le-pm-renvoie-la-balle-vers-licta/425187/
+    - https://twitter.com/_martgilph
     - https://twitter.com/@_mohammadowais
     - https://twitter.com/@0vercl0k
     - https://twitter.com/@0xsobky
