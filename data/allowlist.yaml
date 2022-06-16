@@ -398,8 +398,9 @@ bedrock_base_config: &bedrock_base_config
 
     # Malformatted or broken links which need fixing
     - firefox-third-party.html # This is a 404 and we'll probably leave it as such for now
+    - (https://github.com/mozilla/spoke/blob/master/LICENSE)
     
-    # Temporarily allowed before fixup
+    # Exceptions allowed as Fluent string overrides
     - https://mozlinks.moztw.org/2014/04/poster.html
 
     # Third-party URLs
@@ -687,6 +688,7 @@ bedrock_base_config: &bedrock_base_config
     - https://creativecommons.org/licenses/by-sa/3.0/legalcode
     - https://creativecommons.org/licenses/by-sa/4.0/
     - https://creativecommons.org/licenses/by/3.0/
+    - https://creativecommons.org/licenses/by/3.0/legalcode
     - https://creativecommons.org/licenses/by/4.0/
     - https://creativecommons.org/publicdomain/zero/1.0/
     - https://cseweb.ucsd.edu/~lerner/papers/vera-pldi2020.pdf
@@ -714,6 +716,7 @@ bedrock_base_config: &bedrock_base_config
     - https://developers.google.com/web/tools/lighthouse
     - https://developers.google.com/web/updates/2018/10/watch-video-using-picture-in-picture
     - https://disconnect.me/trackerprotection
+    - https://discordapp.com/privacy
     - https://docs.fastly.com/products/compute-at-edge
     - https://docs.google.com/a/mozilla.com/forms/d/e/1FAIpQLScLwANEOvLBE6gnFVoiamqHOYzzkaChpdQJ7f0PlZGmfyy94w/viewform
     - https://docs.google.com/document/d/19n5LhPYOs_mGWCSMB-0POriv6juLJW_KUEeSOcbXOT8/edit
@@ -798,6 +801,8 @@ bedrock_base_config: &bedrock_base_config
     - https://github.com/mdn/infra
     - https://github.com/mdn/kuma
     - https://github.com/mdn/yari
+    - https://github.com/mozilla/spoke/blob/master/LICENSE
+    - https://github.com/MozillaReality/hubs-discord-bot
     - https://github.com/Metnew
     - https://github.com/microsoft/detours
     - https://github.com/pocmo/speed-dial
@@ -943,6 +948,7 @@ bedrock_base_config: &bedrock_base_config
     - https://shopee.co.id/m/Mozilla-Voucher-Diskon-15RB
     - https://signalnoi.se/
     - https://skeletonscribe.net/
+    - https://sketchfab.com/privacy
     - https://skylined.nl
     - https://snapcraft.io/firefox
     - https://sourceforge.net/p/nsis/bugs/1125/
@@ -966,6 +972,7 @@ bedrock_base_config: &bedrock_base_config
     - https://tails.boum.org/
     - https://techcrunch.com/2020/05/14/mozilla-goes-full-incubator-with-fix-the-internet-startup-lab-and-early-stage-investments/
     - https://tecnoblog.guru/
+    - https://tenor.com/legal-privacy
     - https://testpilot.mozillalabs.com/privacy.php
     - https://theconversation.com/7-in-10-smartphone-apps-share-your-data-with-third-party-services-72404
     - https://themarkup.org
@@ -1060,6 +1067,7 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/cecleandro
     - https://twitter.com/csanuragjain
     - https://twitter.com/cyberboyIndia
+    - https://twitter.com/en/privacy
     - https://twitter.com/f2jason
     - https://twitter.com/firefox
     - https://twitter.com/firefox_es
@@ -1341,6 +1349,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.theverge.com/2018/9/30/17913712/california-net-neutrality-bill-signed-law-jerry-brown
     - https://www.tiktok.com/@mozilla
     - https://www.torproject.org/
+    - https://www.twitch.tv/p/legal/privacy-policy/
     - https://www.ubuntu.com/about/about-ubuntu/conduct
     - https://www.un.org/development/desa/disabilities/resources/factsheet-on-persons-with-disabilities.html
     - https://www.universalsubtitles.org
