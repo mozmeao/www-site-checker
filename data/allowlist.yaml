@@ -1197,6 +1197,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.changecopyright.org/
     - https://www.chromium.org/Home/chromium-security/memory-safety
     - https://www.chromium.org/teams/web-capabilities-fugu
+    - https://www.cira.ca/cybersecurity-services/canadian-shield/privacy
     - https://www.cleveland.com/expo/news/erry-2018/09/297f2797e8466/digitalc-is-a-finalist-for-a-n.html
     - https://www.cloudflare.com/mozilla/firefox-private-network-privacy-notice/
     - https://www.cnas.org/digital-freedom-forum
@@ -1327,6 +1328,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.science.org/doi/abs/10.1126/science.aba3758
     - https://www.securesoftware.nl
     - https://www.sendinblue.com/legal/privacypolicy/
+    - https://www.shaw.ca/dns-statement
     - https://www.silentrobots.com/
     - https://www.siliconrepublic.com/comms/ip-addresses-running-out
     - https://www.smacktls.com/
