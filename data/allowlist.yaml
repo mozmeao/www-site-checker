@@ -344,6 +344,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F&text=%F0%9F%94%A5Firefox+%E0%B8%97%E0%B8%B3%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B9%80%E0%B8%9B%E0%B8%A5%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%99%E0%B8%88%E0%B8%B2%E0%B8%81+Chrome+%E0%B9%84%E0%B8%94%E0%B9%89%E0%B9%80%E0%B8%A3%E0%B9%87%E0%B8%A7%E0%B8%A1%E0%B8%B2%E0%B8%81+%E0%B8%A5%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%A5%E0%B8%A2%21
     - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F&text=Chrome-dan+%F0%9F%94%A5+Firefox-a+ke%C3%A7m%C9%99k+%C3%A7ox+s%C3%BCr%C9%99tli+v%C9%99+asand%C4%B1r.+%C4%B0ndi+yoxlay%C4%B1n%21
     - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F&text=Mae+%F0%9F%94%A5+Firefox+yn+gwneud+newid+i+Chrome+yn+beth+sydyn.+Rhowch+gynnig+arno%21
+    - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=%C3%89g+sty%C3%B0+framt%C3%AD%C3%B0ars%C3%BDnina+um+betra+og+heilbrig%C3%B0ara+internet+fr%C3%A1+%40mozilla%2C+viltu+taka+%C3%BE%C3%A1tt+me%C3%B0+m%C3%A9r%3F
 
     # Mozilla social accounts
     - https://www.instagram.com/firefox/
