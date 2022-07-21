@@ -23,6 +23,7 @@ bedrock_base_config: &bedrock_base_config
     - '^https?:\/\/mzl.la\/(.*)'
     - '^https?:\/\/searchfox.org\/(.*)'
     - '^https?:\/\/videos.cdn.mozilla.net\/(.*)'
+    - '^https?:\/\/donate.mozilla.org\?presets=.*'
 
     # === Mozilla on Github
 
@@ -79,13 +80,6 @@ bedrock_base_config: &bedrock_base_config
 
     # First-party links, not needing a regex rule (yet?)
     - https://connect.mozilla.org?utm_source=contribute-website&utm_medium=banner&utm_campaign=connect-campaign&utm_content=15032022
-    - https://donate.mozilla.org?presets=50,30,20,10&amount=30&utm_source=mozilla.org&utm_medium=referral&utm_content=annualreport2009&currency=usd
-    - https://donate.mozilla.org?presets=50,30,20,10&amount=30&utm_source=mozilla.org&utm_medium=referral&utm_content=company&currency=eur&utm_campaign=footer
-    - https://donate.mozilla.org?presets=50,30,20,10&amount=30&utm_source=mozilla.org&utm_medium=referral&utm_content=company&currency=usd&utm_campaign=footer
-    - https://donate.mozilla.org?presets=50,30,20,10&amount=30&utm_source=mozilla.org&utm_medium=referral&utm_content=contact_us_page&currency=usd
-    - https://donate.mozilla.org?presets=50,30,20,10&amount=30&utm_source=mozilla.org&utm_medium=referral&utm_content=contribute-page&currency=usd
-    - https://donate.mozilla.org?presets=50,30,20,10&amount=30&utm_source=mozilla.org&utm_medium=referral&utm_content=firefox-unfck&currency=usd?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-unfck
-    - https://donate.mozilla.org?presets=50,30,20,10&amount=30&utm_source=mozilla.org&utm_medium=referral&utm_content=openwebfund&currency=usd
     - https://monitor.firefox.com?utm_source=mozilla.org-firefox-accounts&utm_medium=referral&utm_campaign=trailhead&utm_content=product-list-item&entrypoint=mozilla.org-firefox-accounts
     - https://monitor.firefox.com?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=compare-chrome
     - https://monitor.firefox.com?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-home
