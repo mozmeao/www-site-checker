@@ -23,7 +23,7 @@ bedrock_base_config: &bedrock_base_config
     - '^https?:\/\/mzl.la\/(.*)'
     - '^https?:\/\/searchfox.org\/(.*)'
     - '^https?:\/\/videos.cdn.mozilla.net\/(.*)'
-    - '^https?:\/\/donate.mozilla.org\?presets=.*'
+    - '^https?:\/\/donate.mozilla.org\?presets=.+'
 
     # === Mozilla on Github
 
