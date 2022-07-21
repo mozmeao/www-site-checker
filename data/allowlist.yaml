@@ -644,6 +644,7 @@ bedrock_base_config: &bedrock_base_config
     - https://aws.amazon.com/privacy/
     - https://axen-cyber.com
     - https://axen-cyber.com/
+    - https://bedrock.readthedocs.io/
     - https://bishopfox.com/
     - https://bitsup.blogspot.com/2015/03/opportunistic-encryption-for-firefox.html
     - https://bjornweb.nl/
@@ -661,20 +662,20 @@ bedrock_base_config: &bedrock_base_config
     - https://briansmith.org/
     - https://browser.mt/
     - https://browserbench.org/Speedometer2.0/
+    - https://bug-bounty-codeql-databases.s3.us-east-2.amazonaws.com/index.html
     - https://bughunter.withgoogle.com/profile/3c96630c-9112-4ddb-a029-df2bb893c6c3
     - https://bughunter.withgoogle.com/profile/80ae25f5-877d-4402-94e8-7902cacdb4b9
     - https://bugs.webkit.org/show_bug.cgi?id=61585
     - https://bugs.webkit.org/show_bug.cgi?id=70648
     - https://bugzilla-dev.allizom.org/
     - https://bugzilla.mozilla.org
-    - https://bug-bounty-codeql-databases.s3.us-east-2.amazonaws.com/index.html
     - https://builders.mozilla.community/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=state-of-mozilla-2019
     - https://builders.mozilla.community/who-we-fund.html
     - https://ca.go.ke/wp-content/uploads/2018/11/Mozilla-Submission-of-Comments-Kenya-Privacy-and-Data-Protection-Bill-2018.pdf
     - https://cabforum.org/baseline-requirements-documents/
     - https://cabforum.org/extended-validation/
-    - https://cabforum.org/network-security/
     - https://cabforum.org/network-security-requirements/
+    - https://cabforum.org/network-security/
     - https://caddyserver.com/
     - https://cliqz.com/en/privacy-browser
     - https://cliqz.com/en/whycliqz/transparency
@@ -741,9 +742,9 @@ bedrock_base_config: &bedrock_base_config
     - https://docs.microsoft.com/windows/win32/win7appqual/appinit-dlls-in-windows-7-and-windows-server-2008-r2
     - https://docs.microsoft.com/windows/win32/winmsg/hooks
     - https://dolske.wordpress.com/2017/06/15/photon-engineering-newsletter-6/
-    - https://drafts.csswg.org/css-values/#viewport-variants
-    - https://drafts.csswg.org/css-values/#valdef-length-vi
     - https://drafts.csswg.org/css-values/#valdef-length-vb
+    - https://drafts.csswg.org/css-values/#valdef-length-vi
+    - https://drafts.csswg.org/css-values/#viewport-variants
     - https://dutherenverseauborddelatable.wordpress.com/2014/06/26/firefox-the-browser-that-has-your-backup/
     - https://ec.europa.eu/commission/presscorner/detail/en/IP_21_2663
     - https://economictimes.indiatimes.com/blogs/author/amba-kak/
@@ -806,10 +807,10 @@ bedrock_base_config: &bedrock_base_config
     - https://github.com/mdn/infra
     - https://github.com/mdn/kuma
     - https://github.com/mdn/yari
-    - https://github.com/mozilla/spoke/blob/master/LICENSE
-    - https://github.com/MozillaReality/hubs-discord-bot
     - https://github.com/Metnew
     - https://github.com/microsoft/detours
+    - https://github.com/mozilla/spoke/blob/master/LICENSE
+    - https://github.com/MozillaReality/hubs-discord-bot
     - https://github.com/pocmo/speed-dial
     - https://github.com/project-everest/hacl-star
     - https://github.com/sctplab/usrsctp/commit/ffed0925f27d404173c1e3e750d818f432d2c019
@@ -862,6 +863,7 @@ bedrock_base_config: &bedrock_base_config
     - https://internethealthreport.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage&utm_content=card
     - https://internethealthreport.org/2019/?lang=fr&utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage-de&utm_content=card
     - https://irlpodcast.org/
+    - https://jinja.palletsprojects.com/
     - https://jrmuizel.github.io/twitch/volume.html
     - https://jswrenn.com/
     - https://khoros.com/privacy
@@ -934,6 +936,7 @@ bedrock_base_config: &bedrock_base_config
     - https://popcorn.webmaker.org/
     - https://posts.specterops.io/the-tale-of-settingcontent-ms-files-f1ea253e4d39
     - https://privacyportal.onetrust.com/webform/1350748f-7139-405c-8188-22740b3b5587/4ba08202-2ede-4934-a89e-f0b0870f95f0
+    - https://projectfluent.org/
     - https://qatarliving.com/
     - https://quicwg.org/
     - https://qz.com/work/2016593/linkedin-mozilla-are-fighting-burnout-with-company-vacation-days/
@@ -1025,8 +1028,8 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/@geeknik
     - https://twitter.com/@HarperMitchell
     - https://twitter.com/@hjy79425575
-    - https://twitter.com/@hosselot
     - https://twitter.com/@hm_harshit
+    - https://twitter.com/@hosselot
     - https://twitter.com/@insertscript
     - https://twitter.com/@j3ssiejjj
     - https://twitter.com/@jensvoid
@@ -1149,6 +1152,7 @@ bedrock_base_config: &bedrock_base_config
     - https://w3ctag.github.io/unsanctioned-tracking/
     - https://weakdh.org/
     - https://weakdh.org/imperfect-forward-secrecy.pdf
+    - https://web.archive.org/web/19981212031129/http://www.mozilla.org/
     - https://web.archive.org/web/20021001071727/wp.netscape.com/newsref/pr/newsrelease558.html
     - https://web.archive.org/web/20201128180021/https://developer.mozilla.org/en-US/docs/Archive/B2G_OS/API
     - https://web.dev/vitals/
@@ -1219,6 +1223,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.cpdpconferences.org/
     - https://www.credo.ai/
     - https://www.damianschwyrz.de
+    - https://www.djangoproject.com/
     - https://www.engadget.com/2018/10/23/mozilla-firefox-protonvpn-test/
     - https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.02.02_60/en_31941101v010202p.pdf
     - https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.03.01_60/en_31941101v010301p.pdf
@@ -1294,8 +1299,8 @@ bedrock_base_config: &bedrock_base_config
     - https://www.microsoft.com/en-ca/download/details.aspx?id=36805
     - https://www.microsoft.com/en-ca/windows/microsoft-edge
     - https://www.microsoft.com/en-us/download/details.aspx?id=10109
-    - https://www.microsoft.com/en-us/p/av1-video-extension/9mvzqvxjbq9v?activetab=pivot:overviewtab
     - https://www.microsoft.com/en-us/p/av1-video-extension/9mvzqvxjbq9v?activetab%3Dpivot:overviewtab
+    - https://www.microsoft.com/en-us/p/av1-video-extension/9mvzqvxjbq9v?activetab=pivot:overviewtab
     - https://www.mmg.earth/about-us/
     - https://www.mohamedharon.com
     - https://www.nbcnews.com/tech/tech-news/youtubes-recommendations-still-push-harmful-videos-crowdsourced-study-rcna1355
@@ -1392,6 +1397,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.wsj.com/articles/youtubes-search-algorithm-directs-viewers-to-false-and-sexualized-videos-study-finds-11625644803
     - https://www.xfinity.com/privacy/policy/dns
     - https://www.ygitsoftware.com/
+    - https://www.youtube.com/watch?v=4Q7FTjhvZ7Y
     - https://www.yubico.com/support/security-advisories/ysa-2018-02/
     - https://www.zdnet.com/article/before-the-web-the-internet-in-1991/
     - https://www.zippenhop.com/
