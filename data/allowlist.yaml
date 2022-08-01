@@ -91,6 +91,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.firefox.com.cn/
     - https://www.mozillafestival.org/speakers/virtual-dialogue-and-debates/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=state-of-mozilla-2019
     - https://www.mozillapulse.org/profile/410
+    - https://projectfluent.org/
 
     # App store links not covered by the regexes above
     - https://app.adjust.com/gi0ycmr?redirect=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dmozilla.lockbox
@@ -494,6 +495,7 @@ bedrock_base_config: &bedrock_base_config
     - http://msujaws.wordpress.com/2014/08/01/faster-and-snappier-searches-now-in-firefox-aurora/
     - http://msujaws.wordpress.com/2014/08/27/new-in-firefox-nightly-recommended-and-easy-theme-switching-through-customize-mode/
     - http://muizelaar.blogspot.ca/2015/03/performance-and-feature-improvements-in.html
+    - https://www.nytimes.com/2004/09/20/nyregion/you-say-prosciutto-i-say-proshoot-and-purists-cringe.html
     - http://openbadges.org/
     - http://openstreetmap.org/copyright
     - http://openvideoalliance.org/
