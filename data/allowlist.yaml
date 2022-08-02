@@ -91,6 +91,8 @@ bedrock_base_config: &bedrock_base_config
     - https://www.firefox.com.cn/
     - https://www.mozillafestival.org/speakers/virtual-dialogue-and-debates/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=state-of-mozilla-2019
     - https://www.mozillapulse.org/profile/410
+    - https://projectfluent.org/
+    - https://www.projectfluent.org/
 
     # App store links not covered by the regexes above
     - https://app.adjust.com/gi0ycmr?redirect=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dmozilla.lockbox
@@ -494,6 +496,7 @@ bedrock_base_config: &bedrock_base_config
     - http://msujaws.wordpress.com/2014/08/01/faster-and-snappier-searches-now-in-firefox-aurora/
     - http://msujaws.wordpress.com/2014/08/27/new-in-firefox-nightly-recommended-and-easy-theme-switching-through-customize-mode/
     - http://muizelaar.blogspot.ca/2015/03/performance-and-feature-improvements-in.html
+    - https://www.nytimes.com/2004/09/20/nyregion/you-say-prosciutto-i-say-proshoot-and-purists-cringe.html
     - http://openbadges.org/
     - http://openstreetmap.org/copyright
     - http://openvideoalliance.org/
@@ -936,7 +939,6 @@ bedrock_base_config: &bedrock_base_config
     - https://popcorn.webmaker.org/
     - https://posts.specterops.io/the-tale-of-settingcontent-ms-files-f1ea253e4d39
     - https://privacyportal.onetrust.com/webform/1350748f-7139-405c-8188-22740b3b5587/4ba08202-2ede-4934-a89e-f0b0870f95f0
-    - https://projectfluent.org/
     - https://qatarliving.com/
     - https://quicwg.org/
     - https://qz.com/work/2016593/linkedin-mozilla-are-fighting-burnout-with-company-vacation-days/
@@ -1323,7 +1325,6 @@ bedrock_base_config: &bedrock_base_config
     - https://www.pcmag.com/news/7-vpn-services-found-recording-user-logs-despite-no-log-pledge
     - https://www.pinterest.com
     - https://www.popsci.com/technology/best-security-innovations-2021/
-    - https://www.projectfluent.org/
     - https://www.qwant.com/
     - https://www.rapdp.org/
     - https://www.rapdp.org/en
