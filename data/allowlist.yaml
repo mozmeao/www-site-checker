@@ -406,7 +406,6 @@ bedrock_base_config: &bedrock_base_config
     - (https://github.com/mozilla/spoke/blob/master/LICENSE)
     - libro  # in /ia/ locale
     - fluent  # in /ia/ locale
-    - " https://projectfluent.org/" # See https://github.com/mozmeao/www-site-checker/issues/15
 
     # Exceptions allowed as Fluent string overrides
     - https://mozlinks.moztw.org/2014/04/poster.html
