@@ -215,6 +215,9 @@ bedrock_base_config: &bedrock_base_config
     - mailto:?subject=Vaihda%20Firefoxiin&body=Terve%2C%0D%0A%0D%0AFirefox%20tekee%20Chromesta%20vaihtamisen%20todella%20nopeaksi.%20Pid%C3%A4n%20siit%C3%A4%20todella%20ja%20sinunkin%20pit%C3%A4isi%20kokeilla%20sit%C3%A4.%0D%0A%0D%0AKokeile%20sit%C3%A4%20ja%20kerro%2C%20mit%C3%A4%20mielt%C3%A4%20olet%3A%20https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
 
     # Pre-prepared Tweets
+    - https://twitter.com/share?url=http://www.mozilla.org/en-US/stories/art-of-engagement/&text=The+Art+of+Engagement
+    - https://twitter.com/share?url=http://www.mozilla.org/en-US/stories/build-together/&text=Licensed+to+Build+Together
+    - https://twitter.com/share?url=http://www.mozilla.org/en-US/stories/community-champion/&text=From+Volunteer+to+Mozilla+Community+Champion
     - https://www.twitter.com/intent/tweet?url=http%3A%2F%2Fmzl.la%2Funfck&text=Excuse+the+language%2C+but+this+is+kind+of+a+big+deal.+The+internet+is+fcked+and+that+could+fck+with+the+US+elections.+Don%E2%80%99t+wait.+Do+something+%28quick+and+easy%29+today%3A&hashtags=UnfckTheInternet
     - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=%40mozilla%E2%80%99n%C4%B1n+daha+g%C3%BCzel%2C+daha+sa%C4%9Fl%C4%B1kl%C4%B1+internet+vizyonunu+destekliyorum.+Siz+de+kat%C4%B1lmaz+m%C4%B1s%C4%B1n%C4%B1z%3F
     - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=%40mozilla%EC%9D%98+%EA%B1%B4%EA%B0%95%ED%95%98%EA%B3%A0+%EB%82%98%EC%9D%80+%EC%9D%B8%ED%84%B0%EB%84%B7%EC%97%90+%EB%8C%80%ED%95%9C+%EA%BF%88%EC%9D%84+%EC%A7%80%EC%A7%80%ED%95%B4+%EC%A3%BC%EC%8B%AD%EC%8B%9C%EC%98%A4.
@@ -404,8 +407,8 @@ bedrock_base_config: &bedrock_base_config
     # Malformatted or broken links which need fixing
     - firefox-third-party.html # This is a 404 and we'll probably leave it as such for now
     - (https://github.com/mozilla/spoke/blob/master/LICENSE)
-    - libro  # in /ia/ locale
-    - fluent  # in /ia/ locale
+    - libro # in /ia/ locale
+    - fluent # in /ia/ locale
 
     # Exceptions allowed as Fluent string overrides
     - https://mozlinks.moztw.org/2014/04/poster.html
@@ -824,6 +827,7 @@ bedrock_base_config: &bedrock_base_config
     - https://github.com/w3c/resource-timing/issues/29
     - https://github.com/w3c/webcomponents/
     - https://github.com/whatwg/html/pull/166
+    - https://www.gnu.org/
     - https://godotengine.org/
     - https://googleprojectzero.blogspot.com/2018/01/reading-privileged-memory-with-side.html
     - https://googleprojectzero.blogspot.com/2019/02/the-curious-case-of-convexity-confusion.html
@@ -938,6 +942,7 @@ bedrock_base_config: &bedrock_base_config
     - https://policies.google.com/terms
     - https://popcorn.webmaker.org/
     - https://posts.specterops.io/the-tale-of-settingcontent-ms-files-f1ea253e4d39
+    - https://privacy.microsoft.com/privacystatement
     - https://privacyportal.onetrust.com/webform/1350748f-7139-405c-8188-22740b3b5587/4ba08202-2ede-4934-a89e-f0b0870f95f0
     - https://qatarliving.com/
     - https://quicwg.org/
@@ -1189,6 +1194,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.albrightstonebridge.com/
     - https://www.alexa.com/help/privacy
     - https://www.allizom.org
+    - https://www.altlegal.com/blog/to-the-left-to-the-left-an-introduction-to-copyleft-and-open-source-software/
     - https://www.androidpolice.com/2017/10/09/mozilla-testing-another-new-browser-called-firefox-rocket-specifically-indonesia/
     - https://www.aph.gov.au/DocumentStore.ashx?id=7609a72e-1452-4a20-b76a-87e55d1243bc&subId=666681
     - https://www.apple.com/ios/ios-14/
@@ -1202,6 +1208,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.blog.google/products/chrome/building-a-more-private-web
     - https://www.bloomberg.com/news/articles/2020-02-12/400-million-social-media-users-set-to-lose-anonymity-in-india
     - https://www.bugzilla.org
+    - https://www.bugzilla.org/
     - https://www.cbsnews.com/news/facebook-advertisers-pull-ads-mozilla-sonos/
     - https://www.ccadb.org/policy
     - https://www.ceps.eu/publications/software-vulnerability-disclosure-europe-technology-policies-and-legal-challenges
@@ -1225,6 +1232,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.cpdpconferences.org/
     - https://www.credo.ai/
     - https://www.damianschwyrz.de
+    - https://www.drdavidmcmillan.com/sense-of-community/sense-of-community-a-definition-and-theory
     - https://www.djangoproject.com/
     - https://www.engadget.com/2018/10/23/mozilla-firefox-protonvpn-test/
     - https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.02.02_60/en_31941101v010202p.pdf
@@ -1294,6 +1302,9 @@ bedrock_base_config: &bedrock_base_config
     - https://www.linkedin.com/in/yabeow/
     - https://www.linkedin.com/in/yaniv-n-8b4a76193
     - https://www.linkedin.com/posts/mozilla-corporation_language-hispanicheritagemonth-activity-6854780194650230784-wR_N/
+    - https://www.linkedin.com/sharing/share-offsite/?mini=true&url=http://www.mozilla.org/en-US/stories/art-of-engagement/
+    - https://www.linkedin.com/sharing/share-offsite/?mini=true&url=http://www.mozilla.org/en-US/stories/build-together/
+    - https://www.linkedin.com/sharing/share-offsite/?mini=true&url=http://www.mozilla.org/en-US/stories/community-champion/
     - https://www.linshunghuang.com/
     - https://www.marketingcloud.com/privacy-policy/website-privacy-statement/
     - https://www.marketplace.org/shows/marketplace-tech/ever-watch-something-on-youtube-and-wished-you-hadnt-youre-not-alone/
