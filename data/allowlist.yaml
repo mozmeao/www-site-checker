@@ -1012,6 +1012,7 @@ bedrock_base_config: &bedrock_base_config
     - https://translate.google.com/about/languages/
     - https://translate.google.com/translate?sl=auto&tl=en&u=https://www.lemauricien.com/actualites/pnq-sur-le-controle-propose-des-reseaux-sociaux-le-pm-renvoie-la-balle-vers-licta/425187/
     - https://twitter.com/_martgilph
+    - https://twitter.com/_mohammadowais
     - https://twitter.com/@_mohammadowais
     - https://twitter.com/@0vercl0k
     - https://twitter.com/@0xsobky
@@ -1076,6 +1077,7 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/almroot
     - https://twitter.com/angelaplohman
     - https://twitter.com/AntoGarand
+    - https://twitter.com/arshadkazmi42
     - https://twitter.com/ashleyboyd
     - https://twitter.com/aussinfosec
     - https://twitter.com/Black2Fan
@@ -1097,6 +1099,7 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/hashtag/mozillalifeboat
     - https://twitter.com/https://twitter.com/arshadkazmi42
     - https://twitter.com/iambouali
+    - https://twitter.com/j3ssiejjj
     - https://twitter.com/jens1o
     - https://twitter.com/JLLeitschuh
     - https://twitter.com/John08369305
@@ -1124,6 +1127,8 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/Nep_1337_1998
     - https://twitter.com/oja_c7s
     - https://twitter.com/p4fg
+    - https://twitter.com/proabiral
+    - https://twitter.com/R3dpars3c
     - https://twitter.com/Rhynorater
     - https://twitter.com/SachinP01470613
     - https://twitter.com/securityshell
@@ -1146,6 +1151,7 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/yassinek3ch
     - https://twitter.com/yendrzei
     - https://twitter.com/yousukezan
+    - https://twitter.com/zy9ard3
     - https://us.pycon.org/2018/about/code-of-conduct/
     - https://userstyles.org/
     - https://uxplanet.org/how-to-design-notifications-for-better-ux-6fb0711be54d
