@@ -827,7 +827,6 @@ bedrock_base_config: &bedrock_base_config
     - https://github.com/w3c/resource-timing/issues/29
     - https://github.com/w3c/webcomponents/
     - https://github.com/whatwg/html/pull/166
-    - https://www.gnu.org/
     - https://godotengine.org/
     - https://googleprojectzero.blogspot.com/2018/01/reading-privileged-memory-with-side.html
     - https://googleprojectzero.blogspot.com/2019/02/the-curious-case-of-convexity-confusion.html
@@ -891,6 +890,7 @@ bedrock_base_config: &bedrock_base_config
     - https://maone.net
     - https://matthew.noorenberghe.com/blog/2016/08/filling-saved-http-logins-over-https-same-domain
     - https://matthew.noorenberghe.com/blog/2019/05/password-manager-improvements-firefox-67
+    - https://mb.com.ph/2022/04/11/mozilla-bucks-philippine-sim-card-registration-law/
     - https://mdsattacks.com/
     - https://mdsattacks.com/#People
     - https://mediainnovationnetwork.org/east-festival-2021/
@@ -941,6 +941,7 @@ bedrock_base_config: &bedrock_base_config
     - https://policies.google.com/privacy
     - https://policies.google.com/terms
     - https://popcorn.webmaker.org/
+    - https://portswigger.net/daily-swig/indian-vpn-providers-resist-incoming-data-logging-law
     - https://posts.specterops.io/the-tale-of-settingcontent-ms-files-f1ea253e4d39
     - https://privacy.microsoft.com/privacystatement
     - https://privacyportal.onetrust.com/webform/1350748f-7139-405c-8188-22740b3b5587/4ba08202-2ede-4934-a89e-f0b0870f95f0
@@ -957,6 +958,7 @@ bedrock_base_config: &bedrock_base_config
     - https://scroll.com/privacy
     - https://securedrop.org/
     - https://securingdemocracy.gmfus.org/about-us/advisory-council/
+    - https://securityriskahead.eu/
     - https://securitywall.co/
     - https://sensor-js.xyz/
     - https://servo.org/
@@ -1202,6 +1204,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.allizom.org
     - https://www.altlegal.com/blog/to-the-left-to-the-left-an-introduction-to-copyleft-and-open-source-software/
     - https://www.androidpolice.com/2017/10/09/mozilla-testing-another-new-browser-called-firefox-rocket-specifically-indonesia/
+    - https://www.aninews.in/news/national/general-news/decision-to-open-source-aarogya-setu-app-will-help-improve-user-trust-security-mozilla20200527153954/
     - https://www.aph.gov.au/DocumentStore.ashx?id=7609a72e-1452-4a20-b76a-87e55d1243bc&subId=666681
     - https://www.apple.com/ios/ios-14/
     - https://www.apple.com/legal/internet-services/itunes/testflight/sren/terms.html
@@ -1236,15 +1239,17 @@ bedrock_base_config: &bedrock_base_config
     - https://www.cpacanada.ca/en/business-and-accounting-resources/audit-and-assurance/overview-of-webtrust-services/licensed-webtrust-practitioners-international
     - https://www.cpacanada.ca/en/business-and-accounting-resources/audit-and-assurance/overview-of-webtrust-services/principles-and-criteria
     - https://www.cpdpconferences.org/
+    - https://www.cpdpconferences.org/cpdp-panels/privacy-preserving-advertising-prospects-and-paradigms
     - https://www.credo.ai/
     - https://www.damianschwyrz.de
-    - https://www.drdavidmcmillan.com/sense-of-community/sense-of-community-a-definition-and-theory
     - https://www.djangoproject.com/
+    - https://www.drdavidmcmillan.com/sense-of-community/sense-of-community-a-definition-and-theory
     - https://www.engadget.com/2018/10/23/mozilla-firefox-protonvpn-test/
     - https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.02.02_60/en_31941101v010202p.pdf
     - https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.03.01_60/en_31941101v010301p.pdf
     - https://www.etsi.org/deliver/etsi_en/319400_319499/31941102/02.02.02_60/en_31941102v020202p.pdf
     - https://www.etsi.org/deliver/etsi_en/319400_319499/31941102/02.04.01_60/en_31941102v020401p.pdf
+    - https://www.euractiv.com/section/digital/news/regulator-industry-collaboration-key-for-adtech-success-mozilla-official-says/
     - https://www.facebook.com/Fatality04
     - https://www.facebook.com/groups/224642234231741/
     - https://www.facebook.com/sharer/sharer.php?s=100&p[url]=https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
@@ -1261,9 +1266,11 @@ bedrock_base_config: &bedrock_base_config
     - https://www.foxkeh.com/downloads/
     - https://www.franziskuskiefer.de/post/aes-gcm-speedup/
     - https://www.fsf.org/
+    - https://www.ft.com/content/7b6f91c3-8324-467b-953a-d5325a5aacd3
     - https://www.fxsitecompat.com/en-CA/docs/2016/service-workers-have-been-disabled-in-firefox-45-esr/
     - https://www.fxsitecompat.dev/en-CA/docs/2020/text-exceeding-maxlength-will-no-longer-be-truncated-when-pasted-into-input-or-textarea/
     - https://www.glassdoor.com/Overview/Working-at-Mozilla-EI_IE19129.11,18.htm
+    - https://www.gnu.org/
     - https://www.google.com/intl/en/policies/privacy/
     - https://www.google.com/intl/en/policies/terms/
     - https://www.google.com/intl/policies/privacy/
@@ -1340,6 +1347,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.optimizely.com/opt_out
     - https://www.oregoncountryfair.org/
     - https://www.pcmag.com/news/7-vpn-services-found-recording-user-logs-despite-no-log-pledge
+    - https://www.philstar.com/headlines/2022/04/15/2174584/duterte-rejects-bill-requiring-sim-card-social-media-account-registration
     - https://www.pinterest.com
     - https://www.popsci.com/technology/best-security-innovations-2021/
     - https://www.qwant.com/
@@ -1382,6 +1390,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.torproject.org/
     - https://www.twitch.tv/p/legal/privacy-policy/
     - https://www.ubuntu.com/about/about-ubuntu/conduct
+    - https://www.udemy.com/course/lean-data-practices/
     - https://www.un.org/development/desa/disabilities/resources/factsheet-on-persons-with-disabilities.html
     - https://www.universalsubtitles.org
     - https://www.verdict.co.uk/google-apple-privacy/
