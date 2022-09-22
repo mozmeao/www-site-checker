@@ -677,6 +677,7 @@ bedrock_base_config: &bedrock_base_config
     - https://bugzilla.mozilla.org
     - https://builders.mozilla.community/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=state-of-mozilla-2019
     - https://builders.mozilla.community/who-we-fund.html
+    - https://www.businessinsider.com/diversity-executives-transforming-corporate-america-post-george-floyd-2021
     - https://ca.go.ke/wp-content/uploads/2018/11/Mozilla-Submission-of-Comments-Kenya-Privacy-and-Data-Protection-Bill-2018.pdf
     - https://cabforum.org/baseline-requirements-documents/
     - https://cabforum.org/extended-validation/
@@ -796,6 +797,7 @@ bedrock_base_config: &bedrock_base_config
     - https://firefox-dev.tools/
     - https://flathub.org/apps/details/org.mozilla.firefox
     - https://flic.kr/p/2j7GXpB
+    - https://fortune.com/40-under-40/2021/keyanna-schmiedl/
     - https://foundation.mozilla.org
     - https://foundeo.com/
     - https://friendsofglobalvoices.org/
