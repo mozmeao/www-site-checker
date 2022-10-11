@@ -28,7 +28,7 @@ jobs:
           --sitemap-url=https://www.mozilla.org/sitemap.xml
           --batch="${{ matrix.batch }}"
       - name: Upload output files
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: scan-results
           path: output
@@ -53,7 +53,7 @@ jobs:
           --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload output files
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: scan-results
           path: output
@@ -78,7 +78,7 @@ jobs:
           --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload output files
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: scan-results
           path: output
@@ -98,7 +98,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Download artifacts, if they exist
         id: download-scan-results
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: scan-results
           path: output
