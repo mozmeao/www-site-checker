@@ -16,8 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Check main CDN - batch ${{ matrix.batch }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Run checker
@@ -26,7 +28,7 @@ jobs:
           --sitemap-url=https://www.mozilla.org/sitemap.xml
           --batch="${{ matrix.batch }}"
       - name: Upload output files
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: scan-results
           path: output
@@ -38,8 +40,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Check US origin server - batch ${{ matrix.batch }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Run checker
@@ -49,7 +53,7 @@ jobs:
           --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload output files
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: scan-results
           path: output
@@ -61,8 +65,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Check EU origin server - batch ${{ matrix.batch }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Run checker
@@ -72,7 +78,7 @@ jobs:
           --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload output files
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: scan-results
           path: output
@@ -84,13 +90,15 @@ jobs:
       - run_on_us_origin
       - run_on_eu_origin
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Download artifacts, if they exist
         id: download-scan-results
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: scan-results
           path: output

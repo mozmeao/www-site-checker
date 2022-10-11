@@ -1220,6 +1220,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.bloomberg.com/news/articles/2020-02-12/400-million-social-media-users-set-to-lose-anonymity-in-india
     - https://www.bugzilla.org
     - https://www.bugzilla.org/
+    - https://www.businessinsider.com/diversity-executives-transforming-corporate-america-post-george-floyd-2021
     - https://www.cbsnews.com/news/facebook-advertisers-pull-ads-mozilla-sonos/
     - https://www.ccadb.org/policy
     - https://www.ceps.eu/publications/software-vulnerability-disclosure-europe-technology-policies-and-legal-challenges
@@ -1390,6 +1391,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.theverge.com/2018/9/30/17913712/california-net-neutrality-bill-signed-law-jerry-brown
     - https://www.tiktok.com/@mozilla
     - https://www.torproject.org/
+    - https://www.twilio.com
     - https://www.twitch.tv/p/legal/privacy-policy/
     - https://www.ubuntu.com/about/about-ubuntu/conduct
     - https://www.udemy.com/course/lean-data-practices/
