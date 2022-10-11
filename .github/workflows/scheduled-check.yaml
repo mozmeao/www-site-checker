@@ -16,8 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Check main CDN - batch ${{ matrix.batch }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Run checker
@@ -38,8 +38,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Check US origin server - batch ${{ matrix.batch }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Run checker
@@ -61,8 +61,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Check EU origin server - batch ${{ matrix.batch }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Run checker
@@ -84,8 +84,8 @@ jobs:
       - run_on_us_origin
       - run_on_eu_origin
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Download artifacts, if they exist
