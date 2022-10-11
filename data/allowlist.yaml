@@ -1388,6 +1388,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.theverge.com/2018/9/30/17913712/california-net-neutrality-bill-signed-law-jerry-brown
     - https://www.tiktok.com/@mozilla
     - https://www.torproject.org/
+    - https://www.twilio.com
     - https://www.twitch.tv/p/legal/privacy-policy/
     - https://www.ubuntu.com/about/about-ubuntu/conduct
     - https://www.udemy.com/course/lean-data-practices/
