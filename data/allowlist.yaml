@@ -796,6 +796,7 @@ bedrock_base_config: &bedrock_base_config
     - https://firefox-dev.tools/
     - https://flathub.org/apps/details/org.mozilla.firefox
     - https://flic.kr/p/2j7GXpB
+    - https://fortune.com/40-under-40/2021/keyanna-schmiedl/
     - https://foundation.mozilla.org
     - https://foundeo.com/
     - https://friendsofglobalvoices.org/
@@ -1218,6 +1219,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.bloomberg.com/news/articles/2020-02-12/400-million-social-media-users-set-to-lose-anonymity-in-india
     - https://www.bugzilla.org
     - https://www.bugzilla.org/
+    - https://www.businessinsider.com/diversity-executives-transforming-corporate-america-post-george-floyd-2021
     - https://www.cbsnews.com/news/facebook-advertisers-pull-ads-mozilla-sonos/
     - https://www.ccadb.org/policy
     - https://www.ceps.eu/publications/software-vulnerability-disclosure-europe-technology-policies-and-legal-challenges
