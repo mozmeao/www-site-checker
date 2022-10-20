@@ -218,6 +218,7 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/share?url=http://www.mozilla.org/en-US/stories/art-of-engagement/&text=The+Art+of+Engagement
     - https://twitter.com/share?url=http://www.mozilla.org/en-US/stories/build-together/&text=Licensed+to+Build+Together
     - https://twitter.com/share?url=http://www.mozilla.org/en-US/stories/community-champion/&text=From+Volunteer+to+Mozilla+Community+Champion
+    - https://twitter.com/share?url=http://www.mozilla.org/en-US/stories/joy-of-color/&text=The+Joy+of+Color
     - https://www.twitter.com/intent/tweet?url=http%3A%2F%2Fmzl.la%2Funfck&text=Excuse+the+language%2C+but+this+is+kind+of+a+big+deal.+The+internet+is+fcked+and+that+could+fck+with+the+US+elections.+Don%E2%80%99t+wait.+Do+something+%28quick+and+easy%29+today%3A&hashtags=UnfckTheInternet
     - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=%40mozilla%E2%80%99n%C4%B1n+daha+g%C3%BCzel%2C+daha+sa%C4%9Fl%C4%B1kl%C4%B1+internet+vizyonunu+destekliyorum.+Siz+de+kat%C4%B1lmaz+m%C4%B1s%C4%B1n%C4%B1z%3F
     - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=%40mozilla%EC%9D%98+%EA%B1%B4%EA%B0%95%ED%95%98%EA%B3%A0+%EB%82%98%EC%9D%80+%EC%9D%B8%ED%84%B0%EB%84%B7%EC%97%90+%EB%8C%80%ED%95%9C+%EA%BF%88%EC%9D%84+%EC%A7%80%EC%A7%80%ED%95%B4+%EC%A3%BC%EC%8B%AD%EC%8B%9C%EC%98%A4.
@@ -629,6 +630,7 @@ bedrock_base_config: &bedrock_base_config
     - https://acoustic.com/privacy-notice/
     - https://acrossecurity.com/
     - https://addons.mozilla.org
+    - https://aestheticsofjoy.com/
     - https://aframe.io/
     - https://africabusinesscommunities.com/tech/tech-news/kenya-business-and-government-leaders-urged-to-adopt-lead-data-practices/
     - https://afrilabs.com/ag-2021-agenda/
@@ -1321,6 +1323,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.linkedin.com/sharing/share-offsite/?mini=true&url=http://www.mozilla.org/en-US/stories/art-of-engagement/
     - https://www.linkedin.com/sharing/share-offsite/?mini=true&url=http://www.mozilla.org/en-US/stories/build-together/
     - https://www.linkedin.com/sharing/share-offsite/?mini=true&url=http://www.mozilla.org/en-US/stories/community-champion/
+    - https://www.linkedin.com/sharing/share-offsite/?mini=true&url=http://www.mozilla.org/en-US/stories/joy-of-color/
     - https://www.linshunghuang.com/
     - https://www.marketingcloud.com/privacy-policy/website-privacy-statement/
     - https://www.marketplace.org/shows/marketplace-tech/ever-watch-something-on-youtube-and-wished-you-hadnt-youre-not-alone/
