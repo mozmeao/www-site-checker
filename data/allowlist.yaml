@@ -674,6 +674,7 @@ bedrock_base_config: &bedrock_base_config
     - https://bug-bounty-codeql-databases.s3.us-east-2.amazonaws.com/index.html
     - https://bughunter.withgoogle.com/profile/3c96630c-9112-4ddb-a029-df2bb893c6c3
     - https://bughunter.withgoogle.com/profile/80ae25f5-877d-4402-94e8-7902cacdb4b9
+    - https://bugs.chromium.org/p/chromium/issues/detail?id=1379879
     - https://bugs.webkit.org/show_bug.cgi?id=61585
     - https://bugs.webkit.org/show_bug.cgi?id=70648
     - https://bugzilla-dev.allizom.org/
