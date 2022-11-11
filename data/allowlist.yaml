@@ -924,6 +924,7 @@ bedrock_base_config: &bedrock_base_config
     - https://mg.frama.io
     - https://mikeconley.ca/blog/2018/01/11/making-tab-switching-faster-in-firefox-with-tab-warming/
     - https://miketaylr.com/posts/2015/03/contenteditable-paste.html
+    - https://moz-conduit.readthedocs.io/en/latest/lando-user.html
     - https://moz-services-docs.readthedocs.io/en/latest/sync/
     - https://mozilla-push-service.readthedocs.io/en/latest/
     - https://mozilla.fluxx.io/apply/MOSS
