@@ -726,6 +726,7 @@ bedrock_base_config: &bedrock_base_config
     - https://dbaron.org/mozilla/visited-privacy
     - https://detectify.com/
     - https://dev.chromium.org/Home/chromium-security/crlsets
+    - https://developer.android.com/develop/ui/views/touch-and-input/image-keyboard
     - https://developer.android.com/guide/components/intents-filters.html
     - https://developer.chrome.com/multidevice/android/intents
     - https://developers.cloudflare.com/1.1.1.1/privacy/firefox/
@@ -792,6 +793,7 @@ bedrock_base_config: &bedrock_base_config
     - https://energyinnovation.org/2020/03/17/how-much-energy-do-data-centers-really-use/
     - https://ewirch.github.io/
     - https://extensiblewebmanifesto.org/
+    - https://extensionworkshop.com/documentation/develop/web-ext-command-reference/#devtools
     - https://extensionworkshop.com/documentation/publish/site-permission-add-on/
     - https://facebook.com/Bijoora
     - https://facebook.com/mozilla
