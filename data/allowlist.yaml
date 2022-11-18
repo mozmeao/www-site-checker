@@ -501,7 +501,6 @@ bedrock_base_config: &bedrock_base_config
     - http://msujaws.wordpress.com/2014/08/01/faster-and-snappier-searches-now-in-firefox-aurora/
     - http://msujaws.wordpress.com/2014/08/27/new-in-firefox-nightly-recommended-and-easy-theme-switching-through-customize-mode/
     - http://muizelaar.blogspot.ca/2015/03/performance-and-feature-improvements-in.html
-    - https://www.nytimes.com/2004/09/20/nyregion/you-say-prosciutto-i-say-proshoot-and-purists-cringe.html
     - http://openbadges.org/
     - http://openstreetmap.org/copyright
     - http://openvideoalliance.org/
@@ -647,6 +646,7 @@ bedrock_base_config: &bedrock_base_config
     - https://app.onetrust.com/app/#/webform/4ba08202-2ede-4934-a89e-f0b0870f95f0
     - https://arstechnica.com/tech-policy/2017/03/senate-votes-to-let-isps-sell-your-web-browsing-history-to-advertisers/
     - https://ashughes.com/?p=426
+    - https://assets.mofoprod.net/network/documents/Report_Inside_the_shadowy_world_of_disinformation_for_hire_in_Kenya_5._hcc.pdf
     - https://atf.app.swapcard.com/event/africa-tech-festival-2021
     - https://au.int/sites/default/files/decisions/37590-2019_sharm_el_sheikh_declaration_-_stc-cict-3_oct_2019_ver2410-10pm-1rev-2.pdf
     - https://awebpodcast.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage&utm_content=card
@@ -681,7 +681,6 @@ bedrock_base_config: &bedrock_base_config
     - https://bugzilla.mozilla.org
     - https://builders.mozilla.community/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=state-of-mozilla-2019
     - https://builders.mozilla.community/who-we-fund.html
-    - https://www.businessinsider.com/diversity-executives-transforming-corporate-america-post-george-floyd-2021
     - https://ca.go.ke/wp-content/uploads/2018/11/Mozilla-Submission-of-Comments-Kenya-Privacy-and-Data-Protection-Bill-2018.pdf
     - https://cabforum.org/baseline-requirements-documents/
     - https://cabforum.org/extended-validation/
@@ -810,6 +809,7 @@ bedrock_base_config: &bedrock_base_config
     - https://friendsofglobalvoices.org/
     - https://fukusa.nl
     - https://gadgets.ndtv.com/apps/news/mozilla-firefox-rocket-lite-browser-android-download-features-1893490
+    - https://garethheyes.co.uk/
     - https://gecko.readthedocs.io/en/latest/toolkit/components/telemetry/telemetry/index.html
     - https://gecko.readthedocs.org/en/latest/mobile/android/fennec/defaultdomains.html#domain-auto-completion
     - https://getpocket.com
@@ -836,6 +836,7 @@ bedrock_base_config: &bedrock_base_config
     - https://github.com/w3c/resource-timing/issues/29
     - https://github.com/w3c/webcomponents/
     - https://github.com/whatwg/html/pull/166
+    - https://github.com/zhchbin
     - https://godotengine.org/
     - https://googleprojectzero.blogspot.com/2018/01/reading-privileged-memory-with-side.html
     - https://googleprojectzero.blogspot.com/2019/02/the-curious-case-of-convexity-confusion.html
@@ -878,6 +879,7 @@ bedrock_base_config: &bedrock_base_config
     - https://internethealthreport.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage&utm_content=card
     - https://internethealthreport.org/2019/?lang=fr&utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage-de&utm_content=card
     - https://irlpodcast.org/
+    - https://irlpodcast.org/season6/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=state-of-mozilla-2021
     - https://jinja.palletsprojects.com/
     - https://jrmuizel.github.io/twitch/volume.html
     - https://jswrenn.com/
@@ -891,6 +893,7 @@ bedrock_base_config: &bedrock_base_config
     - https://letsencrypt.org/stats/#percent-pageloads
     - https://linkedin.com/in/andirrahmani
     - https://linkedin.com/in/yarbabin
+    - https://lucidcapitalism.com/
     - https://lumendatabase.org/
     - https://luminategroup.com
     - https://lutfumertceylan.com.tr
@@ -966,6 +969,7 @@ bedrock_base_config: &bedrock_base_config
     - https://safebrowsing.google.com/safebrowsing/report_badware/
     - https://safebrowsing.google.com/safebrowsing/report_phish/
     - https://scroll.com/privacy
+    - https://secureailabs.com/
     - https://securedrop.org/
     - https://securingdemocracy.gmfus.org/about-us/advisory-council/
     - https://securityriskahead.eu/
@@ -1002,11 +1006,13 @@ bedrock_base_config: &bedrock_base_config
     - https://tenor.com/legal-privacy
     - https://testpilot.mozillalabs.com/privacy.php
     - https://theconversation.com/7-in-10-smartphone-apps-share-your-data-with-third-party-services-72404
+    - https://thehill.com/opinion/technology/3705272-the-us-midterms-dont-have-to-be-an-online-dystopia/
     - https://themarkup.org
     - https://themarkup.org/series/citizen-browser
     - https://thimble.webmaker.org/
     - https://thunderbird.net
     - https://time.com/collection/time-100-next-2019/5718889/camille-francois/
+    - https://time.com/collection/women-of-the-year/6150549/tracy-chou/
     - https://timkadlec.com/remembers/2020-04-21-the-cost-of-javascript-frameworks/
     - https://tokbox.com/support/privacy-policy
     - https://tools.google.com/dlpage/gaoptout
@@ -1054,10 +1060,12 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/@j3ssiejjj
     - https://twitter.com/@jensvoid
     - https://twitter.com/@jupenur
+    - https://twitter.com/@kang_ali
     - https://twitter.com/@kanytu
     - https://twitter.com/@kid1ng
     - https://twitter.com/@konarkmodi
     - https://twitter.com/@l33d0hyun
+    - https://twitter.com/@lazysaad
     - https://twitter.com/@llamakko_cafe
     - https://twitter.com/@luotojesse
     - https://twitter.com/@masthoon
@@ -1070,11 +1078,13 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/@qab
     - https://twitter.com/@R3dpars3c
     - https://twitter.com/@RandomDhiraj
+    - https://twitter.com/@reboot_ex
     - https://twitter.com/@revskills
     - https://twitter.com/@sebbity
     - https://twitter.com/@shhnjk
     - https://twitter.com/@stevenmcrane
     - https://twitter.com/@sysmus28
+    - https://twitter.com/@tomorrowisnew
     - https://twitter.com/@vladimir_metnew
     - https://twitter.com/@Windowsrcer
     - https://twitter.com/@xorninja
@@ -1093,6 +1103,7 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/ashleyboyd
     - https://twitter.com/aussinfosec
     - https://twitter.com/Black2Fan
+    - https://twitter.com/BountyOverflow
     - https://twitter.com/cecleandro
     - https://twitter.com/csanuragjain
     - https://twitter.com/cyberboyIndia
@@ -1110,6 +1121,7 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/hacklad
     - https://twitter.com/hashtag/mozillalifeboat
     - https://twitter.com/https://twitter.com/arshadkazmi42
+    - https://twitter.com/hunter0x7
     - https://twitter.com/iambouali
     - https://twitter.com/j3ssiejjj
     - https://twitter.com/jens1o
@@ -1137,6 +1149,7 @@ bedrock_base_config: &bedrock_base_config
     - https://twitter.com/msurman
     - https://twitter.com/NateTheRiver
     - https://twitter.com/Nep_1337_1998
+    - https://twitter.com/nlamgade
     - https://twitter.com/oja_c7s
     - https://twitter.com/p4fg
     - https://twitter.com/proabiral
@@ -1224,10 +1237,12 @@ bedrock_base_config: &bedrock_base_config
     - https://www.bavc.org/
     - https://www.bbc.com/news/technology-44382135
     - https://www.bbc.com/news/world-africa-58474936
+    - https://www.blockpartyapp.com/
     - https://www.blog.google/products/chrome/building-a-more-private-web
     - https://www.bloomberg.com/news/articles/2020-02-12/400-million-social-media-users-set-to-lose-anonymity-in-india
     - https://www.bugzilla.org
     - https://www.bugzilla.org/
+    - https://www.businessinsider.com/diversity-executives-transforming-corporate-america-post-george-floyd-2021
     - https://www.businessinsider.com/diversity-executives-transforming-corporate-america-post-george-floyd-2021
     - https://www.cbsnews.com/news/facebook-advertisers-pull-ads-mozilla-sonos/
     - https://www.ccadb.org/policy
@@ -1241,6 +1256,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.cnas.org/digital-freedom-forum
     - https://www.cnbc.com/2018/07/12/private-web-browsing-not-as-private-as-you-think-research.html
     - https://www.cnet.com/news/why-you-should-be-skeptical-about-a-vpns-no-logs-claims/
+    - https://www.congress.gov/bill/117th-congress/senate-bill/2992
     - https://www.consumer.ftc.gov/articles/0014-tips-using-public-wi-fi-networks
     - https://www.contextis.com//resources/blog/leaking-https-urls-20-year-old-vulnerability/
     - https://www.cosic.esat.kuleuven.be/fpdetective/#paper
@@ -1291,11 +1307,13 @@ bedrock_base_config: &bedrock_base_config
     - https://www.greenhouse.io/privacy-policy
     - https://www.grepular.com/
     - https://www.hercampus.com/
+    - https://www.heylogin.com
     - https://www.iainnicol.com/
     - https://www.ieee-security.org/TC/SPW2015/W2SP/papers/W2SP_2015_submission_32.pdf
     - https://www.ietf.org/archive/id/draft-ietf-tls-esni-08.html
     - https://www.inslm.gov.au/sites/default/files/2020-03/tola-transcript-public-hearing-day-1-20-feb-2020.pdf
     - https://www.jefftk.com/p/shared-cache-is-going-away
+    - https://www.journalofdemocracy.org/articles/the-future-of-platform-power-making-middleware-work/
     - https://www.leanplum.com/privacy/
     - https://www.lemauricien.com/actualites/pnq-sur-le-controle-propose-des-reseaux-sociaux-le-pm-renvoie-la-balle-vers-licta/425187/
     - https://www.linkedin.com/company/mozilla-corporation/
@@ -1309,12 +1327,15 @@ bedrock_base_config: &bedrock_base_config
     - https://www.linkedin.com/in/hafiizh-7aa6bb31/
     - https://www.linkedin.com/in/harshbanshpal/
     - https://www.linkedin.com/in/ismailtasdelen/
+    - https://www.linkedin.com/in/jaydeep-nasit/
     - https://www.linkedin.com/in/joaxcar
     - https://www.linkedin.com/in/mehboob-shaikh-7791a3169
+    - https://www.linkedin.com/in/mohamedn/
     - https://www.linkedin.com/in/mohammadhoseinaskari/
     - https://www.linkedin.com/in/mohammed-sherif-635302183
     - https://www.linkedin.com/in/mohammedfayez
     - https://www.linkedin.com/in/muhammad-khizer-javed/
+    - https://www.linkedin.com/in/mvisat
     - https://www.linkedin.com/in/naveen-kumar-8ba517190/
     - https://www.linkedin.com/in/onkar-sonawane-40a59118a/
     - https://www.linkedin.com/in/prakhar-mittal-457ab2155/
@@ -1349,6 +1370,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.nilsand.re/
     - https://www.nngroup.com/articles/response-times-3-important-limits
     - https://www.nngroup.com/articles/the-need-for-speed
+    - https://www.nytimes.com/2004/09/20/nyregion/you-say-prosciutto-i-say-proshoot-and-purists-cringe.html
     - https://www.nytimes.com/2019/07/25/technology/facebook-ad-library.html
     - https://www.nytimes.com/2021/04/19/well/mind/covid-mental-health-languishing.html
     - https://www.nytimes.com/2021/08/08/opinion/tiktok-facebook-youtube-transparency.html
@@ -1372,6 +1394,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.reuters.com/article/us-health-coronavirus-india-app/india-orders-coronavirus-tracing-app-for-all-workers-idUSKBN22E07K
     - https://www.reuters.com/article/us-technology-www/father-of-web-says-tech-giants-may-have-to-be-split-up-idUSKCN1N63MV
     - https://www.rfc-editor.org/rfc/rfc9000.html
+    - https://www.rilabs.org/
     - https://www.rust-lang.org/
     - https://www.rust-lang.org/conduct.html
     - https://www.science.org/doi/abs/10.1126/science.aba3758
@@ -1384,6 +1407,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.softwarefreedom.org/resources/2007/gpl-non-gpl-collaboration.html
     - https://www.spelman.edu/coe-mws/news-events/the-future-is-intersectional-series/resources-recordings
     - https://www.spelman.edu/coe-mws/news-events/the-future-is-intersectional-series/resources-recordings
+    - https://www.startupsandsociety.org/
     - https://www.stellalabs.org/
     - https://www.stophateforprofit.org/
     - https://www.stophateforprofit.org/press-release-week-of-action
@@ -1437,12 +1461,14 @@ bedrock_base_config: &bedrock_base_config
     - https://www.wsj.com/articles/youtubes-search-algorithm-directs-viewers-to-false-and-sexualized-videos-study-finds-11625644803
     - https://www.xfinity.com/privacy/policy/dns
     - https://www.ygitsoftware.com/
+    - https://www.youtube.com/channel/UCUbCnVzyWy4087CAxvL-cbA
     - https://www.youtube.com/watch?v=4Q7FTjhvZ7Y
     - https://www.yubico.com/support/security-advisories/ysa-2018-02/
     - https://www.zdnet.com/article/before-the-web-the-internet-in-1991/
     - https://www.zippenhop.com/
     - https://xiph.org/flac/
     - https://xsleaks.dev/
+    - https://zulln.se/
 
 bedrock_cdn:
   <<: *bedrock_base_config
