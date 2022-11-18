@@ -15,6 +15,7 @@ import logging
 import math
 import os
 import re
+import time
 from collections import defaultdict
 from functools import cache
 from typing import Dict, Iterable, List, Tuple
@@ -45,6 +46,7 @@ if SENTRY_DSN:
 DEFAULT_BATCH__NOOP = "1:1"  # By default treat all URLs as a single batch
 UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_for"
 URL_RETRY_LIMIT = 3
+URL_RETRY_WAIT_SECONDS = 4
 
 
 @click.command()
@@ -161,7 +163,8 @@ def _get_url_with_retry(
 
     except exceptions_to_retry as re:
         if try_count < limit:
-            click.echo(f"Retrying after {re}")
+            click.echo(f"Waiting {URL_RETRY_WAIT_SECONDS} seconds before retrying, following {re}")
+            time.sleep(URL_RETRY_WAIT_SECONDS)
             return _get_url_with_retry(url, try_count=try_count + 1)
         else:
             click.echo(f"Max retries ({URL_RETRY_LIMIT}) reached. Raising exception {re}")
