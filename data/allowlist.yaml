@@ -892,6 +892,7 @@ bedrock_base_config: &bedrock_base_config
     - https://letsencrypt.org/
     - https://letsencrypt.org/stats/#percent-pageloads
     - https://linkedin.com/in/andirrahmani
+    - https://www.linkedin.com/in/orionjoshi/
     - https://linkedin.com/in/yarbabin
     - https://lucidcapitalism.com/
     - https://lumendatabase.org/
