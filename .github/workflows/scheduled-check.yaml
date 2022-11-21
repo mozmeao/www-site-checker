@@ -9,12 +9,24 @@ env:
   SLACK_NOTIFICATION_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATION_WEBHOOK_URL }}
 
 jobs:
-  run_on_cdn:
+  set_up_matrix_vars:
+    runs-on: ubuntu-latest
+    steps:
+      - id: set-matrix-vars
+        run: |
+          echo 'sitemaps="${{ secrets.SITEMAPS_TO_CHECK }}"' >> $GITHUB_ENV
+          echo 'sitemaps="${{ secrets.SITEMAPS_TO_CHECK }}"'
+
+  run_scan:
+    needs:
+      - set_up_matrix_vars
     strategy:
       matrix:
-        batch: ["1:4", "2:4", "3:4", "4:4"]
+        batch: ["1:5", "2:5", "3:5", "4:5", "5:5"]
+        sitemap: ${{fromJson(needs.set_up_matrix_vars.env.sitemap_urls)}}
+
     runs-on: ubuntu-latest
-    name: Check main CDN - batch ${{ matrix.batch }}
+    name: Spider site - batch ${{ matrix.batch }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -25,70 +37,70 @@ jobs:
       - name: Run checker
         run: >
           python bin/run_checks.py
-          --sitemap-url=https://www.mozilla.org/sitemap.xml
           --batch="${{ matrix.batch }}"
+          --maintain-hostname
+          --sitemap-url=${{ matrix.sitemap }}
       - name: Upload output files
         uses: actions/upload-artifact@v3
         with:
           name: scan-results
           path: output
 
-  run_on_us_origin:
-    strategy:
-      matrix:
-        batch: ["1:4", "2:4", "3:4", "4:4"]
-    runs-on: ubuntu-latest
-    name: Check US origin server - batch ${{ matrix.batch }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-      - name: Install requirements
-        run: pip install -r requirements.txt
-      - name: Run checker
-        run: >
-          python bin/run_checks.py
-          --sitemap-url=https://bedrock-prod.gcp.moz.works/sitemap.xml
-          --maintain-hostname
-          --batch="${{ matrix.batch }}"
-      - name: Upload output files
-        uses: actions/upload-artifact@v3
-        with:
-          name: scan-results
-          path: output
+  # run_on_us_origin:
+  #   strategy:
+  #     matrix:
+  #       batch: ["1:4", "2:4", "3:4", "4:4"]
+  #   runs-on: ubuntu-latest
+  #   name: Check US origin server - batch ${{ matrix.batch }}
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-python@v4
+  #       with:
+  #         python-version: "3.10"
+  #     - name: Install requirements
+  #       run: pip install -r requirements.txt
+  #     - name: Run checker
+  #       run: >
+  #         python bin/run_checks.py
+  #         --sitemap-url=https://bedrock-prod.gcp.moz.works/sitemap.xml
+  #         --maintain-hostname
+  #         --batch="${{ matrix.batch }}"
+  #     - name: Upload output files
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: scan-results
+  #         path: output
 
-  run_on_eu_origin:
-    strategy:
-      matrix:
-        batch: ["1:4", "2:4", "3:4", "4:4"]
-    runs-on: ubuntu-latest
-    name: Check EU origin server - batch ${{ matrix.batch }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-      - name: Install requirements
-        run: pip install -r requirements.txt
-      - name: Run checker
-        run: >
-          python bin/run_checks.py
-          --sitemap-url=https://bedrock.prod.fr.moz.works/sitemap.xml
-          --maintain-hostname
-          --batch="${{ matrix.batch }}"
-      - name: Upload output files
-        uses: actions/upload-artifact@v3
-        with:
-          name: scan-results
-          path: output
+  # run_on_eu_origin:
+  #   strategy:
+  #     matrix:
+  #       batch: ["1:4", "2:4", "3:4", "4:4"]
+  #   runs-on: ubuntu-latest
+  #   name: Check EU origin server - batch ${{ matrix.batch }}
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-python@v4
+  #       with:
+  #         python-version: "3.10"
+  #     - name: Install requirements
+  #       run: pip install -r requirements.txt
+  #     - name: Run checker
+  #       run: >
+  #         python bin/run_checks.py
+  #         --sitemap-url=https://bedrock.prod.fr.moz.works/sitemap.xml
+  #         --maintain-hostname
+  #         --batch="${{ matrix.batch }}"
+  #     - name: Upload output files
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: scan-results
+  #         path: output
 
   alert_if_report_files_exist:
     runs-on: ubuntu-latest
     needs:
-      - run_on_cdn
-      - run_on_us_origin
-      - run_on_eu_origin
+      - set_up_matrix_vars
+      - run_scan
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
