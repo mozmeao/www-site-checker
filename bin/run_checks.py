@@ -11,6 +11,7 @@ Run the specified checks on specified URLs and issue a report.
 Initially, we're checking that all outbound URLs are ones we expect.
 """
 import datetime
+import json
 import logging
 import math
 import os
@@ -44,7 +45,7 @@ if SENTRY_DSN:
     )
 
 DEFAULT_BATCH__NOOP = "1:1"  # By default treat all URLs as a single batch
-UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_for"
+UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
 URL_RETRY_LIMIT = 3
 URL_RETRY_WAIT_SECONDS = 4
 
@@ -117,7 +118,7 @@ def check_for_unexpected_outbound_urls(
 
     if results:
         click.echo(f"Unexpected outbound URLs found on {hostname}!")
-        _dump_to_file(
+        _dump_to_files(
             results=results,
             hostname=hostname,
             batch_label="all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0],
@@ -171,26 +172,31 @@ def _get_url_with_retry(
             raise re
 
 
-def _dump_to_file(
+def _dump_to_files(
     results: Dict[str, set],
     hostname: str,
     batch_label: str,
 ) -> Tuple[str]:
-    """Output two files of results speciifc to the current hostname and batch:
+    """Output files of results specific to the current hostname and batch:
 
-    * flat: just the unexpected urls
-    * nested: for each unexpected URL, show were in the site we found it
+    * Text output:
+        * flat: just the unexpected urls
+        * nested: for each unexpected URL, show were in the site we found it
+
+    * JSON output
+
     """
     _output_path = _get_output_path()
-    _now = datetime.datetime.utcnow().isoformat().replace(":", "-")  # Github actions doesn't like colons in filenames
+    _now = datetime.datetime.utcnow().isoformat(timespec="seconds").replace(":", "-")  # Github actions doesn't like colons in filenames
     _base_filename = f"{UNEXPECTED_URLS_FILENAME_FRAGMENT}_{hostname}_{batch_label}_{_now}.txt"
-    flat_output_filepath = os.path.join(_output_path, f"flat_{_base_filename}")
-    nested_output_filepath = os.path.join(_output_path, f"nested_{_base_filename}")
+    flat_output_filepath = os.path.join(_output_path, _base_filename.replace(".txt", "_flat.txt"))
+    nested_output_filepath = flat_output_filepath.replace("_flat", "_nested")
+    json_output_filepath = flat_output_filepath.replace("_flat", "_structured").replace(".txt", ".json")
 
     fp_flat = open(flat_output_filepath, "w")
     fp_flat.write("\n".join([key for key in results.keys()]))
     fp_flat.close
-    click.echo(f"List of unexpected URLs dumped to {flat_output_filepath}")
+    click.echo(f"List of unexpected URLs output to {flat_output_filepath}")
 
     fp_nested = open(nested_output_filepath, "w")
     for unexpected_url, occurrences in results.items():
@@ -200,9 +206,20 @@ def _dump_to_file(
         )
         fp_nested.write(line)
     fp_nested.close()
+    click.echo(f"List of unexpected URLs and their source pages output to {nested_output_filepath}")
 
-    click.echo(f"List of unexpected URLs plus the page URLs that reference them dumped to {nested_output_filepath}")
-    return flat_output_filepath, nested_output_filepath
+    # Can't serialize a set, so make it a list and flip it around
+    inverted_results = defaultdict(list)
+    for key, values in results.items():
+        for value in values:
+            inverted_results[value].append(key)
+
+    fp_json = open(json_output_filepath, "w")
+    fp_json.write(json.dumps(inverted_results))
+    fp_json.close()
+    click.echo(f"JSON version of results output to {json_output_filepath}")
+
+    return flat_output_filepath, nested_output_filepath, json_output_filepath
 
 
 def _get_output_path() -> os.PathLike:
