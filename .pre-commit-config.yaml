@@ -28,7 +28,7 @@ repos:
     hooks:
       - id: trailing-whitespace
       - id: debug-statements
-      - id: check-yaml
+      # - id: check-yaml  # can't be used with pyyaml-env package's !ENV (yet?)
   - repo: https://github.com/psf/black
     rev: 22.3.0
     hooks:

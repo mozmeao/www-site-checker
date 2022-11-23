@@ -1,14 +1,10 @@
 # Simple allowlist with hardly any rules
-development_base_config: &development_base_config
-  allowed_outbound_url_regexes:
-    - 'https?:\/\/[^\/]+.example.com\/(.*)'
-  allowed_outbound_url_literals:
-    - "https://other-example.com/two"
+relevant_hostnames:
+  - localhost:8000
+  - localhost:8080
 
-localhost8080:
-  <<: *development_base_config
-  hostname: localhost:8080
-
-localhost8000:
-  <<: *development_base_config
-  hostname: localhost:8000
+allowed_outbound_url_regexes:
+  # === Broad, trusted cases ===
+  - '^(\/|#).*' # Relative URLs and in-page anchors are OK
+allowed_outbound_url_literals:
+  - "https://other-example.com/two"
