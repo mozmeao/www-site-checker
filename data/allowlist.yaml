@@ -78,7 +78,7 @@ bedrock_base_config: &bedrock_base_config
     # Relative paths
     - "../"
 
-    # First-party links, not needing a regex rule (yet?)
+    # Links not needing a regex rule (yet?)
     - https://connect.mozilla.org?utm_source=contribute-website&utm_medium=banner&utm_campaign=connect-campaign&utm_content=15032022
     - https://monitor.firefox.com?utm_source=mozilla.org-firefox-accounts&utm_medium=referral&utm_campaign=trailhead&utm_content=product-list-item&entrypoint=mozilla.org-firefox-accounts
     - https://monitor.firefox.com?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=compare-chrome
@@ -93,17 +93,23 @@ bedrock_base_config: &bedrock_base_config
     - https://www.mozillapulse.org/profile/410
     - https://projectfluent.org/
     - https://www.projectfluent.org/
-
-    # App store links not covered by the regexes above
     - https://app.adjust.com/gi0ycmr?redirect=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dmozilla.lockbox
     - https://app.adjust.com/jcn6eyw?campaign=firefox100&adgroup=android-store
     - https://app.adjust.com/jcn6eyw?campaign=firefox100&adgroup=ios-store
     - https://app.adjust.com/qywno6t?redirect=https%3A%2F%2Fitunes.apple.com%2Fapp%2Fid1314000270%3Fmt%3D8
-
     - https://apps.apple.com/us/app/firefox-private-network-vpn/id1489407738
     - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn
 
-    # RFCs, etc
+    # Malformatted or broken links which need fixing
+    - firefox-third-party.html # This is a 404 and we'll probably leave it as such for now
+    - (https://github.com/mozilla/spoke/blob/master/LICENSE)
+    - libro # in /ia/ locale
+    - fluent # in /ia/ locale
+
+    # Exceptions allowed as Fluent string overrides
+    - https://mozlinks.moztw.org/2014/04/poster.html
+
+    # START GENERAL LIST OF ALLOWED URLS
     - http://tools.ietf.org/html/rfc5280#section-4.2.1.12
     - http://tools.ietf.org/html/rfc5280#section-6.1.4
     - http://tools.ietf.org/html/rfc6265#section-4.1.1
@@ -119,8 +125,6 @@ bedrock_base_config: &bedrock_base_config
     - https://tools.ietf.org/html/rfc5480#section-2.1.1
     - https://tools.ietf.org/html/rfc5758#section-3.2
     - https://tools.ietf.org/html/rfc8017#appendix-A.1
-
-    # Security advisories
     - http://secunia.com/advisories/10419/
     - http://secunia.com/advisories/12712
     - http://secunia.com/advisories/13129/
@@ -143,7 +147,6 @@ bedrock_base_config: &bedrock_base_config
     - http://www.zerodayinitiative.com/advisories/ZDI-06-025.html
     - http://www.zerodayinitiative.com/advisories/ZDI-06-051.html
 
-    # Pre-prepared email messages via mailto:
     - mailto:?subject=%CE%9C%CE%B5%CF%84%CE%AC%CE%B2%CE%B1%CF%83%CE%B7%20%CF%83%CF%84%CE%BF%20Firefox&body=%CE%93%CE%B5%CE%B9%CE%B1%2C%0D%0A%0D%0A%CE%A4%CE%BF%20Firefox%20%CE%BA%CE%AC%CE%BD%CE%B5%CE%B9%20%CF%84%CE%B7%20%CE%BC%CE%B5%CF%84%CE%AC%CE%B2%CE%B1%CF%83%CE%B7%20%CE%B1%CF%80%CF%8C%20%CF%84%CE%BF%20Chrome%20%CF%80%CE%BF%CE%BB%CF%8D%20%CE%B3%CF%81%CE%AE%CE%B3%CE%BF%CF%81%CE%B1.%20%CE%9C%CE%BF%CF%85%20%CE%B1%CF%81%CE%AD%CF%83%CE%B5%CE%B9%20%CF%80%CE%BF%CE%BB%CF%8D%20%CE%BA%CE%B1%CE%B9%20%CF%80%CF%81%CE%AD%CF%80%CE%B5%CE%B9%20%CE%BD%CE%B1%20%CF%84%CE%BF%20%CE%B4%CE%BF%CE%BA%CE%B9%CE%BC%CE%AC%CF%83%CE%B5%CF%84%CE%B5.%0D%0A%0D%0A%CE%94%CE%B5%CE%AF%CF%84%CE%B5%20%CF%84%CE%BF%20%CE%BA%CE%B1%CE%B9%20%CF%80%CE%B5%CE%AF%CF%84%CE%B5%20%CE%BC%CE%BF%CF%85%20%CF%84%CE%B7%CE%BD%20%CE%AC%CF%80%CE%BF%CF%88%CE%AE%20%CF%83%CE%B1%CF%82%3A%20https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
     - mailto:?subject=%D0%9F%D0%B5%D1%80%D0%B0%D0%B9%D1%81%D1%86%D1%96%20%D0%BD%D0%B0%20Firefox&body=%D0%93%D1%8D%D0%B9%2C%0D%0A%0D%0AFirefox%20%D1%80%D0%BE%D0%B1%D1%96%D1%86%D1%8C%20%D0%BF%D0%B5%D1%80%D0%B0%D1%85%D0%BE%D0%B4%20%D0%B7%20Chrome%20%D1%81%D0%B0%D0%BF%D1%80%D0%B0%D1%9E%D0%B4%D1%8B%20%D1%85%D1%83%D1%82%D0%BA%D1%96%D0%BC.%20%D0%9C%D0%BD%D0%B5%20%D1%91%D0%BD%20%D0%B4%D1%83%D0%B6%D0%B0%20%D0%BF%D0%B0%D0%B4%D0%B0%D0%B1%D0%B0%D0%B5%D1%86%D1%86%D0%B0%2C%20%D1%82%D0%B0%D0%B1%D0%B5%20%D1%82%D0%B0%D0%BA%D1%81%D0%B0%D0%BC%D0%B0%20%D0%B2%D0%B0%D1%80%D1%82%D0%B0%20%D0%BF%D0%B0%D1%81%D0%BF%D1%80%D0%B0%D0%B1%D0%B0%D0%B2%D0%B0%D1%86%D1%8C.%0D%0A%0D%0A%D0%9F%D0%B0%D1%81%D0%BF%D1%80%D0%B0%D0%B1%D1%83%D0%B9%20%D1%96%20%D1%80%D0%B0%D1%81%D0%BA%D0%B0%D0%B6%D1%8B%2C%20%D1%88%D1%82%D0%BE%20%D0%B4%D1%83%D0%BC%D0%B0%D0%B5%D1%88%3A%20https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
     - mailto:?subject=%D0%9F%D0%B5%D1%80%D0%B5%D0%B9%D1%82%D0%B8%20%D0%BD%D0%B0%20Firefox&body=%D0%93%D0%B5%D0%B9%2C%0D%0A%0D%0AFirefox%20%D0%B4%D0%BE%D0%B7%D0%B2%D0%BE%D0%BB%D1%8F%D1%94%20%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%B4%D1%96%20%D1%88%D0%B2%D0%B8%D0%B4%D0%BA%D0%BE%20%D0%BF%D0%B5%D1%80%D0%B5%D0%B9%D1%82%D0%B8%20%D0%B7%20Chrome.%20%D0%9C%D0%B5%D0%BD%D1%96%20%D0%B2%D1%96%D0%BD%20%D0%B4%D1%83%D0%B6%D0%B5%20%D0%BF%D0%BE%D0%B4%D0%BE%D0%B1%D0%B0%D1%94%D1%82%D1%8C%D1%81%D1%8F%20%D1%96%20%D1%82%D0%BE%D0%B1%D1%96%20%D1%82%D0%B5%D0%B6%20%D0%B2%D0%B0%D1%80%D1%82%D0%BE%20%D1%81%D0%BF%D1%80%D0%BE%D0%B1%D1%83%D0%B2%D0%B0%D1%82%D0%B8.%0D%0A%0D%0A%D0%A1%D0%BF%D1%80%D0%BE%D0%B1%D1%83%D0%B9%20%D1%96%20%D1%80%D0%BE%D0%B7%D0%BA%D0%B0%D0%B6%D0%B8%20%D0%BC%D0%B5%D0%BD%D1%96%20%D0%BF%D1%80%D0%BE%20%D1%81%D0%B2%D0%BE%D1%97%20%D0%B2%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F%3A%20https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
@@ -215,7 +218,6 @@ bedrock_base_config: &bedrock_base_config
     - mailto:?subject=V%C3%A1lts%20Firefoxra&body=Szia%21%0D%0A%0D%0AA%20Firefox%20nagyon%20gyorss%C3%A1%20teszi%20a%20v%C3%A1lt%C3%A1st%20a%20Chrome-r%C3%B3l.%20Nagyon%20tetszik%2C%20pr%C3%B3b%C3%A1ld%20ki%20te%20is.%0D%0A%0D%0AN%C3%A9zd%20meg%20te%20is%2C%20%C3%A9s%20mondd%20el%20mit%20gondolsz%3A%20https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
     - mailto:?subject=Vaihda%20Firefoxiin&body=Terve%2C%0D%0A%0D%0AFirefox%20tekee%20Chromesta%20vaihtamisen%20todella%20nopeaksi.%20Pid%C3%A4n%20siit%C3%A4%20todella%20ja%20sinunkin%20pit%C3%A4isi%20kokeilla%20sit%C3%A4.%0D%0A%0D%0AKokeile%20sit%C3%A4%20ja%20kerro%2C%20mit%C3%A4%20mielt%C3%A4%20olet%3A%20https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
 
-    # Pre-prepared Tweets
     - https://twitter.com/share?url=http://www.mozilla.org/en-US/stories/art-of-engagement/&text=The+Art+of+Engagement
     - https://twitter.com/share?url=http://www.mozilla.org/en-US/stories/build-together/&text=Licensed+to+Build+Together
     - https://twitter.com/share?url=http://www.mozilla.org/en-US/stories/community-champion/&text=From+Volunteer+to+Mozilla+Community+Champion
@@ -354,13 +356,11 @@ bedrock_base_config: &bedrock_base_config
     - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F&text=Mae+%F0%9F%94%A5+Firefox+yn+gwneud+newid+i+Chrome+yn+beth+sydyn.+Rhowch+gynnig+arno%21
     - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=%C3%89g+sty%C3%B0+framt%C3%AD%C3%B0ars%C3%BDnina+um+betra+og+heilbrig%C3%B0ara+internet+fr%C3%A1+%40mozilla%2C+viltu+taka+%C3%BE%C3%A1tt+me%C3%B0+m%C3%A9r%3F
 
-    # Mozilla social accounts
     - https://www.instagram.com/firefox/
     - https://www.instagram.com/mozilla/
     - https://www.instagram.com/mozilla_deutschland/
     - https://www.instagram.com/unfcktheinternet/
 
-    # Specific YouTube links
     - https://youtube.com/MozillaDeveloper
     - https://www.youtube.com/t/terms
     - https://www.youtube.com/user/firefoxchannel
@@ -392,7 +392,6 @@ bedrock_base_config: &bedrock_base_config
     - https://youtu.be/F-nFQryDB0s
     - https://youtu.be/M9kBO5bIEyI?t=705
 
-    # Usenet links
     - news://alt.fan.mozilla
     - news://alt.netscape.sucks
     - news://comp.infosystems.www.advocacy
@@ -405,15 +404,6 @@ bedrock_base_config: &bedrock_base_config
     - news://comp.sys.mac.advocacy
     - news://comp.unix.advocacy
     - news://gnu.misc.discuss
-
-    # Malformatted or broken links which need fixing
-    - firefox-third-party.html # This is a 404 and we'll probably leave it as such for now
-    - (https://github.com/mozilla/spoke/blob/master/LICENSE)
-    - libro # in /ia/ locale
-    - fluent # in /ia/ locale
-
-    # Exceptions allowed as Fluent string overrides
-    - https://mozlinks.moztw.org/2014/04/poster.html
 
     # Third-party URLs
     - http://0days.engineer
@@ -892,7 +882,6 @@ bedrock_base_config: &bedrock_base_config
     - https://letsencrypt.org/
     - https://letsencrypt.org/stats/#percent-pageloads
     - https://linkedin.com/in/andirrahmani
-    - https://www.linkedin.com/in/orionjoshi/
     - https://linkedin.com/in/yarbabin
     - https://lucidcapitalism.com/
     - https://lumendatabase.org/
@@ -1339,6 +1328,7 @@ bedrock_base_config: &bedrock_base_config
     - https://www.linkedin.com/in/mvisat
     - https://www.linkedin.com/in/naveen-kumar-8ba517190/
     - https://www.linkedin.com/in/onkar-sonawane-40a59118a/
+    - https://www.linkedin.com/in/orionjoshi/
     - https://www.linkedin.com/in/prakhar-mittal-457ab2155/
     - https://www.linkedin.com/in/shivang-trivedi-a149b2190/
     - https://www.linkedin.com/in/sourc7/
