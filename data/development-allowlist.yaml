@@ -1,0 +1,14 @@
+# Simple allowlist with hardly any rules
+development_base_config: &development_base_config
+  allowed_outbound_url_regexes:
+    - 'https?:\/\/[^\/]+.example.com\/(.*)'
+  allowed_outbound_url_literals:
+    - "https://other-example.com/two"
+
+localhost8080:
+  <<: *development_base_config
+  hostname: localhost:8080
+
+localhost8000:
+  <<: *development_base_config
+  hostname: localhost:8000
