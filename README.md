@@ -43,7 +43,7 @@ And if you only want to check specific pages, you use the `--specific-url` param
 $ python bin/run_checks.py --specific-url=https://www.mozilla.org/ --specific-url=https://www.mozilla.org/en-US/firefox/browsers/mobile/
 ```
 
-There is a default allowlist in use (`data/allowlist.yaml`) but an alernative can be passed via the `--allowlist` param
+There is a default allowlist in use (`data/allowlist-mozorg.yaml` - set via env vars) but an alernative can be passed via the `--allowlist` param
 
 ```
 $ python bin/run_checks.py --sitemap-url=https://www.mozilla.org/sitemap.xml --allowlist=/path/to/custom/allowlist.yaml
