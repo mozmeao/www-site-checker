@@ -28,7 +28,7 @@ jobs:
       - name: Run checker
         run: >
           python bin/run_checks.py
-          --sitemap-url=https://www.mozilla.org/sitemap.xml
+          --sitemap-url="https://${{ secrets.MOZORG_CDN_HOSTNAME }}/sitemap.xml"
           --batch="${{ matrix.batch }}"
       - name: Upload output files
         uses: actions/upload-artifact@v3
@@ -52,7 +52,7 @@ jobs:
       - name: Run checker
         run: >
           python bin/run_checks.py
-          --sitemap-url=https://bedrock-prod.gcp.moz.works/sitemap.xml
+          --sitemap-url="https://${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}/sitemap.xml"
           --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload output files
@@ -77,7 +77,7 @@ jobs:
       - name: Run checker
         run: >
           python bin/run_checks.py
-          --sitemap-url=https://bedrock.prod.fr.moz.works/sitemap.xml
+          --sitemap-url="https://${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}/sitemap.xml"
           --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload output files
@@ -106,4 +106,4 @@ jobs:
           name: scan-results
           path: output
       - name: Fail the job if scan-results exists
-        run: python bin/check_for_output.py
+        run: python bin/handle_output.py
