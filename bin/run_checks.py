@@ -32,6 +32,8 @@ from sentry_sdk.integrations.logging import LoggingIntegration
 
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
+ALLOWLIST_FILEPATH = os.environ.get("ALLOWLIST_FILEPATH")
+
 
 if SENTRY_DSN:
     # Set up Sentry logging if we can.
@@ -79,7 +81,7 @@ URL_RETRY_WAIT_SECONDS = 4
 )
 @click.option(
     "--allowlist",
-    default="data/allowlist.yaml",
+    default=ALLOWLIST_FILEPATH,
     help="Path to a YAML-formatted allowlist. If none is provided, the default of data/allowlist.yml will be used",
 )
 def check_for_unexpected_outbound_urls(
