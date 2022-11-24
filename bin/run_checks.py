@@ -94,7 +94,7 @@ def check_for_unexpected_outbound_urls(
     specific_urls = specific_url
 
     if not sitemap_url and not specific_urls:
-        raise Exception("No sitemap or input URLs specified")
+        raise Exception("No sitemap or input URLs specified. Cannot proceed.")
 
     host_url = sitemap_url or specific_urls[0]  # TODO: ensure all specific URLs use the same hostname
     hostname = urlparse(host_url).netloc
