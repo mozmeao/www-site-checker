@@ -10,6 +10,7 @@ env:
   MOZORG_CDN_HOSTNAME: ${{ secrets.MOZORG_CDN_HOSTNAME }}
   MOZORG_US_ORIGIN_HOSTNAME: ${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}
   MOZORG_EU_ORIGIN_HOSTNAME: ${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}
+  ALLOWLIST_FILEPATH: data/allowlist-mozorg.yaml
 
 jobs:
   run_on_cdn:
