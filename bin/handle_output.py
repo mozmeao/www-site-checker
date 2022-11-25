@@ -57,7 +57,7 @@ For each URL mentioned above:
 
 * Does it work?
 * Does it link somewhere appropriate?
-* Could it be replaced with a regex? (If so, close this PR and open a new one where you edit `allowed_outbound_url_regexes` in the allowlist)
+* Could it be replaced with a regex? (If so, close this PR and open a new one where you edit "allowed_outbound_url_regexes" in the allowlist)
 
 Hopefully this PR saves you time and effort.
 
@@ -150,7 +150,10 @@ def _update_allowlist(pr_candidates: List[str]) -> None:
     # 2. Commit it to git on the new branch
     os.system(f'git commit --all -m "Automatic allowlist updates: {timestamp}"')
 
-    # 3. prepare the Pull Request
+    # 3. Push the branch
+    os.system(f"git push origin {branchname}")
+
+    # 4. prepare the Pull Request
     pr_title = PR_TITLE_TEMPLATE.format(timestamp=timestamp)
     pr_body = PR_BODY_TEMPLATE.format(unexpected_urls_bulleted=unexpected_urls_bulleted)
     new_pr_command = f'gh pr create --title "{pr_title}" --body "{pr_body}" --label "bug"'

@@ -1461,3 +1461,5 @@ allowed_outbound_url_literals:
   - https://zulln.se/
   - https://example.com/new-url-one/
   - http://www.example.com/new-url-TWO/
+  - http://www.example.com/new-url-TWO/
+  - https://example.com/new-url-one/
