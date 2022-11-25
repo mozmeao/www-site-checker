@@ -1,12 +1,10 @@
-# The allowlist has a per-site setup, so that links from SiteA do not have to be allowed from SiteB
-
-# The allowlist doesn't _have_ to be grouped/structured, but it should help
-# with quickly getting a sense for what is included here
+# An allowlist applies to all hostnames running that site (eg dev, staging, prod, or CDNed and non-CDNed hosts)
 
 # Remember that any scalar strings featuring escaped characters must be single-quoted in YAML
 
 # !ENV is a custom tag used by https://github.com/mkaranasou/pyaml_env
 
+---
 relevant_hostnames:
   - !ENV ${MOZORG_CDN_HOSTNAME}
   - !ENV ${MOZORG_US_ORIGIN_HOSTNAME}
