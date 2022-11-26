@@ -147,7 +147,7 @@ def _is_valid_url(url: str) -> bool:
 
 
 def _get_hashed_value(iterable: List) -> str:
-    return sha512("-".join(iterable).encode("utf-8")).hexdigest()[:32]
+    return sha512("-".join(sorted(iterable)).encode("utf-8")).hexdigest()[:32]
 
 
 @cache
