@@ -79,17 +79,22 @@ If unexpected URLs are detected, they are output in pairs:
 
 * files starting `flat_` contain a flat list of the unexpected URLs
 * files starting `nested_` show each unexpected URL followed by a tab-indented list of the pages/URLs that feature the unexpected URL.
+* files starting `structured_` show each page in the site with 1..n unexpected URLs, and what those URLs are. These are also used as input for the automatic creation of PRs or Issues.
 
 If the checks were carried out in batches, there may be multiple pairs of output files, with the batch number included in the filename.
 
 Running the checks locally will put files in the `output/` directory.
-Checks run via Github Actions will gave a `scan-results` archive in the artifacts section for the relevant run, which can be downloaded and inspected.
+Checks run via Github Actions will gave a `scan-results` archive in the artifacts section for the relevant run, which can be downloaded and inspected. You must be authenticated to access the artifact.
 
 ## Adding to the default allowlist
 
 If you come across an alert saying there was an unexpected URL detected and you're happy to allow it here's how you make an unexpected URL into an expected one:
 
-### via Github
+### Automatically via Github PR
+
+* This tool can now open PRs against its own allowlists, so in the ideal case all you need to do is review the generated PR and merge it to `main`.
+
+### Manually via Github editing
 
 * Browse to and edit the `data/allowlist.yaml` file
 * Add either a new entry to `allowed_outbound_url_literals` or a new _tested_ regex to `allowed_outbound_url_regexes`
@@ -98,9 +103,9 @@ If you come across an alert saying there was an unexpected URL detected and you'
 ### Locally
 
 * Make a new branch off `main`
-* Edit `data/allowlist.yaml`
+* Edit the allowlist - eg `data/allowlist-mozorg.yaml`
 * Run the checks locally (see above)
-* Push the branch up and raise a PR
+* Push the branch up and raise a PR.
 
 ## Development
 
