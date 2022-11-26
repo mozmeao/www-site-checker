@@ -1,10 +1,3 @@
-# An allowlist applies to all hostnames running that site (eg dev, staging, prod, or CDNed and non-CDNed hosts)
-
-# Remember that any scalar strings featuring escaped characters must be single-quoted in YAML
-
-# !ENV is a custom tag used by https://github.com/mkaranasou/pyaml_env
-
----
 relevant_hostnames:
   - !ENV ${MOZORG_CDN_HOSTNAME}
   - !ENV ${MOZORG_US_ORIGIN_HOSTNAME}
@@ -1466,3 +1459,5 @@ allowed_outbound_url_literals:
   - https://xiph.org/flac/
   - https://xsleaks.dev/
   - https://zulln.se/
+  - http://www.example.com/new-url-TWO/
+  - https://example.com/new-url-one/
