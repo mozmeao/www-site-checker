@@ -64,7 +64,7 @@ For each URL mentioned above:
 
 * Does it work?
 * Does it link somewhere appropriate?
-* Could it be replaced with a regex? (If so, close this PR and open a new one where you edit `allowed_outbound_url_regexes` in the allowlist)
+* Could it be replaced with a regex? (If so, close this PR and open a new one where you edit 'allowed_outbound_url_regexes' in the allowlist)
 
 Hopefully this PR saves you time and effort.
 
