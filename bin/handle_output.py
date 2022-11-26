@@ -8,6 +8,7 @@ import datetime
 import json
 import os
 import re
+import subprocess
 import sys
 from functools import cache
 from hashlib import sha512
@@ -169,18 +170,19 @@ def _matching_github_entity_exists(current_entities: List, candidates: List[str]
     return False
 
 
-def _update_allowlist(pr_candidates: List[str]) -> int:
+def _update_allowlist(pr_candidates: List[str]) -> str:
     """Update the allowlist with the candidate URLs for a PR"""
+    output = ""
+    allowlist_path = os.environ.get("ALLOWLIST_FILEPATH")
+    timestamp = datetime.datetime.utcnow().isoformat(timespec="seconds")
+    unexpected_urls_bulleted = "\n".join([f"* {x}" for x in pr_candidates])
+
     if _matching_github_entity_exists(
         current_entities=_get_current_github_prs(),
         candidates=pr_candidates,
     ):
         _print("Not opening a new PR - existing one for same unexpected URLs exists already")
-        return -1
-
-    allowlist_path = os.environ.get("ALLOWLIST_FILEPATH")
-    timestamp = datetime.datetime.utcnow().isoformat(timespec="seconds")
-    unexpected_urls_bulleted = "\n".join([f"* {x}" for x in pr_candidates])
+        return output
 
     # 0. Make a new branch
     branchname = f'update-{allowlist_path.replace("/","-")}--{timestamp.replace(":","-")}'
@@ -211,11 +213,9 @@ def _update_allowlist(pr_candidates: List[str]) -> int:
     )
     new_pr_command = f'gh pr create --title "{pr_title}" --body "{pr_body}" --label "bug"'
     _print("Opening PR")
-    status = os.system(new_pr_command)
-    if status != 0:
-        _print(f"Problem submitting PR for unexpected URLs - {status}")
-
-    return status
+    output = subprocess.check_output(new_pr_command, stderr=subprocess.STDOUT, shell=True)
+    output = output.decode()
+    return output
 
 
 def _drop_scheme_and_domain(url: str) -> str:
@@ -237,11 +237,11 @@ def _get_containing_pages_for_malformed_url(
     return page_urls
 
 
-def _open_new_issues(issue_candidates: List[str]) -> None:
+def _open_new_issues(issue_candidates: List[str]) -> List[str]:
     """Open GH issues for each unknown non-URL-like found
     as a hyperlink."""
 
-    retval = 0
+    output = []
 
     for problematic_url in issue_candidates:
         # Do we already have an issue open for this problematic URL?
@@ -250,7 +250,6 @@ def _open_new_issues(issue_candidates: List[str]) -> None:
             candidates=[problematic_url],
         ):
             _print(f"Not opening a new Issue - existing one for '{problematic_url}' exists already")
-            retval = -1
             continue
 
         issue_title = ISSUE_TITLE_TEMPLATE.format(
@@ -268,11 +267,10 @@ def _open_new_issues(issue_candidates: List[str]) -> None:
         )
         new_issue_command = f'gh issue create --title "{issue_title}" --body "{issue_body}" --label "bug"'
         _print("Opening new issue")
-        status = os.system(new_issue_command)
-        if status != 0:
-            _print(f"Problem submitting issue for malformed url {problematic_url} - {status}")
+        result = subprocess.check_output(new_issue_command, stderr=subprocess.STDOUT, shell=True)
+        output.append(result.decode())
 
-    return retval
+    return output
 
 
 def raise_prs_or_issues(output_path: str) -> Dict:
@@ -300,13 +298,12 @@ def raise_prs_or_issues(output_path: str) -> Dict:
         else:
             issue_candidates.add(url)
 
-    # We don't get detailed results back out of these
-    _update_allowlist(pr_candidates)
-    _open_new_issues(issue_candidates)
+    pr_url = _update_allowlist(pr_candidates)
+    issue_url_list = _open_new_issues(issue_candidates)
 
     return {
-        "issue_creation": bool(issue_candidates),
-        "pull_request_creation": bool(pr_candidates),
+        "pr_url": pr_url,
+        "issue_urls": issue_url_list,
     }
 
 
@@ -320,6 +317,7 @@ def main():
     message = ""
     output_path = _get_output_path()
     artifact_found = False
+
     # Do we have any artifacts available? If we _don't_, that's good news
     for filename in os.listdir(output_path):
         if UNEXPECTED_URLS_FILENAME_FRAGMENT in filename:
@@ -330,16 +328,24 @@ def main():
         _print("No artifact detected")
         return
 
+    github_urls = raise_prs_or_issues(output_path)
+
+    _action_url = f"{GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}/"
+    message = "Unexpected outbound URL found when scanning site content.\nDetails and output: {}".format(_action_url)
+    if github_urls.get("pr_url"):
+        message += "\nPR to amend allowlist: {}".format(github_urls["pr_url"])
+    if github_urls.get("issue_urls"):
+        message += "Issue(s) opened: \n{}".format("\n".join(github_urls["issue_urls"]))
+    if not github_urls.get("pr_url") and not github_urls.get("issue_urls"):
+        message += "\nNB: No new Issues or PRs opened - there will be existing ones on www-site-checker"
+
+    _print(message)
+
     if SLACK_NOTIFICATION_WEBHOOK_URL:
         slack_client = SlackWebhookClient(SLACK_NOTIFICATION_WEBHOOK_URL)
-        _action_url = f"{GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}/"
-        message = f"Unexpected outbound URL found when scanning page content. See {_action_url} for details and saved report."
         slack_client.send(text=message)
 
-    if artifact_found:
-        raise_prs_or_issues(output_path)
-
-    sys.exit(message)
+    sys.exit(1)
 
 
 if __name__ == "__main__":
