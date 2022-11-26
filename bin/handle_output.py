@@ -135,7 +135,7 @@ def _is_valid_url(url: str) -> bool:
 
 
 def _get_hashed_value(iterable: List) -> str:
-    return sha512("-".join(iterable).encode("utf-8")).hexdigest()
+    return sha512("-".join(sorted(iterable)).encode("utf-8")).hexdigest()
 
 
 def _existing_pr_exists(pr_candidates: List[str]) -> bool:
