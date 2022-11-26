@@ -185,7 +185,7 @@ def _update_allowlist(pr_candidates: List[str]) -> int:
         fingerprint=_get_hashed_value(pr_candidates),
     )
     new_pr_command = f'gh pr create --title "{pr_title}" --body "{pr_body}" --label "bug"'
-    _print(f"Opening PR with {new_pr_command}")
+    _print("Opening PR")
     status = os.system(new_pr_command)
     if status != 0:
         _print(f"Problem submitting PR for unexpected URLs - {status}")
@@ -231,7 +231,7 @@ def _open_new_issues(issue_candidates: List[str]) -> None:
             ),
         )
         new_issue_command = f'gh issue create --title "{issue_title}" --body "{issue_body}" --label "bug"'
-        _print(f"Opening new issue with {new_issue_command}")
+        _print("Opening new issue")
         status = os.system(new_issue_command)
         if status != 0:
             _print(f"Problem submitting issue for malformed url {problematic_url} - {status}")
