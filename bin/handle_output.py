@@ -212,7 +212,7 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     )
     new_pr_command = f'gh pr create --title "{pr_title}" --body "{pr_body}" --label "bug"'
     _print("Opening PR")
-    output = subprocess.check_output(new_pr_command)
+    output = subprocess.check_output(new_pr_command, stderr=subprocess.STDOUT, shell=True)
     _print(output)
 
     return output
