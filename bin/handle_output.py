@@ -9,8 +9,10 @@ import json
 import os
 import re
 import sys
+from hashlib import sha512
 from typing import Dict, List
 
+import requests
 import ruamel.yaml
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
@@ -21,6 +23,11 @@ GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 GITHUB_SERVER_URL = os.environ.get("GITHUB_SERVER_URL", "NO-GITHUB")
 GITHUB_RUN_ID = os.environ.get("GITHUB_RUN_ID", "NO-RUN-NUMBER")
 SLACK_NOTIFICATION_WEBHOOK_URL = os.environ.get("SLACK_NOTIFICATION_WEBHOOK_URL")
+
+SITE_CHECKER_PULL_REQUESTS_API_URL = os.environ.get(
+    "SITE_CHECKER_PULL_REQUESTS_API_URL",
+    "https://api.github.com/repos/mozmeao/www-site-checker/pulls",
+)
 
 UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
 
@@ -62,6 +69,8 @@ For each URL mentioned above:
 Hopefully this PR saves you time and effort.
 
 CheckerBot
+
+Fingerprint: {fingerprint}
 """
 
 RESULTS_CACHE = {}
@@ -125,8 +134,27 @@ def _is_valid_url(url: str) -> bool:
     return False
 
 
-def _update_allowlist(pr_candidates: List[str]) -> None:
+def _get_hashed_value(iterable: List) -> str:
+    return sha512("-".join(iterable)).hexdigest()
+
+
+def _existing_pr_exists(pr_candidates: List[str]) -> bool:
+    """Search all open PRs to see if we have one featuring this hash"""
+    hashed_value = _get_hashed_value(pr_candidates)
+
+    current_prs = json.loads(requests.get(SITE_CHECKER_PULL_REQUESTS_API_URL).content)
+
+    for pr in current_prs:
+        if hashed_value in pr.get("body", ""):
+            return True
+    return False
+
+
+def _update_allowlist(pr_candidates: List[str]) -> int:
     """Update the allowlist with the candidate URLs for a PR"""
+    if _existing_pr_exists(pr_candidates):
+        _print("Not opening a new PR - existing one for same content exists already")
+        return -1
 
     allowlist_path = os.environ.get("ALLOWLIST_FILEPATH")
     timestamp = datetime.datetime.utcnow().isoformat(timespec="seconds")
@@ -150,14 +178,19 @@ def _update_allowlist(pr_candidates: List[str]) -> None:
     # 2. Commit it to git on the new branch
     os.system(f'git commit --all -m "Automatic allowlist updates: {timestamp}"')
 
-    # 3. prepare the Pull Request
+    # 3. Prepare the Pull Request
     pr_title = PR_TITLE_TEMPLATE.format(timestamp=timestamp)
-    pr_body = PR_BODY_TEMPLATE.format(unexpected_urls_bulleted=unexpected_urls_bulleted)
+    pr_body = PR_BODY_TEMPLATE.format(
+        unexpected_urls_bulleted=unexpected_urls_bulleted,
+        fingerprint=_get_hashed_value(pr_candidates),
+    )
     new_pr_command = f'gh pr create --title "{pr_title}" --body "{pr_body}" --label "bug"'
     _print(f"Opening PR with {new_pr_command}")
     status = os.system(new_pr_command)
     if status != 0:
         _print(f"Problem submitting PR for unexpected URLs - {status}")
+
+    return status
 
 
 def _drop_scheme_and_domain(url: str) -> str:

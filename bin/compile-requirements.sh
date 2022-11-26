@@ -9,6 +9,6 @@ set -exo pipefail
 # We need this installed, but we don't want it to live in the main requirements
 # We will need to periodically review this pinning
 
-pip install -U pip==22.0.3
+pip install -U pip
 pip install pip-tools==6.5.0
 pip-compile --generate-hashes --no-header
