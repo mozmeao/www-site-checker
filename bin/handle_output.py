@@ -178,7 +178,10 @@ def _update_allowlist(pr_candidates: List[str]) -> int:
     # 2. Commit it to git on the new branch
     os.system(f'git commit --all -m "Automatic allowlist updates: {timestamp}"')
 
-    # 3. Prepare the Pull Request
+    # 3. Push the branch up to otigin
+    os.system(f"git push origin {branchname}")
+
+    # 4. Prepare the Pull Request
     pr_title = PR_TITLE_TEMPLATE.format(timestamp=timestamp)
     pr_body = PR_BODY_TEMPLATE.format(
         unexpected_urls_bulleted=unexpected_urls_bulleted,
