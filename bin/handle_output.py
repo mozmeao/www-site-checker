@@ -9,6 +9,7 @@ import json
 import os
 import re
 import sys
+from functools import cache
 from hashlib import sha512
 from typing import Dict, List
 
@@ -27,6 +28,10 @@ SLACK_NOTIFICATION_WEBHOOK_URL = os.environ.get("SLACK_NOTIFICATION_WEBHOOK_URL"
 SITE_CHECKER_PULL_REQUESTS_API_URL = os.environ.get(
     "SITE_CHECKER_PULL_REQUESTS_API_URL",
     "https://api.github.com/repos/mozmeao/www-site-checker/pulls",
+)
+SITE_CHECKER_ISSUES_API_URL = os.environ.get(
+    "SITE_CHECKER_ISSUES_API_URL",
+    "https://api.github.com/repos/mozmeao/www-site-checker/issues",
 )
 
 UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
@@ -48,6 +53,10 @@ This cannot be fixed via an automatic pull request - it needs to be checked and 
 Keep on rocking the free Web,
 
 CheckerBot
+
+--
+
+Fingerprint: {fingerprint}
 """
 
 PR_TITLE_TEMPLATE = "Automatic updates to allowlist - {timestamp}"
@@ -70,8 +79,11 @@ Hopefully this PR saves you time and effort.
 
 CheckerBot
 
+--
+
 Fingerprint: {fingerprint}
 """
+
 
 RESULTS_CACHE = {}
 
@@ -135,16 +147,23 @@ def _is_valid_url(url: str) -> bool:
 
 
 def _get_hashed_value(iterable: List) -> str:
-    return sha512("-".join(iterable).encode("utf-8")).hexdigest()
+    return sha512("-".join(iterable).encode("utf-8")).hexdigest()[:32]
 
 
-def _existing_pr_exists(pr_candidates: List[str]) -> bool:
-    """Search all open PRs to see if we have one featuring this hash"""
-    hashed_value = _get_hashed_value(pr_candidates)
+@cache
+def _get_current_github_prs() -> List:
+    return json.loads(requests.get(SITE_CHECKER_PULL_REQUESTS_API_URL).content)
 
-    current_prs = json.loads(requests.get(SITE_CHECKER_PULL_REQUESTS_API_URL).content)
 
-    for pr in current_prs:
+@cache
+def _get_current_github_issues() -> List:
+    return json.loads(requests.get(SITE_CHECKER_ISSUES_API_URL).content)
+
+
+def _matching_github_entity_exists(current_entities: List, candidates: List[str]) -> bool:
+    """Search all entities (open PRs or Issues) to see if we have one featuring this hash"""
+    hashed_value = _get_hashed_value(candidates)
+    for pr in current_entities:
         if hashed_value in pr.get("body", ""):
             return True
     return False
@@ -152,7 +171,10 @@ def _existing_pr_exists(pr_candidates: List[str]) -> bool:
 
 def _update_allowlist(pr_candidates: List[str]) -> int:
     """Update the allowlist with the candidate URLs for a PR"""
-    if _existing_pr_exists(pr_candidates):
+    if _matching_github_entity_exists(
+        current_entities=_get_current_github_prs(),
+        candidates=pr_candidates,
+    ):
         _print("Not opening a new PR - existing one for same content exists already")
         return -1
 
@@ -220,6 +242,13 @@ def _open_new_issues(issue_candidates: List[str]) -> None:
     as a hyperlink."""
 
     for problematic_url in issue_candidates:
+        # Do we already have an issue open for this problematic URL?
+        if _matching_github_entity_exists(
+            current_entities=_get_current_github_issues(),
+            candidates=[problematic_url],
+        ):
+            _print("Not opening a new Issue - existing one for same content exists already")
+            return -1
 
         issue_title = ISSUE_TITLE_TEMPLATE.format(
             malformed_url=problematic_url,
@@ -232,6 +261,7 @@ def _open_new_issues(issue_candidates: List[str]) -> None:
                     redact_domain=True,
                 ),
             ),
+            fingerprint=_get_hashed_value([problematic_url]),
         )
         new_issue_command = f'gh issue create --title "{issue_title}" --body "{issue_body}" --label "bug"'
         _print("Opening new issue")
