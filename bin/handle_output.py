@@ -8,6 +8,7 @@ import datetime
 import json
 import os
 import re
+import subprocess
 import sys
 from functools import cache
 from hashlib import sha512
@@ -169,7 +170,7 @@ def _matching_github_entity_exists(current_entities: List, candidates: List[str]
     return False
 
 
-def _update_allowlist(pr_candidates: List[str]) -> int:
+def _update_allowlist(pr_candidates: List[str]) -> str:
     """Update the allowlist with the candidate URLs for a PR"""
     if _matching_github_entity_exists(
         current_entities=_get_current_github_prs(),
@@ -211,11 +212,10 @@ def _update_allowlist(pr_candidates: List[str]) -> int:
     )
     new_pr_command = f'gh pr create --title "{pr_title}" --body "{pr_body}" --label "bug"'
     _print("Opening PR")
-    status = os.system(new_pr_command)
-    if status != 0:
-        _print(f"Problem submitting PR for unexpected URLs - {status}")
+    output = subprocess.check_output(new_pr_command)
+    _print(output)
 
-    return status
+    return output
 
 
 def _drop_scheme_and_domain(url: str) -> str:
