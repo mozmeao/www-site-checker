@@ -211,7 +211,7 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
         unexpected_urls_bulleted=unexpected_urls_bulleted,
         fingerprint=_get_hashed_value(pr_candidates),
     )
-    new_pr_command = f'gh pr create --title "{pr_title}" --body "{pr_body}" --label "bug"'
+    new_pr_command = f'gh pr create --title "{pr_title}" --body "{pr_body}"'
     _print("Opening PR")
     output = subprocess.check_output(new_pr_command, stderr=subprocess.STDOUT, shell=True)
     output = output.decode()
