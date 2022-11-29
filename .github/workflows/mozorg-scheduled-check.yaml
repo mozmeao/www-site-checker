@@ -16,7 +16,7 @@ jobs:
   run_on_cdn:
     strategy:
       matrix:
-        batch: ["1:4", "2:4", "3:4", "4:4"]
+        batch: ["1:5", "2:5", "3:5", "4:5", "5:5"]
     runs-on: ubuntu-latest
     name: Check main CDN - batch ${{ matrix.batch }}
     steps:
@@ -40,7 +40,7 @@ jobs:
   run_on_us_origin:
     strategy:
       matrix:
-        batch: ["1:4", "2:4", "3:4", "4:4"]
+        batch: ["1:5", "2:5", "3:5", "4:5", "5:5"]
     runs-on: ubuntu-latest
     name: Check US origin server - batch ${{ matrix.batch }}
     steps:
@@ -65,7 +65,7 @@ jobs:
   run_on_eu_origin:
     strategy:
       matrix:
-        batch: ["1:4", "2:4", "3:4", "4:4"]
+        batch: ["1:6", "2:6", "3:6", "4:6", "5:6", "6:6"]
     runs-on: ubuntu-latest
     name: Check EU origin server - batch ${{ matrix.batch }}
     steps:
