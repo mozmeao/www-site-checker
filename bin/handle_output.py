@@ -24,7 +24,10 @@ GITHUB_ACTION = os.environ.get("GITHUB_ACTION", "NO-ACTION-IN-USE")
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 GITHUB_SERVER_URL = os.environ.get("GITHUB_SERVER_URL", "NO-GITHUB")
 GITHUB_RUN_ID = os.environ.get("GITHUB_RUN_ID", "NO-RUN-NUMBER")
-SLACK_NOTIFICATION_WEBHOOK_URL = os.environ.get("SLACK_NOTIFICATION_WEBHOOK_URL")
+
+RELATIVE_URL_REGEX = re.compile(r"^[^\/]+\/[^\/].*$|^\/[^\/].*$")
+
+RESULTS_CACHE = {}
 
 SITE_CHECKER_PULL_REQUESTS_API_URL = os.environ.get(
     "SITE_CHECKER_PULL_REQUESTS_API_URL",
@@ -35,58 +38,25 @@ SITE_CHECKER_ISSUES_API_URL = os.environ.get(
     "https://api.github.com/repos/mozmeao/www-site-checker/issues",
 )
 
+SLACK_NOTIFICATION_WEBHOOK_URL = os.environ.get("SLACK_NOTIFICATION_WEBHOOK_URL")
+
 UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
 
-RELATIVE_URL_REGEX = re.compile(r"^[^\/]+\/[^\/].*$|^\/[^\/].*$")
+
+def _load_template(filepath):
+    filepath = f"templates/{filepath}"
+    if not str(os.getcwd()).endswith("/bin"):
+        filepath = f"bin/{filepath}"
+
+    with open(filepath) as fp:
+        template = fp.read()
+    return template
+
 
 ISSUE_TITLE_TEMPLATE = "Malformed hyperlink detected: {malformed_url}"
-ISSUE_BODY_TEMPLATE = """
-While scanning the site, the following string was found in a href attribute for a hyperlink:
-
-    {malformed_url}
-
-URL of page(s) with this malformed link in it:
-
-    {containing_page_urls}
-
-This cannot be fixed via an automatic pull request - it needs to be checked and remedied.
-
-Keep on rocking the free Web,
-
-CheckerBot
-
---
-
-Fingerprint: {fingerprint}
-"""
-
+ISSUE_BODY_TEMPLATE = _load_template("issue_template.txt")
 PR_TITLE_TEMPLATE = "Automatic updates to allowlist - {timestamp}"
-PR_BODY_TEMPLATE = """
-While scanning the site, the following outbound URLs were detected in the site:
-
-{unexpected_urls_bulleted}
-
-They have been automatically added to the allowlist, as featured in this pull request.
-
-**Please do not just approve and merge without checking**
-
-For each URL mentioned above:
-
-* Does it work?
-* Does it link somewhere appropriate?
-* Could it be replaced with a regex? (If so, close this PR and open a new one where you edit 'allowed_outbound_url_regexes' in the allowlist)
-
-Hopefully this PR saves you time and effort.
-
-CheckerBot
-
---
-
-Fingerprint: {fingerprint}
-"""
-
-
-RESULTS_CACHE = {}
+PR_BODY_TEMPLATE = _load_template("pr_template.txt")
 
 
 # TODO: import from run_checks.py or move to shared code
