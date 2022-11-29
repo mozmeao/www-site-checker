@@ -1,0 +1,17 @@
+While scanning the site, the following string was found in a href attribute for a hyperlink:
+
+    {malformed_url}
+
+URL of page(s) with this malformed link in it:
+
+    {containing_page_urls}
+
+This cannot be fixed via an automatic pull request - it needs to be checked and remedied.
+
+Keep on rocking the free Web,
+
+CheckerBot
+
+--
+
+Fingerprint: {fingerprint}

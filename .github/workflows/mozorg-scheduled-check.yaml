@@ -7,12 +7,16 @@ on:
 env:
   SENTRY_DSN: https://45ad5d426da7480081831c053ca02cac@o1069899.ingest.sentry.io/6249535
   SLACK_NOTIFICATION_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATION_WEBHOOK_URL }}
+  MOZORG_CDN_HOSTNAME: ${{ secrets.MOZORG_CDN_HOSTNAME }}
+  MOZORG_US_ORIGIN_HOSTNAME: ${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}
+  MOZORG_EU_ORIGIN_HOSTNAME: ${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}
+  ALLOWLIST_FILEPATH: data/allowlist-mozorg.yaml
 
 jobs:
   run_on_cdn:
     strategy:
       matrix:
-        batch: ["1:4", "2:4", "3:4", "4:4"]
+        batch: ["1:5", "2:5", "3:5", "4:5", "5:5"]
     runs-on: ubuntu-latest
     name: Check main CDN - batch ${{ matrix.batch }}
     steps:
@@ -25,7 +29,7 @@ jobs:
       - name: Run checker
         run: >
           python bin/run_checks.py
-          --sitemap-url=https://www.mozilla.org/sitemap.xml
+          --sitemap-url="https://${{ secrets.MOZORG_CDN_HOSTNAME }}/sitemap.xml"
           --batch="${{ matrix.batch }}"
       - name: Upload output files
         uses: actions/upload-artifact@v3
@@ -36,7 +40,7 @@ jobs:
   run_on_us_origin:
     strategy:
       matrix:
-        batch: ["1:4", "2:4", "3:4", "4:4"]
+        batch: ["1:5", "2:5", "3:5", "4:5", "5:5"]
     runs-on: ubuntu-latest
     name: Check US origin server - batch ${{ matrix.batch }}
     steps:
@@ -49,7 +53,7 @@ jobs:
       - name: Run checker
         run: >
           python bin/run_checks.py
-          --sitemap-url=https://bedrock-prod.gcp.moz.works/sitemap.xml
+          --sitemap-url="https://${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}/sitemap.xml"
           --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload output files
@@ -61,7 +65,7 @@ jobs:
   run_on_eu_origin:
     strategy:
       matrix:
-        batch: ["1:4", "2:4", "3:4", "4:4"]
+        batch: ["1:6", "2:6", "3:6", "4:6", "5:6", "6:6"]
     runs-on: ubuntu-latest
     name: Check EU origin server - batch ${{ matrix.batch }}
     steps:
@@ -74,7 +78,7 @@ jobs:
       - name: Run checker
         run: >
           python bin/run_checks.py
-          --sitemap-url=https://bedrock.prod.fr.moz.works/sitemap.xml
+          --sitemap-url="https://${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}/sitemap.xml"
           --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload output files
@@ -103,4 +107,4 @@ jobs:
           name: scan-results
           path: output
       - name: Fail the job if scan-results exists
-        run: python bin/check_for_output.py
+        run: python bin/handle_output.py

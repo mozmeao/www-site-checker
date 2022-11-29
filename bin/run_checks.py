@@ -26,12 +26,14 @@ import click
 import requests
 import sentry_sdk
 from bs4 import BeautifulSoup
+from pyaml_env import parse_config
 from requests.exceptions import ChunkedEncodingError, ConnectionError, HTTPError
 from sentry_sdk.integrations.logging import LoggingIntegration
-from yaml import safe_load
 
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
+ALLOWLIST_FILEPATH = os.environ.get("ALLOWLIST_FILEPATH")
+
 
 if SENTRY_DSN:
     # Set up Sentry logging if we can.
@@ -79,7 +81,7 @@ URL_RETRY_WAIT_SECONDS = 4
 )
 @click.option(
     "--allowlist",
-    default="data/allowlist.yaml",
+    default=ALLOWLIST_FILEPATH,
     help="Path to a YAML-formatted allowlist. If none is provided, the default of data/allowlist.yml will be used",
 )
 def check_for_unexpected_outbound_urls(
@@ -94,7 +96,7 @@ def check_for_unexpected_outbound_urls(
     specific_urls = specific_url
 
     if not sitemap_url and not specific_urls:
-        raise Exception("No sitemap or input URLs specified")
+        raise Exception("No sitemap or input URLs specified. Cannot proceed.")
 
     host_url = sitemap_url or specific_urls[0]  # TODO: ensure all specific URLs use the same hostname
     hostname = urlparse(host_url).netloc
@@ -248,15 +250,14 @@ def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
     and warm up any regexes."""
 
     click.echo(f"Seeking an appropriate allowlist in file {allowlist_pathname}")
-    fp = open(_get_allowlist_path(allowlist_pathname))
-    config_data = safe_load(fp)
+    config_data = parse_config(_get_allowlist_path(allowlist_pathname))
 
     site_config = None
 
     # Find the appropriate config for the config node
-    for site_identifier, config_dict in config_data.items():
-        if config_dict.get("hostname") == hostname:
-            site_config = config_dict
+    for candidate_hostname in config_data.get("relevant_hostnames"):
+        if candidate_hostname == hostname:
+            site_config = config_data
             break
 
     if not site_config:
@@ -269,11 +270,11 @@ def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
         # While we're here, turn the list of full strings to match into a set, to optimise lookups later.
         # We _could_ mark this up as sets in YAML, but that gets parsed as {key_x: null, ...} so
         # still would need cleaning up
-        site_config["allowed_outbound_url_literals"] = set(site_config["allowed_outbound_url_literals"])
+        site_config["allowed_outbound_url_literals"] = set(site_config.get("allowed_outbound_url_literals", []))
 
         # Also, let's pre-compile our regexes, at least:
         compiled_regexes = set()
-        for raw_regex in site_config["allowed_outbound_url_regexes"]:
+        for raw_regex in site_config.get("allowed_outbound_url_regexes", []):
             compiled_regexes.add(re.compile(raw_regex))
 
         # Warning: re-using same key but with [slightly] different data than sourced from YAML

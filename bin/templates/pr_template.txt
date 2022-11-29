@@ -1,0 +1,21 @@
+While scanning the site, the following outbound URLs were detected in the site:
+
+{unexpected_urls_bulleted}
+
+They have been automatically added to the allowlist, as featured in this pull request.
+
+**Please do not just approve and merge without checking**
+
+For each URL mentioned above:
+
+* Does it work?
+* Does it link somewhere appropriate?
+* Could it be replaced with a regex? (If so, close this PR and open a new one where you edit 'allowed_outbound_url_regexes' in the allowlist)
+
+Hopefully this PR saves you time and effort.
+
+CheckerBot
+
+--
+
+Fingerprint: {fingerprint}
