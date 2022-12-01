@@ -108,9 +108,6 @@ allowed_outbound_url_literals:
 
   # Malformatted or broken links which need fixing
   - firefox-third-party.html # This is a 404 and we'll probably leave it as such for now
-  - (https://github.com/mozilla/spoke/blob/master/LICENSE)
-  - libro # in /ia/ locale
-  - fluent # in /ia/ locale
 
   # Exceptions allowed as Fluent string overrides
   - https://mozlinks.moztw.org/2014/04/poster.html
