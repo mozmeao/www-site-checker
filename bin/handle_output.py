@@ -27,6 +27,8 @@ GITHUB_RUN_ID = os.environ.get("GITHUB_RUN_ID", "NO-RUN-NUMBER")
 
 RELATIVE_URL_REGEX = re.compile(r"^[^\/]+\/[^\/].*$|^\/[^\/].*$")
 
+MEAO_IDENTITY_EMAIL = os.environ.get("MEAO_IDENTITY_EMAIL")
+
 RESULTS_CACHE = {}
 
 SITE_CHECKER_PULL_REQUESTS_API_URL = os.environ.get(
@@ -155,6 +157,9 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
         return output
 
     # 0. Make a new branch
+    os.system(f'git config --global user.email "{MEAO_IDENTITY_EMAIL}"')
+    os.system('git config --global user.name "www-site-checker bot"')
+
     branchname = f'update-{allowlist_path.replace("/","-")}--{timestamp.replace(":","-")}'
     os.system(f"git switch -c {branchname}")
 
