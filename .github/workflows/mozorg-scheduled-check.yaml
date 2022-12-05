@@ -108,3 +108,5 @@ jobs:
           path: output
       - name: Fail the job if scan-results exists
         run: python bin/handle_output.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
