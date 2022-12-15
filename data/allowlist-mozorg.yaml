@@ -1460,3 +1460,5 @@ allowed_outbound_url_literals:
   - https://crash-stats.allizom.org/
   - https://www.linkedin.com/sharing/share-offsite/?mini=true&url=http://www.mozilla.org/en-US/stories/raising-technology-eq/
   - https://crash-reports.allizom.org/
+  - https://youtu.be/oDifVXtL10w
+  - https://youtu.be/_obdx3VUzuQ
