@@ -1462,3 +1462,4 @@ allowed_outbound_url_literals:
   - https://crash-reports.allizom.org/
   - https://youtu.be/oDifVXtL10w
   - https://youtu.be/_obdx3VUzuQ
+  - https://mastodon.social/@Mozilla
