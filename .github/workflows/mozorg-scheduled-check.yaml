@@ -1,6 +1,8 @@
-name: "Scheduled checks"
+name: "Site scanning"
 on:
   push:
+    branches-ignore:
+      - "dependabot/**"
   schedule:
     - cron: "32 2,14 * * *" # 02:32 UTC and 14:32 every day
 
