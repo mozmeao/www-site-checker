@@ -10,5 +10,5 @@ set -exo pipefail
 # We will need to periodically review this pinning
 
 pip install -U pip
-pip install pip-tools==6.5.0
+pip install pip-tools
 pip-compile --generate-hashes --no-header

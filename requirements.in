@@ -7,7 +7,7 @@ lxml==4.9.1
 pyaml-env==1.2.0
 requests==2.28.1
 ruamel.yaml==0.17.21
-sentry-sdk==1.11.1
+sentry-sdk==1.12.1
 slack_sdk==3.19.4
 
 # test reqs
