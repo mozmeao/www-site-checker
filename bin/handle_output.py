@@ -56,7 +56,7 @@ def _load_template(filepath):
 
 
 MAX_ISSUE_TITLE_URL_LENGTH = 20  # 20 + length of ISSUE_TITLE_TEMPLATE's string == 50
-ISSUE_TITLE_TEMPLATE = "Malformed hyperlink detected: {malformed_url}"
+ISSUE_TITLE_TEMPLATE = "Malformed hyperlink found: {malformed_url}..."
 ISSUE_BODY_TEMPLATE = _load_template("issue_template.txt")
 PR_TITLE_TEMPLATE = "Automatic updates to allowlist - {timestamp}"
 PR_BODY_TEMPLATE = _load_template("pr_template.txt")
