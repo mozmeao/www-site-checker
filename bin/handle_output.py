@@ -311,7 +311,7 @@ def main():
     if github_urls.get("pr_url"):
         message += "\nPR to amend allowlist: {}".format(github_urls["pr_url"])
     if github_urls.get("issue_urls"):
-        message += "Issue(s) opened: \n{}".format("\n".join(github_urls["issue_urls"]))
+        message += "\nIssue(s) opened: \n{}".format("\n".join(github_urls["issue_urls"]))
     if not github_urls.get("pr_url") and not github_urls.get("issue_urls"):
         message += "\nNB: No new Issues or PRs opened - there will be existing ones on www-site-checker"
 
