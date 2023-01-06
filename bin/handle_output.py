@@ -55,6 +55,7 @@ def _load_template(filepath):
     return template
 
 
+MAX_ISSUE_TITLE_URL_LENGTH = 20  # 20 + length of ISSUE_TITLE_TEMPLATE's string == 50
 ISSUE_TITLE_TEMPLATE = "Malformed hyperlink detected: {malformed_url}"
 ISSUE_BODY_TEMPLATE = _load_template("issue_template.txt")
 PR_TITLE_TEMPLATE = "Automatic updates to allowlist - {timestamp}"
@@ -228,7 +229,7 @@ def _open_new_issues(issue_candidates: List[str]) -> List[str]:
             continue
 
         issue_title = ISSUE_TITLE_TEMPLATE.format(
-            malformed_url=problematic_url,
+            malformed_url=problematic_url[:MAX_ISSUE_TITLE_URL_LENGTH],
         )
         issue_body = ISSUE_BODY_TEMPLATE.format(
             malformed_url=problematic_url,
