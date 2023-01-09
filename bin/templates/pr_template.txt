@@ -1,6 +1,6 @@
 While scanning the site, the following outbound URLs were detected in the site:
 
-{unexpected_urls_bulleted}
+{unexpected_urls_structured}
 
 They have been automatically added to the allowlist, as featured in this pull request.
 
