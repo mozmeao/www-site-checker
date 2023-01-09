@@ -143,12 +143,25 @@ def _matching_github_entity_exists(current_entities: List, candidates: List[str]
     return False
 
 
+def _build_structured_url_list_for_pr_description(pr_candidates: List[str]) -> str:
+    """Returns a Markdown-format bulleted list of unexpected URLs with the page(s)
+    that refernce them as nested bulleted lists"""
+
+    output = "\n"
+    for url in pr_candidates:
+        output += f"* {url}\nFound in:\n"
+        for referencing_url in _get_containing_pages_for_url(url, redact_domain=True):
+            output += f"  * {referencing_url}\n"
+    output += "\n"
+    return output
+
+
 def _update_allowlist(pr_candidates: List[str]) -> str:
     """Update the allowlist with the candidate URLs for a PR"""
     output = ""
     allowlist_path = os.environ.get("ALLOWLIST_FILEPATH")
     timestamp = datetime.datetime.utcnow().isoformat(timespec="seconds")
-    unexpected_urls_bulleted = "\n".join([f"* {x}" for x in pr_candidates])
+    unexpected_urls_structured = _build_structured_url_list_for_pr_description(pr_candidates)
 
     if _matching_github_entity_exists(
         current_entities=_get_current_github_prs(),
@@ -184,7 +197,7 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     # 4. Prepare the Pull Request
     pr_title = PR_TITLE_TEMPLATE.format(timestamp=timestamp)
     pr_body = PR_BODY_TEMPLATE.format(
-        unexpected_urls_bulleted=unexpected_urls_bulleted,
+        unexpected_urls_structured=unexpected_urls_structured,
         fingerprint=_get_hashed_value(pr_candidates),
     )
     new_pr_command = f'gh pr create --title "{pr_title}" --body "{pr_body}"'
@@ -198,7 +211,7 @@ def _drop_scheme_and_domain(url: str) -> str:
     return "/" + "/".join(url.split("//")[1].split("/")[1:])
 
 
-def _get_containing_pages_for_malformed_url(
+def _get_containing_pages_for_url(
     malformed_url: str,
     redact_domain: bool,
 ) -> List[str]:
@@ -234,7 +247,7 @@ def _open_new_issues(issue_candidates: List[str]) -> List[str]:
         issue_body = ISSUE_BODY_TEMPLATE.format(
             malformed_url=problematic_url,
             containing_page_urls="\n".join(
-                _get_containing_pages_for_malformed_url(
+                _get_containing_pages_for_url(
                     problematic_url,
                     redact_domain=True,
                 ),

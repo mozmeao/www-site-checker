@@ -8,3 +8,35 @@ allowed_outbound_url_regexes:
   - '^(\/|#).*' # Relative URLs and in-page anchors are OK
 allowed_outbound_url_literals:
   - "https://other-example.com/two"
+  - https://www.instagram.com/mozilla/
+  - https://monitor.firefox.com/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=products
+  - https://www.tiktok.com/@mozilla
+  - http://www.example.com/new-url-TWO/
+  - https://commonvoice.mozilla.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=innovation
+  - https://www.linkedin.com/company/mozilla-corporation/
+  - https://open.spotify.com/show/0vT7LJMeVDxyQ2ZamHKu08?si=_uDRD6bRR_6M5YZyISGXgA
+  - https://hubs.mozilla.com/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=innovation
+  - https://relay.firefox.com/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=products
+  - https://firefox-source-docs.mozilla.org/devtools-user/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=footer&utm_content=developers
+  - https://www.instagram.com/firefox/
+  - https://support.mozilla.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=footer&utm_content=support
+  - https://bugzilla.mozilla.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=footer&utm_content=support
+  - https://twitter.com/mozilla
+  - https://donate.mozilla.org?presets=60,30,20,10&amount=30&utm_source=mozilla.org&utm_medium=referral&utm_content=company&currency=usd&utm_campaign=footer
+  - https://example.com/new-url-one/
+  - https://getpocket.com/firefox_learnmore/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=products
+  - https://foundation.mozilla.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=who-we-are
+  - https://www.mozilla.org/
+  - https://labs.mozilla.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=innovation
+  - https://developer.mozilla.org/en-US/plus?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=products
+  - https://fpn.firefox.com/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=products
+  - https://blog.mozilla.org/press/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=footer&utm_content=company
+  - https://mastodon.social/@Mozilla
+  - https://foundation.mozilla.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=footer
+  - https://www.youtube.com/user/firefoxchannel
+  - https://blog.mozilla.org/firefox/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=firefox
+  - https://blog.mozilla.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=who-we-are
+  - https://blog.mozilla.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=footer&utm_content=company
+  - https://developer.mozilla.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=innovation
+  - https://twitter.com/firefox
+  - https://mozilla.design/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=footer&utm_content=resources
