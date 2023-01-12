@@ -29,6 +29,8 @@ jobs:
           python-version: "3.10"
       - name: Install requirements
         run: pip install -r requirements.txt
+      - name: Download dictionaries
+        run: ./bin/update-dictionaries.sh
       - name: Run checker
         run: >
           python bin/run_checks.py
@@ -53,6 +55,8 @@ jobs:
           python-version: "3.10"
       - name: Install requirements
         run: pip install -r requirements.txt
+      - name: Download dictionaries
+        run: ./bin/update-dictionaries.sh
       - name: Run checker
         run: >
           python bin/run_checks.py
@@ -78,6 +82,8 @@ jobs:
           python-version: "3.10"
       - name: Install requirements
         run: pip install -r requirements.txt
+      - name: Download dictionaries
+        run: ./bin/update-dictionaries.sh
       - name: Run checker
         run: >
           python bin/run_checks.py
