@@ -8,7 +8,7 @@
 repos:
   # Note: hooks that add content must run before ones which check formatting, lint, etc
   - repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.1.10
+    rev: v1.3.0
     hooks:
       - id: insert-license
         language: python
@@ -24,13 +24,13 @@ repos:
           - --license-filepath
           - license_header/mpl2_header.txt
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0 # Use the ref you want to point at
+    rev: v4.3.0 # Use the ref you want to point at
     hooks:
       - id: trailing-whitespace
       - id: debug-statements
       # - id: check-yaml  # can't be used with pyyaml-env package's !ENV (yet?)
   - repo: https://github.com/psf/black
-    rev: 22.3.0
+    rev: 22.6.0
     hooks:
       - id: black
         language_version: python3
@@ -38,8 +38,8 @@ repos:
     rev: 5.10.1
     hooks:
       - id: isort
-  - repo: https://gitlab.com/pycqa/flake8
-    rev: 3.9.2
+  - repo: https://github.com/pycqa/flake8
+    rev: 5.0.4
     hooks:
       - id: flake8
   #        TODO Add this and fix issues found
