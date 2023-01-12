@@ -4,26 +4,31 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+
 import datetime
 import json
+import logging
 import os
 import re
 import subprocess
 import sys
 from functools import cache
 from hashlib import sha512
-from typing import Dict, List
+from typing import Dict, List, Set, Union
 
 import requests
 import ruamel.yaml
+import sentry_sdk
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
+from sentry_sdk.integrations.logging import LoggingIntegration
 from slack_sdk.webhook import WebhookClient as SlackWebhookClient
 
 GITHUB_ACTION = os.environ.get("GITHUB_ACTION", "NO-ACTION-IN-USE")
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 GITHUB_SERVER_URL = os.environ.get("GITHUB_SERVER_URL", "NO-GITHUB")
 GITHUB_RUN_ID = os.environ.get("GITHUB_RUN_ID", "NO-RUN-NUMBER")
+GH_ISSUE_BODY_MAX_LENGTH = 65536
 
 RELATIVE_URL_REGEX = re.compile(r"^[^\/]+\/[^\/].*$|^\/[^\/].*$")
 
@@ -41,8 +46,20 @@ SITE_CHECKER_ISSUES_API_URL = os.environ.get(
 )
 
 SLACK_NOTIFICATION_WEBHOOK_URL = os.environ.get("SLACK_NOTIFICATION_WEBHOOK_URL")
+SENTRY_DSN = os.environ.get("SENTRY_DSN")
+if SENTRY_DSN:
+    # Set up Sentry logging if we can.
+    sentry_logging = LoggingIntegration(
+        level=logging.DEBUG,  # Capture debug and above as breadcrumbs
+        event_level=logging.ERROR,  # Send errors and above as events
+    )
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[sentry_logging],
+    )
 
 UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
+UNKNOWN_WORDS_FILENAME_FRAGMENT = "unknown_words_for"
 
 
 def _load_template(filepath):
@@ -55,11 +72,15 @@ def _load_template(filepath):
     return template
 
 
-MAX_ISSUE_TITLE_URL_LENGTH = 20  # 20 + length of ISSUE_TITLE_TEMPLATE's string == 50
-ISSUE_TITLE_TEMPLATE = "Malformed hyperlink found: {malformed_url}..."
-ISSUE_BODY_TEMPLATE = _load_template("issue_template.txt")
-PR_TITLE_TEMPLATE = "Automatic updates to allowlist - {timestamp}"
-PR_BODY_TEMPLATE = _load_template("pr_template.txt")
+MAX_ISSUE_TITLE_URL_LENGTH__MALFORMED_URL = 20  # 20 + length of ISSUE_TITLE_TEMPLATE__MALFORMED_URL's string == 50
+ISSUE_TITLE_TEMPLATE__MALFORMED_URL = "Malformed hyperlink found: {malformed_url}..."
+ISSUE_TITLE_TEMPLATE__UNKNOWN_WORDS = "Unexpected words found during spellcheck sweep"
+
+ISSUE_BODY_TEMPLATE__MALFORMED_URL = _load_template("malformed_url_issue_template.txt")
+ISSUE_BODY_TEMPLATE__UNKNOWN_WORDS = _load_template("unknown_words_issue_template.txt")
+
+PR_TITLE_TEMPLATE_NEW_URLS = "Automatic updates to allowlist - {timestamp}"
+PR_BODY_TEMPLATE_NEW_URLS = _load_template("new_urls_pr_template.txt")
 
 
 # TODO: import from run_checks.py or move to shared code
@@ -90,19 +111,45 @@ def _load_results_json(filename: str) -> dict:
     return data
 
 
-def _assemble_results(output_path: str) -> set:
-    """Pull together all the results from the run, de-duplicating where possible"""
+def _assemble_results(
+    output_path: str,
+    urls: bool = False,
+    words: bool = False,
+    redact_domain_for_unknown_words: bool = True,
+) -> Union[Set, Dict]:
+    """Pull together all the results from the run, de-duplicating if appropriate.
+    Will return either a set of URLs or a dict mapping URLs to words, depending on what's specified"""
+
+    if (not urls and not words) or (urls and words):
+        raise Exception("_assemble_results() called with `urls` or `words` flags inappropriately set")
 
     output = set()
-    unexpected_url_data = {}
 
-    # assume we have multiple output files, all scanning different sources of the website data
+    _unexpected_url_data = {}
+    _unexpected_words_data = {}
+
+    # Assume we have multiple output files, all scanning different
+    # sources of the website data and/or in small batches
     for filename in os.listdir(output_path):
         if filename.endswith(".json"):
-            unexpected_url_data.update(_load_results_json(os.path.join(output_path, filename)))
+            if urls and filename.startswith("unexpected_urls_for"):
+                _unexpected_url_data.update(_load_results_json(os.path.join(output_path, filename)))
+            elif words and filename.startswith("unknown_words_for"):
+                results = _load_results_json(os.path.join(output_path, filename))
+                if redact_domain_for_unknown_words:
+                    # drop the domain from the URL keys
+                    dict_keys = list(results.keys())
+                    for url in dict_keys:
+                        path = _drop_scheme_and_domain(url)
+                        results[path] = results.pop(url)
+                _unexpected_words_data.update(results)
 
-    for hostname in unexpected_url_data.keys():
-        output.update(set(unexpected_url_data[hostname]))
+    if urls:
+        for hostname in _unexpected_url_data.keys():
+            output.update(set(_unexpected_url_data[hostname]))
+
+    if words:
+        output = _unexpected_words_data
 
     return output
 
@@ -137,8 +184,8 @@ def _get_current_github_issues() -> List:
 def _matching_github_entity_exists(current_entities: List, candidates: List[str]) -> bool:
     """Search all entities (open PRs or Issues) to see if we have one featuring this hash"""
     hashed_value = _get_hashed_value(candidates)
-    for pr in current_entities:
-        if hashed_value in pr.get("body", ""):
+    for entity in current_entities:
+        if hashed_value in entity.get("body", ""):
             return True
     return False
 
@@ -156,12 +203,15 @@ def _build_structured_url_list_for_pr_description(pr_candidates: List[str]) -> s
     return output
 
 
-def _update_allowlist(pr_candidates: List[str]) -> str:
+def _update_allowlist_with_new_urls(pr_candidates: List[str]) -> str:
     """Update the allowlist with the candidate URLs for a PR"""
     output = ""
     allowlist_path = os.environ.get("ALLOWLIST_FILEPATH")
     timestamp = datetime.datetime.utcnow().isoformat(timespec="seconds")
     unexpected_urls_structured = _build_structured_url_list_for_pr_description(pr_candidates)
+
+    if not pr_candidates:
+        return ""
 
     if _matching_github_entity_exists(
         current_entities=_get_current_github_prs(),
@@ -195,8 +245,8 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     os.system(f"git push origin {branchname}")
 
     # 4. Prepare the Pull Request
-    pr_title = PR_TITLE_TEMPLATE.format(timestamp=timestamp)
-    pr_body = PR_BODY_TEMPLATE.format(
+    pr_title = PR_TITLE_TEMPLATE_NEW_URLS.format(timestamp=timestamp)
+    pr_body = PR_BODY_TEMPLATE_NEW_URLS.format(
         unexpected_urls_structured=unexpected_urls_structured,
         fingerprint=_get_hashed_value(pr_candidates),
     )
@@ -226,9 +276,12 @@ def _get_containing_pages_for_url(
     return page_urls
 
 
-def _open_new_issues(issue_candidates: List[str]) -> List[str]:
+def _open_new_issues_for_malformed_urls(issue_candidates: List[str]) -> List[str]:
     """Open GH issues for each unknown non-URL-like found
     as a hyperlink."""
+
+    if not issue_candidates:
+        return []
 
     output = []
 
@@ -241,10 +294,10 @@ def _open_new_issues(issue_candidates: List[str]) -> List[str]:
             _print(f"Not opening a new Issue - existing one for '{problematic_url}' exists already")
             continue
 
-        issue_title = ISSUE_TITLE_TEMPLATE.format(
-            malformed_url=problematic_url[:MAX_ISSUE_TITLE_URL_LENGTH],
+        issue_title = ISSUE_TITLE_TEMPLATE__MALFORMED_URL.format(
+            malformed_url=problematic_url[:MAX_ISSUE_TITLE_URL_LENGTH__MALFORMED_URL],
         )
-        issue_body = ISSUE_BODY_TEMPLATE.format(
+        issue_body = ISSUE_BODY_TEMPLATE__MALFORMED_URL.format(
             malformed_url=problematic_url,
             containing_page_urls="\n".join(
                 _get_containing_pages_for_url(
@@ -262,37 +315,90 @@ def _open_new_issues(issue_candidates: List[str]) -> List[str]:
     return output
 
 
+def _get_structured_unknown_words(unknown_words: Dict) -> str:
+
+    output = []
+    for page_url, words in unknown_words.items():
+        output.append(page_url)
+        for word in words:
+            output.append(f"* {word}")
+        output.append("")
+
+    return "\n".join(output)
+
+
+def _open_new_issue_for_unknown_words(unknown_words: List[str]) -> str:
+    """Open a GH issue for all the unknown words in the site"""
+
+    output = []
+
+    _unknown_words_for_fingerprint = [f"{k}:{v}" for k, v in unknown_words.items()]
+
+    # Do we already have an issue open for misspellings?
+    if _matching_github_entity_exists(
+        current_entities=_get_current_github_issues(),
+        candidates=_unknown_words_for_fingerprint,
+    ):
+        _print("Not opening a new Issue - existing one for these unknown words exists already")
+        return output
+
+    issue_title = ISSUE_TITLE_TEMPLATE__UNKNOWN_WORDS
+    issue_body = ISSUE_BODY_TEMPLATE__UNKNOWN_WORDS.format(
+        unknown_words__formatted=_get_structured_unknown_words(unknown_words),
+        fingerprint=_get_hashed_value(_unknown_words_for_fingerprint),
+    )
+    new_issue_command = f'gh issue create --title "{issue_title}" --body "{issue_body}" --label "bug"'
+    if len(new_issue_command) >= GH_ISSUE_BODY_MAX_LENGTH:
+        message = "Issue-creation command was too large - see artifacts zip as there may be a lot of unknown words"
+        if SENTRY_DSN:
+            sentry_sdk.capture_message(
+                message=message,
+                level="error",
+            )
+        raise Exception(message)
+
+    _print("Opening new issue for unknown words")
+    result = subprocess.check_output(new_issue_command, stderr=subprocess.STDOUT, shell=True)
+    output = result.decode()
+
+    return output
+
+
 def raise_prs_or_issues(output_path: str) -> Dict:
     """Raises a PR, if possible, from the results stored in the output path.
 
-    Not all results will be able to be turned into a PR, but we'll try, based
-    on these rules:
+    Not all results for unexpected URLs will be able to be turned into a PR,
+    but we'll try, based on these rules:
 
     1. If the detected new string is definitely a URL (either absolute or
        relative), we add it to a PR to update the allowlist
     2. If it isn't a URL, we show a message (Slack / Sentry) and open a new
        GH Issue, indicating malformed content
 
+    For all unexpected words, we'll just open an Issue.
+
     Returns a dictionary with whether or not PRs and Issues were opened
     """
 
-    unexpected_urls = _assemble_results(output_path)
+    unexpected_urls = _assemble_results(output_path, urls=True)
+    unexpected_words = _assemble_results(output_path, words=True)
 
-    issue_candidates = set()
-    pr_candidates = set()
-
+    url_issue_candidates = set()
+    url_pr_candidates = set()
     for url in unexpected_urls:
         if _is_valid_url(url):
-            pr_candidates.add(url)
+            url_pr_candidates.add(url)
         else:
-            issue_candidates.add(url)
+            url_issue_candidates.add(url)
+    allowlist_pr_url = _update_allowlist_with_new_urls(url_pr_candidates)
+    allowlist_issue_url_list = _open_new_issues_for_malformed_urls(url_issue_candidates)
 
-    pr_url = _update_allowlist(pr_candidates)
-    issue_url_list = _open_new_issues(issue_candidates)
+    unknown_words_issue_url = _open_new_issue_for_unknown_words(unexpected_words)
 
     return {
-        "pr_url": pr_url,
-        "issue_urls": issue_url_list,
+        "allowlist_pr_url": allowlist_pr_url,
+        "allowlist_issues_urls": allowlist_issue_url_list,
+        "unknown_words_issue_url": unknown_words_issue_url,
     }
 
 
@@ -309,7 +415,7 @@ def main():
 
     # Do we have any artifacts available? If we _don't_, that's good news
     for filename in os.listdir(output_path):
-        if UNEXPECTED_URLS_FILENAME_FRAGMENT in filename:
+        if UNEXPECTED_URLS_FILENAME_FRAGMENT in filename or UNKNOWN_WORDS_FILENAME_FRAGMENT in filename:
             artifact_found = True
             break
 
@@ -319,13 +425,20 @@ def main():
 
     github_urls = raise_prs_or_issues(output_path)
 
+    output_message_lookup = {
+        "allowlist_pr_url": "PR to amend allowlist: {}".format(github_urls["allowlist_pr_url"]),
+        "allowlist_issues_urls": "Issue(s) opened: \n{}".format("\n".join(github_urls["allowlist_issues_urls"])),
+        "unknown_words_issue_url": "Issue opened: \n{}".format(github_urls["unknown_words_issue_url"]),
+    }
+
     _action_url = f"{GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}/"
-    message = "Unexpected outbound URL found when scanning site content.\nDetails and output: {}".format(_action_url)
-    if github_urls.get("pr_url"):
-        message += "\nPR to amend allowlist: {}".format(github_urls["pr_url"])
-    if github_urls.get("issue_urls"):
-        message += "\nIssue(s) opened: \n{}".format("\n".join(github_urls["issue_urls"]))
-    if not github_urls.get("pr_url") and not github_urls.get("issue_urls"):
+    message = "Unexpected content found when scanning site content.\nDetails and output: {}".format(_action_url)
+
+    for result_key, result_values in github_urls.items():
+        if result_values:
+            message += "\n" + output_message_lookup[result_key]
+
+    if not any(github_urls.values()):
         message += "\nNB: No new Issues or PRs opened - there will be existing ones on www-site-checker"
 
     _print(message)
