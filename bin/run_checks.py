@@ -51,6 +51,11 @@ UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
 URL_RETRY_LIMIT = 3
 URL_RETRY_WAIT_SECONDS = 4
 
+# Run a simple cache of the pages we've already pulled down, to avoid getting them twice
+# Size wise, ballparking at 25Kb per page, with ~3500 enpages => 85MB
+PAGE_CONTENT_LOOKUP = dict()
+LOCALES_TO_CACHE = ("en-US",)
+
 
 @click.command()
 @click.option(
@@ -84,7 +89,7 @@ URL_RETRY_WAIT_SECONDS = 4
     default=ALLOWLIST_FILEPATH,
     help="Path to a YAML-formatted allowlist. If none is provided, the default of data/allowlist.yml will be used",
 )
-def check_for_unexpected_outbound_urls(
+def run_checks(
     sitemap_url: str,
     maintain_hostname: bool,
     specific_url: Iterable,
@@ -101,7 +106,7 @@ def check_for_unexpected_outbound_urls(
     host_url = sitemap_url or specific_urls[0]  # TODO: ensure all specific URLs use the same hostname
     hostname = urlparse(host_url).netloc
 
-    config = _get_allowlist_config(
+    allowlist_config = _get_allowlist_config(
         hostname,
         allowlist_pathname=allowlist,
     )
@@ -116,7 +121,22 @@ def check_for_unexpected_outbound_urls(
     if batch != DEFAULT_BATCH__NOOP:
         urls_to_check = _get_batched_urls(urls_to_check, batch)
 
-    results = _check_pages(urls_to_check, config)
+    check_for_unexpected_urls(
+        urls_to_check=urls_to_check,
+        allowlist_config=allowlist_config,
+        hostname=hostname,
+        batch=batch,
+    )
+
+
+def check_for_unexpected_urls(
+    urls_to_check: List[str],
+    allowlist_config: dict,
+    hostname: str,
+    batch: str,
+) -> None:
+    click.echo("Checking pages for unexpected URLs")
+    results = _check_pages_for_outbound_links(urls_to_check, allowlist_config)
 
     if results:
         click.echo(f"Unexpected outbound URLs found on {hostname}!")
@@ -149,10 +169,18 @@ def _get_batched_urls(urls_to_check: List[str], batch: str) -> List[str]:
     return urls_to_check[start_index:end_index]
 
 
+def _page_content_is_cacheable(url):
+    for locale in LOCALES_TO_CACHE:
+        if f"/{locale}/" in url:
+            return True
+    return False
+
+
 def _get_url_with_retry(
     url: str,
     try_count: int = 0,
     limit: int = URL_RETRY_LIMIT,
+    cache_html: bool = True,
 ) -> requests.Response:
     exceptions_to_retry = (
         ChunkedEncodingError,
@@ -160,8 +188,15 @@ def _get_url_with_retry(
         HTTPError,  # GOTCHA? This might be too permissive because many Requests exceptions inherit it
     )
     try:
-        resp = requests.get(url)
-        resp.raise_for_status()
+        resp = PAGE_CONTENT_LOOKUP.get(url)
+        if resp:
+            click.echo(f"Getting {url} from cache")
+        else:
+            click.echo(f"Pulling down {url}")
+            resp = requests.get(url)
+            resp.raise_for_status()
+            if cache_html and _page_content_is_cacheable(url):
+                PAGE_CONTENT_LOOKUP[url] = resp
         return resp
 
     except exceptions_to_retry as re:
@@ -254,7 +289,7 @@ def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
 
     site_config = None
 
-    # Find the appropriate config for the config node
+    # Find the appropriate allowlist for the allowlist_config node
     for candidate_hostname in config_data.get("relevant_hostnames"):
         if candidate_hostname == hostname:
             site_config = config_data
@@ -282,7 +317,7 @@ def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
     return site_config
 
 
-def _verify_url_allowed(url: str, config: dict) -> bool:
+def _verify_url_allowed(url: str, allowlist_config: dict) -> bool:
 
     # Quickest check first - set membership.
 
@@ -292,11 +327,11 @@ def _verify_url_allowed(url: str, config: dict) -> bool:
     else:
         _url = url
 
-    if _url in config["allowed_outbound_url_literals"]:
+    if _url in allowlist_config["allowed_outbound_url_literals"]:
         return True
 
     # If no luck, try our regex rules
-    for compiled_regex in config["allowed_outbound_url_regexes"]:
+    for compiled_regex in allowlist_config["allowed_outbound_url_regexes"]:
         if compiled_regex.match(url):  # NB: testing the original, untweaked URL
             return True
 
@@ -304,16 +339,15 @@ def _verify_url_allowed(url: str, config: dict) -> bool:
     return False
 
 
-def _check_pages(urls: List[str], config: Dict) -> Dict:
+def _check_pages_for_outbound_links(urls: List[str], allowlist_config: Dict) -> Dict:
 
     unlisted_outbound_urls = defaultdict(set)
     # oubound url is they key, a set of pages it's on is the value
 
     for page_url in urls:
-        click.echo(f"Pulling down {page_url}")
         resp = _get_url_with_retry(page_url)
-        content = resp.text
-        soup = BeautifulSoup(content, "html5lib")
+        html_content = resp.text
+        soup = BeautifulSoup(html_content, "html5lib")
         anchor_tags = soup.find_all("a")
         script_tags = soup.find_all("script")
         link_tags = soup.find_all("link")
@@ -325,7 +359,7 @@ def _check_pages(urls: List[str], config: Dict) -> Dict:
         ]:
             for node in nodelist:
                 _url = node.attrs.get("href")
-                if _url and not _verify_url_allowed(_url, config):
+                if _url and not _verify_url_allowed(_url, allowlist_config):
                     unlisted_outbound_urls[_url].add(page_url)
 
         # TODO: OPTIMISE THE ABOVE
@@ -426,4 +460,4 @@ def _update_hostname(origin_hostname_with_scheme: str, urls: List[str]) -> List[
 
 
 if __name__ == "__main__":
-    check_for_unexpected_outbound_urls()
+    run_checks()
