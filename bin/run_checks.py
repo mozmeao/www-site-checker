@@ -29,11 +29,11 @@ from bs4 import BeautifulSoup
 from pyaml_env import parse_config
 from requests.exceptions import ChunkedEncodingError, ConnectionError, HTTPError
 from sentry_sdk.integrations.logging import LoggingIntegration
+from spellchecker import SpellChecker
 
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
 ALLOWLIST_FILEPATH = os.environ.get("ALLOWLIST_FILEPATH")
-
 
 if SENTRY_DSN:
     # Set up Sentry logging if we can.
@@ -48,13 +48,306 @@ if SENTRY_DSN:
 
 DEFAULT_BATCH__NOOP = "1:1"  # By default treat all URLs as a single batch
 UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
+UNKNOWN_WORDS_FILENAME_FRAGMENT = "unknown_words_for"
 URL_RETRY_LIMIT = 3
 URL_RETRY_WAIT_SECONDS = 4
 
 # Run a simple cache of the pages we've already pulled down, to avoid getting them twice
 # Size wise, ballparking at 25Kb per page, with ~3500 enpages => 85MB
 PAGE_CONTENT_LOOKUP = dict()
+
 LOCALES_TO_CACHE = ("en-US",)
+LOCALES_FOR_SPELLCHECK = LOCALES_TO_CACHE
+CUSTOM_DICTIONARIES = {
+    "en-US": {
+        # "@firefox",
+        # "@firefoxchannel",
+        # "@mozilla",
+        "acholi",
+        "akrotiri",
+        "albania",
+        "andorra",
+        "angola",
+        "anguilla",
+        "antigua",
+        "aragonés",
+        "armenia",
+        "aruba",
+        "ashmore",
+        "asturianu",
+        "avañe'ẽ",
+        "azerbaijan",
+        "azərbaycanca",
+        "bahasa",
+        "bahrain",
+        "bangladesh",
+        "barbados",
+        "barbuda",
+        "barthélemy",
+        "bassas",
+        "belarus",
+        "benin",
+        "bhutan",
+        "bissau",
+        "bokmål",
+        "bosanski",
+        "bosnia",
+        "botswana",
+        "bouvet",
+        "brasil",
+        "brazzaville",
+        "brezhoneg",
+        "browser's",
+        "browsers",
+        "brunei",
+        "bulgaria",
+        "burkina",
+        "burundi",
+        "caicos",
+        "caledonia",
+        "cambodia",
+        "cameroon",
+        "català",
+        "čeština",
+        "clipperton",
+        "cocos",
+        "comoros",
+        "côte",
+        "croatia",
+        "cunha",
+        "curaçao",
+        "customizable",
+        "cymraeg",
+        "czechia",
+        "d'ivoire",
+        "dansk",
+        "deutsch",
+        "dhekelia",
+        "djibouti",
+        "dolnoserbšćina",
+        "dominica",
+        "eesti",
+        "eritrea",
+        "españa",
+        "español",
+        "esperanto",
+        "estonia",
+        "eswatini",
+        "europeu",
+        "euskara",
+        "falkland",
+        "faroe",
+        "faso",
+        "fiji",
+        "firefox",
+        "français",
+        "frysk",
+        "fulfulde",
+        "futuna",
+        "gabon",
+        "gaeilge",
+        "gàidhlig",
+        "galego",
+        "gambia",
+        "ghana",
+        "gibraltar",
+        "glorioso",
+        "greenland",
+        "grenada",
+        "grenadines",
+        "guadeloupe",
+        "guam",
+        "guatemala",
+        "guernsey",
+        "guiana",
+        "guyana",
+        "herzegovina",
+        "hornjoserbsce",
+        "howland",
+        "hrvatski",
+        "html",
+        "interlingua",
+        "ios",
+        "isixhosa",
+        "islas",
+        "íslenska",
+        "johnston",
+        "kaqchikel",
+        "kazakhstan",
+        "kingman",
+        "kinshasa",
+        "kiribati",
+        "kitts",
+        "kosovo",
+        "kyrgyzstan",
+        "lanka",
+        "laos",
+        "later!",
+        "latgaliešu",
+        "latvia",
+        "latviešu",
+        "lengadocian",
+        "lesotho",
+        "leste",
+        "liberia",
+        "liechtenstein",
+        "lietuvių",
+        "ligure",
+        "linkedin",
+        "linux",
+        "lithuania",
+        "luxembourg",
+        "maarten",
+        "macau",
+        "macedonia",
+        "magyar",
+        "malawi",
+        "mali",
+        "malta",
+        "malvinas",
+        "martinique",
+        "mauritania",
+        "mauritius",
+        "mayen",
+        "mayotte",
+        "mcdonald",
+        "mdn",
+        "melayu",
+        "méxico",
+        "micronesia",
+        "miquelon",
+        "moldova",
+        "mongolia",
+        "montenegro",
+        "montserrat",
+        "mozambique",
+        "mozilla.org",
+        "mozilla",
+        "nahuatl",
+        "namibia",
+        "nauru",
+        "navassa",
+        "nederlands",
+        "nevis",
+        "nicaragua",
+        "niger",
+        "nigeria",
+        "niue",
+        "norsk",
+        "norte",
+        "nynorsk",
+        "occitan",
+        "oʻzbek",
+        "oman",
+        "palau",
+        "palmyra",
+        "papua",
+        "paracel",
+        "pdfs",
+        "pitcairn",
+        "polski",
+        "polynesia",
+        "português",
+        "príncipe",
+        "puebla",
+        "pulaar",
+        "qatar",
+        "réunion",
+        "rica",
+        "română",
+        "romania",
+        "rumantsch",
+        "rwanda",
+        "samoa",
+        "são",
+        "senegal",
+        "serbia",
+        "seychelles",
+        "shqip",
+        "sint",
+        "slovakia",
+        "slovenčina",
+        "slovenia",
+        "slovenščina",
+        "somalia",
+        "soŋay",
+        "spotify",
+        "spratly",
+        "sudan",
+        "suomi",
+        "suriname",
+        "svalbard",
+        "svenska",
+        "tagalog",
+        "taiwan",
+        "tajikistan",
+        "tanzania",
+        "taqbaylit",
+        "thanks!",
+        "tiếng",
+        "tiktok",
+        "tili",
+        "timor",
+        "tobago",
+        "tokelau",
+        "tomé",
+        "triqui",
+        "tromelin",
+        "tunisia",
+        "türkçe",
+        "turkmenistan",
+        "tuvalu",
+        "u.s",
+        "uganda",
+        "uruguay",
+        "uzbekistan",
+        "valoda",
+        "vanuatu",
+        "việt",
+        "vpn",
+        "wallis",
+        "zambia",
+        "zimbabwe",
+        "ελληνικά",
+        "беларуская",
+        "български",
+        "қазақ",
+        "македонски",
+        "русский",
+        "српски",
+        "українська",
+        "ქართული",
+        "հայերեն",
+        "עברית",
+        "اُردو",
+        "سرائیکی",
+        "عربي",
+        "فارسی",
+        "नेपाली",
+        "भारत",
+        "मराठी",
+        "हिन्दी",
+        "বাংলা",
+        "ਪੰਜਾਬੀ",
+        "ਭਾਰਤ",
+        "ગુજરાતી",
+        "ભારત",
+        "தமிழ்",
+        "తెలుగు",
+        "ಕನ್ನಡ",
+        "മലയാളം",
+        "සිංහල",
+        "ไทย",
+        "မြန်မာဘာသာ",
+        "ខ្មែរ",
+        "한국어",
+        "中文",
+        "日本語",
+        "正體中文",
+        "简体",
+        "繁體",
+    },
+}
 
 
 @click.command()
@@ -127,6 +420,12 @@ def run_checks(
         hostname=hostname,
         batch=batch,
     )
+    check_spelling(
+        urls_to_check=urls_to_check,
+        allowlist_config=allowlist_config,
+        hostname=hostname,
+        batch=batch,
+    )
 
 
 def check_for_unexpected_urls(
@@ -140,7 +439,7 @@ def check_for_unexpected_urls(
 
     if results:
         click.echo(f"Unexpected outbound URLs found on {hostname}!")
-        _dump_to_files(
+        _dump_unexpected_urls_to_files(
             results=results,
             hostname=hostname,
             batch_label="all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0],
@@ -209,11 +508,11 @@ def _get_url_with_retry(
             raise re
 
 
-def _dump_to_files(
+def _dump_unexpected_urls_to_files(
     results: Dict[str, set],
     hostname: str,
     batch_label: str,
-) -> Tuple[str]:
+) -> Tuple[str, str, str]:
     """Output files of results specific to the current hostname and batch:
 
     * Text output:
@@ -457,6 +756,116 @@ def _update_hostname(origin_hostname_with_scheme: str, urls: List[str]) -> List[
         click.echo(f"No need to replace the hostname on this batch of URLs: {candidate_hostname_with_scheme}")
 
     return [url.replace(candidate_hostname_with_scheme, origin_hostname_with_scheme) for url in urls]
+
+
+def check_spelling(
+    urls_to_check: List[str],
+    allowlist_config: dict,
+    hostname: str,
+    batch: str,
+) -> None:
+    click.echo("Checking pages for spelling errors")
+
+    grouped_urls = _filter_urls_to_available_locales(
+        urls=urls_to_check,
+        locales=LOCALES_FOR_SPELLCHECK,
+    )
+    unknown_words = {}
+
+    for locale, urls in grouped_urls.items():
+        for page_url in urls:
+            resp = _get_url_with_retry(page_url)
+            html_content = resp.text
+            soup = BeautifulSoup(html_content, "html5lib")
+            tags_to_drop = soup(["head", "script", "style"])
+            [s.extract() for s in tags_to_drop]
+            page_text = soup.getText()
+            if spelling_errors := _check_pages_for_spelling_errors(page_text, locale):
+                unknown_words[page_url] = list(spelling_errors)
+
+    _dump_unknown_words_to_file(
+        results=unknown_words,
+        hostname=hostname,
+        batch_label="all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0],
+    )
+
+
+def _check_pages_for_spelling_errors(text: str, locale: str) -> List[str]:
+
+    spell = SpellChecker()  # TODO: support other locales
+    if locale in CUSTOM_DICTIONARIES:
+        spell.word_frequency.load_words(CUSTOM_DICTIONARIES[locale])
+
+    text = _clean_up_text_before_spellchecking(text)
+    return spell.unknown(text)
+
+
+def _clean_up_text_before_spellchecking(text: str) -> str:
+
+    chars_to_drop = [
+        "(",
+        ")",
+    ]
+    chars_to_swap = [
+        ("’", "'"),  # spellchecker doesn't like curly quotes
+        ("-", " "),  # de-hyphenate things
+        ("–", " "),  # remove en-dashes
+        ("—", " "),  # remove em-dashes
+    ]
+
+    trailing_chars_to_drop = [".", ",", ":", ";", "?"]
+    leading_chars_to_drop = ["$", "£", "€", "©"]
+
+    for char in chars_to_drop:
+        text = text.replace(char, "")
+
+    for current, replacement in chars_to_swap:
+        text = text.replace(current, replacement)
+
+    text = text.replace("\n", " ").split()
+    for i, word in enumerate(text):
+        if word[0] in leading_chars_to_drop:
+            text[i] = word[1:]
+
+        if word[-1] in trailing_chars_to_drop:
+            word = word[:-1]
+            text[i] = word
+
+    return text
+
+
+def _filter_urls_to_available_locales(urls: List[str], locales: List[str]) -> Dict:
+
+    grouped = defaultdict(list)
+
+    # Playground: https://regex101.com/r/j7lMf1/2
+    pattern = re.compile(r"http(?:s*):\/\/.*\/([a-z]{2}-*[A-Z]{0,2})\/")
+    for url in urls:
+        if match := pattern.match(url):
+            locale = match.groups()[0]
+            if locale in locales:
+                grouped[locale].append(url)
+
+    return grouped
+
+
+def _dump_unknown_words_to_file(
+    results: Dict[str, set],
+    hostname: str,
+    batch_label: str,
+) -> str:
+    """Output files of results specific to the current hostname and batch to JSON"""
+    _output_path = _get_output_path()
+    _now = datetime.datetime.utcnow().isoformat(timespec="seconds").replace(":", "-")  # Github actions doesn't like colons in filenames
+    _base_filename = f"{UNKNOWN_WORDS_FILENAME_FRAGMENT}_{hostname}_{batch_label}_{_now}.json"
+    output_filepath = os.path.join(_output_path, _base_filename)
+
+    fp_json = open(output_filepath, "w")
+    fp_json.write(json.dumps(results))
+    fp_json.close()
+    click.echo(f"JSON version of results output to {output_filepath}")
+
+    return output_filepath
 
 
 if __name__ == "__main__":
