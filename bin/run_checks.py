@@ -783,11 +783,15 @@ def check_spelling(
             if spelling_errors := _check_pages_for_spelling_errors(page_text, locale):
                 unknown_words[page_url] = list(spelling_errors)
 
-    _dump_unknown_words_to_file(
-        results=unknown_words,
-        hostname=hostname,
-        batch_label="all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0],
-    )
+    if unknown_words:
+        click.echo("Writing unknown words to a file")
+        _dump_unknown_words_to_file(
+            results=unknown_words,
+            hostname=hostname,
+            batch_label="all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0],
+        )
+    else:
+        click.echo("No unknown words found")
 
 
 def _check_pages_for_spelling_errors(text: str, locale: str) -> List[str]:

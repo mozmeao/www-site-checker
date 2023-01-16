@@ -1,0 +1,14 @@
+While scanning the site, the following pages had unknown words in them, based on
+their respective locales:
+
+{unknown_words__structured}
+
+This cannot be fixed via an automatic pull request - it needs to be checked and remedied.
+
+Be excellent to each other,
+
+CheckerBot
+
+--
+
+Fingerprint: {fingerprint}
