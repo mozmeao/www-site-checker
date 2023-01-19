@@ -1,6 +1,6 @@
 # www-site-checker
 
-_CURRENT STATUS_: WIP, pre-production.
+_CURRENT STATUS_: Beta.
 
 This project contains tooling designed to check on the state of the mozilla.org website in various ways.
 
