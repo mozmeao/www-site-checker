@@ -445,7 +445,7 @@ def check_for_unexpected_urls(
             batch_label="all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0],
         )
         if SENTRY_DSN:
-            message = f"Unexpected oubound URLs found on {hostname} - see Github Action in {GITHUB_REPOSITORY} for output data"
+            message = f"Unexpected content found on {hostname} - see Github Action in {GITHUB_REPOSITORY} for output data"
             sentry_sdk.capture_message(
                 message=message,
                 level="error",
