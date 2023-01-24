@@ -1471,3 +1471,14 @@ allowed_outbound_url_literals:
   - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F&text=%F0%9F%94%A5+Firefox+Chrome+%DA%A9%D9%86%D9%88%DA%BA+%D8%B3%D9%88%D8%A6%DA%86+%DA%A9%D8%B1%DD%A8+%DA%A9%D9%88%DA%BA+%D8%A7%D8%B5%D9%84+%D9%88%DA%86+%D8%AA%DA%A9%DA%BE%DB%8C%D8%B1%D8%A7+%D8%A8%DD%A8%DB%8C%D9%86%D8%AF%DB%92%DB%94+%D8%A7%DB%8C%DA%BA+%DA%A9%D9%88%DA%BA+%D8%A7%D8%B2%D9%85%D8%A7%D8%A4%21
   - https://www.convert.com/privacy-notice/
   - https://www.convert.com/
+  - https://stage-vpn.guardian.nonprod.cloudops.mozgcp.net/r/vpn/download/windows
+  - https://accounts.stage.mozaws.net/signup?entrypoint=mozilla.org-firefox-desktop&form_type=button&utm_source=mozilla.org-firefox-desktop&utm_medium=referral
+  - https://accounts.stage.mozaws.net/signup?entrypoint=mozilla.org-firefox-sync&form_type=button&utm_source=mozilla.org-firefox-sync&utm_medium=referral&utm_campaign=seo&utm_content=firefox-sync-sign-up
+  - https://accounts.stage.mozaws.net/signin?entrypoint=mozilla.org-privacy-products&form_type=button&utm_source=mozilla.org-privacy-products&utm_medium=referral&utm_campaign=privacy-products
+  - https://accounts.stage.mozaws.net/signin?entrypoint=mozilla.org-firefox-browsers&form_type=button&utm_source=mozilla.org-firefox-browsers&utm_medium=referral&utm_campaign=browsers-footer
+  - https://accounts.stage.mozaws.net/signin?entrypoint=mozilla.org-firefox-products&form_type=button&utm_source=mozilla.org-firefox-products&utm_medium=referral&utm_campaign=products-footer
+  - https://accounts.stage.mozaws.net/signup?entrypoint=mozilla.org-firefox_home&form_type=button&utm_source=mozilla.org-firefox_home&utm_medium=referral&utm_campaign=firefox-home&utm_content=secondary-join-firefox
+  - https://stage-vpn.guardian.nonprod.cloudops.mozgcp.net/r/vpn/download/linux
+  - https://accounts.stage.mozaws.net/signin?entrypoint=mozilla.org-firefox-mobile&form_type=button&utm_source=mozilla.org-firefox-mobile&utm_medium=referral&utm_campaign=browsers-footer
+  - https://accounts.stage.mozaws.net/signin?entrypoint=mozilla.org-firefox-accounts&form_type=button&utm_source=mozilla.org-firefox-accounts&utm_medium=referral&utm_campaign=trailhead&utm_content=form-upper
+  - https://stage-vpn.guardian.nonprod.cloudops.mozgcp.net/r/vpn/download/mac
