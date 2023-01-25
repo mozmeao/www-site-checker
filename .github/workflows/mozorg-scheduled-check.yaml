@@ -27,7 +27,11 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - name: Install requirements
+      - name: Install OS-level requirements
+        run: sudo apt-get install -y build-essential pkg-config libhunspell-dev hunspell
+      - name: Install cyhhunspell with deliberate args
+        run: pip install Cython && pip install --global-option=build_ext --global-option=$(pkg-config --libs hunspell) cyhunspell
+      - name: Install Python requirements
         run: pip install -r requirements.txt
       - name: Download dictionaries
         run: ./bin/update-dictionaries.sh
@@ -53,7 +57,11 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - name: Install requirements
+      - name: Install OS-level requirements
+        run: sudo apt-get install -y build-essential pkg-config libhunspell-dev hunspell
+      - name: Install cyhhunspell with deliberate args
+        run: pip install Cython && pip install --global-option=build_ext --global-option=$(pkg-config --libs hunspell) cyhunspell
+      - name: Install Python requirements
         run: pip install -r requirements.txt
       - name: Download dictionaries
         run: ./bin/update-dictionaries.sh
@@ -80,7 +88,11 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - name: Install requirements
+      - name: Install OS-level requirements
+        run: sudo apt-get install -y build-essential pkg-config libhunspell-dev hunspell
+      - name: Install cyhhunspell with deliberate args
+        run: pip install Cython && pip install --global-option=build_ext --global-option=$(pkg-config --libs hunspell) cyhunspell
+      - name: Install Python requirements
         run: pip install -r requirements.txt
       - name: Download dictionaries
         run: ./bin/update-dictionaries.sh
@@ -107,7 +119,7 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - name: Install requirements
+      - name: Install Python requirements
         run: pip install -r requirements.txt
       - name: Download artifacts, if they exist
         id: download-scan-results
