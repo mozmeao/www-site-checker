@@ -19,6 +19,7 @@ import re
 import time
 from collections import defaultdict
 from functools import cache
+from itertools import filterfalse
 from typing import Dict, Iterable, List, Tuple
 from urllib.parse import urlparse
 
@@ -62,6 +63,12 @@ CUSTOM_DICTIONARIES = {
     "en-US",
 }
 CUSTOM_DICTIONARY_FILE_TEMPLATE = "./data/custom_dictionaries/{}.txt"
+
+
+# Spot paths and in-page anchors
+SIMPLE_PATH_REGEX_COMPILED = re.compile(r"^[\/|#]{1}[\w\/\-\.]{1,}$")  # https://regex101.com/r/P3wiSJ/1
+SIMPLE_URL_REGEX_COMPILED = re.compile(r"^(?:http)s?:\/\/.*$")  # https://regex101.com/r/IKl215/1
+SIMPLE_RV_REGEX_COMPILED = re.compile(r"^rv\:[0-9.\/]+$")  # https://regex101.com/r/fgDjqe/2
 
 
 @click.command()
@@ -629,7 +636,21 @@ def _clean_up_text_before_spellchecking(text: str, locale="en") -> str:
                     word = word[: -len(trailing_sequence)]
                     text[i] = word
 
-    return text
+    filtered_text = filterfalse(_is_skippable_string, text)
+
+    return filtered_text
+
+
+def _is_skippable_string(word: str) -> bool:
+    print("_is_skippable_string: word", word)
+    for regex in (
+        SIMPLE_PATH_REGEX_COMPILED,
+        SIMPLE_URL_REGEX_COMPILED,
+        SIMPLE_RV_REGEX_COMPILED,
+    ):
+        if regex.match(word):
+            return True
+    return False
 
 
 def _filter_urls_to_available_locales(urls: List[str], locales: List[str]) -> Dict:
