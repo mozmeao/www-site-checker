@@ -567,19 +567,26 @@ def _clean_up_text_before_spellchecking(text: str, locale="en") -> str:
     # Initially a naive-ish manual tuning job, because we don't want
     # to over-correct things, either
 
-    chars_to_drop = {
-        "en": [
-            "(",
-            ")",
-        ]
-    }
     chars_to_swap = {
         "en": [
             ("”", '"'),  # spellchecker doesn't like curly quotes
+            ("“", "'"),  # spellchecker doesn't like curly quotes
+            ("‘", "'"),  # spellchecker doesn't like curly quotes
             ("’", "'"),  # spellchecker doesn't like curly quotes
             # ("-", " "),  # de-hyphenate things
             ("–", " "),  # remove en-dashes
             ("—", " "),  # remove em-dashes
+            (r"\'", "'"),  # unescape single quotes
+        ]
+    }
+
+    chars_to_drop = {
+        "en": [
+            "(",
+            ")",
+            "[",
+            "]",
+            '"',
         ]
     }
 
@@ -612,11 +619,11 @@ def _clean_up_text_before_spellchecking(text: str, locale="en") -> str:
         ],
     }
 
-    for char in chars_to_drop.get(locale):
-        text = text.replace(char, "")
-
     for current, replacement in chars_to_swap.get(locale):
         text = text.replace(current, replacement)
+
+    for char in chars_to_drop.get(locale):
+        text = text.replace(char, " ")
 
     text = text.replace("\n", " ").split()
     for _ in range(2):

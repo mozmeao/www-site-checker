@@ -327,7 +327,7 @@ def _get_structured_unknown_words(unknown_words: Dict) -> str:
     return "\n".join(output)
 
 
-def _open_new_issue_for_unknown_words(unknown_words: List[str]) -> str:
+def _open_new_issue_for_unknown_words(unknown_words: dict) -> str:
     """Open a GH issue for all the unknown words in the site"""
 
     output = []
