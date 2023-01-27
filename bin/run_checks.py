@@ -64,11 +64,32 @@ CUSTOM_DICTIONARIES = {
 }
 CUSTOM_DICTIONARY_FILE_TEMPLATE = "./data/custom_dictionaries/{}.txt"
 
-
-# Spot paths and in-page anchors
+# Regexes used to identify tokens we can skip
+FIREFOX_VERSION_NUMBER_REGEX_COMPLILED = re.compile(r"^[\.\d]+[\.|a1|beta|esr]+$")  # https://regex101.com/r/UFrNoG/1
+SIMPLE_CTRL_REGEX_COMPILED = re.compile(r"^(?i)ctrl[\-|\+\w]*$")  # https://regex101.com/r/xstZl1/1
+SIMPLE_CVE_REGEX_COMPILED = re.compile(r"^CVE\-\d{4}\-\d{4}$")  # https://regex101.com/r/4yKJYo/2
+SIMPLE_ISO_REGEX_COMPILED = re.compile(r"^ISO\-\d{4,5}(?:\-\w{2}){0,1}$")  # https://regex101.com/r/v8mJXW/2
 SIMPLE_PATH_REGEX_COMPILED = re.compile(r"^[\/|#]{1}[\w\/\-\.]{1,}$")  # https://regex101.com/r/P3wiSJ/1
-SIMPLE_URL_REGEX_COMPILED = re.compile(r"^(?:http)s?:\/\/.*$")  # https://regex101.com/r/IKl215/1
 SIMPLE_RV_REGEX_COMPILED = re.compile(r"^rv\:[0-9.\/]+$")  # https://regex101.com/r/fgDjqe/2
+SIMPLE_SOCIAL_HANDLE_REGEX_COMPILED = re.compile(r"^@\w+$")  # https://regex101.com/r/iAt6LZ/2
+SIMPLE_UNDERSCORE_REGEX_COMPILED = re.compile(r"^_+$")  # https://regex101.com/r/Oz0XOt/3
+SIMPLE_URL_REGEX_COMPILED = re.compile(r"^(?:http)s?:\/\/.*$")  # https://regex101.com/r/IKl215/1
+SIMPLE_VERSION_NUMBER_REGEX_COMPLILED = re.compile(r"^[vV][\.\d]+$")  # https://regex101.com/r/NOAW3M/1
+SIMPLE_ZDI_REGEX_COMPILED = re.compile(r"^ZDI\-\w{2,3}\-\d{3,4}$")  # https://regex101.com/r/HPlGet/1
+
+SKIPPABLE_TOKEN_REGEXES = (
+    FIREFOX_VERSION_NUMBER_REGEX_COMPLILED,
+    SIMPLE_CTRL_REGEX_COMPILED,
+    SIMPLE_CVE_REGEX_COMPILED,
+    SIMPLE_ISO_REGEX_COMPILED,
+    SIMPLE_PATH_REGEX_COMPILED,
+    SIMPLE_RV_REGEX_COMPILED,
+    SIMPLE_SOCIAL_HANDLE_REGEX_COMPILED,
+    SIMPLE_UNDERSCORE_REGEX_COMPILED,
+    SIMPLE_URL_REGEX_COMPILED,
+    SIMPLE_VERSION_NUMBER_REGEX_COMPLILED,
+    SIMPLE_ZDI_REGEX_COMPILED,
+)
 
 
 @click.command()
@@ -570,13 +591,16 @@ def _clean_up_text_before_spellchecking(text: str, locale="en") -> str:
     chars_to_swap = {
         "en": [
             ("”", '"'),  # spellchecker doesn't like curly quotes
-            ("“", "'"),  # spellchecker doesn't like curly quotes
+            ("“", '"'),  # spellchecker doesn't like curly quotes
             ("‘", "'"),  # spellchecker doesn't like curly quotes
             ("’", "'"),  # spellchecker doesn't like curly quotes
-            # ("-", " "),  # de-hyphenate things
+            ("-", " "),  # de-hyphenate things
             ("–", " "),  # remove en-dashes
             ("—", " "),  # remove em-dashes
             (r"\'", "'"),  # unescape single quotes
+            (r"/", " "),  # remove slashes
+            (r":", " "),  # remove colons
+            (r".", " "),  # remove full stops
         ]
     }
 
@@ -587,18 +611,22 @@ def _clean_up_text_before_spellchecking(text: str, locale="en") -> str:
             "[",
             "]",
             '"',
+            "`",
+            "^",
+            "+",
         ]
     }
 
     trailing_chars_to_drop = {
         "en": [
-            ".",
+            # ".",  # already removed
             ",",
-            ":",
+            # ":",  # already removed
             ";",
             "?",
             "!",
             "¶",
+            "%",
             "'",
             "®",
             "…",
@@ -615,7 +643,7 @@ def _clean_up_text_before_spellchecking(text: str, locale="en") -> str:
     trailing_sequences_to_drop = {
         "en": [
             "'s",
-            "...",
+            # "...",  # already removed
         ],
     }
 
@@ -648,14 +676,9 @@ def _clean_up_text_before_spellchecking(text: str, locale="en") -> str:
     return filtered_text
 
 
-def _is_skippable_string(word: str) -> bool:
-    print("_is_skippable_string: word", word)
-    for regex in (
-        SIMPLE_PATH_REGEX_COMPILED,
-        SIMPLE_URL_REGEX_COMPILED,
-        SIMPLE_RV_REGEX_COMPILED,
-    ):
-        if regex.match(word):
+def _is_skippable_string(token: str) -> bool:
+    for regex in SKIPPABLE_TOKEN_REGEXES:
+        if regex.match(token):
             return True
     return False
 
