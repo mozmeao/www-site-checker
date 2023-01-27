@@ -14,6 +14,6 @@ slack_sdk==3.19.5
 pytest==7.2.1
 pytest-cov==4.0.0
 
-# Also needed, installed manually - see README
-# Cython==0.29.33  # for cyhunspell
-# cyhunspell==1.3.4
+# These need to be pre-installed manually/via GH action - see README
+Cython==0.29.33  # for cyhunspell
+cyhunspell==1.3.4
