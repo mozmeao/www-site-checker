@@ -1471,3 +1471,21 @@ allowed_outbound_url_literals:
   - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F&text=%F0%9F%94%A5+Firefox+Chrome+%DA%A9%D9%86%D9%88%DA%BA+%D8%B3%D9%88%D8%A6%DA%86+%DA%A9%D8%B1%DD%A8+%DA%A9%D9%88%DA%BA+%D8%A7%D8%B5%D9%84+%D9%88%DA%86+%D8%AA%DA%A9%DA%BE%DB%8C%D8%B1%D8%A7+%D8%A8%DD%A8%DB%8C%D9%86%D8%AF%DB%92%DB%94+%D8%A7%DB%8C%DA%BA+%DA%A9%D9%88%DA%BA+%D8%A7%D8%B2%D9%85%D8%A7%D8%A4%21
   - https://www.convert.com/privacy-notice/
   - https://www.convert.com/
+  - https://www.commonsensemedia.org/articles/what-is-online-harassment?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.youtube.com/playlist?list=PLFlAJDI87Jg1It3hFaH61sYytK1lAU7fG
+  - https://www.commonsensemedia.org/game-reviews/fortnite?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/articles/practical-tips-for-easing-kids-social-media-anxiety?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/articles/what-should-i-teach-my-child-about-safe-online-behavior?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/articles/parents-ultimate-guide-to-fortnite?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/videos/a-day-in-the-life-your-privacy-matters?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/articles/parents-ultimate-guide-to-instagram?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/articles/how-much-screen-time-is-ok-for-my-kids?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/articles/how-can-i-protect-my-familys-data-privacy?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/family-tech-planners?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/articles/what-should-i-do-if-my-child-is-bullied-online?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/articles/how-do-i-protect-my-kids-privacy-online?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/articles/be-a-role-model-4-ways-to-balance-screen-time-around-children?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/articles/4-conversations-to-have-with-older-kids-and-teens-about-their-screen-time-habits?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/articles/how-do-i-talk-to-my-kids-about-violence-on-tv-and-in-movies-or-games?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
+  - https://www.commonsensemedia.org/articles/what-is-cyberbullying?utm_source=firefox&utm_medium=partnership&utm_campaign=faq
