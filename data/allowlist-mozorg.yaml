@@ -1496,3 +1496,4 @@ allowed_outbound_url_literals:
   - https://www.linkedin.com/sharing/share-offsite/?mini=true&url=http://www.mozilla.org/en-US/stories/dreaming-then-building/
   - https://twitter.com/share?url=http://www.mozilla.org/en-US/stories/dreaming-then-building/&text=Dreaming+Then+Building+With+Platform+Discovery
   - https://www.nvaccess.org/about-nvda/
+  - https://groups.google.com/a/ccadb.org/g/public
