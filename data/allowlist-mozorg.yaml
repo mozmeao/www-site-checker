@@ -1498,3 +1498,4 @@ allowed_outbound_url_literals:
   - https://www.nvaccess.org/about-nvda/
   - https://groups.google.com/a/ccadb.org/g/public
   - https://www.healthychildren.org/English/family-life/Media/Pages/Where-We-Stand-TV-Viewing-Time.aspx
+  - https://developer.android.com/about/versions/13/features#themed-app-icons
