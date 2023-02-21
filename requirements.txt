@@ -67,9 +67,9 @@ coverage[toml]==6.3.2 \
     --hash=sha256:f9987b0354b06d4df0f4d3e0ec1ae76d7ce7cbca9a2f98c25041eb79eec766f1 \
     --hash=sha256:fd9e830e9d8d89b20ab1e5af09b32d33e1a08ef4c4e14411e559556fd788e6b2
     # via pytest-cov
-django==4.1.6 \
-    --hash=sha256:bceb0fe1a386781af0788cae4108622756cd05e7775448deec04a71ddf87685d \
-    --hash=sha256:c6fe7ebe7c017fe59f1029821dae0acb5a2ddcd6c9a0138fd20a8bfefac914bc
+django==4.1.7 \
+    --hash=sha256:44f714b81c5f190d9d2ddad01a532fe502fa01c4cb8faf1d081f4264ed15dcd8 \
+    --hash=sha256:f2f431e75adc40039ace496ad3b9f17227022e8b11566f4b363da44c7e44761e
     # via -r requirements.in
 exceptiongroup==1.0.4 \
     --hash=sha256:542adf9dea4055530d6e1279602fa5cb11dab2395fa650b8674eaec35fc4a828 \
@@ -266,17 +266,17 @@ ruamel-yaml-clib==0.2.7 \
     --hash=sha256:f01da5790e95815eb5a8a138508c01c758e5f5bc0ce4286c4f7028b8dd7ac3d0 \
     --hash=sha256:f34019dced51047d6f70cb9383b2ae2853b7fc4dce65129a5acd49f4f9256646
     # via ruamel-yaml
-sentry-sdk==1.14.0 \
-    --hash=sha256:273fe05adf052b40fd19f6d4b9a5556316807246bd817e5e3482930730726bb0 \
-    --hash=sha256:72c00322217d813cf493fe76590b23a757e063ff62fec59299f4af7201dd4448
+sentry-sdk==1.15.0 \
+    --hash=sha256:69ecbb2e1ff4db02a06c4f20f6f69cb5dfe3ebfbc06d023e40d77cf78e9c37e7 \
+    --hash=sha256:7ad4d37dd093f4a7cb5ad804c6efe9e8fab8873f7ffc06042dc3f3fd700a93ec
     # via -r requirements.in
 six==1.16.0 \
     --hash=sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926 \
     --hash=sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254
     # via html5lib
-slack-sdk==3.19.5 \
-    --hash=sha256:0b52bb32a87c71f638b9eb47e228dffeebf89de5e762684ef848276f9f186c84 \
-    --hash=sha256:47fb4af596243fe6585a92f3034de21eb2104a55cc9fd59a92ef3af17cf9ddd8
+slack-sdk==3.20.0 \
+    --hash=sha256:b4359535fcd1cb9e45be451c89ce91a273f5c987260fbac3373a2176fd55e479 \
+    --hash=sha256:f97644153bbb536a732018bb6fa781a97118bc71501a5cb031a70e71b80d25f6
     # via -r requirements.in
 soupsieve==2.3.1 \
     --hash=sha256:1a3cca2617c6b38c0343ed661b1fa5de5637f257d4fe22bd9f1338010a1efefb \

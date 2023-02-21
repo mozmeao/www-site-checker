@@ -11,4 +11,4 @@ set -exo pipefail
 
 pip install -U pip
 pip install pip-tools
-pip-compile --generate-hashes --no-header
+pip-compile --generate-hashes --no-header --resolver=backtracking --rebuild
