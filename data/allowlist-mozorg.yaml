@@ -1511,3 +1511,4 @@ allowed_outbound_url_literals:
   - https://www.youtube.com/watch?v=sYrU2H52-9Q
   - https://www.stiftung-nv.de/de/veranstaltung/cyber-diplomacy-workshop-governments-role-increasing-software-supply-chain-security
   - https://youtu.be/HsoSSfZP0Cs
+  - https://fs.spec.whatwg.org/
