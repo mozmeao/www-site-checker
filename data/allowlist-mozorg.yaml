@@ -1512,3 +1512,5 @@ allowed_outbound_url_literals:
   - https://www.stiftung-nv.de/de/veranstaltung/cyber-diplomacy-workshop-governments-role-increasing-software-supply-chain-security
   - https://youtu.be/HsoSSfZP0Cs
   - https://fs.spec.whatwg.org/
+  - https://mastodon.social/@stevetex
+  - https://twitter.com/stevetex
