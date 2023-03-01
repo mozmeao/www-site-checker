@@ -10,7 +10,6 @@ import os
 import re
 import subprocess
 import sys
-from functools import cache
 from hashlib import sha512
 from typing import Dict, List
 
@@ -124,12 +123,10 @@ def _get_hashed_value(iterable: List) -> str:
     return sha512("-".join(sorted(iterable)).encode("utf-8")).hexdigest()[:32]
 
 
-@cache
 def _get_current_github_prs() -> List:
     return json.loads(requests.get(SITE_CHECKER_PULL_REQUESTS_API_URL).content)
 
 
-@cache
 def _get_current_github_issues() -> List:
     return json.loads(requests.get(SITE_CHECKER_ISSUES_API_URL).content)
 
@@ -137,9 +134,15 @@ def _get_current_github_issues() -> List:
 def _matching_github_entity_exists(current_entities: List, candidates: List[str]) -> bool:
     """Search all entities (open PRs or Issues) to see if we have one featuring this hash"""
     hashed_value = _get_hashed_value(candidates)
-    for pr in current_entities:
-        if hashed_value in pr.get("body", ""):
-            return True
+
+    try:
+        for pr in current_entities:
+            if hashed_value in pr.get("body", ""):
+                return True
+    except AttributeError as ae:
+        _print(str(ae))
+        _print(f"Current entities: {current_entities}")
+        sys.exit(1)
     return False
 
 
