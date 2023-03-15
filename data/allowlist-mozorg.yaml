@@ -1514,3 +1514,8 @@ allowed_outbound_url_literals:
   - https://fs.spec.whatwg.org/
   - https://mastodon.social/@stevetex
   - https://twitter.com/stevetex
+  - https://en.wikipedia.org/wiki/Dog_whistle_(politics)
+  - https://en.wikipedia.org/wiki/Swatting
+  - https://docs.joinmastodon.org/user/moderating/
+  - https://developer.android.com/guide/components/activities/recents#url-sharing
+  - https://en.wikipedia.org/wiki/Dogpiling_(Internet)
