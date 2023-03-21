@@ -166,6 +166,9 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     timestamp = datetime.datetime.utcnow().isoformat(timespec="seconds")
     unexpected_urls_structured = _build_structured_url_list_for_pr_description(pr_candidates)
 
+    _print(f"DEBUG: pr_candidates: {pr_candidates}")
+    _print(f"DEBUG: unexpected_urls_structured: {unexpected_urls_structured}")
+
     if _matching_github_entity_exists(
         current_entities=_get_current_github_prs(),
         candidates=pr_candidates,
