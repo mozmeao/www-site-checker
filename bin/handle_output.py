@@ -128,6 +128,8 @@ def _get_current_github_prs() -> List:
 
 
 def _get_current_github_issues() -> List:
+    # NB /issues also returns pull requests
+    # https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-repository-issues
     return json.loads(requests.get(SITE_CHECKER_ISSUES_API_URL).content)
 
 
@@ -136,8 +138,9 @@ def _matching_github_entity_exists(current_entities: List, candidates: List[str]
     hashed_value = _get_hashed_value(candidates)
 
     try:
-        for pr in current_entities:
-            if hashed_value in pr.get("body", ""):
+        for entity in current_entities:
+            body = entity.get("body")
+            if body is not None and hashed_value in body:
                 return True
     except AttributeError as ae:
         _print(str(ae))
