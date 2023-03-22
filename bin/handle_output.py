@@ -128,6 +128,8 @@ def _get_current_github_prs() -> List:
 
 
 def _get_current_github_issues() -> List:
+    # NB /issues also returns pull requests
+    # https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-repository-issues
     return json.loads(requests.get(SITE_CHECKER_ISSUES_API_URL).content)
 
 
@@ -136,8 +138,9 @@ def _matching_github_entity_exists(current_entities: List, candidates: List[str]
     hashed_value = _get_hashed_value(candidates)
 
     try:
-        for pr in current_entities:
-            if hashed_value in pr.get("body", ""):
+        for entity in current_entities:
+            body = entity.get("body")
+            if body is not None and hashed_value in body:
                 return True
     except AttributeError as ae:
         _print(str(ae))
@@ -166,8 +169,9 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     timestamp = datetime.datetime.utcnow().isoformat(timespec="seconds")
     unexpected_urls_structured = _build_structured_url_list_for_pr_description(pr_candidates)
 
-    _print(f"DEBUG: pr_candidates: {pr_candidates}")
-    _print(f"DEBUG: unexpected_urls_structured: {unexpected_urls_structured}")
+    if not pr_candidates:
+        _print("No candidate URLs to add to the allowlist")
+        return output
 
     if _matching_github_entity_exists(
         current_entities=_get_current_github_prs(),
