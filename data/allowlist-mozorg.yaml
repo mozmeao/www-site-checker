@@ -1519,3 +1519,4 @@ allowed_outbound_url_literals:
   - https://docs.joinmastodon.org/user/moderating/
   - https://developer.android.com/guide/components/activities/recents#url-sharing
   - https://en.wikipedia.org/wiki/Dogpiling_(Internet)
+  - https://w3c.github.io/webrtc-pc/#dom-rtcrtpsender-setstreams
