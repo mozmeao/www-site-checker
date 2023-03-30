@@ -1520,3 +1520,4 @@ allowed_outbound_url_literals:
   - https://developer.android.com/guide/components/activities/recents#url-sharing
   - https://en.wikipedia.org/wiki/Dogpiling_(Internet)
   - https://w3c.github.io/webrtc-pc/#dom-rtcrtpsender-setstreams
+  - https://assets.mofoprod.net/network/documents/Mozilla-Trustworthy_AI.pdf
