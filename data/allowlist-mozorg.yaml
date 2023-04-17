@@ -1536,3 +1536,8 @@ allowed_outbound_url_literals:
   - https://twitter.com/JayateerthaG
   - https://www.linkedin.com/in/manojkumar-j-7ba35b202/
   - https://mozilla.social/@FirefoxNightly
+  - https://mozilla.formstack.com/forms/builders
+  - https://mozilla.formstack.com/forms/advocates
+  - https://mozilla.formstack.com/forms/activists
+  - https://mozilla.formstack.com/forms/artists
+  - https://mozilla.formstack.com/forms/creators
