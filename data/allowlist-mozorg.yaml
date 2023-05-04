@@ -1544,3 +1544,6 @@ allowed_outbound_url_literals:
   - https://mozilla.formstack.com/forms/activists
   - https://mozilla.formstack.com/forms/artists
   - https://mozilla.formstack.com/forms/creators
+  - https://mozilla.social/@muhlheim
+  - https://mozilla.social/@stevetex
+  - https://mozilla.social/@imo
