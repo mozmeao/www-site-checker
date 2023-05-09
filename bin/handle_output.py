@@ -195,6 +195,7 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     for candidate_url in pr_candidates:
         data["allowed_outbound_url_literals"].append(candidate_url)
     yaml.indent(offset=2)
+    yaml.width = 10000  # Avoid wrapping-induced breakage of very long lines
     with open(allowlist_path, "w") as fp:
         yaml.dump(data, fp)
 
