@@ -1547,3 +1547,7 @@ allowed_outbound_url_literals:
   - https://mozilla.social/@muhlheim
   - https://mozilla.social/@stevetex
   - https://mozilla.social/@imo
+  - https://hackerone.com/mozilla_critical_services/thanks
+  - https://hackerone.com/mozilla_core_services
+  - https://hackerone.com/mozilla_critical_services
+  - https://hackerone.com/mozilla_core_services/thanks
