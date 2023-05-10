@@ -1551,3 +1551,6 @@ allowed_outbound_url_literals:
   - https://hackerone.com/mozilla_core_services
   - https://hackerone.com/mozilla_critical_services
   - https://hackerone.com/mozilla_core_services/thanks
+  - https://w3c.github.io/webtransport
+  - https://github.com/w3c/webtransport/blob/main/explainer.md
+  - https://html.spec.whatwg.org/multipage/workers.html#workeroptions
