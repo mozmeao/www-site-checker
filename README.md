@@ -1,6 +1,6 @@
 # www-site-checker
 
-_CURRENT STATUS_: WIP, pre-production.
+_CURRENT STATUS_: Beta
 
 This project contains tooling designed to check on the state of the mozilla.org website in various ways.
 
@@ -96,7 +96,7 @@ If you come across an alert saying there was an unexpected URL detected and you'
 
 ### Manually via Github editing
 
-* Browse to and edit the `data/allowlist.yaml` file
+* Browse to and edit the `data/allowlist-mozorg.yaml` file
 * Add either a new entry to `allowed_outbound_url_literals` or a new _tested_ regex to `allowed_outbound_url_regexes`
 * Raise a new PR against the `main` branch. Github Actions will run the site checks. If your new rule change is valid, the checks will no longer consider that URL to be unexpected
 
