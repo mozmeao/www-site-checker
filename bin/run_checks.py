@@ -51,6 +51,11 @@ UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
 URL_RETRY_LIMIT = 3
 URL_RETRY_WAIT_SECONDS = 4
 
+# Run a simple cache of the pages we've already pulled down, to avoid getting them twice
+# Size wise, ballparking at 25Kb per page, with ~3500 pages per worker => 85MB
+PAGE_CONTENT_CACHE = dict()
+LOCALES_TO_CACHE = ("en-US",)
+
 
 @click.command()
 @click.option(
@@ -149,10 +154,18 @@ def _get_batched_urls(urls_to_check: List[str], batch: str) -> List[str]:
     return urls_to_check[start_index:end_index]
 
 
+def _page_content_is_cacheable(url):
+    for locale in LOCALES_TO_CACHE:
+        if f"/{locale}/" in url:
+            return True
+    return False
+
+
 def _get_url_with_retry(
     url: str,
     try_count: int = 0,
     limit: int = URL_RETRY_LIMIT,
+    cache_html: bool = True,
 ) -> requests.Response:
     exceptions_to_retry = (
         ChunkedEncodingError,
@@ -160,8 +173,15 @@ def _get_url_with_retry(
         HTTPError,  # GOTCHA? This might be too permissive because many Requests exceptions inherit it
     )
     try:
-        resp = requests.get(url)
-        resp.raise_for_status()
+        resp = PAGE_CONTENT_CACHE.get(url)
+        if resp:
+            click.echo(f"Getting {url} from cache")
+        else:
+            click.echo(f"Pulling down {url}")
+            resp = requests.get(url)
+            resp.raise_for_status()
+            if cache_html and _page_content_is_cacheable(url):
+                PAGE_CONTENT_CACHE[url] = resp
         return resp
 
     except exceptions_to_retry as re:
