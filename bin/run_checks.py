@@ -357,9 +357,10 @@ def _check_pages_for_outbound_links(urls: List[str], allowlist_config: Dict) -> 
             (anchor_tags, "href"),
             (script_tags, "src"),
             (link_tags, "src"),
+            (link_tags, "href"),  # eg for Atom/RSS feeds
         ]:
             for node in nodelist:
-                _url = node.attrs.get("href")
+                _url = node.attrs.get(attr)
                 if _url and not _verify_url_allowed(_url, allowlist_config):
                     unlisted_outbound_urls[_url].add(page_url)
 
