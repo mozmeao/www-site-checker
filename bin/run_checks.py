@@ -136,12 +136,12 @@ def check_for_unexpected_urls(
     batch: str,
 ) -> None:
     click.echo("Checking pages for unexpected URLs")
-    results = _check_pages_for_outbound_links(urls_to_check, allowlist_config)
+    url_results = _check_pages_for_outbound_links(urls_to_check, allowlist_config)
 
-    if results:
+    if url_results:
         click.echo(f"Unexpected outbound URLs found on {hostname}!")
         _dump_unexpected_urls_to_files(
-            results=results,
+            results=url_results,
             hostname=hostname,
             batch_label="all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0],
         )
