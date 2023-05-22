@@ -125,10 +125,12 @@ def run_checks(
     )
 
     if additional_urls_file:
-        urls_to_check += _generate_additional_urls_to_check(
+        extra_urls = _generate_additional_urls_to_check(
             additional_urls_file=additional_urls_file,
             hostname=hostname,
         )
+        click.echo(f"Added {len(extra_urls)} extra URLs from {additional_urls_file}")
+        urls_to_check += extra_urls
 
     # Do we need to chunk these down?
     if batch != DEFAULT_BATCH__NOOP:
