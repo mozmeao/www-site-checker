@@ -9,7 +9,6 @@ extra_urls_to_check:
   - firefox/dedicated-profiles/
   - firefox/installer-help/
   - firefox/this-browser-comes-highly-recommended/
-  - firefox/nightly/notes/feed/
   - newsletter/existing/
   - newsletter/recovery/
   - newsletter/updated/
