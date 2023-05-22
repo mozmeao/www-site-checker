@@ -71,7 +71,7 @@ allowed_outbound_url_regexes:
   - '^..\/200\d{1,2}\/mfsa200\d{1,2}-\d{2}.html$'
 
   # Assets
-  - https:\/\/assets-prod.sumo.prod.webservices.mozgcp.net\/static\/.*(js|css)
+  - '^https:\/\/assets-prod.sumo.prod.webservices.mozgcp.net\/static\/.*(js|css|png|ico)$'
 
 allowed_outbound_url_literals:
   # Internals
