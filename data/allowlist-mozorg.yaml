@@ -1564,3 +1564,7 @@ allowed_outbound_url_literals:
   - https://web.archive.org/web/20210530092017/https://developer.mozilla.org/en-US/docs/Mozilla/Command_Line_Options
   - https://cdn-3.convertexperiments.com/js/10039-1003343.js
   - https://nn8g.adj.st/?adjust_t=ucunb4r
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/favicon-32x32.2143cdf0c7e3f377.png
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/favicon.03d97697df808c0e.ico
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/favicon-16x16.352a0a2cef154dda.png
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/apple-touch-icon.bdc11b610d791a16.png
