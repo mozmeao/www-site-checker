@@ -1554,3 +1554,35 @@ allowed_outbound_url_literals:
   - https://w3c.github.io/webtransport
   - https://github.com/w3c/webtransport/blob/main/explainer.md
   - https://html.spec.whatwg.org/multipage/workers.html#workeroptions
+  - https://web.archive.org/web/20210530092017/https://developer.mozilla.org/en-US/docs/Mozilla/Command_Line_Options
+  - https://github.com/mozmeao/www-sitemap-generator/commit/49dd7366dd289f8994732864ee03c8a37dd14088
+  - https://github.com/mozmeao/www-admin/commit/9fe1143389034062214d4916abe60ed81ed68b1a
+  - https://github.com/mozmeao/www-l10n/commit/b9e180c007dbc38e2784dd2bc7bdf3ca2f8003b0
+  - https://s3-us-west-2.amazonaws.com/bedrock-db-dev/cd7a72596d-a40e785d53.db
+  - https://github.com/mozmeao/www-config
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/screen.64227f5d8572308e.css
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/991.4bf69088a6ccc030.js
+  - https://github.com/mozmeao/www-sitemap-generator/commit/fec70723c2936e1bf3a6a90208c3a0723554b6b0
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/697.753eecc32ec40d7c.js
+  - https://cdn-3.convertexperiments.com/js/10039-1003343.js
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/favicon-16x16.352a0a2cef154dda.png
+  - https://github.com/mozmeao/www-admin
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/gtm-snippet.13d8a06e3c6022fa.js
+  - https://nn8g.adj.st/?adjust_t=ucunb4r
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/apple-touch-icon.bdc11b610d791a16.png
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/common.82b6739e397eb9d9.js
+  - https://github.com/mozmeao/www-l10n
+  - https://github.com/mozilla-releng/product-details/commit/e408f09b82cdad1e513b3afedd63264e2d7744c4
+  - https://github.com/mozilla-releng/product-details
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/jsi18n/en-us/djangojs-min.js
+  - https://github.com/mozmeao/www-sitemap-generator
+  - https://s3-us-west-2.amazonaws.com/bedrock-db-dev/cd7a72596d-f17fe742b1.db
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/787.1be22708a92c8cb8.js
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/common.fx.download.d8e4ed8eaa791d2c.js
+  - https://www.instagram.com/firefox
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/favicon.03d97697df808c0e.ico
+  - https://www.youtube.com/firefoxchannel
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/document.83b0fed8af0d1aa0.js
+  - https://www.facebook.com/Firefox
+  - https://github.com/mozmeao/www-config/commit/cb59d0eaabbdb53dab19b78d96d95c8b719a98df
+  - https://assets-prod.sumo.prod.webservices.mozgcp.net/static/favicon-32x32.2143cdf0c7e3f377.png
