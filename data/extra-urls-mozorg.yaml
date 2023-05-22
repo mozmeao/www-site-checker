@@ -1,0 +1,21 @@
+# URLs which won't be discovered via the sitemap, but which we want to check anyway
+
+# This list is drawn from the NOINDEX_URLS setting in Bedrock:
+# https://github.com/mozilla/bedrock/blob/main/bedrock/settings/base.py#L433
+
+extra_urls_to_check:
+  - firefox/set-as-default/thanks/
+  - firefox/unsupported/
+  - firefox/dedicated-profiles/
+  - firefox/installer-help/
+  - firefox/this-browser-comes-highly-recommended/
+  - newsletter/existing/
+  - newsletter/recovery/
+  - newsletter/updated/
+  - newsletter/fxa-error/
+  - newsletter/opt-out-confirmation/
+  - newsletter/country/success/
+  - readiness/
+  - healthz/
+  - healthz-cron/
+  - firefox/browsers/mobile/get-ios/

@@ -33,6 +33,7 @@ from sentry_sdk.integrations.logging import LoggingIntegration
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
 ALLOWLIST_FILEPATH = os.environ.get("ALLOWLIST_FILEPATH")
+EXTRA_URLS_FILEPATH = os.environ.get("EXTRA_URLS_FILEPATH")
 
 
 if SENTRY_DSN:
@@ -50,6 +51,11 @@ DEFAULT_BATCH__NOOP = "1:1"  # By default treat all URLs as a single batch
 UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
 URL_RETRY_LIMIT = 3
 URL_RETRY_WAIT_SECONDS = 4
+
+# Run a simple cache of the pages we've already pulled down, to avoid getting them twice
+# Size wise, ballparking at 25Kb per page, with ~3500 pages per worker => 85MB
+PAGE_CONTENT_CACHE = dict()
+LOCALES_TO_CACHE = ("en-US",)
 
 
 @click.command()
@@ -82,14 +88,20 @@ URL_RETRY_WAIT_SECONDS = 4
 @click.option(
     "--allowlist",
     default=ALLOWLIST_FILEPATH,
-    help="Path to a YAML-formatted allowlist. If none is provided, the default of data/allowlist.yml will be used",
+    help="Path to a YAML-formatted allowlist. If none is provided, the env var of ALLOWLIST_FILEPATH will be used",
 )
-def check_for_unexpected_outbound_urls(
+@click.option(
+    "--additional-urls-file",
+    default=EXTRA_URLS_FILEPATH,
+    help="Path to a YAML-formatted list of additional URLs to check. If none is provided, the env var EXTRA_URLS_FILEPATH will be used",
+)
+def run_checks(
     sitemap_url: str,
     maintain_hostname: bool,
     specific_url: Iterable,
     batch: str,
     allowlist: str,
+    additional_urls_file: str,
 ) -> None:
 
     # Let's tidy up that variable name we get from the input option
@@ -101,7 +113,7 @@ def check_for_unexpected_outbound_urls(
     host_url = sitemap_url or specific_urls[0]  # TODO: ensure all specific URLs use the same hostname
     hostname = urlparse(host_url).netloc
 
-    config = _get_allowlist_config(
+    allowlist_config = _get_allowlist_config(
         hostname,
         allowlist_pathname=allowlist,
     )
@@ -112,16 +124,55 @@ def check_for_unexpected_outbound_urls(
         maintain_hostname=maintain_hostname,
     )
 
+    if additional_urls_file:
+        urls_to_check += _generate_additional_urls_to_check(
+            additional_urls_file=additional_urls_file,
+            hostname=hostname,
+        )
+
     # Do we need to chunk these down?
     if batch != DEFAULT_BATCH__NOOP:
         urls_to_check = _get_batched_urls(urls_to_check, batch)
 
-    results = _check_pages(urls_to_check, config)
+    check_for_unexpected_urls(
+        urls_to_check=urls_to_check,
+        allowlist_config=allowlist_config,
+        hostname=hostname,
+        batch=batch,
+    )
 
-    if results:
+
+def _generate_additional_urls_to_check(
+    additional_urls_file: str,
+    hostname: str,
+) -> List[str]:
+    """If we have a file of additional paths to check (eg ones which
+    are deliberately not in the sitemap), load the paths here and convert to
+    full URLs"""
+    output = []
+
+    extra_urls_data = parse_config(_get_configuration_path(additional_urls_file))
+    if extra_urls_data:
+        scheme = "http://" if hostname.startswith("localhost:") else "https://"
+        for url in extra_urls_data["extra_urls_to_check"]:
+            output.append(f"{scheme}{hostname}/{url}")
+
+    return output
+
+
+def check_for_unexpected_urls(
+    urls_to_check: List[str],
+    allowlist_config: dict,
+    hostname: str,
+    batch: str,
+) -> None:
+    click.echo("Checking pages for unexpected URLs")
+    url_results = _check_pages_for_outbound_links(urls_to_check, allowlist_config)
+
+    if url_results:
         click.echo(f"Unexpected outbound URLs found on {hostname}!")
-        _dump_to_files(
-            results=results,
+        _dump_unexpected_urls_to_files(
+            results=url_results,
             hostname=hostname,
             batch_label="all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0],
         )
@@ -149,10 +200,18 @@ def _get_batched_urls(urls_to_check: List[str], batch: str) -> List[str]:
     return urls_to_check[start_index:end_index]
 
 
+def _page_content_is_cacheable(url):
+    for locale in LOCALES_TO_CACHE:
+        if f"/{locale}/" in url:
+            return True
+    return False
+
+
 def _get_url_with_retry(
     url: str,
     try_count: int = 0,
     limit: int = URL_RETRY_LIMIT,
+    cache_html: bool = True,
 ) -> requests.Response:
     exceptions_to_retry = (
         ChunkedEncodingError,
@@ -160,8 +219,15 @@ def _get_url_with_retry(
         HTTPError,  # GOTCHA? This might be too permissive because many Requests exceptions inherit it
     )
     try:
-        resp = requests.get(url)
-        resp.raise_for_status()
+        resp = PAGE_CONTENT_CACHE.get(url)
+        if resp:
+            click.echo(f"Getting {url} from cache")
+        else:
+            click.echo(f"Pulling down {url}")
+            resp = requests.get(url)
+            resp.raise_for_status()
+            if cache_html and _page_content_is_cacheable(url):
+                PAGE_CONTENT_CACHE[url] = resp
         return resp
 
     except exceptions_to_retry as re:
@@ -174,11 +240,11 @@ def _get_url_with_retry(
             raise re
 
 
-def _dump_to_files(
+def _dump_unexpected_urls_to_files(
     results: Dict[str, set],
     hostname: str,
     batch_label: str,
-) -> Tuple[str]:
+) -> Tuple[str, str, str]:
     """Output files of results specific to the current hostname and batch:
 
     * Text output:
@@ -235,7 +301,7 @@ def _get_output_path() -> os.PathLike:
     return os.path.join("", *path_components)
 
 
-def _get_allowlist_path(allowlist_pathname: str) -> os.PathLike:
+def _get_configuration_path(allowlist_pathname: str) -> os.PathLike:
     # Get the path, allowing for this being called from the project root or the bin/ dir
     path_components = allowlist_pathname.split("/")
     working_dir = os.getcwd()
@@ -246,22 +312,22 @@ def _get_allowlist_path(allowlist_pathname: str) -> os.PathLike:
 
 @cache
 def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
-    """Load the allowlist from the YAML file, optimise the direct like-for-like lookups
-    and warm up any regexes."""
+    """Load the allowlist from the YAML file, optimise the direct
+    like-for-like lookups and warm up any regexes."""
 
     click.echo(f"Seeking an appropriate allowlist in file {allowlist_pathname}")
-    config_data = parse_config(_get_allowlist_path(allowlist_pathname))
+    config_data = parse_config(_get_configuration_path(allowlist_pathname))
 
     site_config = None
 
-    # Find the appropriate config for the config node
+    # Find the appropriate allowlist for the allowlist_config node
     for candidate_hostname in config_data.get("relevant_hostnames"):
         if candidate_hostname == hostname:
             site_config = config_data
             break
 
     if not site_config:
-        click.echo(f"Could not find an allowlist for {hostname}, so treating all outbound URLs as unexpected")
+        click.echo(f"Could not find a config for {hostname}, so treating all outbound URLs as unexpected")
         site_config = {
             "allowed_outbound_url_literals": set(),
             "allowed_outbound_url_regexes": set(),
@@ -282,9 +348,9 @@ def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
     return site_config
 
 
-def _verify_url_allowed(url: str, config: dict) -> bool:
+def _verify_url_allowed(url: str, allowlist_config: dict) -> bool:
 
-    # Quickest check first - set membership.
+    # Quickest check first, using set membership.
 
     # Temporary measure: adjust for line breaks in hrefs
     if "\n" in url:
@@ -292,11 +358,11 @@ def _verify_url_allowed(url: str, config: dict) -> bool:
     else:
         _url = url
 
-    if _url in config["allowed_outbound_url_literals"]:
+    if _url in allowlist_config["allowed_outbound_url_literals"]:
         return True
 
     # If no luck, try our regex rules
-    for compiled_regex in config["allowed_outbound_url_regexes"]:
+    for compiled_regex in allowlist_config["allowed_outbound_url_regexes"]:
         if compiled_regex.match(url):  # NB: testing the original, untweaked URL
             return True
 
@@ -304,16 +370,16 @@ def _verify_url_allowed(url: str, config: dict) -> bool:
     return False
 
 
-def _check_pages(urls: List[str], config: Dict) -> Dict:
+def _check_pages_for_outbound_links(urls: List[str], allowlist_config: Dict) -> Dict:
 
     unlisted_outbound_urls = defaultdict(set)
     # oubound url is they key, a set of pages it's on is the value
 
     for page_url in urls:
-        click.echo(f"Pulling down {page_url}")
+        click.echo(f"Checking {page_url}")
         resp = _get_url_with_retry(page_url)
-        content = resp.text
-        soup = BeautifulSoup(content, "html5lib")
+        html_content = resp.text
+        soup = BeautifulSoup(html_content, "html5lib")
         anchor_tags = soup.find_all("a")
         script_tags = soup.find_all("script")
         link_tags = soup.find_all("link")
@@ -322,14 +388,16 @@ def _check_pages(urls: List[str], config: Dict) -> Dict:
             (anchor_tags, "href"),
             (script_tags, "src"),
             (link_tags, "src"),
+            (link_tags, "href"),  # eg for Atom/RSS feeds
         ]:
             for node in nodelist:
-                _url = node.attrs.get("href")
-                if _url and not _verify_url_allowed(_url, config):
+                _url = node.attrs.get(attr)
+                if _url and not _verify_url_allowed(_url, allowlist_config):
                     unlisted_outbound_urls[_url].add(page_url)
 
         # TODO: OPTIMISE THE ABOVE
         # TODO: find URLS in rendered content, too
+
     return unlisted_outbound_urls
 
 
@@ -426,4 +494,4 @@ def _update_hostname(origin_hostname_with_scheme: str, urls: List[str]) -> List[
 
 
 if __name__ == "__main__":
-    check_for_unexpected_outbound_urls()
+    run_checks()

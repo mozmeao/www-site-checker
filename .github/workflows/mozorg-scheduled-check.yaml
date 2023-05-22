@@ -1,8 +1,6 @@
 name: "Site scanning"
 on:
-  push:
-    branches-ignore:
-      - "dependabot/**"
+  workflow_dispatch:
   schedule:
     - cron: "32 2,14 * * *" # 02:32 UTC and 14:32 every day
 
@@ -14,6 +12,7 @@ env:
   MOZORG_EU_ORIGIN_HOSTNAME: ${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}
   MEAO_IDENTITY_EMAIL: ${{ secrets.MEAO_IDENTITY_EMAIL }}
   ALLOWLIST_FILEPATH: data/allowlist-mozorg.yaml
+  EXTRA_URLS_FILEPATH: data/extra-urls-mozorg.yaml
 
 jobs:
   run_on_cdn:
