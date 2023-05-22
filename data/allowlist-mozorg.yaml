@@ -26,7 +26,7 @@ allowed_outbound_url_regexes:
 
   # === Mozilla on Github
 
-  - '^https:\/\/github.com\/(mozilla|mozilla-mobile|mozilla-services|mozilla-tw)\/.*'
+  - '^https:\/\/github.com\/(mozilla|mozmeao|mozilla-mobile|mozilla-services|mozilla-tw)\/.*'
   - '^https?:\/\/mozilla.github.io($|\/(.*))'
   - '^https?:\/\/mozilladevelopers.github.io($|\/(.*))'
   - '^https?:\/\/mozillagfx.wordpress.com($|\/(.*))'
@@ -69,6 +69,9 @@ allowed_outbound_url_regexes:
 
   # References back up the tree from within security advisory pages
   - '^..\/200\d{1,2}\/mfsa200\d{1,2}-\d{2}.html$'
+
+  # Assets
+  - https:\/\/assets-prod.sumo.prod.webservices.mozgcp.net\/static\/.*(js|css)
 
 allowed_outbound_url_literals:
   # Internals
@@ -356,13 +359,17 @@ allowed_outbound_url_literals:
   - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=%C3%89g+sty%C3%B0+framt%C3%AD%C3%B0ars%C3%BDnina+um+betra+og+heilbrig%C3%B0ara+internet+fr%C3%A1+%40mozilla%2C+viltu+taka+%C3%BE%C3%A1tt+me%C3%B0+m%C3%A9r%3F
 
   - https://www.instagram.com/firefox/
+  - https://www.instagram.com/firefox
   - https://www.instagram.com/mozilla/
   - https://www.instagram.com/mozilla_deutschland/
   - https://www.instagram.com/unfcktheinternet/
 
+  - https://www.facebook.com/Firefox
+
   - https://youtube.com/MozillaDeveloper
   - https://www.youtube.com/t/terms
   - https://www.youtube.com/user/firefoxchannel
+  - https://www.youtube.com/firefoxchannel
   - https://www.youtube.com/watch?v=1iT0eSSNlC4
   - https://www.youtube.com/watch?v=2Hukzq_hOQ8
   - https://www.youtube.com/watch?v=6Ck1d6qo8a0
@@ -1554,3 +1561,6 @@ allowed_outbound_url_literals:
   - https://w3c.github.io/webtransport
   - https://github.com/w3c/webtransport/blob/main/explainer.md
   - https://html.spec.whatwg.org/multipage/workers.html#workeroptions
+  - https://web.archive.org/web/20210530092017/https://developer.mozilla.org/en-US/docs/Mozilla/Command_Line_Options
+  - https://cdn-3.convertexperiments.com/js/10039-1003343.js
+  - https://nn8g.adj.st/?adjust_t=ucunb4r

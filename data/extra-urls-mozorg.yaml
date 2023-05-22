@@ -16,6 +16,4 @@ extra_urls_to_check:
   - newsletter/opt-out-confirmation/
   - newsletter/country/success/
   - readiness/
-  - healthz/
-  - healthz-cron/
   - firefox/browsers/mobile/get-ios/
