@@ -12,6 +12,7 @@ env:
   MOZORG_EU_ORIGIN_HOSTNAME: ${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}
   MEAO_IDENTITY_EMAIL: ${{ secrets.MEAO_IDENTITY_EMAIL }}
   ALLOWLIST_FILEPATH: data/allowlist-mozorg.yaml
+  EXTRA_URLS_FILEPATH: data/extra-urls-mozorg.yaml
 
 jobs:
   run_on_cdn:

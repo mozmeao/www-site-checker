@@ -33,6 +33,7 @@ from sentry_sdk.integrations.logging import LoggingIntegration
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
 ALLOWLIST_FILEPATH = os.environ.get("ALLOWLIST_FILEPATH")
+EXTRA_URLS_FILEPATH = os.environ.get("EXTRA_URLS_FILEPATH")
 
 
 if SENTRY_DSN:
@@ -87,7 +88,12 @@ LOCALES_TO_CACHE = ("en-US",)
 @click.option(
     "--allowlist",
     default=ALLOWLIST_FILEPATH,
-    help="Path to a YAML-formatted allowlist. If none is provided, the default of data/allowlist.yml will be used",
+    help="Path to a YAML-formatted allowlist. If none is provided, the env var of ALLOWLIST_FILEPATH will be used",
+)
+@click.option(
+    "--additional-urls-file",
+    default=EXTRA_URLS_FILEPATH,
+    help="Path to a YAML-formatted list of additional URLs to check. If none is provided, the env var EXTRA_URLS_FILEPATH will be used",
 )
 def run_checks(
     sitemap_url: str,
@@ -95,6 +101,7 @@ def run_checks(
     specific_url: Iterable,
     batch: str,
     allowlist: str,
+    additional_urls_file: str,
 ) -> None:
 
     # Let's tidy up that variable name we get from the input option
@@ -117,6 +124,12 @@ def run_checks(
         maintain_hostname=maintain_hostname,
     )
 
+    if additional_urls_file:
+        urls_to_check += _generate_additional_urls_to_check(
+            additional_urls_file=additional_urls_file,
+            hostname=hostname,
+        )
+
     # Do we need to chunk these down?
     if batch != DEFAULT_BATCH__NOOP:
         urls_to_check = _get_batched_urls(urls_to_check, batch)
@@ -127,6 +140,24 @@ def run_checks(
         hostname=hostname,
         batch=batch,
     )
+
+
+def _generate_additional_urls_to_check(
+    additional_urls_file: str,
+    hostname: str,
+) -> List[str]:
+    """If we have a file of additional paths to check (eg ones which
+    are deliberately not in the sitemap), load the paths here and convert to
+    full URLs"""
+    output = []
+
+    extra_urls_data = parse_config(_get_configuration_path(additional_urls_file))
+    if extra_urls_data:
+        scheme = "http://" if hostname.startswith("localhost:") else "https://"
+        for url in extra_urls_data["extra_urls_to_check"]:
+            output.append(f"{scheme}{hostname}/{url}")
+
+    return output
 
 
 def check_for_unexpected_urls(
@@ -270,7 +301,7 @@ def _get_output_path() -> os.PathLike:
     return os.path.join("", *path_components)
 
 
-def _get_allowlist_path(allowlist_pathname: str) -> os.PathLike:
+def _get_configuration_path(allowlist_pathname: str) -> os.PathLike:
     # Get the path, allowing for this being called from the project root or the bin/ dir
     path_components = allowlist_pathname.split("/")
     working_dir = os.getcwd()
@@ -285,7 +316,7 @@ def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
     like-for-like lookups and warm up any regexes."""
 
     click.echo(f"Seeking an appropriate allowlist in file {allowlist_pathname}")
-    config_data = parse_config(_get_allowlist_path(allowlist_pathname))
+    config_data = parse_config(_get_configuration_path(allowlist_pathname))
 
     site_config = None
 
@@ -345,7 +376,7 @@ def _check_pages_for_outbound_links(urls: List[str], allowlist_config: Dict) -> 
     # oubound url is they key, a set of pages it's on is the value
 
     for page_url in urls:
-        click.echo(f"Pulling down {page_url}")
+        click.echo(f"Checking {page_url}")
         resp = _get_url_with_retry(page_url)
         html_content = resp.text
         soup = BeautifulSoup(html_content, "html5lib")

@@ -29,6 +29,8 @@ git clone git@github.com:mozmeao/www-site-checker.git
 cd www-site-checker
 # make a virtualenv, with whatever you prefer, and activate it
 pip install -r requirements.txt
+export ALLOWLIST_FILEPATH=data/allowlist-mozorg.yaml
+export EXTRA_URLS_FILEPATH=data/extra-urls-mozorg.yaml
 python bin/run_checks.py --sitemap-url=https://www.mozilla.org/sitemap.xml
 ```
 
@@ -47,7 +49,7 @@ And if you only want to check a specific page, you use the `--specific-url` para
 python bin/run_checks.py --specific-url=https://www.mozilla.org/en-US/firefox/browsers/mobile/
 ```
 
-There is a default allowlist in use (`data/allowlist-mozorg.yaml` - set via env vars) but an alernative can be passed via the `--allowlist` param
+There is a default allowlist in use (`data/allowlist-mozorg.yaml` - **set via env vars**) but an alernative can be passed via the `--allowlist` param
 
 ```bash
 python bin/run_checks.py --sitemap-url=https://www.mozilla.org/sitemap.xml --allowlist=/path/to/custom/allowlist.yaml
