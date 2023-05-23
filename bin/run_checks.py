@@ -29,6 +29,7 @@ from bs4 import BeautifulSoup
 from pyaml_env import parse_config
 from requests.exceptions import ChunkedEncodingError, ConnectionError, HTTPError
 from sentry_sdk.integrations.logging import LoggingIntegration
+from utils import _get_configuration_path
 
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
@@ -297,15 +298,6 @@ def _get_output_path() -> os.PathLike:
     path_components = [
         "output",
     ]
-    working_dir = os.getcwd()
-    if str(working_dir).endswith("/bin"):
-        path_components = [working_dir, ".."] + path_components
-    return os.path.join("", *path_components)
-
-
-def _get_configuration_path(allowlist_pathname: str) -> os.PathLike:
-    # Get the path, allowing for this being called from the project root or the bin/ dir
-    path_components = allowlist_pathname.split("/")
     working_dir = os.getcwd()
     if str(working_dir).endswith("/bin"):
         path_components = [working_dir, ".."] + path_components
