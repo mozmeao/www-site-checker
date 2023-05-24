@@ -1,0 +1,39 @@
+name: "RSS/Atom feed checking"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "03 2,14 * * *" # 02:03 UTC and 14:03 every day
+
+env:
+  MOZORG_CDN_HOSTNAME: ${{ secrets.MOZORG_CDN_HOSTNAME }}
+  MOZORG_US_ORIGIN_HOSTNAME: ${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}
+  MOZORG_EU_ORIGIN_HOSTNAME: ${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}
+
+jobs:
+  run_checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Check main CDN feeds
+        if: always()
+        run: >
+          python bin/validate_feeds.py
+          --hostname="https://${{ secrets.MOZORG_CDN_HOSTNAME }}"
+      - name: "Check US origin feeds"
+        if: always()
+        run: >
+          python bin/validate_feeds.py
+          --hostname="https://${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}"
+      - name: "Check EU origin feeds"
+        if: always()
+        run: >
+          python bin/validate_feeds.py
+          --hostname="https://${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}"
+      - name: Check for failures
+        if: steps.*.status == 'failure'
+        run: exit 1

@@ -1,0 +1,9 @@
+relevant_hostnames:
+  - !ENV ${MOZORG_CDN_HOSTNAME}
+  - !ENV ${MOZORG_US_ORIGIN_HOSTNAME}
+  - !ENV ${MOZORG_EU_ORIGIN_HOSTNAME}
+  - localhost:8000
+  - localhost:8080
+
+feed_paths:
+  - "firefox/nightly/notes/feed/"

@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:webfeeds="http://webfeeds.org/rss/1.0">
+  <title>Firefox Nightly Notes</title>
+  <subtitle>Firefox Nightly gets a new version every day and as a consequence, the release notes for the Nightly channel are updated continuously to reflect features that have reached sufficient maturity to benefit from community feedback and bug reports.</subtitle>
+  <author>
+    <name>Mozilla</name>
+  </author>
+  <id>https://www.mozilla.org/en-US/firefox/nightly/notes/feed/</id>
+  <link rel="self" type="application/atom+xml" href="https://www.mozilla.org/en-US/firefox/nightly/notes/feed/"/>
+  <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/nightly/notes/"/>
+  <icon>https://www.mozilla.org/media/img/favicons/firefox/browser/nightly/apple-touch-icon.d0bdd11a17e1.png</icon>
+  <updated>2023-05-18T19:42:56.107658+00:00</updated>
+  <webfeeds:cover image="https://www.mozilla.org/media/protocol/img/logos/firefox/browser/nightly/og.3190903353c3.png" />
+  <webfeeds:icon>https://www.mozilla.org/media/img/favicons/firefox/browser/nightly/favicon-196x196.f6d874cabab4.png</webfeeds:icon>
+
+  <entry>
+    <title type="html">Starting with Firefox 115, Nightly users without platform support for H264 video decoding can...</title>
+    <id>https://www.mozilla.org/en-US/firefox/115.0a1/releasenotes/#note-789551</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/115.0a1/releasenotes/#note-789551"/>
+    <updated>2023-05-18T19:42:56.107658+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        115.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1832568">Bug 1832568</a>
+        <p>Starting with Firefox 115, Nightly users without platform support for H264 video decoding can now fallback to Cisco's OpenH264 plugin for playback.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">On Linux, middle clicks on the new tab button will now open the xclipboard contents in the new...</title>
+    <id>https://www.mozilla.org/en-US/firefox/115.0a1/releasenotes/#note-789546</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/115.0a1/releasenotes/#note-789546"/>
+    <updated>2023-05-11T12:43:13.536683+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        115.0a1 / Changed / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1418462">Bug 1418462</a>
+        <p>On Linux, middle clicks on the new tab button will now open the xclipboard contents in the new tab. If the xclipboard content is a URL then that URL is opened, any other text is opened with your default search provider. This feature can be turned off using <code>browser.tabs.searchclipboardfor.middleclick</code> in <code>about:config</code>.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">DOM: Added support for ES Modules on DedicatedWorker and SharedWorker</title>
+    <id>https://www.mozilla.org/en-US/firefox/114.0a1/releasenotes/#note-789543</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/114.0a1/releasenotes/#note-789543"/>
+    <updated>2023-05-10T11:05:55.512298+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        114.0a1 / Web Platform / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1812591">Bug 1812591</a>
+        <p>DOM: Added support for ES Modules on <a href="https://html.spec.whatwg.org/multipage/workers.html#workeroptions">DedicatedWorker and SharedWorker</a></p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">It is now possible to reorder the extensions listed in the extensions panel.</title>
+    <id>https://www.mozilla.org/en-US/firefox/114.0a1/releasenotes/#note-789542</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/114.0a1/releasenotes/#note-789542"/>
+    <updated>2023-05-10T09:44:12.101975+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        114.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1805924">Bug 1805924</a>
+        <p>It is now possible to reorder the extensions listed in the extensions panel.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">DNS over HTTPS settings are now part of  the Privacy &amp; Security section of the Settings page...</title>
+    <id>https://www.mozilla.org/en-US/firefox/114.0a1/releasenotes/#note-789491</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/114.0a1/releasenotes/#note-789491"/>
+    <updated>2023-05-08T13:06:10.541493+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        114.0a1 / Changed / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1610741">Bug 1610741</a>
+        <p>DNS over HTTPS settings are now part of  the <em>Privacy &amp; Security</em> section of the <em>Settings</em> page and allow the user to choose from all the supported modes.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Added UI to manage the DNS over HTTPS exception list.</title>
+    <id>https://www.mozilla.org/en-US/firefox/114.0a1/releasenotes/#note-789492</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/114.0a1/releasenotes/#note-789492"/>
+    <updated>2023-05-08T13:05:55.420369+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        114.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1596847">Bug 1596847</a>
+        <p>Added UI to manage the DNS over HTTPS exception list.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Bookmarks can now be searched from the Bookmarks menu. The Bookmarks menu is accessible by...</title>
+    <id>https://www.mozilla.org/en-US/firefox/114.0a1/releasenotes/#note-789496</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/114.0a1/releasenotes/#note-789496"/>
+    <updated>2023-05-08T13:05:47.084867+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        114.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1736937">Bug 1736937</a>
+        <p>Bookmarks can now be searched from the Bookmarks menu. The Bookmarks menu is accessible by adding the <em>Bookmarks menu</em> button to the toolbar.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Restrict searches to your local browsing history by selecting Search history from the History,...</title>
+    <id>https://www.mozilla.org/en-US/firefox/114.0a1/releasenotes/#note-789506</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/114.0a1/releasenotes/#note-789506"/>
+    <updated>2023-05-08T13:05:35.809087+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        114.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1736939">Bug 1736939</a>
+        <p>Restrict searches to your local browsing history by selecting <em>Search history</em> from the History, Library or Application menu buttons.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Mac users can now capture video from their cameras in all supported native resolutions. This...</title>
+    <id>https://www.mozilla.org/en-US/firefox/114.0a1/releasenotes/#note-789509</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/114.0a1/releasenotes/#note-789509"/>
+    <updated>2023-05-08T13:05:29.043397+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        114.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1806604">Bug 1806604</a>
+        <p>Mac users can now capture video from their cameras in all supported native resolutions. This enables resolutions higher than 1280x720.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Say hello to enhanced Picture-in-Picture! Rewind, check video duration, and effortlessly switch...</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789402</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789402"/>
+    <updated>2023-05-05T15:26:20.249508+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1778801">Bug 1778801</a>
+        <p>Say hello to enhanced <a href="https://support.mozilla.org/kb/about-picture-picture-firefox">Picture-in-Picture</a>! Rewind, check video duration, and effortlessly switch to full-screen mode on the web's most popular video websites.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Firefox 113 adds support for a number of WebRTC features for improved interoperability:...</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789451</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789451"/>
+    <updated>2023-05-05T15:08:46.615340+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / Web Platform / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1510802">Bug 1510802</a>
+        <p>Firefox 113 adds support for a number of WebRTC features for improved interoperability: <a href="https://www.w3.org/TR/webrtc-stats/#dom-rtcmediasourcestats"><code>RTCMediaSourceStats</code></a>, <a href="https://w3c.github.io/webrtc-pc/#dom-rtcpeerconnectionstate"><code>RTCPeerConnectionState</code></a>, <a href="https://www.w3.org/TR/webrtc-stats/#dom-rtcpeerconnectionstats"><code>RTCPeerConnectionStats</code></a> ("peer-connection" RTCStatsType), <a href="https://w3c.github.io/webrtc-pc/#dom-rtcrtpsender-setstreams"><code>RTCRtpSender.setStreams()</code></a>, and <a href="https://w3c.github.io/webrtc-pc/#dom-rtcsctptransport"><code>RTCSctpTransport</code></a>.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">For all ETP Strict users, we extended the list of known tracking parameters that are removed...</title>
+    <id>https://www.mozilla.org/en-US/firefox/112.0a1/releasenotes/#note-789482</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/112.0a1/releasenotes/#note-789482"/>
+    <updated>2023-05-02T19:20:13.935277+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        112.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1773983">Bug 1773983</a>
+        <p>For all ETP Strict users, we extended the list of known tracking parameters that are removed from URLs to further protect our users from cross-site tracking.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Starting with Firefox 112, Nightly users on macOS and Linux can now use FIDO2 / WebAuthn...</title>
+    <id>https://www.mozilla.org/en-US/firefox/115.0a1/releasenotes/#note-789441</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/115.0a1/releasenotes/#note-789441"/>
+    <updated>2023-05-01T13:51:25.181951+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        115.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1814487">Bug 1814487</a>
+        <p>Starting with Firefox 112, Nightly users on macOS and Linux can now use FIDO2 / WebAuthn authenticators over USB. Some advanced features, such as fully passwordless logins, require a PIN to be set on the authenticator. It is expected to ship to all users in a future release.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Starting with Firefox 113, Nightly and early beta builds now behave similar to the other...</title>
+    <id>https://www.mozilla.org/en-US/firefox/115.0a1/releasenotes/#note-789452</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/115.0a1/releasenotes/#note-789452"/>
+    <updated>2023-05-01T13:51:25.181951+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        115.0a1 / Web Platform / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1820116">Bug 1820116</a>
+        <p>Starting with Firefox 113, Nightly and early beta builds now behave similar to the other browsers when splitting a node (e.g., typing <code>Enter</code> to split a paragraph) and joining two nodes (e.g., typing <code>Backspace</code> at start of a paragraph to join the paragraph and the previous one) when using the built-in editor. When a node is split, the built-in editor creates new node after the original one, i.e., creates the right node. Similarly, when two nodes are joined, the built-in editor deletes the latter node and moves its children to end of the preceding node.</p>
+<p>This new behavior can also be enabled by web apps themselves for all channels with a call of <code>document.execCommand("enableCompatibleJoinSplitDirection", false, "false")</code> (introduced in <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1810663">bug 1810663</a>). This command is available only when <code>designMode</code> is set to <code>"on"</code> or there is at least one editable element which has <code>contenteditable</code> attribute, and the built-in editor has not handled the <code>insertParagraph</code>, <code>delete</code>, or <code>forwardDelete</code> command.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Starting with Firefox 113, the WebTransport API is now enabled in the Nightly channel, including...</title>
+    <id>https://www.mozilla.org/en-US/firefox/115.0a1/releasenotes/#note-789459</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/115.0a1/releasenotes/#note-789459"/>
+    <updated>2023-05-01T13:51:25.181951+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        115.0a1 / Web Platform / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1818754">Bug 1818754</a>
+        <p>Starting with Firefox 113, the WebTransport API is now enabled in the Nightly channel, including RFC 9297 support. It's expected to ship to release in the near future. WebTransport is expected to see widespread use for media delivery and other applications. WebTransport is built on top of QUIC/HTTP3 and provides reliable streams and reliable and unreliable datagrams.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">The Awesomebar result menu is now enabled in Firefox Nightly, allowing you to remove history...</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789387</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789387"/>
+    <updated>2023-04-20T18:31:07.949078+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1789661">Bug 1789661</a>
+        <p>The Awesomebar result menu is now enabled in Firefox Nightly, allowing you to remove history results and dismiss sponsored Firefox Suggest results.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">The forced-color-adjust property is now supported, allowing authors to opt an element out of...</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789457</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789457"/>
+    <updated>2023-04-08T09:10:25.872385+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / Web Platform / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1818819">Bug 1818819</a>
+        <p>The <code>forced-color-adjust</code> property is now supported, allowing authors to opt an element out of color changes in Forced Color Mode for improved readability where the automatically-picked contrasting colors are not ideal.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Passwords generated in Firefox now include special characters, making them more secure.</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789439</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789439"/>
+    <updated>2023-04-08T09:10:23.679966+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1559986">Bug 1559986</a>
+        <p>Passwords <a href="https://support.mozilla.org/kb/how-generate-secure-password-firefox">generated in Firefox</a> now include special characters, making them more secure.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">AV1 Image Format files containing animations (AVIS) are now supported, improving Firefox'...</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789460</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789460"/>
+    <updated>2023-04-08T09:10:22.757576+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1825580">Bug 1825580</a>
+        <p>AV1 Image Format files containing animations (AVIS) are now supported, improving Firefox' support for AVIF images across the web.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">On Windows, the elastic overscroll effect is now enabled by default, with two fingers scrolling...</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789458</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789458"/>
+    <updated>2023-04-08T09:10:22.054853+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1810641">Bug 1810641</a>
+        <p>On Windows, the elastic overscroll effect is now enabled by default, with two fingers scrolling on touchpad or scrolling on touchscreen, you will see a bouncing animation when scrolling past the edge of a scroll container.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Firefox now supports the scripting CSS media query.</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789456</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789456"/>
+    <updated>2023-04-08T09:10:18.971299+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / Web Platform / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1166581">Bug 1166581</a>
+        <p>Firefox now supports the <a href="https://developer.mozilla.org/docs/Web/CSS/@media/scripting"><code>scripting</code></a> CSS media query.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Following up on the work already shipped on macOS and Linux in Firefox 110, GPU-accelerated...</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789455</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789455"/>
+    <updated>2023-04-08T09:10:18.177980+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1825182">Bug 1825182</a>
+        <p>Following up on the work already shipped on macOS and Linux in Firefox 110, GPU-accelerated Canvas2D is now enabled by default for <a href="https://play.google.com/store/apps/details?id=org.mozilla.fenix">Firefox for Android</a> also.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Firefox for Android now supports hardware accelerated AV1 video decoding by default with...</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789454</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789454"/>
+    <updated>2023-04-08T09:10:17.366693+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / New
+        <p><a href="https://play.google.com/store/apps/details?id=org.mozilla.fenix">Firefox for Android</a> now supports hardware accelerated AV1 video decoding by default with supported hardware or via fallback to software decoding.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Websites that use window.print() can now be printed in Firefox for Android.</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789453</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789453"/>
+    <updated>2023-04-08T09:10:16.442255+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1659818">Bug 1659818</a>
+        <p>Websites that use window.print() can now be printed in <a href="https://play.google.com/store/apps/details?id=org.mozilla.fenix">Firefox for Android</a>.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Mac users can now access macOS Services directly from the context menu.</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789449</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789449"/>
+    <updated>2023-04-08T09:10:01.357239+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=660452">Bug 660452</a>
+        <p>Mac users can now access macOS Services directly from the context menu.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Removed the long-deprecated mozRTCPeerConnection, mozRTCIceCandidate, and...</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789450</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789450"/>
+    <updated>2023-04-08T09:09:58.286690+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / Changed / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1531812">Bug 1531812</a>
+        <p>Removed the long-deprecated mozRTCPeerConnection, mozRTCIceCandidate, and mozRTCSessionDescription types. Sites should utilize the non-prefixed variants instead.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">A 13-year-old feature request was fulfilled, and Firefox now supports files being...</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789447</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789447"/>
+    <updated>2023-04-08T09:09:57.507775+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=580928">Bug 580928</a>
+        <p>A 13-year-old feature request was fulfilled, and Firefox now supports files being drag-and-dropped directly from Microsoft Outlook. A special thanks to volunteer contributor Marco Spiess for helping to get this across the finish line!</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Firefox now supports the color functions from the color (level 4) specification. This includes...</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789448</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789448"/>
+    <updated>2023-04-08T09:09:56.598552+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / Web Platform / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1352753">Bug 1352753</a>
+        <p>Firefox now supports the color functions from the color (level 4) specification. This includes the lab(), lch(), oklab(), oklch() and color() functions.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">The Windows GPU sandbox first shipped in the Firefox 110 release has been tightened to enhance...</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789446</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789446"/>
+    <updated>2023-04-08T09:09:55.955146+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1822308">Bug 1822308</a>
+        <p>The Windows GPU sandbox first shipped in the Firefox 110 release has been tightened to enhance the security benefits it provides.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Module scripts can now import other ES module scripts on worklets.</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789445</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789445"/>
+    <updated>2023-04-08T09:09:55.139949+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / Web Platform / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1572644">Bug 1572644</a>
+        <p>Module scripts can now import other ES module scripts on worklets.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Importing bookmarks from Safari or a Chrome-based browser? The favicons for those bookmarks will...</title>
+    <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789440</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789440"/>
+    <updated>2023-04-08T09:09:53.100353+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        113.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=326701">Bug 326701</a>
+        <p>Importing bookmarks from Safari or a Chrome-based browser? The favicons for those bookmarks will now also be imported by default to make them easier to identify.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">The deprecated U2F Javascript API is now disabled by default. The U2F protocol remains usable...</title>
+    <id>https://www.mozilla.org/en-US/firefox/112.0a1/releasenotes/#note-789380</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/112.0a1/releasenotes/#note-789380"/>
+    <updated>2023-04-06T15:24:53.245093+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        112.0a1 / Changed / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1809333">Bug 1809333</a>
+        <p>The deprecated U2F Javascript API is now disabled by default. The U2F protocol remains usable through the WebAuthn API. The U2F API can be re-enabled using the <code>security.webauth.u2f</code> preference.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Do you use the tab list panel in the tab bar? If so, you can now close tabs by middle-clicking...</title>
+    <id>https://www.mozilla.org/en-US/firefox/112.0a1/releasenotes/#note-789415</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/112.0a1/releasenotes/#note-789415"/>
+    <updated>2023-04-06T15:24:52.332581+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        112.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=953217">Bug 953217</a>
+        <p>Do you use the tab list panel in the tab bar? If so, you can now close tabs by middle-clicking items in that list.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">You've always been able to un-close a tab by using (Cmd/Ctrl)-Shift-T. Now, that same shortcut...</title>
+    <id>https://www.mozilla.org/en-US/firefox/112.0a1/releasenotes/#note-789416</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/112.0a1/releasenotes/#note-789416"/>
+    <updated>2023-04-06T15:24:51.586634+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        112.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1423125">Bug 1423125</a>
+        <p><a href="https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly#w_windows-tabs">You've always been able to un-close a tab by using (Cmd/Ctrl)-Shift-T</a>. Now, that same shortcut will restore the previous session if there are no more closed tabs from the same session to re-open.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Right-clicking on password fields now shows an option to reveal the password.</title>
+    <id>https://www.mozilla.org/en-US/firefox/112.0a1/releasenotes/#note-789403</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/112.0a1/releasenotes/#note-789403"/>
+    <updated>2023-04-06T15:24:50.836083+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        112.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1816988">Bug 1816988</a>
+        <p>Right-clicking on password fields now shows an option to reveal the password.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">“Clear” button, newly added to the date picker panel, allows users to quickly clear the input...</title>
+    <id>https://www.mozilla.org/en-US/firefox/112.0a1/releasenotes/#note-789404</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/112.0a1/releasenotes/#note-789404"/>
+    <updated>2023-04-06T15:24:50.001222+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        112.0a1 / Web Platform / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1811187">Bug 1811187</a>
+        <p>“Clear” button, newly added to the date picker panel, allows users to quickly clear the input with type “date“ or “datetime-local” and provides familiar experience across browsers.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Ubuntu Linux users can now import their browser data from the Chromium Snap package. Currently,...</title>
+    <id>https://www.mozilla.org/en-US/firefox/112.0a1/releasenotes/#note-789406</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/112.0a1/releasenotes/#note-789406"/>
+    <updated>2023-04-06T15:24:49.000702+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        112.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1467094">Bug 1467094</a>
+        <p>Ubuntu Linux users can now import their browser data from the Chromium Snap package. Currently, this will only work if Firefox is not also installed as a Snap package, but work is underway to address this!</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Use of the rel attribute is now supported on form elements, allowing the specification of the...</title>
+    <id>https://www.mozilla.org/en-US/firefox/111.0a1/releasenotes/#note-789381</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/111.0a1/releasenotes/#note-789381"/>
+    <updated>2023-03-11T13:37:48.081794+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        111.0a1 / Web Platform / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1509346">Bug 1509346</a>
+        <p>Use of the <code>rel</code> attribute is now supported on <code>form</code> elements, allowing the specification of the relationship between the current document and the form target in a simpler, cross-browser way.</p>
+      </div>
+    </content>
+  </entry>
+
+  <entry>
+    <title type="html">Windows native notifications are now enabled by default.</title>
+    <id>https://www.mozilla.org/en-US/firefox/111.0a1/releasenotes/#note-789389</id>
+    <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/111.0a1/releasenotes/#note-789389"/>
+    <updated>2023-03-11T13:37:47.587640+00:00</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        111.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1497425">Bug 1497425</a>
+        <p>Windows native notifications are now enabled by default.</p>
+      </div>
+    </content>
+  </entry>
+
+</feed>
