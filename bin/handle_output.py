@@ -18,6 +18,7 @@ import ruamel.yaml
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from slack_sdk.webhook import WebhookClient as SlackWebhookClient
+from utils import _get_output_path, _print
 
 GITHUB_ACTION = os.environ.get("GITHUB_ACTION", "NO-ACTION-IN-USE")
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
@@ -59,23 +60,6 @@ ISSUE_TITLE_TEMPLATE = "Malformed hyperlink found: {malformed_url}..."
 ISSUE_BODY_TEMPLATE = _load_template("issue_template.txt")
 PR_TITLE_TEMPLATE = "Automatic updates to allowlist - {timestamp}"
 PR_BODY_TEMPLATE = _load_template("pr_template.txt")
-
-
-# TODO: import from run_checks.py or move to shared code
-def _get_output_path() -> os.PathLike:
-    # Get the path, allowing for this being called from the project root or the bin/ dir
-    path_components = [
-        "output",
-    ]
-    working_dir = os.getcwd()
-    if str(working_dir).endswith("/bin"):
-        path_components = [working_dir, ".."] + path_components
-    return os.path.join("", *path_components)
-
-
-def _print(message: str) -> None:
-    sys.stdout.write(message)
-    sys.stdout.write("\n")
 
 
 def _load_results_json(filename: str) -> dict:

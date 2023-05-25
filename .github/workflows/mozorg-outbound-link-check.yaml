@@ -1,4 +1,4 @@
-name: "Site scanning"
+name: "Outbound link scanning"
 on:
   workflow_dispatch:
   schedule:

@@ -6,7 +6,7 @@ This project contains tooling designed to check on the state of the mozilla.org 
 
 Supported checks:
 
-* Verify all outbound URLs found on www.mozilla.org. Verification is done by domain and or an allow-list and exceptions are reported loudly.
+* Verify all outbound URLs found on `www.mozilla.org`. Verification is done by domain and or an allow-list and exceptions are reported loudly.
 
 Roadmap for future checks and behaviour
 
