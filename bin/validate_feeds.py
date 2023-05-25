@@ -13,12 +13,20 @@ import click
 import feedparser
 import requests
 from pyaml_env import parse_config
+from slack_sdk.webhook import WebhookClient as SlackWebhookClient
 
 # Awkward hack to allow importing into tests
 try:
     from utils import _get_configuration_path, _print
 except ImportError:
     from .utils import _get_configuration_path, _print
+
+GITHUB_ACTION = os.environ.get("GITHUB_ACTION", "NO-ACTION-IN-USE")
+GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
+GITHUB_SERVER_URL = os.environ.get("GITHUB_SERVER_URL", "NO-GITHUB")
+GITHUB_RUN_ID = os.environ.get("GITHUB_RUN_ID", "NO-RUN-NUMBER")
+
+SLACK_NOTIFICATION_WEBHOOK_URL = os.environ.get("SLACK_NOTIFICATION_WEBHOOK_URL")
 
 
 @click.command()
@@ -52,7 +60,13 @@ def validate_feeds(hostname) -> None:
         _print("Invalid feed detected:")
         for url, failure in failures.items():
             _print(f"{url} {failure}")
-        sys.exit(1)
+
+        if SLACK_NOTIFICATION_WEBHOOK_URL:
+            message = f"Check of RSS/Atom feeds failed. See {GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}"
+            slack_client = SlackWebhookClient(SLACK_NOTIFICATION_WEBHOOK_URL)
+            slack_client.send(text=message)
+
+        sys.exit(128)
     else:
         _print("No issues found.")
 
