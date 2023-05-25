@@ -39,8 +39,10 @@ def validate_feeds(hostname) -> None:
             scheme = "http://"
         else:
             scheme = "https://"
+
         feed_url = f"{scheme}{hostname}/{feed_path}"
 
+        _print(f"Checking {feed_url}")
         result = _check_feed(feed_url)
 
         if result is not None:
