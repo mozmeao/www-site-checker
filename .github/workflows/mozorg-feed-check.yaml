@@ -23,17 +23,17 @@ jobs:
         if: always()
         run: >
           python bin/validate_feeds.py
-          --hostname="https://${{ secrets.MOZORG_CDN_HOSTNAME }}"
+          --hostname="${{ env.MOZORG_CDN_HOSTNAME }}"
       - name: "Check US origin feeds"
         if: always()
         run: >
           python bin/validate_feeds.py
-          --hostname="https://${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}"
+          --hostname="${{ env.MOZORG_US_ORIGIN_HOSTNAME }}"
       - name: "Check EU origin feeds"
         if: always()
         run: >
           python bin/validate_feeds.py
-          --hostname="https://${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}"
+          --hostname="${{ env.MOZORG_EU_ORIGIN_HOSTNAME }}"
       - name: Check for failures
         if: steps.*.status == 'failure'
         run: exit 1
