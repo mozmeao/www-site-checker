@@ -1564,3 +1564,4 @@ allowed_outbound_url_literals:
   - https://web.archive.org/web/20210530092017/https://developer.mozilla.org/en-US/docs/Mozilla/Command_Line_Options
   - https://cdn-3.convertexperiments.com/js/10039-1003343.js
   - https://nn8g.adj.st/?adjust_t=ucunb4r
+  - https://w3c.github.io/webrtc-extensions/#rtcrtpreceiver-jitterbuffertarget-attributes
