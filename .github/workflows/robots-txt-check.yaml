@@ -1,0 +1,17 @@
+name: "Robots.txt checking"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "5 0/3 * * *" # At minute 5 past every 3rd hour from 0 through 23.
+
+env:
+  HOSTNAME: ${{ secrets.MOZORG_CDN_HOSTNAME }}
+
+jobs:
+  run_robots_txt_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check robots.txt on main CDN
+        shell: bash
+        run: bin/robots_check.sh
