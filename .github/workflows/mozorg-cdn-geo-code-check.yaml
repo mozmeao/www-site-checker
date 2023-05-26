@@ -1,0 +1,59 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+# NB this workflow needs a cache of HTML documents, emitted by the main
+# site-scanning workflow for the CDN origin only
+
+name: Check CDN for geo stability
+
+env:
+  SLACK_NOTIFICATION_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATION_WEBHOOK_URL }}
+
+on:
+  workflow_run:
+    workflows:
+      - Site scanning
+    types:
+      - completed
+jobs:
+  check_geo_from_cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - name: Download page cache
+        uses: actions/github-script@v6
+        with:
+          script: |
+            let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: context.payload.workflow_run.id,
+            });
+            let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "html-cache"
+            })[0];
+            let download = await github.rest.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: matchArtifact.id,
+               archive_format: 'zip',
+            });
+            let fs = require('fs');
+            // ${process.env.GITHUB_WORKSPACE}/page_cache already exists because it's in the repo
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/page_cache/html-cache.zip`, Buffer.from(download.data));
+      - name: Unzip page cache
+        run: |
+          cd page_cache
+          unzip -o html-cache.zip
+          cd ..
+          ls -la page_cache/
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Scan the dumped cache for geo-code consistency
+        run: python bin/check_for_cdn_geo_consistency.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

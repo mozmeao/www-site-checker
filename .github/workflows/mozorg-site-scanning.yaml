@@ -1,5 +1,14 @@
-name: "Outbound link scanning"
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+# If you rename this workflow, make sure you update the name in the workflow_run
+# ref in mozorg-cdn-ge-code-check.yaml
+name: "Site scanning"
 on:
+  push:
+    branches-ignore:
+      - "dependabot/**"
   workflow_dispatch:
   schedule:
     - cron: "32 2,14 * * *" # 02:32 UTC and 14:32 every day
@@ -30,14 +39,22 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run checker
         run: >
-          python bin/run_checks.py
+          python bin/scan_site.py
           --sitemap-url="https://${{ secrets.MOZORG_CDN_HOSTNAME }}/sitemap.xml"
           --batch="${{ matrix.batch }}"
-      - name: Upload output files
+          --export-cache
+      - name: Upload scan output files
         uses: actions/upload-artifact@v3
         with:
           name: scan-results
           path: output
+          retention-days: 15
+      - name: Upload page-cache
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-cache
+          path: page_cache
+          retention-days: 5
 
   run_on_us_origin:
     strategy:
@@ -54,11 +71,11 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run checker
         run: >
-          python bin/run_checks.py
+          python bin/scan_site.py
           --sitemap-url="https://${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}/sitemap.xml"
           --maintain-hostname
           --batch="${{ matrix.batch }}"
-      - name: Upload output files
+      - name: Upload scan output files
         uses: actions/upload-artifact@v3
         with:
           name: scan-results
@@ -79,11 +96,11 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run checker
         run: >
-          python bin/run_checks.py
+          python bin/scan_site.py
           --sitemap-url="https://${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}/sitemap.xml"
           --maintain-hostname
           --batch="${{ matrix.batch }}"
-      - name: Upload output files
+      - name: Upload scan output files
         uses: actions/upload-artifact@v3
         with:
           name: scan-results
@@ -109,6 +126,6 @@ jobs:
           name: scan-results
           path: output
       - name: Fail the job if scan-results exists
-        run: python bin/handle_output.py
+        run: python bin/handle_site_scan_output.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

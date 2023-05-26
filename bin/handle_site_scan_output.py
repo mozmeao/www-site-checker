@@ -17,8 +17,7 @@ import requests
 import ruamel.yaml
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
-from slack_sdk.webhook import WebhookClient as SlackWebhookClient
-from utils import _get_output_path, _print
+from utils import _print, get_output_path, ping_slack
 
 GITHUB_ACTION = os.environ.get("GITHUB_ACTION", "NO-ACTION-IN-USE")
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
@@ -39,8 +38,6 @@ SITE_CHECKER_ISSUES_API_URL = os.environ.get(
     "SITE_CHECKER_ISSUES_API_URL",
     "https://api.github.com/repos/mozmeao/www-site-checker/issues",
 )
-
-SLACK_NOTIFICATION_WEBHOOK_URL = os.environ.get("SLACK_NOTIFICATION_WEBHOOK_URL")
 
 UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
 
@@ -165,8 +162,8 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
         return output
 
     # 0. Make a new branch
-    os.system(f'git config --global user.email "{MEAO_IDENTITY_EMAIL}"')
-    os.system('git config --global user.name "www-site-checker bot"')
+    os.system(f'git config user.email "{MEAO_IDENTITY_EMAIL}"')
+    os.system('git config user.name "www-site-checker bot"')
 
     branchname = f'update-{allowlist_path.replace("/","-")}--{timestamp.replace(":","-")}'
     os.system(f"git switch -c {branchname}")
@@ -299,7 +296,7 @@ def main():
     URLs are found, so the Slack message isn't the only alert.
     """
     message = ""
-    output_path = _get_output_path()
+    output_path = get_output_path()
     artifact_found = False
 
     # Do we have any artifacts available? If we _don't_, that's good news
@@ -324,10 +321,7 @@ def main():
         message += "\nNB: No new Issues or PRs opened - there will be existing ones on www-site-checker"
 
     _print(message)
-
-    if SLACK_NOTIFICATION_WEBHOOK_URL:
-        slack_client = SlackWebhookClient(SLACK_NOTIFICATION_WEBHOOK_URL)
-        slack_client.send(text=message)
+    ping_slack(message)
 
     sys.exit(1)
 

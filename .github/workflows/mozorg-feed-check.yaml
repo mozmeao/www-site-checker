@@ -1,3 +1,7 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 name: "RSS/Atom feed checking"
 on:
   workflow_dispatch:
@@ -8,6 +12,7 @@ env:
   MOZORG_CDN_HOSTNAME: ${{ secrets.MOZORG_CDN_HOSTNAME }}
   MOZORG_US_ORIGIN_HOSTNAME: ${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}
   MOZORG_EU_ORIGIN_HOSTNAME: ${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}
+  SLACK_NOTIFICATION_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATION_WEBHOOK_URL }}
 
 jobs:
   run_checks:

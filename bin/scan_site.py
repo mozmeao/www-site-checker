@@ -20,7 +20,7 @@ import time
 from collections import defaultdict
 from functools import cache
 from typing import Dict, Iterable, List, Tuple
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 import click
 import requests
@@ -29,7 +29,7 @@ from bs4 import BeautifulSoup
 from pyaml_env import parse_config
 from requests.exceptions import ChunkedEncodingError, ConnectionError, HTTPError
 from sentry_sdk.integrations.logging import LoggingIntegration
-from utils import _get_configuration_path
+from utils import _get_configuration_path, get_output_path
 
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
@@ -96,6 +96,11 @@ LOCALES_TO_CACHE = ("en-US",)
     default=EXTRA_URLS_FILEPATH,
     help="Path to a YAML-formatted list of additional URLs to check. If none is provided, the env var EXTRA_URLS_FILEPATH will be used",
 )
+@click.option(
+    "--export-cache/--no-export-cache",
+    default=False,
+    help="If True, we'll export the cached pages as an artifact to {hostname}-cached-pages/batch{batch-id}, for other checks to use",
+)
 def run_checks(
     sitemap_url: str,
     maintain_hostname: bool,
@@ -103,9 +108,10 @@ def run_checks(
     batch: str,
     allowlist: str,
     additional_urls_file: str,
+    export_cache: bool,
 ) -> None:
 
-    # Let's tidy up that variable name we get from the input option
+    # Let's tidy up that variables we get from the input option
     specific_urls = specific_url
 
     if not sitemap_url and not specific_urls:
@@ -143,6 +149,26 @@ def run_checks(
         hostname=hostname,
         batch=batch,
     )
+
+    if export_cache:
+        _export_cache()
+
+
+def _export_cache() -> None:
+    click.echo("Dumping cache to disk")
+    counter = 0
+    output_path = get_output_path("page_cache")
+    for url, html in PAGE_CONTENT_CACHE.items():
+        if url.endswith("/"):
+            # Add a suffix to make it easier to filter the dumped cache,
+            # but it's only needed on HTML pages that have path-like URIs
+            url += ".html"
+        quoted_url = quote(url).replace("/", "_")
+        output_filename = f"{output_path}/{quoted_url}"
+        with open(output_filename, "w") as fp:
+            fp.write(html)
+        counter += 1
+    click.echo(f"{counter} files dumped to {output_path}")
 
 
 def _generate_additional_urls_to_check(
@@ -230,7 +256,7 @@ def _get_url_with_retry(
             resp = requests.get(url)
             resp.raise_for_status()
             if cache_html and _page_content_is_cacheable(url):
-                PAGE_CONTENT_CACHE[url] = resp
+                PAGE_CONTENT_CACHE[url] = resp.content.decode()
         return resp
 
     except exceptions_to_retry as re:
@@ -257,7 +283,7 @@ def _dump_unexpected_urls_to_files(
     * JSON output
 
     """
-    _output_path = _get_output_path()
+    _output_path = get_output_path()
     _now = datetime.datetime.utcnow().isoformat(timespec="seconds").replace(":", "-")  # Github actions doesn't like colons in filenames
     _base_filename = f"{UNEXPECTED_URLS_FILENAME_FRAGMENT}_{hostname}_{batch_label}_{_now}.txt"
     flat_output_filepath = os.path.join(_output_path, _base_filename.replace(".txt", "_flat.txt"))
@@ -291,17 +317,6 @@ def _dump_unexpected_urls_to_files(
     click.echo(f"JSON version of results output to {json_output_filepath}")
 
     return flat_output_filepath, nested_output_filepath, json_output_filepath
-
-
-def _get_output_path() -> os.PathLike:
-    # Get the path, allowing for this being called from the project root or the bin/ dir
-    path_components = [
-        "output",
-    ]
-    working_dir = os.getcwd()
-    if str(working_dir).endswith("/bin"):
-        path_components = [working_dir, ".."] + path_components
-    return os.path.join("", *path_components)
 
 
 @cache
