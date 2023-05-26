@@ -23,10 +23,10 @@ def _print(message: str) -> None:
     sys.stdout.write("\n")
 
 
-def _get_output_path() -> os.PathLike:
+def _get_output_path(directory_name="output") -> os.PathLike:
     # Get the path, allowing for this being called from the project root or the bin/ dir
     path_components = [
-        "output",
+        directory_name,
     ]
     working_dir = os.getcwd()
     if str(working_dir).endswith("/bin"):
