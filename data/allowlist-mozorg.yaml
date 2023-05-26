@@ -1565,3 +1565,4 @@ allowed_outbound_url_literals:
   - https://cdn-3.convertexperiments.com/js/10039-1003343.js
   - https://nn8g.adj.st/?adjust_t=ucunb4r
   - https://w3c.github.io/webrtc-extensions/#rtcrtpreceiver-jitterbuffertarget-attributes
+  - https://github.com/tc39/proposal-change-array-by-copy
