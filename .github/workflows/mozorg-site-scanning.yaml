@@ -37,6 +37,7 @@ jobs:
           python bin/run_checks.py
           --sitemap-url="https://${{ secrets.MOZORG_CDN_HOSTNAME }}/sitemap.xml"
           --batch="${{ matrix.batch }}"
+          --export-cache
       - name: Upload output files
         uses: actions/upload-artifact@v3
         with:
