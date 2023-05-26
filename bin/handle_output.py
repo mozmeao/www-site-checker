@@ -165,8 +165,8 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
         return output
 
     # 0. Make a new branch
-    os.system(f'git config --global user.email "{MEAO_IDENTITY_EMAIL}"')
-    os.system('git config --global user.name "www-site-checker bot"')
+    os.system(f'git config user.email "{MEAO_IDENTITY_EMAIL}"')
+    os.system('git config user.name "www-site-checker bot"')
 
     branchname = f'update-{allowlist_path.replace("/","-")}--{timestamp.replace(":","-")}'
     os.system(f"git switch -c {branchname}")
