@@ -29,7 +29,7 @@ from bs4 import BeautifulSoup
 from pyaml_env import parse_config
 from requests.exceptions import ChunkedEncodingError, ConnectionError, HTTPError
 from sentry_sdk.integrations.logging import LoggingIntegration
-from utils import _get_configuration_path, _get_output_path
+from utils import _get_configuration_path, get_output_path
 
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
@@ -154,7 +154,7 @@ def run_checks(
         click.echo("Dumping cache to disk")
         counter = 0
         hostname = hostname.replace(".", "_")
-        output_path = _get_output_path("page_cache")
+        output_path = get_output_path("page_cache")
         for url, html in PAGE_CONTENT_CACHE.items():
             output_filename = f"{output_path}/{quote(url).replace('/','_')}"
             with open(output_filename, "w") as fp:
@@ -275,7 +275,7 @@ def _dump_unexpected_urls_to_files(
     * JSON output
 
     """
-    _output_path = _get_output_path()
+    _output_path = get_output_path()
     _now = datetime.datetime.utcnow().isoformat(timespec="seconds").replace(":", "-")  # Github actions doesn't like colons in filenames
     _base_filename = f"{UNEXPECTED_URLS_FILENAME_FRAGMENT}_{hostname}_{batch_label}_{_now}.txt"
     flat_output_filepath = os.path.join(_output_path, _base_filename.replace(".txt", "_flat.txt"))

@@ -18,7 +18,7 @@ import ruamel.yaml
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from slack_sdk.webhook import WebhookClient as SlackWebhookClient
-from utils import _get_output_path, _print
+from utils import _print, get_output_path
 
 GITHUB_ACTION = os.environ.get("GITHUB_ACTION", "NO-ACTION-IN-USE")
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
@@ -299,7 +299,7 @@ def main():
     URLs are found, so the Slack message isn't the only alert.
     """
     message = ""
-    output_path = _get_output_path()
+    output_path = get_output_path()
     artifact_found = False
 
     # Do we have any artifacts available? If we _don't_, that's good news
