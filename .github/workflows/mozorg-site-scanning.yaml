@@ -1,3 +1,7 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 name: "Site scanning"
 on:
   push:
@@ -38,11 +42,16 @@ jobs:
           --sitemap-url="https://${{ secrets.MOZORG_CDN_HOSTNAME }}/sitemap.xml"
           --batch="${{ matrix.batch }}"
           --export-cache
-      - name: Upload output files
+      - name: Upload scan output files
         uses: actions/upload-artifact@v3
         with:
           name: scan-results
           path: output
+      - name: Upload page-cache
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-cache
+          path: page_cache
 
   run_on_us_origin:
     strategy:
@@ -63,7 +72,7 @@ jobs:
           --sitemap-url="https://${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}/sitemap.xml"
           --maintain-hostname
           --batch="${{ matrix.batch }}"
-      - name: Upload output files
+      - name: Upload scan output files
         uses: actions/upload-artifact@v3
         with:
           name: scan-results
@@ -88,7 +97,7 @@ jobs:
           --sitemap-url="https://${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}/sitemap.xml"
           --maintain-hostname
           --batch="${{ matrix.batch }}"
-      - name: Upload output files
+      - name: Upload scan output files
         uses: actions/upload-artifact@v3
         with:
           name: scan-results
@@ -117,3 +126,19 @@ jobs:
         run: python bin/handle_site_scan_output.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  trigger_cdn_geo_checks:
+    runs-on: ubuntu-latest
+    needs:
+      - run_on_cdn
+    steps:
+      - name: Trigger Workflow
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'mozorg-cdn-geo-code-check.yaml',
+              ref: 'main',
+            })
