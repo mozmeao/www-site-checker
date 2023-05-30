@@ -17,8 +17,7 @@ import requests
 import ruamel.yaml
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
-from slack_sdk.webhook import WebhookClient as SlackWebhookClient
-from utils import _print, get_output_path
+from utils import _print, get_output_path, ping_slack
 
 GITHUB_ACTION = os.environ.get("GITHUB_ACTION", "NO-ACTION-IN-USE")
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
@@ -39,8 +38,6 @@ SITE_CHECKER_ISSUES_API_URL = os.environ.get(
     "SITE_CHECKER_ISSUES_API_URL",
     "https://api.github.com/repos/mozmeao/www-site-checker/issues",
 )
-
-SLACK_NOTIFICATION_WEBHOOK_URL = os.environ.get("SLACK_NOTIFICATION_WEBHOOK_URL")
 
 UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
 
@@ -324,10 +321,7 @@ def main():
         message += "\nNB: No new Issues or PRs opened - there will be existing ones on www-site-checker"
 
     _print(message)
-
-    if SLACK_NOTIFICATION_WEBHOOK_URL:
-        slack_client = SlackWebhookClient(SLACK_NOTIFICATION_WEBHOOK_URL)
-        slack_client.send(text=message)
+    ping_slack(message)
 
     sys.exit(1)
 
