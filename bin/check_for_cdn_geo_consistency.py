@@ -32,7 +32,7 @@ def check_geo_consistency():
 
     if "NOT_PRESENT" in geo_codes_seen:
         _print("Found no geo codes in at least one CDN page!")
-        message = "No data-country-code values found in CDN content. See {GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}"
+        message = f"No data-country-code values found in CDN content. See {GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}"
         ping_slack(message)
         sys.exit(98)
 
