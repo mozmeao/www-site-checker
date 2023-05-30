@@ -23,7 +23,7 @@ jobs:
         id: download-page-cache
         uses: actions/download-artifact@v3
         with:
-          name: page_cache
+          name: html-cache
           path: page_cache
       - name: Install requirements
         run: pip install -r requirements.txt
