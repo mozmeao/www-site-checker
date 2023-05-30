@@ -6,7 +6,6 @@ name: "Site scanning"
 on:
   push:
     branches-ignore:
-      - main
       - "dependabot/**"
   workflow_dispatch:
   schedule:
