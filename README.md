@@ -7,6 +7,9 @@ This project contains tooling designed to check on the state of the mozilla.org 
 Supported checks:
 
 * Verify all outbound URLs found on `www.mozilla.org`. Verification is done by domain and or an allow-list and exceptions are reported loudly.
+* Confirm robots.txt points to the correct sitemap, on the public domain, never an internal domain
+* Verify the geo code in the majority of HTML pages served via the CDN is stable, confirming appripriate CDN `Vary`-header configuration
+* Verify that RSS and Atom feeds are error-free
 
 Roadmap for future checks and behaviour
 
@@ -14,7 +17,21 @@ Roadmap for future checks and behaviour
 * HTML validation of all CMS-authored pages
 * Support throttling, if necessary in real use
 
-## Usage
+All of these checks are run by Github Actions - see `.github/workflows`
+
+## Project Development
+
+### Linting, etc
+
+Install [pre-commit](https://pre-commit.com/#install), and then run `pre-commit install` and you'll be setup
+to auto format your code according to our style and check for errors for every commit.
+
+### Tests
+
+TO COME
+
+----
+## Outbound link-checker - specific instructions
 
 ### Automatic usage
 
@@ -109,13 +126,3 @@ If you come across an alert saying there was an unexpected URL detected and you'
 * Run the checks locally (see above)
 * Push the branch up and raise a PR.
 
-## Development
-
-### Linting, etc
-
-Install [pre-commit](https://pre-commit.com/#install), and then run `pre-commit install` and you'll be setup
-to auto format your code according to our style and check for errors for every commit.
-
-### Tests
-
-TO COME
