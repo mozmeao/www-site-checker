@@ -16,7 +16,6 @@ import logging
 import math
 import os
 import re
-import socket
 import time
 from collections import defaultdict
 from functools import cache
@@ -100,7 +99,7 @@ LOCALES_TO_CACHE = ("en-US",)
 @click.option(
     "--export-cache/--no-export-cache",
     default=False,
-    help="If True, we'll export the cached pages as an artifact to {hostname}-cached-pages, for other checks to use",
+    help="If True, we'll export the cached pages as an artifact to {hostname}-cached-pages/batch{batch-id}, for other checks to use",
 )
 def run_checks(
     sitemap_url: str,
@@ -111,6 +110,7 @@ def run_checks(
     additional_urls_file: str,
     export_cache: bool,
 ) -> None:
+
     # Let's tidy up that variables we get from the input option
     specific_urls = specific_url
 
@@ -236,14 +236,6 @@ def _page_content_is_cacheable(url):
     return False
 
 
-def _get_host_ip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(("8.8.4.4", 53))
-    ip = s.getsockname()[0]
-    s.close()
-    return ip
-
-
 def _get_url_with_retry(
     url: str,
     try_count: int = 0,
@@ -255,18 +247,16 @@ def _get_url_with_retry(
         ConnectionError,
         HTTPError,  # GOTCHA? This might be too permissive because many Requests exceptions inherit it
     )
-    ip = _get_host_ip()
-    key = f"{url}_{ip}"
     try:
-        resp = PAGE_CONTENT_CACHE.get(key)
+        resp = PAGE_CONTENT_CACHE.get(url)
         if resp:
-            click.echo(f"Getting {url} from cache with key {key}")
+            click.echo(f"Getting {url} from cache")
         else:
             click.echo(f"Pulling down {url}")
             resp = requests.get(url)
             resp.raise_for_status()
             if cache_html and _page_content_is_cacheable(url):
-                PAGE_CONTENT_CACHE[key] = resp.content.decode()
+                PAGE_CONTENT_CACHE[url] = resp.content.decode()
         return resp
 
     except exceptions_to_retry as re:
@@ -368,6 +358,7 @@ def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
 
 
 def _verify_url_allowed(url: str, allowlist_config: dict) -> bool:
+
     # Quickest check first, using set membership.
 
     # Temporary measure: adjust for line breaks in hrefs
@@ -389,6 +380,7 @@ def _verify_url_allowed(url: str, allowlist_config: dict) -> bool:
 
 
 def _check_pages_for_outbound_links(urls: List[str], allowlist_config: Dict) -> Dict:
+
     unlisted_outbound_urls = defaultdict(set)
     # oubound url is they key, a set of pages it's on is the value
 
