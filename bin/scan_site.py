@@ -36,6 +36,7 @@ SENTRY_DSN = os.environ.get("SENTRY_DSN")
 ALLOWLIST_FILEPATH = os.environ.get("ALLOWLIST_FILEPATH")
 EXTRA_URLS_FILEPATH = os.environ.get("EXTRA_URLS_FILEPATH")
 
+USER_AGENT = os.environ.get("USER_AGENT")
 
 if SENTRY_DSN:
     # Set up Sentry logging if we can.
@@ -110,7 +111,6 @@ def run_checks(
     additional_urls_file: str,
     export_cache: bool,
 ) -> None:
-
     # Let's tidy up that variables we get from the input option
     specific_urls = specific_url
 
@@ -252,8 +252,11 @@ def _get_url_with_retry(
         if resp:
             click.echo(f"Getting {url} from cache")
         else:
+            headers = {}
+            if USER_AGENT:
+                headers.update({"User-Agent": USER_AGENT})
             click.echo(f"Pulling down {url}")
-            resp = requests.get(url)
+            resp = requests.get(url, headers=headers)
             resp.raise_for_status()
             if cache_html and _page_content_is_cacheable(url):
                 PAGE_CONTENT_CACHE[url] = resp.content.decode()
@@ -358,7 +361,6 @@ def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
 
 
 def _verify_url_allowed(url: str, allowlist_config: dict) -> bool:
-
     # Quickest check first, using set membership.
 
     # Temporary measure: adjust for line breaks in hrefs
@@ -380,7 +382,6 @@ def _verify_url_allowed(url: str, allowlist_config: dict) -> bool:
 
 
 def _check_pages_for_outbound_links(urls: List[str], allowlist_config: Dict) -> Dict:
-
     unlisted_outbound_urls = defaultdict(set)
     # oubound url is they key, a set of pages it's on is the value
 

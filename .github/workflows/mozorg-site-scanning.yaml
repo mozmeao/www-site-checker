@@ -22,6 +22,7 @@ env:
   MEAO_IDENTITY_EMAIL: ${{ secrets.MEAO_IDENTITY_EMAIL }}
   ALLOWLIST_FILEPATH: data/allowlist-mozorg.yaml
   EXTRA_URLS_FILEPATH: data/extra-urls-mozorg.yaml
+  USER_AGENT: Mozilla/5.0 (Automated; https://github.com/mozmeao/www-site-checker) CheckerBot/1.0
 
 jobs:
   run_on_cdn:
