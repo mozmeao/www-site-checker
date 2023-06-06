@@ -57,6 +57,11 @@ def check_geo_consistency():
 
     elif len(geo_codes_seen.keys()) != 1:
         _print(f"Found {len(geo_codes_seen.keys())} geo codes in CDN pages: {geo_codes_seen.keys()}")
+        # We usually run this test from US-based servers, so the US key will point to thousands
+        # of items, which is generally not useful to us, so we'll not print them out. Non-US
+        # results _are_ interesting to us, though
+        geo_codes_seen.pop("US", None)
+        _print(f"Non-US geo codes seen and corresponding URLs: {geo_codes_seen.items()}")
         message = (
             "WARNING: Inconsistent number of data-country-code values found from CDN content. "
             f"See {GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}"
