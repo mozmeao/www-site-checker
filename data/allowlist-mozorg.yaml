@@ -1570,3 +1570,4 @@ allowed_outbound_url_literals:
   - https://nn8g.adj.st/?adjust_t=ucunb4r
   - https://w3c.github.io/webrtc-extensions/#rtcrtpreceiver-jitterbuffertarget-attributes
   - https://github.com/tc39/proposal-change-array-by-copy
+  - https://www.w3.org/International/questions/qa-html-dir#reportingdirection
