@@ -1574,3 +1574,5 @@ allowed_outbound_url_literals:
   - https://launchpad.net/~mozillacorp/+archive/ubuntu/mozillavpn
   - https://cdn-4.convertexperiments.com/js/10039-1003343.js
   - https://help.ubuntu.com/community/Repositories/Ubuntu#Adding_Personal_Package_Archives_.28PPAs.29
+  - https://w3c.github.io/webappsec-csp/#external-hash
+  - https://mozilla.formstack.com/forms/advertising
