@@ -323,8 +323,11 @@ def main():
     _print(message)
     ping_slack(message)
 
-    sys.exit(1)
+    # Now that we reliably have PR generation, don't count the detection of unexpected content as
+    # a "failure" - we gracefully exit
+    sys.exit(0)
 
 
 if __name__ == "__main__":
+    main()
     main()
