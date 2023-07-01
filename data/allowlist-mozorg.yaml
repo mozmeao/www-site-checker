@@ -1593,3 +1593,4 @@ allowed_outbound_url_literals:
   - https://www.pentestpeople.com/
   - https://twitter.com/c3l3si4n
   - https://www.linkedin.com/in/jimmy-bruneel-26a185108/
+  - https://fedidcg.github.io/FedCM/
