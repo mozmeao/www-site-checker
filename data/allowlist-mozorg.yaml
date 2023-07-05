@@ -1594,3 +1594,5 @@ allowed_outbound_url_literals:
   - https://twitter.com/c3l3si4n
   - https://www.linkedin.com/in/jimmy-bruneel-26a185108/
   - https://fedidcg.github.io/FedCM/
+  - https://www.w3.org/TR/css-cascade-5/#conditional-import
+  - https://w3c.github.io/IndexedDB/
