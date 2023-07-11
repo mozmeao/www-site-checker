@@ -16,9 +16,9 @@ charset-normalizer==2.0.11 \
     --hash=sha256:2842d8f5e82a1f6aa437380934d5e1cd4fcf2003b06fed6940769c164a480a45 \
     --hash=sha256:98398a9d69ee80548c762ba991a4728bfc3836768ed226b3945908d1a688371c
     # via requests
-click==8.1.3 \
-    --hash=sha256:7682dc8afb30297001674575ea00d1814d808d6a36af415a82bd481d37ba7b8e \
-    --hash=sha256:bb4d8133cb15a609f44e8213d9b391b0809795062913b383c62be0ee95b1db48
+click==8.1.4 \
+    --hash=sha256:2739815aaa5d2c986a88f1e9230c55e17f0caad3d958a5e13ad0797c166db9e3 \
+    --hash=sha256:b97d0c74955da062a7d4ef92fadb583806a585b2ea81958a81bd72726cbb8e37
     # via -r requirements.in
 coverage[toml]==6.3.2 \
     --hash=sha256:03e2a7826086b91ef345ff18742ee9fc47a6839ccd517061ef8fa1976e652ce9 \
@@ -63,9 +63,9 @@ coverage[toml]==6.3.2 \
     --hash=sha256:f9987b0354b06d4df0f4d3e0ec1ae76d7ce7cbca9a2f98c25041eb79eec766f1 \
     --hash=sha256:fd9e830e9d8d89b20ab1e5af09b32d33e1a08ef4c4e14411e559556fd788e6b2
     # via pytest-cov
-django==4.2.1 \
-    --hash=sha256:066b6debb5ac335458d2a713ed995570536c8b59a580005acb0732378d5eb1ee \
-    --hash=sha256:7efa6b1f781a6119a10ac94b4794ded90db8accbe7802281cd26f8664ffed59c
+django==4.2.3 \
+    --hash=sha256:45a747e1c5b3d6df1b141b1481e193b033fd1fdbda3ff52677dc81afdaacbaed \
+    --hash=sha256:f7c7852a5ac5a3da5a8d5b35cc6168f31b605971441798dac845f17ca8028039
     # via -r requirements.in
 exceptiongroup==1.0.4 \
     --hash=sha256:542adf9dea4055530d6e1279602fa5cb11dab2395fa650b8674eaec35fc4a828 \
@@ -182,9 +182,9 @@ pyparsing==3.0.7 \
     --hash=sha256:18ee9022775d270c55187733956460083db60b37d0d0fb357445f3094eed3eea \
     --hash=sha256:a6c06a88f252e6c322f65faf8f418b16213b51bdfaece0524c1c1bc30c63c484
     # via packaging
-pytest==7.3.1 \
-    --hash=sha256:3799fa815351fea3a5e96ac7e503a96fa51cc9942c3753cda7651b93c1cfa362 \
-    --hash=sha256:434afafd78b1d78ed0addf160ad2b77a30d35d4bdf8af234fe621919d9ed15e3
+pytest==7.4.0 \
+    --hash=sha256:78bf16451a2eb8c7a2ea98e32dc119fd2aa758f1d5d66dbf0a59d69a3969df32 \
+    --hash=sha256:b4bf8c45bd59934ed84001ad51e11b4ee40d40a1229d2c79f9c592b0a3f6bd8a
     # via
     #   -r requirements.in
     #   pytest-cov
@@ -227,9 +227,9 @@ requests==2.31.0 \
     --hash=sha256:58cd2187c01e70e6e26505bca751777aa9f2ee0b7f4300988b709f44e013003f \
     --hash=sha256:942c5a758f98d790eaed1a29cb6eefc7ffb0d1cf7af05c3d2791656dbd6ad1e1
     # via -r requirements.in
-ruamel-yaml==0.17.30 \
-    --hash=sha256:7e47a3d9ccfa2e41d353e6615661308bcbbc2ebad393bdc13b725bac15baf8a9 \
-    --hash=sha256:b73821c1e0a9daa459e215db7c4d6d23d7159fb61c4c536653a2b4fb5b8d08a7
+ruamel-yaml==0.17.32 \
+    --hash=sha256:23cd2ed620231677564646b0c6a89d138b6822a0d78656df7abda5879ec4f447 \
+    --hash=sha256:ec939063761914e14542972a5cba6d33c23b0859ab6342f61cf070cfc600efc2
     # via -r requirements.in
 ruamel-yaml-clib==0.2.7 \
     --hash=sha256:045e0626baf1c52e5527bd5db361bc83180faaba2ff586e763d3d5982a876a9e \
@@ -266,9 +266,9 @@ ruamel-yaml-clib==0.2.7 \
     --hash=sha256:f01da5790e95815eb5a8a138508c01c758e5f5bc0ce4286c4f7028b8dd7ac3d0 \
     --hash=sha256:f34019dced51047d6f70cb9383b2ae2853b7fc4dce65129a5acd49f4f9256646
     # via ruamel-yaml
-sentry-sdk==1.24.0 \
-    --hash=sha256:0bbcecda9f51936904c1030e7fef0fe693e633888f02a14d1cb68646a50e83b3 \
-    --hash=sha256:56d6d9d194c898d853a7c1dd99bed92ce82334ee1282292c15bcc967ff1a49b5
+sentry-sdk==1.28.0 \
+    --hash=sha256:2281ba98011cfa9bc9bb15c1074b6dd9f7fdfce94033cd25b50f18f078ffed4c \
+    --hash=sha256:b8b363aaa3f3d6a3acc1aa571efa4db29fb440339fed03560bb1276b8d2c2509
     # via -r requirements.in
 sgmllib3k==1.0.0 \
     --hash=sha256:7868fb1c8bfa764c1ac563d3cf369c381d1325d36124933a726f29fcdaa812e9
