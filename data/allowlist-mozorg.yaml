@@ -1596,3 +1596,4 @@ allowed_outbound_url_literals:
   - https://fedidcg.github.io/FedCM/
   - https://www.w3.org/TR/css-cascade-5/#conditional-import
   - https://w3c.github.io/IndexedDB/
+  - https://apps.apple.com/us/app/mozilla-vpn/id1489407738
