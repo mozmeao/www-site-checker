@@ -1597,3 +1597,5 @@ allowed_outbound_url_literals:
   - https://www.w3.org/TR/css-cascade-5/#conditional-import
   - https://w3c.github.io/IndexedDB/
   - https://apps.apple.com/us/app/mozilla-vpn/id1489407738
+  - https://foundation.mozilla.org?utm_source=www.mozilla.org-vpn-product-page&utm_medium=referral&utm_campaign=vpn-features-page
+  - https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-reactions
