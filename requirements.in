@@ -1,6 +1,6 @@
 # main reqs
 beautifulsoup4==4.12.2
-click==8.1.5
+click==8.1.6
 django==4.2.3
 html5lib==1.1
 feedparser==6.0.10
