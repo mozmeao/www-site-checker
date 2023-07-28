@@ -1599,3 +1599,12 @@ allowed_outbound_url_literals:
   - https://apps.apple.com/us/app/mozilla-vpn/id1489407738
   - https://foundation.mozilla.org?utm_source=www.mozilla.org-vpn-product-page&utm_medium=referral&utm_campaign=vpn-features-page
   - https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-reactions
+  - https://ghgprotocol.org/
+  - https://blog.getpocket.com/2020/04/marking-earth-day-during-a-pandemic/
+  - https://registry.verra.org/app/projectDetail/VCS/844
+  - https://www.climateimpact.com/news-insights/news/climate-impact-partners-releases-2023-carbonneutral-protocol-strengthening-guidance-around-climate-action-claims/
+  - https://registry.verra.org/app/projectDetail/VCS/674
+  - https://www.ariadne-network.eu/green-screen-coalition-awards/
+  - https://www.natureconservancy.ca/en/where-we-work/british-columbia/featured-projects/west-kootenay/darkwoods/dw-carbon.html
+  - https://solarprotocol.net
+  - https://www.climateimpact.com/who-we-are/
