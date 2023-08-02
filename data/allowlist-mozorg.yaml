@@ -1608,3 +1608,4 @@ allowed_outbound_url_literals:
   - https://www.natureconservancy.ca/en/where-we-work/british-columbia/featured-projects/west-kootenay/darkwoods/dw-carbon.html
   - https://solarprotocol.net
   - https://www.climateimpact.com/who-we-are/
+  - https://fxdx.dev/firefox-devtools-custom-object-formatters/
