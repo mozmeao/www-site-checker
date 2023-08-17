@@ -1609,3 +1609,4 @@ allowed_outbound_url_literals:
   - https://solarprotocol.net
   - https://www.climateimpact.com/who-we-are/
   - https://fxdx.dev/firefox-devtools-custom-object-formatters/
+  - https://js.stripe.com/v3/
