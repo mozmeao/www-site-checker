@@ -1611,3 +1611,4 @@ allowed_outbound_url_literals:
   - https://fxdx.dev/firefox-devtools-custom-object-formatters/
   - https://js.stripe.com/v3/
   - https://globalprivacycontrol.org/
+  - https://www.openwall.com/lists/oss-security/2023/08/03/1
