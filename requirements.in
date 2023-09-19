@@ -1,5 +1,6 @@
 # main reqs
 beautifulsoup4==4.12.2
+certifi>=2023.7.22
 click==8.1.5
 django==4.2.3
 html5lib==1.1
