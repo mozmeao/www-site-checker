@@ -1638,3 +1638,7 @@ allowed_outbound_url_literals:
   - https://www.cpacanada.ca/-/media/site/operational/ep-education-pld/docs/mds21216wtbr-26-rev-august-2022final.pdf
   - https://www.ccadb.org/cas/incident-report
   - https://github.com/annevk/orb
+  - https://youtu.be/2CT-zB6AO6k
+  - https://hackerone.com/mozilla_critical_services/policy_scopes
+  - https://hackerone.com/mozilla_core_services/policy_scopes
+  - https://reports.mozilla.social/infringement-form
