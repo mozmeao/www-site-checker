@@ -1642,3 +1642,5 @@ allowed_outbound_url_literals:
   - https://hackerone.com/mozilla_critical_services/policy_scopes
   - https://hackerone.com/mozilla_core_services/policy_scopes
   - https://reports.mozilla.social/infringement-form
+  - https://www.cve.org/CVERecord?id=CVE-2023-4863
+  - https://www.cve.org/CVERecord?id=CVE-2023-5129
