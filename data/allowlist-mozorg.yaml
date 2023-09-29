@@ -1644,3 +1644,6 @@ allowed_outbound_url_literals:
   - https://reports.mozilla.social/infringement-form
   - https://www.cve.org/CVERecord?id=CVE-2023-4863
   - https://www.cve.org/CVERecord?id=CVE-2023-5129
+  - https://www.cve.org/CVERecord?id=CVE-2023-5217
+  - https://mozilla-hub.atlassian.net/l/cp/bgfp6Be7
+  - https://bugs.chromium.org/p/chromium/issues/detail?id=1486441
