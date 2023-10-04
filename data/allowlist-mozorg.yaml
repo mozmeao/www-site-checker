@@ -1647,3 +1647,6 @@ allowed_outbound_url_literals:
   - https://www.cve.org/CVERecord?id=CVE-2023-5217
   - https://mozilla-hub.atlassian.net/l/cp/bgfp6Be7
   - https://bugs.chromium.org/p/chromium/issues/detail?id=1486441
+  - https://wasmio.tech/sessions/flutter-dart-and-wasm-gc-a-new-model-for-web-applications/
+  - https://github.com/WebAssembly/gc/blob/main/proposals/gc/Overview.md
+  - https://kotlinlang.org/docs/wasm-overview.html#browser-support
