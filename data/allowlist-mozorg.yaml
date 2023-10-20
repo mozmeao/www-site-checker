@@ -1652,3 +1652,4 @@ allowed_outbound_url_literals:
   - https://kotlinlang.org/docs/wasm-overview.html#browser-support
   - https://cure53.de/
   - https://time.com/32784/netflix-comcast-net-neutrality/
+  - https://blog.cloudflare.com/early-hints/
