@@ -1653,3 +1653,19 @@ allowed_outbound_url_literals:
   - https://cure53.de/
   - https://time.com/32784/netflix-comcast-net-neutrality/
   - https://blog.cloudflare.com/early-hints/
+  - https://twitter.com/privacy
+  - https://meetmarigold.com/privacy-notices
+  - https://www.intuit.com/privacy/statement/
+  - https://www.fastly.com/privacy/
+  - https://support.github.com/#our-use-of-cookies-and-tracking
+  - https://sentry.io/privacy/
+  - https://www.twilio.com/en-us/legal/privacy
+  - https://datatracker.ietf.org/doc/draft-ietf-ohai-ohttp/
+  - https://fundraiseup.com/privacy/
+  - https://meetmarigold.com/privacy-notices/
+  - https://www.socketlabs.com/legal/service-privacy/
+  - https://www.fakespot.com/
+  - https://www.cira.ca/en/canadian-shield/privacy/
+  - https://www.salesforce.com/company/privacy/
+  - https://www.thunderbird.net/newsletter/
+  - https://dev.kevel.com/docs/privacy-policy-customers
