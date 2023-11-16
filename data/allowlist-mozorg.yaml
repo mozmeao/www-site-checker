@@ -1670,3 +1670,5 @@ allowed_outbound_url_literals:
   - https://www.salesforce.com/company/privacy/
   - https://www.thunderbird.net/newsletter/
   - https://dev.kevel.com/docs/privacy-policy-customers
+  - https://www.reddit.com/r/kde/comments/osjt3p/firefox_wayland_pip_workaround_or_how_i_learned/
+  - https://extensions.gnome.org/extension/4691/pip-on-top/
