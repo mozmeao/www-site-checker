@@ -1,19 +1,19 @@
 # main reqs
 beautifulsoup4==4.12.2
 certifi>=2023.7.22
-click==8.1.5
-django==4.2.4
+click==8.1.7
+django==4.2.7
 html5lib==1.1
 feedparser==6.0.10
 lxml==4.9.3
 pyaml-env==1.2.1
 PyYAML==6.0.1  # https://github.com/yaml/pyyaml/issues/724
 requests==2.31.0
-ruamel.yaml==0.17.32
-sentry-sdk==1.29.2
-slack_sdk==3.21.3
+ruamel.yaml==0.18.5
+sentry-sdk==1.35.0
+slack_sdk==3.25.0
 sqlparse==0.4.4
 
 # test reqs
-pytest==7.4.0
+pytest==7.4.3
 pytest-cov==4.1.0
