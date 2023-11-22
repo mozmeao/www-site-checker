@@ -1673,3 +1673,4 @@ allowed_outbound_url_literals:
   - https://www.reddit.com/r/kde/comments/osjt3p/firefox_wayland_pip_workaround_or_how_i_learned/
   - https://extensions.gnome.org/extension/4691/pip-on-top/
   - https://github.com/WebAssembly/tail-call/blob/main/proposals/tail-call/Overview.md
+  - https://docs.flutter.dev/platform-integration/web/wasm
