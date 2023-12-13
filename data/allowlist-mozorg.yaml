@@ -1692,3 +1692,4 @@ allowed_outbound_url_literals:
   - https://righttobe.org/feel-support/
   - https://stopncii.org/?utm_medium=organic&utm_source=mozilla&utm_campaign=antiharassment
   - https://cybercivilrights.org/ccri-crisis-helpline/
+  - https://github.com/tc39/proposal-arraybuffer-transfer
