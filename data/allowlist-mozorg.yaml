@@ -1695,3 +1695,5 @@ allowed_outbound_url_literals:
   - https://github.com/tc39/proposal-arraybuffer-transfer
   - https://support.apple.com/guide/mac-help/create-a-passkey-mchl4af65d1a/mac
   - https://www.getpocket.com/2023/
+  - https://web.dev/articles/passkey-form-autofill
+  - https://github.com/w3c/webauthn/wiki/Explainer:-WebAuthn-Conditional-UI
