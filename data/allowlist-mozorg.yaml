@@ -1699,3 +1699,4 @@ allowed_outbound_url_literals:
   - https://github.com/w3c/webauthn/wiki/Explainer:-WebAuthn-Conditional-UI
   - https://apps.microsoft.com/detail/9MVZQVXJBQ9V
   - https://support.apple.com/guide/mac-help/use-voice-control-commands-mh40719/mac
+  - https://www.w3.org/TR/filter-effects-1/#tainted-filter-primitives
