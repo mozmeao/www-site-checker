@@ -70,10 +70,6 @@ django==4.2.7 \
     --hash=sha256:8e0f1c2c2786b5c0e39fe1afce24c926040fad47c8ea8ad30aaf1188df29fc41 \
     --hash=sha256:e1d37c51ad26186de355cbcec16613ebdabfa9689bbade9c538835205a8abbe9
     # via -r requirements.in
-exceptiongroup==1.2.0 \
-    --hash=sha256:4bfd3996ac73b41e9b9628b04e079f193850720ea5945fc96a08633c66912f14 \
-    --hash=sha256:91f5c769735f051a4290d52edd0858999b57e5876e9f85937691bd4c9fa3ed68
-    # via pytest
 feedparser==6.0.10 \
     --hash=sha256:27da485f4637ce7163cdeab13a80312b93b7d0c1b775bef4a47629a3110bca51 \
     --hash=sha256:79c257d526d13b944e965f6095700587f27388e50ea16fd245babe4dfae7024f
@@ -200,9 +196,9 @@ pyparsing==3.0.7 \
     --hash=sha256:18ee9022775d270c55187733956460083db60b37d0d0fb357445f3094eed3eea \
     --hash=sha256:a6c06a88f252e6c322f65faf8f418b16213b51bdfaece0524c1c1bc30c63c484
     # via packaging
-pytest==7.4.3 \
-    --hash=sha256:0d009c083ea859a71b76adf7c1d502e4bc170b80a8ef002da5806527b9591fac \
-    --hash=sha256:d989d136982de4e3b29dabcc838ad581c64e8ed52c11fbe86ddebd9da0818cd5
+pytest==7.4.4 \
+    --hash=sha256:2cf0005922c6ace4a3e2ec8b4080eb0d9753fdc93107415332f50ce9e7994280 \
+    --hash=sha256:b090cdf5ed60bf4c45261be03239c2c1c22df034fbffe691abe93cd80cea01d8
     # via
     #   -r requirements.in
     #   pytest-cov
@@ -325,9 +321,7 @@ sqlparse==0.4.4 \
 tomli==2.0.1 \
     --hash=sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc \
     --hash=sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f
-    # via
-    #   coverage
-    #   pytest
+    # via coverage
 urllib3==2.1.0 \
     --hash=sha256:55901e917a5896a349ff771be919f8bd99aff50b79fe58fec595eb37bbc56bb3 \
     --hash=sha256:df7aa8afb0148fa78488e7899b2c59b5f4ffcfa82e6c54ccb9dd37c1d7b52d54
