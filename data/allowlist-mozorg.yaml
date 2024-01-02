@@ -1692,3 +1692,11 @@ allowed_outbound_url_literals:
   - https://righttobe.org/feel-support/
   - https://stopncii.org/?utm_medium=organic&utm_source=mozilla&utm_campaign=antiharassment
   - https://cybercivilrights.org/ccri-crisis-helpline/
+  - https://web.dev/articles/passkey-form-autofill
+  - https://www.w3.org/TR/filter-effects-1/#tainted-filter-primitives
+  - https://support.apple.com/guide/mac-help/create-a-passkey-mchl4af65d1a/mac
+  - https://www.getpocket.com/2023/
+  - https://apps.microsoft.com/detail/9MVZQVXJBQ9V
+  - https://github.com/w3c/webauthn/wiki/Explainer:-WebAuthn-Conditional-UI
+  - https://github.com/tc39/proposal-arraybuffer-transfer
+  - https://support.apple.com/guide/mac-help/use-voice-control-commands-mh40719/mac
