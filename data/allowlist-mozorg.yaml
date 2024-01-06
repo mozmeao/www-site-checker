@@ -1700,3 +1700,6 @@ allowed_outbound_url_literals:
   - https://apps.microsoft.com/detail/9MVZQVXJBQ9V
   - https://support.apple.com/guide/mac-help/use-voice-control-commands-mh40719/mac
   - https://www.w3.org/TR/filter-effects-1/#tainted-filter-primitives
+  - https://monitor.mozilla.org?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=compare-chrome
+  - https://monitor.mozilla.org?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-products
+  - https://monitor.mozilla.org?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-home
