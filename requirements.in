@@ -1,5 +1,5 @@
 # main reqs
-beautifulsoup4==4.12.2
+beautifulsoup4==4.12.3
 certifi>=2023.7.22
 click==8.1.7
 django==4.2.8
