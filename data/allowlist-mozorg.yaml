@@ -1704,3 +1704,5 @@ allowed_outbound_url_literals:
   - https://monitor.mozilla.org?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-products
   - https://monitor.mozilla.org?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-home
   - https://apps.apple.com/app/apple-store/id989804926?pt=373246&ct=mozilla-org-firefox-new&mt=8
+  - https://fxdx.dev/rules-view-enter-key/
+  - https://github.com/w3c/webauthn/wiki/Explainer%3A-WebAuthn-Conditional-UI
