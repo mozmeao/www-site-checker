@@ -1706,3 +1706,7 @@ allowed_outbound_url_literals:
   - https://apps.apple.com/app/apple-store/id989804926?pt=373246&ct=mozilla-org-firefox-new&mt=8
   - https://fxdx.dev/rules-view-enter-key/
   - https://github.com/w3c/webauthn/wiki/Explainer%3A-WebAuthn-Conditional-UI
+  - https://haveibeenpwned.com/OptOut
+  - https://onerep.com/
+  - https://spdx.dev/learn/handling-license-info/
+  - https://reuse.software/
