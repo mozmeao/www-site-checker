@@ -41,18 +41,18 @@ allowed_outbound_url_regexes:
   # mailto links to Mozilla itself
   - "^mailto:[^@]+@mozilla.(com|org)$"
 
-  # === Mobile downloads, direct and via adjust.com
+  # === Mobile downloads
 
   - '^https:\/\/itunes\.apple\.com\/[a-z]{0,2}\/{0,1}app\/firefox-private-safe-browser\/id989804926($|\?.*)'
   - '^https:\/\/play\.google\.com\/store\/apps\/details\?id=org.mozilla.(firefox|firefox_beta|fenix)($|&hl=[a-z]{2}|&referrer=.*)'
-  - '^https:\/\/app\.adjust\.com\/2uo1qc\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Ffirefox-private-safe-browser%2Fid989804926&campaign=www\.mozilla\.org(&[a-z_]+=[a-z_\-]+)+$'
-  - '^https:\/\/app\.adjust\.com\/2uo1qc\?redirect=https%3A%2F%2Fplay\.google\.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dorg\.mozilla\.firefox&campaign=www\.mozilla\.org(&[a-z_]+=[a-z_\-]+)+$'
-  - '^https:\/\/app\.adjust\.com\/m54twk\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Fpocket-save-read-grow%2Fid309601447&campaign=www\.mozilla\.org(&[a-z_]+=[a-z_\-]+)+$'
-  - '^https:\/\/app\.adjust\.com\/m54twk\?redirect=https%3A%2F%2Fplay\.google\.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom\.ideashower\.readitlater\.pro&campaign=www\.mozilla\.org(&[a-z_]+=[a-z_\-]+)+$'
-  - '^https:\/\/app\.adjust\.com\/b8s7qo\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Ffirefox-focus-privacy-browser%2Fid1055677337&campaign=www\.mozilla\.org(&[a-z_]+=[a-z_\-]+)+$'
-  - '^https:\/\/app\.adjust\.com\/b8s7qo\?redirect=https%3A%2F%2Fplay\.google\.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dorg\.mozilla\.focus&campaign=www\.mozilla\.org(&[a-z_]+=[a-z_\-]+)+$'
-  - '^https:\/\/app\.adjust\.com\/jfcx5x\?redirect=https%3A%2F%2Fitunes\.apple\.com%2F[a-z]{0,2}(%2F){0,1}app%2Fklar-by-firefox%2Fid1073435754&campaign=www\.mozilla\.org(&[a-z_]+=[a-z_\-]+)+$'
-  - '^https:\/\/app\.adjust\.com\/jfcx5x\?redirect=https%3A%2F%2Fplay\.google\.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dorg\.mozilla\.klar&campaign=www\.mozilla\.org(&[a-z_]+=[a-z_\-]+)+$'
+
+  - '^https:\/\/apps.apple.com\/(?:\w{2,3}\/)?app\/apple-store\/id989804926\?pt=373246(?:&[a-z_\-]+=[a-z_\-\d]+)+$'  # Firefox iOS
+  - '^https:\/\/apps.apple.com\/(?:\w{2,3}\/)?app\/apple-store\/id1055677337\?pt=373246(?:&[a-z_\-]+=[a-z_\-\d]+)+$'  # Focus iOS
+  - '^https:\/\/apps.apple.com\/(?:\w{2,3}\/)?app\/apple-store\/id1073435754\?pt=373246(?:&[a-z_\-]+=[a-z_\-\d]+)+$'  # Klar iOS
+  - '^https:\/\/apps.apple.com\/(?:\w{2,3}\/)?app\/apple-store\/id309601447\?pt=373246(?:&[a-z_\-]+=[a-z_\-\d]+)+$'  # Pocket
+  - '^https:\/\/play\.google\.com\/store\/apps\/details\?id=com\.ideashower\.readitlater\.pro(?:&[a-z_\-]+=[\w_\-\d\.%]+)+$'
+  - '^https:\/\/play\.google\.com\/store\/apps\/details\?id=org\.mozilla\.klar(?:&[a-z_\-]+=[\w_\-\d\.%]+)+$'
+  - '^https:\/\/play\.google\.com\/store\/apps\/details\?id=org\.mozilla\.focus(?:&[a-z_\-]+=[\w_\-\d\.%]+)+$'
 
   # === Trusted third-party sites ===
 
@@ -99,12 +99,16 @@ allowed_outbound_url_literals:
   - https://www.mozillapulse.org/profile/410
   - https://projectfluent.org/
   - https://www.projectfluent.org/
-  - https://app.adjust.com/gi0ycmr?redirect=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dmozilla.lockbox
-  - https://app.adjust.com/jcn6eyw?campaign=firefox100&adgroup=android-store
-  - https://app.adjust.com/jcn6eyw?campaign=firefox100&adgroup=ios-store
-  - https://app.adjust.com/qywno6t?redirect=https%3A%2F%2Fitunes.apple.com%2Fapp%2Fid1314000270%3Fmt%3D8
   - https://apps.apple.com/us/app/firefox-private-network-vpn/id1489407738
   - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn
+  - https://apps.apple.com/us/app/apple-store/id989804926
+  - https://apps.apple.com/us/app/apple-store/id989804926
+
+  # Mentioned in release notes https://www.mozilla.org/en-US/firefox/67.0.1/releasenotes/
+  - https://app.adjust.com/gi0ycmr?redirect=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dmozilla.lockbox
+  - https://app.adjust.com/qywno6t?redirect=https%3A%2F%2Fitunes.apple.com%2Fapp%2Fid1314000270%3Fmt%3D8
+
+
 
   # Malformatted or broken links which need fixing
   - firefox-third-party.html # This is a 404 and we'll probably leave it as such for now
@@ -1710,3 +1714,4 @@ allowed_outbound_url_literals:
   - https://onerep.com/
   - https://spdx.dev/learn/handling-license-info/
   - https://reuse.software/
+  - https://www.internethalloffame.org/inductee/mitchell-baker/
