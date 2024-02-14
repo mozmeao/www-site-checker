@@ -15,7 +15,7 @@ jobs:
   run_robots_txt_check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Check robots.txt on main CDN
         shell: bash
         run: bin/robots_check.sh
