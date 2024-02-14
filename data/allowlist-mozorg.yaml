@@ -52,6 +52,7 @@ allowed_outbound_url_regexes:
   - '^https:\/\/apps.apple.com\/(?:\w{2,3}\/)?app\/apple-store\/id309601447\?pt=373246(?:&[a-z_\-]+=[a-z_\-\d]+)+$'  # Pocket
   - '^https:\/\/play\.google\.com\/store\/apps\/details\?id=com\.ideashower\.readitlater\.pro(?:&[a-z_\-]+=[\w_\-\d\.%]+)+$'
   - '^https:\/\/play\.google\.com\/store\/apps\/details\?id=org\.mozilla\.klar(?:&[a-z_\-]+=[\w_\-\d\.%]+)+$'
+  - '^https:\/\/play\.google\.com\/store\/apps\/details\?id=org\.mozilla\.focus(?:&[a-z_\-]+=[\w_\-\d\.%]+)+$'
 
   # === Trusted third-party sites ===
 
@@ -102,6 +103,11 @@ allowed_outbound_url_literals:
   - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn
   - https://apps.apple.com/us/app/apple-store/id989804926
   - https://apps.apple.com/us/app/apple-store/id989804926
+
+  # Mentioned in release notes https://www.mozilla.org/en-US/firefox/67.0.1/releasenotes/
+  - https://app.adjust.com/gi0ycmr?redirect=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dmozilla.lockbox
+  - https://app.adjust.com/qywno6t?redirect=https%3A%2F%2Fitunes.apple.com%2Fapp%2Fid1314000270%3Fmt%3D8
+
 
 
   # Malformatted or broken links which need fixing
