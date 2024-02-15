@@ -49,7 +49,7 @@ if SENTRY_DSN:
         integrations=[sentry_logging],
     )
 
-DEFAULT_BATCH__NOOP = "1:1"  # By default treat all URLs as a single batch
+DEFAULT_BATCH__NOOP = "1_1"  # By default treat all URLs as a single batch
 UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
 URL_RETRY_LIMIT = 3
 URL_RETRY_WAIT_SECONDS = 4
@@ -203,7 +203,7 @@ def check_for_unexpected_urls(
         _dump_unexpected_urls_to_files(
             results=url_results,
             hostname=hostname,
-            batch_label="all" if batch == DEFAULT_BATCH__NOOP else batch.split(":")[0],
+            batch_label="all" if batch == DEFAULT_BATCH__NOOP else batch.split("_")[0],
         )
         if SENTRY_DSN:
             message = f"Unexpected oubound URLs found on {hostname} - see Github Action in {GITHUB_REPOSITORY} for output data"
@@ -218,7 +218,7 @@ def check_for_unexpected_urls(
 def _get_batched_urls(urls_to_check: List[str], batch: str) -> List[str]:
     # TODO: optimise to avoid making a new list - just return the indices and work with them in a loop
     url_count = len(urls_to_check)
-    chunk_num, total_chunks = [int(x) for x in batch.split(":")]
+    chunk_num, total_chunks = [int(x) for x in batch.split("_")]
     if chunk_num < 1 or total_chunks < 1 or chunk_num > total_chunks:
         raise Exception(f"--batch parameter {batch} was nonsensical")
 
@@ -441,7 +441,7 @@ def _get_urls_from_sitemap(
     urls = []
 
     _parsed_origin_sitemap_url = urlparse(sitemap_url)
-    origin_hostname_with_scheme = f"{_parsed_origin_sitemap_url.scheme}://{_parsed_origin_sitemap_url.netloc}"
+    origin_hostname_with_scheme = f"{_parsed_origin_sitemap_url.scheme}://{_parsed_origin_sitemap_url.netloc}"  # noqa E231
 
     resp = _get_url_with_retry(sitemap_url)
 
@@ -495,7 +495,7 @@ def _update_hostname(origin_hostname_with_scheme: str, urls: List[str]) -> List[
     # This assumes all URLs in the sitemap have the same hostname, so we can use the first
     # as our source of truth. This doesn't seem unreasonable.
     _parsed_sample = urlparse(urls[0])
-    candidate_hostname_with_scheme = f"{_parsed_sample.scheme}://{_parsed_sample.netloc}"
+    candidate_hostname_with_scheme = f"{_parsed_sample.scheme}://{_parsed_sample.netloc}"  # noqa E231
 
     if origin_hostname_with_scheme == candidate_hostname_with_scheme:
         click.echo(f"No need to replace the hostname on this batch of URLs: {candidate_hostname_with_scheme}")

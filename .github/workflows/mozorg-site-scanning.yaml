@@ -28,7 +28,7 @@ jobs:
   run_on_cdn:
     strategy:
       matrix:
-        batch: ["1:8", "2:8", "3:8", "4:8", "5:8", "6:8", "7:8", "8:8"]
+        batch: ["1_8", "2_8", "3_8", "4_8", "5_8", "6_8", "7_8", "8_8"]
     runs-on: ubuntu-latest
     name: Check main CDN - batch ${{ matrix.batch }}
     steps:
@@ -45,22 +45,22 @@ jobs:
           --batch="${{ matrix.batch }}"
           --export-cache
       - name: Upload scan output files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: scan-results
+          name: scan-results-${{ matrix.batch }}-CDN
           path: output
           retention-days: 15
       - name: Upload page-cache
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: html-cache
+          name: html-cache-${{ matrix.batch }}
           path: page_cache
           retention-days: 5
 
   run_on_us_origin:
     strategy:
       matrix:
-        batch: ["1:8", "2:8", "3:8", "4:8", "5:8", "6:8", "7:8", "8:8"]
+        batch: ["1_8", "2_8", "3_8", "4_8", "5_8", "6_8", "7_8", "8_8"]
     runs-on: ubuntu-latest
     name: Check US origin server - batch ${{ matrix.batch }}
     steps:
@@ -77,15 +77,16 @@ jobs:
           --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload scan output files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: scan-results
+          name: scan-results-${{ matrix.batch }}-US-origin
           path: output
+          retention-days: 15
 
   run_on_eu_origin:
     strategy:
       matrix:
-        batch: ["1:8", "2:8", "3:8", "4:8", "5:8", "6:8", "7:8", "8:8"]
+        batch: ["1_8", "2_8", "3_8", "4_8", "5_8", "6_8", "7_8", "8_8"]
     runs-on: ubuntu-latest
     name: Check EU origin server - batch ${{ matrix.batch }}
     steps:
@@ -102,10 +103,11 @@ jobs:
           --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload scan output files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: scan-results
+          name: scan-results-${{ matrix.batch }}-EU-origin
           path: output
+          retention-days: 15
 
   alert_if_report_files_exist:
     runs-on: ubuntu-latest
@@ -120,13 +122,12 @@ jobs:
           python-version: "3.10"
       - name: Install requirements
         run: pip install -r requirements.txt
-      - name: Download artifacts, if they exist
-        id: download-scan-results
-        uses: actions/download-artifact@v3
+      - name: Download all artifacts, if they exist
+        uses: actions/download-artifact@v4
         with:
-          name: scan-results
           path: output
-      - name: Fail the job if scan-results exists
+          merge-multiple: true
+      - name: Handle the scan results
         run: python bin/handle_site_scan_output.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
