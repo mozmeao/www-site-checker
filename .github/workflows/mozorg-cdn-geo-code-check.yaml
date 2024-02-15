@@ -57,7 +57,7 @@ jobs:
       - name: Unzip page cache
         run: |
           cd page_cache
-          unzip -o html-cache.zip
+          unzip -o '*.zip'
           cd ..
           ls -la page_cache/
       - name: Install requirements
