@@ -1715,3 +1715,15 @@ allowed_outbound_url_literals:
   # - https://spdx.dev/learn/handling-license-info/
   # - https://reuse.software/
   # - https://www.internethalloffame.org/inductee/mitchell-baker/
+  - https://www.internethalloffame.org/inductee/mitchell-baker/
+  - https://www.w3.org/TR/filter-effects-1/#tainted-filter-primitives
+  - https://spdx.dev/learn/handling-license-info/
+  - https://monitor.mozilla.org?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-products
+  - https://monitor.mozilla.org?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-home
+  - https://monitor.mozilla.org?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=compare-chrome
+  - https://github.com/w3c/webauthn/wiki/Explainer%3A-WebAuthn-Conditional-UI
+  - https://reuse.software/
+  - https://onerep.com/
+  - https://fxdx.dev/rules-view-enter-key/
+  - https://haveibeenpwned.com/OptOut
+  - https://support.apple.com/guide/mac-help/use-voice-control-commands-mh40719/mac
