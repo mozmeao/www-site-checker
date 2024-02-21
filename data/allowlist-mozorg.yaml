@@ -1710,3 +1710,5 @@ allowed_outbound_url_literals:
   - https://spdx.dev/learn/handling-license-info/
   - https://reuse.software/
   - https://www.internethalloffame.org/inductee/mitchell-baker/
+  - https://play.google.com/store/apps/details?id=mozilla.lockbox
+  - https://apps.apple.com/app/id1314000270
