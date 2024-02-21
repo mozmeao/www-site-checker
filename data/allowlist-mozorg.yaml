@@ -104,10 +104,6 @@ allowed_outbound_url_literals:
   - https://apps.apple.com/us/app/apple-store/id989804926
   - https://apps.apple.com/us/app/apple-store/id989804926
 
-  # Mentioned in release notes https://www.mozilla.org/en-US/firefox/67.0.1/releasenotes/
-  - https://app.adjust.com/gi0ycmr?redirect=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dmozilla.lockbox
-  - https://app.adjust.com/qywno6t?redirect=https%3A%2F%2Fitunes.apple.com%2Fapp%2Fid1314000270%3Fmt%3D8
-
 
 
   # Malformatted or broken links which need fixing
@@ -1573,7 +1569,6 @@ allowed_outbound_url_literals:
   - https://html.spec.whatwg.org/multipage/workers.html#workeroptions
   - https://web.archive.org/web/20210530092017/https://developer.mozilla.org/en-US/docs/Mozilla/Command_Line_Options
   - https://cdn-3.convertexperiments.com/js/10039-1003343.js
-  - https://nn8g.adj.st/?adjust_t=ucunb4r
   - https://w3c.github.io/webrtc-extensions/#rtcrtpreceiver-jitterbuffertarget-attributes
   - https://github.com/tc39/proposal-change-array-by-copy
   - https://www.w3.org/International/questions/qa-html-dir#reportingdirection
