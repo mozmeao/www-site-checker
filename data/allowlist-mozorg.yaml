@@ -1712,3 +1712,6 @@ allowed_outbound_url_literals:
   - https://www.internethalloffame.org/inductee/mitchell-baker/
   - https://play.google.com/store/apps/details?id=mozilla.lockbox
   - https://apps.apple.com/app/id1314000270
+  - https://youtu.be/LbGtijF8qb0
+  - https://monitor.mozilla.org?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=products
+  - https://mozilla.formstack.com/forms/rise25
