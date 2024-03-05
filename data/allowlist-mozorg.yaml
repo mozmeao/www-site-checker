@@ -1716,3 +1716,8 @@ allowed_outbound_url_literals:
   - https://monitor.mozilla.org?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=products
   - https://mozilla.formstack.com/forms/rise25
   - https://html.spec.whatwg.org/#the-popover-attribute
+  - https://youtu.be/_EeFDE5WW0I
+  - https://youtu.be/CqGZtCZVDZ0
+  - https://youtu.be/7yLoRVwuZlc
+  - https://youtu.be/OarBwHc2JzY
+  - https://youtu.be/ISYtFzMXVbM
