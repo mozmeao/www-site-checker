@@ -1721,3 +1721,4 @@ allowed_outbound_url_literals:
   - https://youtu.be/7yLoRVwuZlc
   - https://youtu.be/OarBwHc2JzY
   - https://youtu.be/ISYtFzMXVbM
+  - https://github.com/WebKit/Speedometer/
