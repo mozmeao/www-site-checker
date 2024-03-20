@@ -1722,3 +1722,5 @@ allowed_outbound_url_literals:
   - https://youtu.be/OarBwHc2JzY
   - https://youtu.be/ISYtFzMXVbM
   - https://github.com/WebKit/Speedometer/
+  - https://drafts.csswg.org/css-shapes-2/#shape-function
+  - https://drafts.fxtf.org/css-masking-1/#the-clip-path
