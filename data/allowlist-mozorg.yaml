@@ -1724,3 +1724,6 @@ allowed_outbound_url_literals:
   - https://github.com/WebKit/Speedometer/
   - https://drafts.csswg.org/css-shapes-2/#shape-function
   - https://drafts.fxtf.org/css-masking-1/#the-clip-path
+  - https://extensionworkshop.com/documentation/publish/add-on-policies/
+  - https://extensionworkshop.com/documentation/publish/add-on-policies
+  - https://mozilla.social
