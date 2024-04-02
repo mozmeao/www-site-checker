@@ -1728,3 +1728,8 @@ allowed_outbound_url_literals:
   - https://extensionworkshop.com/documentation/publish/add-on-policies
   - https://mozilla.social
   - https://html.spec.whatwg.org/multipage/custom-elements.html#custom-state-pseudo-class
+  - https://drafts.csswg.org/css-shapes-2/#funcdef-shape
+  - https://drafts.csswg.org/css-shapes-1/#funcdef-basic-shape-path
+  - https://drafts.csswg.org/css-shapes-2/#interpolating-shape
+  - https://drafts.fxtf.org/motion-1/#offset-path-property
+  - https://url.spec.whatwg.org/#dom-url-parse
