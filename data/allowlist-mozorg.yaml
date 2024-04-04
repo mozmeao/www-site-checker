@@ -1733,3 +1733,4 @@ allowed_outbound_url_literals:
   - https://drafts.csswg.org/css-shapes-2/#interpolating-shape
   - https://drafts.fxtf.org/motion-1/#offset-path-property
   - https://url.spec.whatwg.org/#dom-url-parse
+  - https://drafts.csswg.org/css-viewport/#zoom-property
