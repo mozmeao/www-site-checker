@@ -1734,3 +1734,4 @@ allowed_outbound_url_literals:
   - https://drafts.fxtf.org/motion-1/#offset-path-property
   - https://url.spec.whatwg.org/#dom-url-parse
   - https://drafts.csswg.org/css-viewport/#zoom-property
+  - https://www.braze.com/company/legal/privacy
