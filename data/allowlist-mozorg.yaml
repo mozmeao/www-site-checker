@@ -1735,3 +1735,5 @@ allowed_outbound_url_literals:
   - https://url.spec.whatwg.org/#dom-url-parse
   - https://drafts.csswg.org/css-viewport/#zoom-property
   - https://www.braze.com/company/legal/privacy
+  - https://www.formstack.com/
+  - https://www.formstack.com/legal
