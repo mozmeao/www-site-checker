@@ -38,18 +38,8 @@ repos:
       - id: trailing-whitespace
       - id: debug-statements
       # - id: check-yaml  # can't be used with pyyaml-env package's !ENV (yet?)
-  - repo: https://github.com/psf/black
-    rev: 22.3.0
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.3.3
     hooks:
-      - id: black
-        language_version: python3
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.10.1
-    hooks:
-      - id: isort
-  - repo: https://github.com/pycqa/flake8
-    rev: 5.0.4
-    hooks:
-      - id: flake8
-  #        TODO Add this and fix issues found
-  #        additional_dependencies: [flake8-bugbear]
+      - id: ruff
+      - id: ruff-format

@@ -49,19 +49,21 @@ def check_geo_consistency():
     if "NOT_PRESENT" in geo_codes_seen.keys():
         not_present_pages = geo_codes_seen["NOT_PRESENT"]
         _print(f"Found no geo codes in at least one CDN page! ({not_present_pages})")
-        message = (
-            f"WARNING: No data-country-code values found in CDN content. See {GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}"
-        )
+        message = f"WARNING: No data-country-code values found in CDN content. See {GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}"
         ping_slack(message)
         sys.exit(98)
 
     elif len(geo_codes_seen.keys()) != 1:
-        _print(f"Found {len(geo_codes_seen.keys())} geo codes in CDN pages: {geo_codes_seen.keys()}")
+        _print(
+            f"Found {len(geo_codes_seen.keys())} geo codes in CDN pages: {geo_codes_seen.keys()}"
+        )
         # We usually run this test from US-based servers, so the US key will point to thousands
         # of items, which is generally not useful to us, so we'll not print them out. Non-US
         # results _are_ interesting to us, though
         geo_codes_seen.pop("US", None)
-        _print(f"Non-US geo codes seen and corresponding URLs: {geo_codes_seen.items()}")
+        _print(
+            f"Non-US geo codes seen and corresponding URLs: {geo_codes_seen.items()}"
+        )
         message = (
             "WARNING: Inconsistent number of data-country-code values found from CDN content. "
             f"See {GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}"
@@ -70,7 +72,9 @@ def check_geo_consistency():
         sys.exit(99)
 
     else:
-        _print(f"All OK: Only one single geo code seen in CDN pages from cache. Checked {len(html_document_lookup.keys())} documents")
+        _print(
+            f"All OK: Only one single geo code seen in CDN pages from cache. Checked {len(html_document_lookup.keys())} documents"
+        )
         _print(f"(Code seen: {list(geo_codes_seen.keys())[0]})")
 
 

@@ -10,6 +10,7 @@ Run the specified checks on specified URLs and issue a report.
 
 Initially, we're checking that all outbound URLs are ones we expect.
 """
+
 import datetime
 import json
 import logging
@@ -117,7 +118,9 @@ def run_checks(
     if not sitemap_url and not specific_urls:
         raise Exception("No sitemap or input URLs specified. Cannot proceed.")
 
-    host_url = sitemap_url or specific_urls[0]  # TODO: ensure all specific URLs use the same hostname
+    host_url = (
+        sitemap_url or specific_urls[0]
+    )  # TODO: ensure all specific URLs use the same hostname
     hostname = urlparse(host_url).netloc
 
     allowlist_config = _get_allowlist_config(
@@ -222,7 +225,9 @@ def _get_batched_urls(urls_to_check: List[str], batch: str) -> List[str]:
     if chunk_num < 1 or total_chunks < 1 or chunk_num > total_chunks:
         raise Exception(f"--batch parameter {batch} was nonsensical")
 
-    chunk_size = math.ceil(url_count / total_chunks)  # better to make the chunk one element
+    chunk_size = math.ceil(
+        url_count / total_chunks
+    )  # better to make the chunk one element
     start_index = (chunk_num - 1) * chunk_size
     end_index = start_index + chunk_size
     click.echo(f"Working on batch {chunk_num}/{total_chunks}: {chunk_size} items")
@@ -264,11 +269,15 @@ def _get_url_with_retry(
 
     except exceptions_to_retry as re:
         if try_count < limit:
-            click.echo(f"Waiting {URL_RETRY_WAIT_SECONDS} seconds before retrying, following {re}")
+            click.echo(
+                f"Waiting {URL_RETRY_WAIT_SECONDS} seconds before retrying, following {re}"
+            )
             time.sleep(URL_RETRY_WAIT_SECONDS)
             return _get_url_with_retry(url, try_count=try_count + 1)
         else:
-            click.echo(f"Max retries ({URL_RETRY_LIMIT}) reached. Raising exception {re}")
+            click.echo(
+                f"Max retries ({URL_RETRY_LIMIT}) reached. Raising exception {re}"
+            )
             raise re
 
 
@@ -287,11 +296,19 @@ def _dump_unexpected_urls_to_files(
 
     """
     _output_path = get_output_path()
-    _now = datetime.datetime.utcnow().isoformat(timespec="seconds").replace(":", "-")  # Github actions doesn't like colons in filenames
-    _base_filename = f"{UNEXPECTED_URLS_FILENAME_FRAGMENT}_{hostname}_{batch_label}_{_now}.txt"
-    flat_output_filepath = os.path.join(_output_path, _base_filename.replace(".txt", "_flat.txt"))
+    _now = (
+        datetime.datetime.utcnow().isoformat(timespec="seconds").replace(":", "-")
+    )  # Github actions doesn't like colons in filenames
+    _base_filename = (
+        f"{UNEXPECTED_URLS_FILENAME_FRAGMENT}_{hostname}_{batch_label}_{_now}.txt"
+    )
+    flat_output_filepath = os.path.join(
+        _output_path, _base_filename.replace(".txt", "_flat.txt")
+    )
     nested_output_filepath = flat_output_filepath.replace("_flat", "_nested")
-    json_output_filepath = flat_output_filepath.replace("_flat", "_structured").replace(".txt", ".json")
+    json_output_filepath = flat_output_filepath.replace("_flat", "_structured").replace(
+        ".txt", ".json"
+    )
 
     fp_flat = open(flat_output_filepath, "w")
     fp_flat.write("\n".join([key for key in results.keys()]))
@@ -300,13 +317,17 @@ def _dump_unexpected_urls_to_files(
 
     fp_nested = open(nested_output_filepath, "w")
     for unexpected_url, occurrences in results.items():
-        line = "\nUnexpected URL: {unexpected_url}\nFound in:\n\t{occurrences}\n".format(
-            unexpected_url=unexpected_url,
-            occurrences="\n\t".join(occurrences),
+        line = (
+            "\nUnexpected URL: {unexpected_url}\nFound in:\n\t{occurrences}\n".format(
+                unexpected_url=unexpected_url,
+                occurrences="\n\t".join(occurrences),
+            )
         )
         fp_nested.write(line)
     fp_nested.close()
-    click.echo(f"List of unexpected URLs and their source pages output to {nested_output_filepath}")
+    click.echo(
+        f"List of unexpected URLs and their source pages output to {nested_output_filepath}"
+    )
 
     # Can't serialize a set, so make it a list and flip it around
     inverted_results = defaultdict(list)
@@ -339,7 +360,9 @@ def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
             break
 
     if not site_config:
-        click.echo(f"Could not find a config for {hostname}, so treating all outbound URLs as unexpected")
+        click.echo(
+            f"Could not find a config for {hostname}, so treating all outbound URLs as unexpected"
+        )
         site_config = {
             "allowed_outbound_url_literals": set(),
             "allowed_outbound_url_regexes": set(),
@@ -348,7 +371,9 @@ def _get_allowlist_config(hostname: str, allowlist_pathname: str) -> dict:
         # While we're here, turn the list of full strings to match into a set, to optimise lookups later.
         # We _could_ mark this up as sets in YAML, but that gets parsed as {key_x: null, ...} so
         # still would need cleaning up
-        site_config["allowed_outbound_url_literals"] = set(site_config.get("allowed_outbound_url_literals", []))
+        site_config["allowed_outbound_url_literals"] = set(
+            site_config.get("allowed_outbound_url_literals", [])
+        )
 
         # Also, let's pre-compile our regexes, at least:
         compiled_regexes = set()
@@ -441,7 +466,9 @@ def _get_urls_from_sitemap(
     urls = []
 
     _parsed_origin_sitemap_url = urlparse(sitemap_url)
-    origin_hostname_with_scheme = f"{_parsed_origin_sitemap_url.scheme}://{_parsed_origin_sitemap_url.netloc}"  # noqa E231
+    origin_hostname_with_scheme = (
+        f"{_parsed_origin_sitemap_url.scheme}://{_parsed_origin_sitemap_url.netloc}"  # noqa E231
+    )
 
     resp = _get_url_with_retry(sitemap_url)
 
@@ -473,7 +500,9 @@ def _get_urls_from_sitemap(
             try:
                 urls.append(url.loc.text)
             except AttributeError as ae:
-                sentry_sdk.capture_message(f"URL node {url} missing '<loc>' - exception to follow")
+                sentry_sdk.capture_message(
+                    f"URL node {url} missing '<loc>' - exception to follow"
+                )
                 sentry_sdk.capture_exception(ae)
 
     # Also remember to update the hostname on the final set of URLs, if required
@@ -495,12 +524,19 @@ def _update_hostname(origin_hostname_with_scheme: str, urls: List[str]) -> List[
     # This assumes all URLs in the sitemap have the same hostname, so we can use the first
     # as our source of truth. This doesn't seem unreasonable.
     _parsed_sample = urlparse(urls[0])
-    candidate_hostname_with_scheme = f"{_parsed_sample.scheme}://{_parsed_sample.netloc}"  # noqa E231
+    candidate_hostname_with_scheme = (
+        f"{_parsed_sample.scheme}://{_parsed_sample.netloc}"  # noqa E231
+    )
 
     if origin_hostname_with_scheme == candidate_hostname_with_scheme:
-        click.echo(f"No need to replace the hostname on this batch of URLs: {candidate_hostname_with_scheme}")
+        click.echo(
+            f"No need to replace the hostname on this batch of URLs: {candidate_hostname_with_scheme}"
+        )
 
-    return [url.replace(candidate_hostname_with_scheme, origin_hostname_with_scheme) for url in urls]
+    return [
+        url.replace(candidate_hostname_with_scheme, origin_hostname_with_scheme)
+        for url in urls
+    ]
 
 
 if __name__ == "__main__":
