@@ -79,7 +79,9 @@ def _assemble_results(output_path: str) -> set:
     # assume we have multiple output files, all scanning different sources of the website data
     for filename in os.listdir(output_path):
         if filename.endswith(".json"):
-            unexpected_url_data.update(_load_results_json(os.path.join(output_path, filename)))
+            unexpected_url_data.update(
+                _load_results_json(os.path.join(output_path, filename))
+            )
 
     for hostname in unexpected_url_data.keys():
         output.update(set(unexpected_url_data[hostname]))
@@ -114,7 +116,9 @@ def _get_current_github_issues() -> List:
     return json.loads(requests.get(SITE_CHECKER_ISSUES_API_URL).content)
 
 
-def _matching_github_entity_exists(current_entities: List, candidates: List[str]) -> bool:
+def _matching_github_entity_exists(
+    current_entities: List, candidates: List[str]
+) -> bool:
     """Search all entities (open PRs or Issues) to see if we have one featuring this hash"""
     hashed_value = _get_hashed_value(candidates)
 
@@ -148,7 +152,9 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     output = ""
     allowlist_path = os.environ.get("ALLOWLIST_FILEPATH")
     timestamp = datetime.datetime.utcnow().isoformat(timespec="seconds")
-    unexpected_urls_structured = _build_structured_url_list_for_pr_description(pr_candidates)
+    unexpected_urls_structured = _build_structured_url_list_for_pr_description(
+        pr_candidates
+    )
 
     if not pr_candidates:
         _print("No candidate URLs to add to the allowlist")
@@ -158,14 +164,18 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
         current_entities=_get_current_github_prs(),
         candidates=pr_candidates,
     ):
-        _print("Not opening a new PR - existing one for same unexpected URLs exists already")
+        _print(
+            "Not opening a new PR - existing one for same unexpected URLs exists already"
+        )
         return output
 
     # 0. Make a new branch
     os.system(f'git config user.email "{MEAO_IDENTITY_EMAIL}"')
     os.system('git config user.name "www-site-checker bot"')
 
-    branchname = f'update-{allowlist_path.replace("/","-")}--{timestamp.replace(":","-")}'
+    branchname = (
+        f'update-{allowlist_path.replace("/","-")}--{timestamp.replace(":","-")}'
+    )
     os.system(f"git switch -c {branchname}")
 
     # 1. Update the allowlist
@@ -194,7 +204,9 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     )
     new_pr_command = f'gh pr create --title "{pr_title}" --body "{pr_body}"'
     _print("Opening PR")
-    output = subprocess.check_output(new_pr_command, stderr=subprocess.STDOUT, shell=True)
+    output = subprocess.check_output(
+        new_pr_command, stderr=subprocess.STDOUT, shell=True
+    )
     output = output.decode()
     return output
 
@@ -230,7 +242,9 @@ def _open_new_issues(issue_candidates: List[str]) -> List[str]:
             current_entities=_get_current_github_issues(),
             candidates=[problematic_url],
         ):
-            _print(f"Not opening a new Issue - existing one for '{problematic_url}' exists already")
+            _print(
+                f"Not opening a new Issue - existing one for '{problematic_url}' exists already"
+            )
             continue
 
         issue_title = ISSUE_TITLE_TEMPLATE.format(
@@ -248,7 +262,9 @@ def _open_new_issues(issue_candidates: List[str]) -> List[str]:
         )
         new_issue_command = f'gh issue create --title "{issue_title}" --body "{issue_body}" --label "bug"'
         _print("Opening new issue")
-        result = subprocess.check_output(new_issue_command, stderr=subprocess.STDOUT, shell=True)
+        result = subprocess.check_output(
+            new_issue_command, stderr=subprocess.STDOUT, shell=True
+        )
         output.append(result.decode())
 
     return output
@@ -311,12 +327,18 @@ def main():
 
     github_urls = raise_prs_or_issues(output_path)
 
-    _action_url = f"{GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}/"
-    message = "Unexpected outbound URL found when scanning site content.\nDetails and output: {}".format(_action_url)
+    _action_url = (
+        f"{GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}/"
+    )
+    message = "Unexpected outbound URL found when scanning site content.\nDetails and output: {}".format(
+        _action_url
+    )
     if github_urls.get("pr_url"):
         message += "\nPR to amend allowlist: {}".format(github_urls["pr_url"])
     if github_urls.get("issue_urls"):
-        message += "\nIssue(s) opened: \n{}".format("\n".join(github_urls["issue_urls"]))
+        message += "\nIssue(s) opened: \n{}".format(
+            "\n".join(github_urls["issue_urls"])
+        )
     if not github_urls.get("pr_url") and not github_urls.get("issue_urls"):
         message += "\nNB: No new Issues or PRs opened - there will be existing ones on www-site-checker"
 

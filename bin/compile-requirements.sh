@@ -11,4 +11,8 @@ set -exo pipefail
 
 pip install -U pip
 pip install pip-tools
+
+# Drop the compiled reqs files, to help us pick up automatic subdep updates, too
+rm -f requirements.txt
+
 pip-compile --generate-hashes --no-header --resolver=backtracking --rebuild

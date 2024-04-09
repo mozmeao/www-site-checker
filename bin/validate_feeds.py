@@ -32,7 +32,6 @@ GITHUB_RUN_ID = os.environ.get("GITHUB_RUN_ID", "NO-RUN-NUMBER")
     help="Hostname of site where the feeds are located - eg www.mozilla.org",
 )
 def validate_feeds(hostname) -> None:
-
     feed_config = _load_config(
         hostname=hostname,
         filename=os.environ.get("FEED_CONFIG_FILENAME", "data/feeds-to-check.yaml"),

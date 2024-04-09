@@ -411,7 +411,7 @@ This feature can be turned off using <code>browser.tabs.searchclipboardfor.middl
     <title type="html">Importing bookmarks from Safari or a Chrome-based browser? The favicons for those bookmarks will...</title>
     <id>https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789440</id>
     <link rel="alternate" type="text/html" href="https://www.mozilla.org/en-US/firefox/113.0a1/releasenotes/#note-789440"/>
-    <updated>2023-04-08T09:09:53.100353+00:00</updated>
+    <updated>2023-04-08T09:09:53.110353+00:00</updated>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         113.0a1 / New / <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=326701">Bug 326701</a>
