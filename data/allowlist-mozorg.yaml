@@ -1738,3 +1738,5 @@ allowed_outbound_url_literals:
   - https://www.formstack.com/
   - https://www.formstack.com/legal
   - https://kb.cert.org/vuls/id/421644
+  - https://www.w3.org/TR/xbl/
+  - https://web.archive.org/web/20061116161614/http://developer.mozilla.org/en/docs/Creating_MozSearch_plugins
