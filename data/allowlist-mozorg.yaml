@@ -1744,3 +1744,4 @@ allowed_outbound_url_literals:
   - https://www.thunderbird.net/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=products
   - https://www.thunderbird.net/download/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=products
   - https://www.fakespot.com/analyzer?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=products
+  - https://groups.google.com/a/mozilla.org/g/dev-platform/c/M6erM0SjPTM
