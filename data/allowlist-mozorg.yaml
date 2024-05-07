@@ -1740,3 +1740,7 @@ allowed_outbound_url_literals:
   - https://kb.cert.org/vuls/id/421644
   - https://www.w3.org/TR/xbl/
   - https://web.archive.org/web/20061116161614/http://developer.mozilla.org/en/docs/Creating_MozSearch_plugins
+  - https://www.fakespot.com/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=products
+  - https://www.thunderbird.net/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=products
+  - https://www.thunderbird.net/download/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=products
+  - https://www.fakespot.com/analyzer?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=products
