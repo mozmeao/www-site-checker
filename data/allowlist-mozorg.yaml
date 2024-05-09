@@ -1745,3 +1745,10 @@ allowed_outbound_url_literals:
   - https://www.thunderbird.net/download/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=products
   - https://www.fakespot.com/analyzer?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=products
   - https://groups.google.com/a/mozilla.org/g/dev-platform/c/M6erM0SjPTM
+  - https://www.europarl.europa.eu/doceo/document/A-9-2023-0038-AM-007-007_EN.pdf
+  - https://netzpolitik.org/2023/gefaehrlicher-praezedenzfall-neues-gesetz-in-frankreich-will-browser-zur-zensur-verpflichten/
+  - https://nce.mpi-sp.org/index.php/s/cG88cptFdaDNyRr
+  - https://media.ccc.de/v/37c3-12004-please_identify_yourself
+  - https://thenextweb.com/news/french-law-threatens-free-internet-warns-mozilla
+  - https://www.techpolicy.press/five-eyes-campaign-against-encryption-threatens-democracy/
+  - https://last-chance-for-eidas.org/
