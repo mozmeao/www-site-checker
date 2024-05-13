@@ -1752,3 +1752,7 @@ allowed_outbound_url_literals:
   - https://thenextweb.com/news/french-law-threatens-free-internet-warns-mozilla
   - https://www.techpolicy.press/five-eyes-campaign-against-encryption-threatens-democracy/
   - https://last-chance-for-eidas.org/
+  - https://hackerone.com/mozilla/thanks
+  - https://registry.verra.org/app/projectDetail/VCS/607
+  - https://hackerone.com/mozilla/policy_scopes
+  - https://hackerone.com/mozilla
