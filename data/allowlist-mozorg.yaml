@@ -23,6 +23,7 @@ allowed_outbound_url_regexes:
   - '^https?:\/\/assets.mozilla.net\/(.*)'
   - '^https?:\/\/bugzil.la\/(\d*)$'
   - '^https?:\/\/getpocket.com\/(.*)'
+  - '^https?:\/\/fakespot.com\/(.*)'
   - '^https?:\/\/mzl.la\/(.*)'
   - '^https?:\/\/searchfox.org\/(.*)'
   - '^https?:\/\/videos.cdn.mozilla.net\/(.*)'
