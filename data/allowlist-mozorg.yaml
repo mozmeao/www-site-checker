@@ -1759,3 +1759,5 @@ allowed_outbound_url_literals:
   - https://hackerone.com/mozilla
   - http://facebook.github.io/zstd/
   - https://www.w3.org/TR/webrtc/#dom-rtcrtptransceiver-setcodecpreferences
+  - https://mozilla.ai/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage
+  - https://mozilla.vc/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage
