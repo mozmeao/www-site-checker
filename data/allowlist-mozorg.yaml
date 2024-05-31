@@ -1761,3 +1761,5 @@ allowed_outbound_url_literals:
   - https://www.w3.org/TR/webrtc/#dom-rtcrtptransceiver-setcodecpreferences
   - https://mozilla.ai/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage
   - https://mozilla.vc/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage
+  - https://support.google.com/chrome/answer/13355898#zippy=%2Cmanage-site-suggested-ads
+  - https://support.google.com/chrome/answer/13355898#zippy=%2Cmanage-ad-topics
