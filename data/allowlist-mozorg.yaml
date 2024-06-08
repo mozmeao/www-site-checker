@@ -1765,3 +1765,4 @@ allowed_outbound_url_literals:
   - https://support.google.com/chrome/answer/13355898#zippy=%2Cmanage-ad-topics
   - https://marketingplatform.google.com/about/analytics/
   - https://support.google.com/analytics/topic/2919631?&ref_topic=1008008&sjid=14989286036636170427-NA
+  - https://github.com/privacycg/CHIPS
