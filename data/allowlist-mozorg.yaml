@@ -1763,3 +1763,8 @@ allowed_outbound_url_literals:
   - https://mozilla.vc/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage
   - https://support.google.com/chrome/answer/13355898#zippy=%2Cmanage-site-suggested-ads
   - https://support.google.com/chrome/answer/13355898#zippy=%2Cmanage-ad-topics
+  - https://github.com/privacycg/CHIPS
+  - https://w3c.github.io/media-capabilities/#mediacapabilitieskeysystemconfiguration
+  - https://marketingplatform.google.com/about/analytics/
+  - https://github.com/w3ctag/design-principles/issues/463
+  - https://support.google.com/analytics/topic/2919631?&ref_topic=1008008&sjid=14989286036636170427-NA
