@@ -261,7 +261,7 @@ def _get_url_with_retry(
             if USER_AGENT:
                 headers.update({"User-Agent": USER_AGENT})
             click.echo(f"Pulling down {url}")
-            resp = requests.get(url, headers=headers)
+            resp = requests.get(url, headers=headers, allow_redirects=False)
             resp.raise_for_status()
             if cache_html and _page_content_is_cacheable(url):
                 PAGE_CONTENT_CACHE[url] = resp.content.decode()
