@@ -1768,3 +1768,8 @@ allowed_outbound_url_literals:
   - https://github.com/privacycg/CHIPS
   - https://github.com/w3ctag/design-principles/issues/463
   - https://w3c.github.io/media-capabilities/#mediacapabilitieskeysystemconfiguration
+  - http://www.onguardonline.gov/articles/0014-tips-using-public-wi-fi-networks
+  - http://lifehacker.com/5576927/how-to-stay-safe-on-public-wi+fi-networks
+  - https://www.getcybersafe.gc.ca/en/
+  - https://www.google.com/safetycenter/everyone/start/
+  - https://www.eff.org/wp/effs-top-12-ways-protect-your-online-privacy
