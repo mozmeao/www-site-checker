@@ -1768,3 +1768,5 @@ allowed_outbound_url_literals:
   - https://github.com/privacycg/CHIPS
   - https://github.com/w3ctag/design-principles/issues/463
   - https://w3c.github.io/media-capabilities/#mediacapabilitieskeysystemconfiguration
+  - https://open.spotify.com/playlist/0vvXsWCC9xrXsKd4FyS8kM
+  - https://www.youtube.com/watch?v=dQw4w9WgXcQ
