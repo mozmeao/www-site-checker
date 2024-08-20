@@ -1770,3 +1770,5 @@ allowed_outbound_url_literals:
   - https://w3c.github.io/media-capabilities/#mediacapabilitieskeysystemconfiguration
   - https://open.spotify.com/playlist/0vvXsWCC9xrXsKd4FyS8kM
   - https://www.youtube.com/watch?v=dQw4w9WgXcQ
+  - https://datatracker.ietf.org/doc/rfc9460/
+  - https://datatracker.ietf.org/doc/draft-ietf-tls-esni/
