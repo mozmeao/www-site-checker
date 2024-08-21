@@ -29,12 +29,6 @@ allowed_outbound_url_regexes:
   - '^https?:\/\/videos.cdn.mozilla.net\/(.*)'
   - '^https?:\/\/donate.mozilla.org\?presets=.+'
 
-  # === TEMPORARY additions while testing on dev
-  - '^https:\/\/www-dev.allizom.org($|\/(.*))'
-  - '^https://bouncer-bouncer.stage.mozaws.net/.*'
-  - '^https://accounts.stage.mozaws.net/.*'
-  - '^https://stage.guardian.nonprod.cloudops.mozgcp.net/r/.*'
-
   # === Mozilla on Github
 
   - '^https:\/\/github.com\/(mozilla|mozmeao|mozilla-mobile|mozilla-services|mozilla-tw)\/.*'
