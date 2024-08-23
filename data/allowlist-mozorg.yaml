@@ -1772,3 +1772,5 @@ allowed_outbound_url_literals:
   - https://www.youtube.com/watch?v=dQw4w9WgXcQ
   - https://datatracker.ietf.org/doc/rfc9460/
   - https://datatracker.ietf.org/doc/draft-ietf-tls-esni/
+  - https://x.com/FirefoxNightly
+  - https://x.com/firefoxbeta
