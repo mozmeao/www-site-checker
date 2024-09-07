@@ -1778,3 +1778,4 @@ allowed_outbound_url_literals:
   - https://x.com/firefoxbeta
   - https://rabble.ca/
   - https://extensionworkshop.com/documentation/publish/firefox-add-on-distribution-agreement/
+  - https://github.com/tc39/ecma262/security/advisories/GHSA-g38c-wh3c-5h9r
