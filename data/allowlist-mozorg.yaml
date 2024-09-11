@@ -1779,3 +1779,8 @@ allowed_outbound_url_literals:
   - https://rabble.ca/
   - https://extensionworkshop.com/documentation/publish/firefox-add-on-distribution-agreement/
   - https://github.com/tc39/ecma262/security/advisories/GHSA-g38c-wh3c-5h9r
+  - https://www.forbes.com/sites/neilhowe/2017/11/17/a-special-price-just-for-you/#583fdd8590b3
+  - https://www.theverge.com/2019/2/7/18211890/social-media-life-insurance-new-york-algorithms-big-data-discrimination-online-records
+  - https://www.nytimes.com/2019/10/08/opinion/ai-hiring-discrimination.html
+  - https://www.theverge.com/2018/4/11/17225482/facebook-shadow-profiles-zuckerberg-congress-data-privacy
+  - https://www.pewresearch.org/internet/2019/01/16/facebook-algorithms-and-personal-data/
