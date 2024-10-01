@@ -260,8 +260,8 @@ allowed_outbound_url_literals:
   - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=Eg+st%C3%B8tter+visjonen+fr%C3%A5+%40mozilla+om+eit+betre%2C+sunnare+internett%2C+vil+du+vere+med%3F
   - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=Eu+apoio+a+vis%C3%A3o+da+%40mozilla+de+uma+internet+melhor+e+mais+saud%C3%A1vel.+E+voc%C3%AA%2C+vai+se+juntar+a+mim%3F
   - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=Eu+apoio+a+vis%C3%A3o+da+%40mozilla+para+uma+internet+melhor+e+mais+saud%C3%A1vel.+Voc%C3%AA+vai+juntar-se+a+mim%3F
-  - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=I+support+the+vision+of+a+better%2C+healthier+internet+from+%40mozilla%2C+will+you+join+me%3F
-  - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=Ich+unterst%C3%BCtze+die+Vision+von+%40mozilla+f%C3%BCr+ein+besseres%2C+ges%C3%BCnderes+Internet+%E2%80%93+Sie+auch%3F
+  - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=I+support+the++of+a+better%2C+healthier+internet+from+%40mozilla%2C+will+you+join+me%3F
+  - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=Ich+unterst%C3%BCtze+die+Vision+von+%40mozilla+f%C3%BCr+ein+besseres%2C+ges%C3%BCnderes+Internet+%E2%80%93+du+auch%3F
   - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=Ik+steun+de+visie+van+een+beter%2C+gezonder+internet+van+%40mozilla%2C+doet+u+mee%3F
   - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=Ik+stypje+de+fyzje+fan+in+better%2C+s%C3%BBner+ynternet+fan+%40mozilla%2C+dochsto+mei+my+mei%3F
   - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fmzl.la%2Fmanifesto&text=Internet+hobe+eta+osasuntsuago+bati+buruz+%40mozilla-k+duen+ikuspegiarekin+bat+egiten+dut%2C+eta+zuk%3F
