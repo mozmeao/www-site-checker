@@ -1799,3 +1799,37 @@ allowed_outbound_url_literals:
   - https://apps.apple.com/us/app/firefox-private-safe-browser/id989804926?ppid=fb7ff70c-585e-4c32-bd90-f3abb0500d2a&ct=nothing-personal&mt=8
   - https://play.google.com/store/apps/details?id=org.mozilla.firefox&listing=nothing-personal&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dnothing-personal
   - https://google.com/
+  - https://apps.apple.com/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=de
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=uk
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=hu
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=tr
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=pt
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=el
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=en
+  - https://apps.apple.com/br/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=es
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=zh
+  - https://apps.apple.com/ua/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://apps.apple.com/id/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=it
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=ia
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=sv
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=vi
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=ja
+  - https://apps.apple.com/gb/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://apps.apple.com/de/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://apps.apple.com/tr/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://apps.apple.com/jp/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://apps.apple.com/mx/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://github.com/tc39/proposal-arraybuffer-base64
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=dsb
+  - https://apps.apple.com/gr/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://apps.apple.com/vt/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://apps.apple.com/it/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://apps.apple.com/cn/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=id
+  - https://apps.apple.com/hu/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://apps.apple.com/se/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://apps.apple.com/tw/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://apps.apple.com/es/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
