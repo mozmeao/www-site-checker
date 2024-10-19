@@ -1878,3 +1878,4 @@ allowed_outbound_url_literals:
   - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=fr
   - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=ka
   - https://apps.apple.com/no/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox&listing=nothing_personal&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dnothing-personal
