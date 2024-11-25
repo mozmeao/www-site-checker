@@ -10,7 +10,7 @@ pyaml-env==1.2.1
 PyYAML==6.0.2  # https://github.com/yaml/pyyaml/issues/724
 requests==2.32.3
 ruamel.yaml==0.17.21
-sentry-sdk==2.17.0
+sentry-sdk==2.19.0
 slack_sdk==3.33.2
 sqlparse==0.5.1
 
