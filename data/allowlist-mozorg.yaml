@@ -19,15 +19,19 @@ allowed_outbound_url_regexes:
   - '^https?:\/\/[^\/]+.firefox.com($|\/(.*))'
 
   - '^https?:\/\/[^\/]+.mozilla.design($|\/(.*))'
-  - '^https?:\/\/(www\.){0,3}mozillians.org($|\/(.*))'
+  - '^https?:\/\/(www\.){0,1}mozillians.org($|\/(.*))'
   - '^https?:\/\/assets.mozilla.net\/(.*)'
   - '^https?:\/\/bugzil.la\/(\d*)$'
-  - '^https?:\/\/getpocket.com\/(.*)'
-  - '^https?:\/\/fakespot.com\/(.*)'
+  - '^https:\/\/getpocket.com\/(.*)'
+  - '^https:\/\/(www.){0,1}fakespot\.com\/(.*)'
   - '^https?:\/\/mzl.la\/(.*)'
   - '^https?:\/\/searchfox.org\/(.*)'
   - '^https?:\/\/videos.cdn.mozilla.net\/(.*)'
   - '^https?:\/\/donate.mozilla.org\?presets=.+'
+  - '^https:\/\/www.thunderbird.net\/(.*)'
+  - '^https:\/\/irlpodcast.org\/(.*)'
+  - '^https:\/\/(www.|blog.){0,1}mozilla.ai\/(.*)'
+  - '^https:\/\/mozilla.vc\/(.*)'
 
   # === Mozilla on Github
 
@@ -404,6 +408,8 @@ allowed_outbound_url_literals:
   - https://www.youtube.com/watch?v=zZzl649NcD0
   - https://youtu.be/F-nFQryDB0s
   - https://youtu.be/M9kBO5bIEyI?t=705
+  - https://www.youtube.com/watch?v=GOhibTSUTO0
+  - https://www.youtube.com/watch?v=QzDUMpJbLiM
 
   - news://alt.fan.mozilla
   - news://alt.netscape.sucks
@@ -826,6 +832,7 @@ allowed_outbound_url_literals:
   - https://github.com/mdn/kuma
   - https://github.com/mdn/yari
   - https://github.com/Metnew
+  - https://github.com/Mozilla-Ocho/llamafile
   - https://github.com/microsoft/detours
   - https://github.com/mozilla/spoke/blob/master/LICENSE
   - https://github.com/MozillaReality/hubs-discord-bot
@@ -1759,8 +1766,6 @@ allowed_outbound_url_literals:
   - https://hackerone.com/mozilla
   - http://facebook.github.io/zstd/
   - https://www.w3.org/TR/webrtc/#dom-rtcrtptransceiver-setcodecpreferences
-  - https://mozilla.ai/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage
-  - https://mozilla.vc/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage
   - https://support.google.com/chrome/answer/13355898#zippy=%2Cmanage-site-suggested-ads
   - https://support.google.com/chrome/answer/13355898#zippy=%2Cmanage-ad-topics
   - https://marketingplatform.google.com/about/analytics/
@@ -1772,9 +1777,7 @@ allowed_outbound_url_literals:
   - https://www.youtube.com/watch?v=dQw4w9WgXcQ
   - https://datatracker.ietf.org/doc/rfc9460/
   - https://datatracker.ietf.org/doc/draft-ietf-tls-esni/
-  - https://www.mozilla.ai/
   - https://x.com/FirefoxNightly
-  - https://mozilla.vc/
   - https://x.com/firefoxbeta
   - https://rabble.ca/
   - https://extensionworkshop.com/documentation/publish/firefox-add-on-distribution-agreement/
