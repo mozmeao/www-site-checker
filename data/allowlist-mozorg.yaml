@@ -1896,3 +1896,24 @@ allowed_outbound_url_literals:
   - https://youtu.be/-Mz8xJW4CNE
   - https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2024-49039
   - https://www.youtube.com/watch?v=F-nFQryDB0s
+  - https://www.thunderbird.net/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=homepage
+  - https://irlpodcast.org/season7/episode4/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://www.thunderbird.net/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-mobile
+  - https://www.youtube.com/watch?v=GOhibTSUTO0
+  - https://www.thunderbird.net/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-home
+  - https://irlpodcast.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://www.mozilla.ai/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=about-us
+  - https://www.fakespot.com/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://irlpodcast.org/season7/episode3/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://irlpodcast.org/season7/episode5/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://blog.mozilla.ai/introducing-lumigator-2/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://mozilla.vc/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=about-us
+  - https://www.thunderbird.net/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=state-of-mozilla-2019
+  - https://www.youtube.com/watch?v=QzDUMpJbLiM
+  - https://github.com/Mozilla-Ocho/llamafile
+  - https://mozilla.vc/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://www.thunderbird.net/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-desktop
+  - https://www.thunderbird.net/utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=firefox-features
+  - https://www.thunderbird.net/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=account
+  - https://www.thunderbird.net/
+  - https://www.thunderbird.net/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
