@@ -15,5 +15,5 @@ slack_sdk==3.33.4
 sqlparse==0.5.2
 
 # test reqs
-pytest==8.3.3
+pytest==8.3.4
 pytest-cov==5.0.0
