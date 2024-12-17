@@ -1929,7 +1929,6 @@ allowed_outbound_url_literals:
   - https://opensource.org/open-source-ai-definition-draft-v-0-0-9
   - https://www.mozillafestival.org/
   - https://opensource.org/blog/the-open-source-initiative-announces-the-release-of-the-industrys-first-open-source-ai-definition
-  - http://Mozilla.ai
   - https://probabl.ai/
   - https://flower.ai/
   - https://nousresearch.com/
@@ -1944,7 +1943,6 @@ allowed_outbound_url_literals:
   - https://filament.dm/
   - https://a16z.com/generative-ai-enterprise-2024/
   - https://www.germnetwork.com/
-  - http://mozilla.ai
   - https://meta.com/
   - https://Mozilla.ai
   - https://mozilla.ai
