@@ -1946,3 +1946,5 @@ allowed_outbound_url_literals:
   - https://www.germnetwork.com/
   - http://mozilla.ai
   - https://meta.com/
+  - https://Mozilla.ai
+  - https://mozilla.ai
