@@ -130,4 +130,4 @@ jobs:
       - name: Handle the scan results
         run: python bin/handle_site_scan_output.py
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
