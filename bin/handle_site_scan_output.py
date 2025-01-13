@@ -204,9 +204,13 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     )
     new_pr_command = f'gh pr create --title "{pr_title}" --body "{pr_body}"'
     _print("Opening PR")
-    output = subprocess.check_output(
-        new_pr_command, stderr=subprocess.STDOUT, shell=True
-    )
+    try:
+        output = subprocess.check_output(
+            new_pr_command, stderr=subprocess.STDOUT, shell=True
+        )
+    except subprocess.CalledProcessError as e:
+        _print(f"Failed to create PR: {e.output.decode()}")
+        sys.exit(e.returncode)
     output = output.decode()
     return output
 
