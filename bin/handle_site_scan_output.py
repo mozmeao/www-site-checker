@@ -193,7 +193,7 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     # 2. Commit it to git on the new branch
     os.system(f'git commit --all -m "Automatic allowlist updates: {timestamp}"')
 
-    # 3. Push the branch up to otigin
+    # 3. Push the branch up to origin
     os.system(f"git push origin {branchname}")
 
     # 4. Prepare the Pull Request
@@ -202,7 +202,9 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
         unexpected_urls_structured=unexpected_urls_structured,
         fingerprint=_get_hashed_value(pr_candidates),
     )
-    new_pr_command = f'gh pr create --title "{pr_title}" --body "{pr_body}"'
+    new_pr_command = (
+        f'gh pr create --head {branchname} --title "{pr_title}" --body "{pr_body}"'
+    )
     _print("Opening PR")
     try:
         output = subprocess.check_output(
