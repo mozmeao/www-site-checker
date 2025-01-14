@@ -1955,3 +1955,5 @@ allowed_outbound_url_literals:
   - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=is
   - https://apps.apple.com/is/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
   - https://www.twitter.com/intent/tweet?url=https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F&text=Chrome-%E0%B5%BD+%E0%B4%A8%E0%B4%BF%E0%B4%A8%E0%B5%8D%E0%B4%A8%E0%B5%81%E0%B4%82+%F0%9F%94%A5Firefox-%E0%B4%B2%E0%B5%87%E0%B4%95%E0%B5%8D%E0%B4%95%E0%B5%81%E0%B5%8D+%E0%B4%9E%E0%B5%8A%E0%B4%9F%E0%B4%BF%E0%B4%AF%E0%B4%BF%E0%B4%9F%E0%B4%AF%E0%B4%BF%E0%B4%B2%E0%B5%8D%E2%80%8D+%E0%B4%AE%E0%B4%BE%E0%B4%B1%E0%B4%BE%E0%B4%82.+%E0%B4%87%E0%B4%A4%E0%B5%81%E0%B5%8D+%E0%B4%AA%E0%B4%B0%E0%B5%80%E0%B4%95%E0%B5%8D%E0%B4%B7%E0%B4%BF%E0%B4%9A%E0%B5%8D%E0%B4%9A%E0%B5%81%E0%B4%A8%E0%B5%8B%E0%B4%95%E0%B5%8D%E0%B4%95%E0%B5%82%21
+  - https://svgwg.org/specs/animations/#DiscardElement
+  - https://svgwg.org/specs/paths/#DOMInterfaces
