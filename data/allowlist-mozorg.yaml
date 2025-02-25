@@ -1968,3 +1968,10 @@ allowed_outbound_url_literals:
   - https://bsky.app/profile/firefox.com
   - http://mozilla.ai/
   - http://defined.ai/
+  - https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf
+  - https://www.etsi.org/deliver/etsi_en/319400_319499/31941102/02.05.01_60/en_31941102v020501p.pdf
+  - https://www.cpacanada.ca/-/media/site/operational/ms-member-services/docs/webtrust/01618_ms_extended-validation-ssl_final_aoda-compliant.pdf
+  - https://www.cpacanada.ca/-/media/site/operational/ms-member-services/docs/webtrust/01618-ms_24-3464_webtrust-for-ca-smime-certificates-v1-0-3_final.pdf
+  - https://www.cpacanada.ca/-/media/site/operational/ms-member-services/docs/webtrust/01618-ms_24-3464_webtrust-for-ca-ssl-baseline-v2-8_final.pdf
+  - https://datatracker.ietf.org/doc/html/rfc3647#section-6
+  - https://www.cpacanada.ca/-/media/site/operational/ms-member-services/docs/webtrust/01618-ms_24-3464_webtrust-for-ca-network-security-v1-7_final.pdf
