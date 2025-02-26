@@ -1975,3 +1975,7 @@ allowed_outbound_url_literals:
   - https://www.cpacanada.ca/-/media/site/operational/ms-member-services/docs/webtrust/01618-ms_24-3464_webtrust-for-ca-ssl-baseline-v2-8_final.pdf
   - https://datatracker.ietf.org/doc/html/rfc3647#section-6
   - https://www.cpacanada.ca/-/media/site/operational/ms-member-services/docs/webtrust/01618-ms_24-3464_webtrust-for-ca-network-security-v1-7_final.pdf
+  - https://cabforum.org/working-groups/smime/documents/
+  - https://cabforum.org/working-groups/netsec/documents/
+  - https://cabforum.org/working-groups/server/extended-validation/documents/
+  - https://cabforum.org/working-groups/server/baseline-requirements/documents/
