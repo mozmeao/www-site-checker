@@ -2076,3 +2076,8 @@ allowed_outbound_url_literals:
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Preklop+s+Chroma+na+Firefox+je+resni%C4%8Dno+hiter.+Poskusite+ga%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5Firefox+%E0%B8%97%E0%B8%B3%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B9%80%E0%B8%9B%E0%B8%A5%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%99%E0%B8%88%E0%B8%B2%E0%B8%81+Chrome+%E0%B9%84%E0%B8%94%E0%B9%89%E0%B9%80%E0%B8%A3%E0%B9%87%E0%B8%A7%E0%B8%A1%E0%B8%B2%E0%B8%81+%E0%B8%A5%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%...+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
   - https://bsky.app/intent/compose?text=Podpiram+Mozillino+vizijo+bolj%C5%A1ega%2C+zdravega+interneta.+Ste+z+mano%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
+  - https://bsky.app/intent/compose?text=Podp%C4%9Bruju+wiziju+l%C4%9Bp%C5%A1eho%2C+strow%C5%A1eho+interneta+wot+Mozilla%2C+chce%C4%87e+so+nam+p%C5%99idru%C5%BEi%C4%87%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
+  - https://bsky.app/intent/compose?text=%F0%9F%94%A5+V%C4%8Faka+Firefoxu+je+prechod+z+Chromu+naozaj+r%C3%BDchly.+Vysk%C3%BA%C5%A1ajte+to%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://bsky.app/intent/compose?text=Apoyo+la+visi%C3%B3n+de+una+internet+mejor+y+m%C3%A1s+saludable+de+parte+de+Mozilla%2C+%C2%BFte+vas+a+unir%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
+  - https://bsky.app/intent/compose?text=Podporujem+v%C3%ADziu+lep%C5%A1ieho+a+zdrav%C5%A1ieho+internetu+od+Mozilly%2C+prid%C3%A1te+sa+ku+mne%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
+  - https://bsky.app/intent/compose?text=T%C3%A1mogatom+az+Mozilla+jobb+%C3%A9s+eg%C3%A9szs%C3%A9gesebb+internetr%C5%91l+alkotott+v%C3%ADzi%C3%B3j%C3%A1t%2C+csatlakozol%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
