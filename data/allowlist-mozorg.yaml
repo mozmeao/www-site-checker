@@ -2104,3 +2104,9 @@ allowed_outbound_url_literals:
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+C%E2%80%99est+super+rapide+de+passer+de+Chrome+%C3%A0+Firefox%2C+vous+devriez+essayer%C2%A0%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+%D9%81%D9%8A%D9%8E%D8%B1%D9%81%D9%8F%D9%83%D8%B3+%D9%8A%D9%8E%D8%AC%D8%B9%D9%84+%D8%A7%D9%84%D8%A7%D9%86%D8%AA%D9%82%D8%A7%D9%84+%D9%85%D9%86+Chrome+%D9%81%D9%8A+%D9%85%D9%86%D8%AA%D9%87%D9%89+%D8%A7%D9%84%D8%B3%D8%B1%D8%B9%D8%A9.+%D8%AC%D8%B1%D9%91%D8%A8%D9%87%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
   - https://bsky.app/intent/compose?text=Je+soutiens+la+vision+de+Mozilla+pour+un+Internet+meilleur+et+plus+sain.+Vous+aussi%C2%A0%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
+  - https://bsky.app/intent/compose?text=Saya+menyokong+visi+internet+yang+lebih+baik+dan+sihat+oleh+Mozilla%2C+mahu+sertai+saya%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
+  - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+menjadikan+peralihan+daripada+Chrome+benar-benar+pantas.+Cubalah%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+%E0%BB%80%E0%BA%AE%E0%BA%B1%E0%BA%94%E0%BB%83%E0%BA%AB%E0%BB%89%E0%BA%81%E0%BA%B2%E0%BA%99%E0%BA%9B%E0%BB%88%E0%BA%BD%E0%BA%99%E0%BA%88%E0%BA%B2%E0%BA%81+Chrome+%E0%BB%84%E0%BA%A7%E0%BB%81%E0%BA%97%E0%BB%89%E0%BB%86.+%E0%BA%A5%E0%BA%AD%E0%BA%87%E0%BB%83%E0%BA%8A%E0%BB%89%E0%B...+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+macht+den+Wechsel+von+Chrome+superschnell.+Jetzt+versuchen%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://foundation.wikimedia.org/wiki/Policy:Privacy_policy
+  - https://bsky.app/intent/compose?text=Ich+unterst%C3%BCtze+die+Vision+von+Mozilla+f%C3%BCr+ein+besseres%2C+ges%C3%BCnderes+Internet%C2%A0%E2%80%93+du+auch%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
