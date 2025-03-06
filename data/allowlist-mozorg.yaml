@@ -2110,3 +2110,15 @@ allowed_outbound_url_literals:
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+macht+den+Wechsel+von+Chrome+superschnell.+Jetzt+versuchen%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
   - https://foundation.wikimedia.org/wiki/Policy:Privacy_policy
   - https://bsky.app/intent/compose?text=Ich+unterst%C3%BCtze+die+Vision+von+Mozilla+f%C3%BCr+ein+besseres%2C+ges%C3%BCnderes+Internet%C2%A0%E2%80%93+du+auch%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
+  - https://tc39.es/proposal-temporal/docs/
+  - https://bsky.app/profile/firefoxbeta.bsky.social
+  - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+makket+switchen+fan+Chrome+hiel+fluch.+Probearje+it+ris%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://html.spec.whatwg.org/multipage/semantics.html#pragma-directives%3Anavigate
+  - https://bsky.app/intent/compose?text=%F0%9F%94%A5+%CE%A4%CE%BF+Firefox+%CE%BA%CE%AC%CE%BD%CE%B5%CE%B9+%CE%B1%CF%83%CF%84%CF%81%CE%B1%CF%80%CE%B9%CE%B1%CE%AF%CE%B1+%CF%84%CE%B7+%CE%BC%CE%B5%CF%84%CE%AC%CE%B2%CE%B1%CF%83%CE%B7+%CE%B1%CF%80%CF%8C+%CF%84%CE%BF+Chrome.+%CE%94%CE%BF%CE%BA%CE%B9%CE%BC%CE%AC%CF%83%CF%84%CE%B5+%CF%84%CE%BF%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+maakt+overstappen+vanaf+Chrome+echt+snel.+Probeer+het+zelf%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://w3c.github.io/mst-content-hint/#degradation-preference-when-encoding
+  - https://wicg.github.io/aom/aria-reflection-explainer.html#reflecting-element-references
+  - https://bsky.app/profile/firefoxnightly.bsky.social
+  - https://bsky.app/intent/compose?text=Ik+steun+de+visie+van+een+beter%2C+gezonder+internet+van+Mozilla%2C+doet+u+mee%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
+  - https://bsky.app/intent/compose?text=Ik+stypje+de+fyzje+fan+in+better%2C+s%C3%BBner+ynternet+fan+Mozilla%2C+dochsto+mei+my+mei%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
+  - http://github.com/tc39/proposal-error-capturestacktrace
