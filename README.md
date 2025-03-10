@@ -44,11 +44,14 @@ You can also clone this repo to your local machine and run it there. This is the
 ```bash
 git clone git@github.com:mozmeao/www-site-checker.git
 cd www-site-checker
+# you need docker setup for this step
+# it creates a sitemap.json file in the sitemap dir
+./sitemap/generate_sitemap_docker.sh
 # make a virtualenv, with whatever you prefer, and activate it
 pip install -r requirements.txt
 export ALLOWLIST_FILEPATH=data/allowlist-mozorg.yaml
 export EXTRA_URLS_FILEPATH=data/extra-urls-mozorg.yaml
-python bin/scan_site.py --sitemap-url=https://www.mozilla.org/sitemap.xml
+python bin/scan_site.py --hostname=www.mozilla.org
 ```
 
 The above will start to work through the entire sitemap (and child sitemaps) at that URL
@@ -57,7 +60,7 @@ If you only want to check a smaller batch of URLs (handy in development), add th
 
 ```bash
 # Only inspect batch three of all URLs to check, after slicing the site into 40 batches
-python bin/scan_site.py --sitemap-url=https://www.mozilla.org/sitemap.xml --batch=3:40
+python bin/scan_site.py --hostname=www.mozilla.org --batch=3:40
 ```
 
 And if you only want to check a specific page, you use the `--specific-url` param. The following, for example, checks the homepage and a Fx mobile downbload page
@@ -69,27 +72,27 @@ python bin/scan_site.py --specific-url=https://www.mozilla.org/en-US/firefox/bro
 There is a default allowlist in use (`data/allowlist-mozorg.yaml` - **set via env vars**) but an alernative can be passed via the `--allowlist` param
 
 ```bash
-python bin/scan_site.py --sitemap-url=https://www.mozilla.org/sitemap.xml --allowlist=/path/to/custom/allowlist.yaml
+python bin/scan_site.py --hostname=www.mozilla.org --allowlist=/path/to/custom/allowlist.yaml
 ```
 
-If you want or need to check a site whose sitemap points to a _different_ domain (eg you want to check an origin server whose sitemap is hard-coded to refer to the CDN domain, or a localhost setup) you should ensure the server is listed as an option in the allowlist and also pass the `--maintain-hostname` parameter.
+If you want or need to check a site whose sitemap points to a _different_ domain (eg you want to check an origin server whose sitemap is hard-coded to refer to the CDN domain, or a localhost setup) you should ensure the server is listed as an option in the allowlist.
 
 For example:
 
 ```bash
-python bin/scan_site.py --sitemap-url=http://origin-server.example.com/sitemap.xml --maintain-hostname
+python bin/scan_site.py --hostname=origin-server.example.com
 ```
 
 or, for localhost
 
 ```bash
-python bin/scan_site.py --sitemap-url=http://localhost:8000/sitemap.xml --maintain-hostname
+python bin/scan_site.py --hostname=localhost:8000
 ```
 
 If you want to test the Sentry integration locally, you can pass a Sentry DSN as an environment variable. Here, we're passing a URL to [Kent - a local 'fake Sentry'](https://github.com/willkg/kent)
 
 ```bash
-SENTRY_DSN=http://public@127.0.0.1:8011/1 python bin/scan_site.py --sitemap-url=https://www.mozilla.org/sitemap.xml
+SENTRY_DSN=http://public@127.0.0.1:8011/1 python bin/scan_site.py --hostname=www.mozilla.org
 ```
 
 ## The output files
@@ -125,4 +128,3 @@ If you come across an alert saying there was an unexpected URL detected and you'
 * Edit the allowlist - eg `data/allowlist-mozorg.yaml`
 * Run the checks locally (see above)
 * Push the branch up and raise a PR.
-
