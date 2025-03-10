@@ -20,6 +20,7 @@ import re
 import time
 from collections import defaultdict
 from functools import cache
+from pathlib import Path
 from typing import Dict, Iterable, List, Tuple
 from urllib.parse import quote, urlparse
 
@@ -50,6 +51,7 @@ if SENTRY_DSN:
         integrations=[sentry_logging],
     )
 
+DEFAULT_SITEMAP_FILENAME = "sitemap/sitemap.json"
 DEFAULT_BATCH__NOOP = "1_1"  # By default treat all URLs as a single batch
 UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
 URL_RETRY_LIMIT = 3
@@ -63,15 +65,14 @@ LOCALES_TO_CACHE = ("en-US",)
 
 @click.command()
 @click.option(
-    "--sitemap-url",
-    default=None,
-    help="URL of an XML sitemap to use as source data",
+    "--hostname",
+    required=True,
+    help="Hostname of the site instance to scan",
 )
 @click.option(
-    "--maintain-hostname",
-    default=False,
-    is_flag=True,
-    help="If the sitemap points to a different domain (eg a CDN domain), override it and replace it with the hostname that served the sitemap",
+    "--sitemap-filename",
+    default=DEFAULT_SITEMAP_FILENAME,
+    help="Filename of a JSON sitemap file",
 )
 @click.option(
     "--specific-url",
@@ -104,8 +105,8 @@ LOCALES_TO_CACHE = ("en-US",)
     help="If True, we'll export the cached pages as an artifact to {hostname}-cached-pages/batch{batch-id}, for other checks to use",
 )
 def run_checks(
-    sitemap_url: str,
-    maintain_hostname: bool,
+    sitemap_filename: str,
+    hostname: str,
     specific_url: Iterable,
     batch: str,
     allowlist: str,
@@ -114,14 +115,10 @@ def run_checks(
 ) -> None:
     # Let's tidy up that variables we get from the input option
     specific_urls = specific_url
+    sitemap_path = Path(sitemap_filename)
 
-    if not sitemap_url and not specific_urls:
+    if not sitemap_path.exists() and not specific_urls:
         raise Exception("No sitemap or input URLs specified. Cannot proceed.")
-
-    host_url = (
-        sitemap_url or specific_urls[0]
-    )  # TODO: ensure all specific URLs use the same hostname
-    hostname = urlparse(host_url).netloc
 
     allowlist_config = _get_allowlist_config(
         hostname,
@@ -129,9 +126,9 @@ def run_checks(
     )
 
     urls_to_check = _build_urls_to_check(
-        sitemap_url=sitemap_url,
+        sitemap_path=sitemap_path,
+        hostname=hostname,
         specific_urls=specific_url,
-        maintain_hostname=maintain_hostname,
     )
 
     if additional_urls_file:
@@ -437,16 +434,16 @@ def _check_pages_for_outbound_links(urls: List[str], allowlist_config: Dict) -> 
 
 
 def _build_urls_to_check(
-    sitemap_url: str,
+    sitemap_path: Path,
+    hostname: str,
     specific_urls: Iterable,
-    maintain_hostname: bool,
 ) -> List[str]:
     """Given a sitemap URL and/or specific URLs to check, put together a list
     of overall URLs whose content wen want to check"""
 
     urls = []
-    if sitemap_url:
-        urls += _get_urls_from_sitemap(sitemap_url, maintain_hostname)
+    if sitemap_path:
+        urls += _get_urls_from_json_file(sitemap_path, hostname)
     if specific_urls:
         # Don't forget any manually specified URLs
         urls += specific_urls
@@ -454,63 +451,22 @@ def _build_urls_to_check(
     return urls
 
 
-def _get_urls_from_sitemap(
-    sitemap_url: str,
-    maintain_hostname: bool,
+def _get_urls_from_json_file(
+    sitemap_path: Path,
+    hostname: str,
 ) -> List[str]:
-    """Extract URLs to explore from a sitemap, optionally ensuring the hostname in
-    any URLs found is swapped ('maintained') to be the same as that of the source
-    sitemap –- this is needed when checking an origin server whose sitemap returns
-    the CDN's hostname"""
-
     urls = []
+    with sitemap_path.open() as fh:
+        sitemap = json.load(fh)
 
-    _parsed_origin_sitemap_url = urlparse(sitemap_url)
-    origin_hostname_with_scheme = (
-        f"{_parsed_origin_sitemap_url.scheme}://{_parsed_origin_sitemap_url.netloc}"  # noqa E231
-    )
+    for path, locales in sitemap.items():
+        if not locales:
+            urls.append(f"https://{hostname}{path}")
+            continue
 
-    resp = _get_url_with_retry(sitemap_url)
+        for locale in locales:
+            urls.append(f"https://{hostname}/{locale}{path}")
 
-    sitemap_xml = resp.text
-    soup = BeautifulSoup(sitemap_xml, "lxml")
-
-    # Look for a <sitemap> node, and get each as a URL for a locale-specific sitemap
-    sitemap_nodes = soup.find_all("sitemap")
-    if len(sitemap_nodes):
-        click.echo(f"Discovered {len(sitemap_nodes)} child sitemaps")
-
-    for sitemap_node in sitemap_nodes:
-        sitemap_url = sitemap_node.loc.text
-
-        if maintain_hostname:
-            sitemap_url = _update_hostname(
-                origin_hostname_with_scheme=origin_hostname_with_scheme,
-                urls=[sitemap_url],
-            )[0]
-
-        click.echo(f"Diving into {sitemap_url}")
-        urls.extend(_get_urls_from_sitemap(sitemap_url, maintain_hostname))
-
-    # look for regular URL nodes, which may or may not co-exist alongside sitemap nodes
-    url_nodes = soup.find_all("url")
-    if url_nodes:
-        click.echo(f"Adding {len(url_nodes)} URLs")
-        for url in url_nodes:
-            try:
-                urls.append(url.loc.text)
-            except AttributeError as ae:
-                sentry_sdk.capture_message(
-                    f"URL node {url} missing '<loc>' - exception to follow"
-                )
-                sentry_sdk.capture_exception(ae)
-
-    # Also remember to update the hostname on the final set of URLs, if required
-    if maintain_hostname:
-        urls = _update_hostname(
-            origin_hostname_with_scheme=origin_hostname_with_scheme,
-            urls=urls,
-        )
     return urls
 
 
