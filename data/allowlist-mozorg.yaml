@@ -2123,3 +2123,4 @@ allowed_outbound_url_literals:
   - https://bsky.app/intent/compose?text=Ik+stypje+de+fyzje+fan+in+better%2C+s%C3%BBner+ynternet+fan+Mozilla%2C+dochsto+mei+my+mei%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
   - http://github.com/tc39/proposal-error-capturestacktrace
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Chrome%EC%97%90%EC%84%9C+Firefox%EB%A1%9C+%EC%95%84%EC%A3%BC+%EB%B9%A0%EB%A5%B4%EA%B2%8C+%EC%A0%84%ED%99%98%ED%95%A0+%EC%88%98+%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4.+%ED%95%9C+%EB%B2%88+%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+g%C3%B8r+det+hurtigt+at+skifte+fra+Chrome.+Pr%C3%B8v+det%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
