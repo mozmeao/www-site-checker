@@ -176,9 +176,9 @@ coverage[toml]==7.6.12 \
     --hash=sha256:f60a297c3987c6c02ffb29effc70eadcbb412fe76947d394a1091a3615948e2f \
     --hash=sha256:f973643ef532d4f9be71dd88cf7588936685fdb576d93a79fe9f65bc337d9d73
     # via pytest-cov
-django==5.1.5 \
-    --hash=sha256:19bbca786df50b9eca23cee79d495facf55c8f5c54c529d9bf1fe7b5ea086af3 \
-    --hash=sha256:c46eb936111fffe6ec4bc9930035524a8be98ec2f74d8a0ff351226a3e52f459
+django==5.1.7 \
+    --hash=sha256:1323617cb624add820cb9611cdcc788312d250824f92ca6048fda8625514af2b \
+    --hash=sha256:30de4ee43a98e5d3da36a9002f287ff400b43ca51791920bfb35f6917bfe041c
     # via -r requirements.in
 feedparser==6.0.11 \
     --hash=sha256:0be7ee7b395572b19ebeb1d6aafb0028dee11169f1c934e0ed67d54992f4ad45 \
