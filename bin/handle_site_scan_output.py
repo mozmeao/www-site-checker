@@ -218,6 +218,7 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
 
 
 def _drop_scheme_and_domain(url: str) -> str:
+    print(url)
     return "/" + "/".join(url.split("//")[1].split("/")[1:])
 
 
