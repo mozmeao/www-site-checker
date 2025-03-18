@@ -2127,3 +2127,5 @@ allowed_outbound_url_literals:
   - https://bsky.app/intent/compose?text=Wspieram+wizj%C4%99+Mozilli+o+lepszym%2C+zdrowszym+Internecie%2C+do%C5%82%C4%85czysz+do+mnie%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
   - https://bsky.app/intent/compose?text=Yo+apoyo+la+visi%C3%B3n+de+un+internet+mejor+y+m%C3%A1s+saludable+de+Mozilla%2C+%C2%BFte+unes+a+mi%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Con+Firefox+es+muy+sencillo+cambiar+desde+Chrome.+%C2%A1Pru%C3%A9balo%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://apps.apple.com/pl/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=pl
