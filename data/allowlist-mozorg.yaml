@@ -2129,3 +2129,5 @@ allowed_outbound_url_literals:
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Con+Firefox+es+muy+sencillo+cambiar+desde+Chrome.+%C2%A1Pru%C3%A9balo%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
   - https://apps.apple.com/pl/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
   - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=pl
+  - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+%E0%A8%A8%E0%A9%87+Chrome+%E0%A8%A4%E0%A9%8B%E0%A8%82+%E0%A8%AC%E0%A8%A6%E0%A8%B2%E0%A8%A3%E0%A8%BE+%E0%A8%AC%E0%A8%B9%E0%A9%81%E0%A8%A4+%E0%A8%A4%E0%A9%87%E0%A9%9B+%E0%A8%AC%E0%A8%A3%E0%A8%BE+%E0%A8%A6%E0%A8%BF%E0%A9%B1%E0%A8%A4%E0%A8%BE+%E0%A8%B9%E0%A9%88%E0%A5%A4+%E0%A8%87...+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://bsky.app/intent/compose?text=Jeg+st%C3%B8tter+Mozillas+vision+om+et+bedre+og+mere+sundt+internet.+Vil+du+ogs%C3%A5+v%C3%A6re+med%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
