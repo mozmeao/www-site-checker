@@ -2135,3 +2135,4 @@ allowed_outbound_url_literals:
   - https://www.arthur.ai/
   - https://www.w3.org/TR/clear-site-data/#clear-cache
   - https://blog.monotonous.org/2025/03/06/New-Contrast-Control-Settings/
+  - https://soloist.ai/?utm_source=mozilla&utm_medium=cards_join_the_movement&utm_campaign=mozilla_homepage
