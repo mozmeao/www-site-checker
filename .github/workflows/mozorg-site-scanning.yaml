@@ -25,20 +25,7 @@ env:
   USER_AGENT: Mozilla/5.0 (Automated; https://github.com/mozmeao/www-site-checker) CheckerBot/1.0
 
 jobs:
-  build_sitemap_json:
-    name: Build sitemap.json file
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Generate sitemap
-        run: sitemap/generate_sitemap_docker.sh
-      - name: Upload sitemap to cache
-        uses: actions/upload-artifact@v4
-        with:
-          name: sitemap_json
-          path: sitemap/sitemap.json
   run_on_cdn:
-    needs: build_sitemap_json
     strategy:
       matrix:
         batch: ["1_8", "2_8", "3_8", "4_8", "5_8", "6_8", "7_8", "8_8"]
@@ -46,11 +33,6 @@ jobs:
     name: Check main CDN - batch ${{ matrix.batch }}
     steps:
       - uses: actions/checkout@v4
-      - name: Download sitemap
-        uses: actions/download-artifact@v4
-        with:
-          name: sitemap_json
-          path: sitemap/
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -59,7 +41,7 @@ jobs:
       - name: Run checker
         run: >
           python bin/scan_site.py
-          --hostname="${{ secrets.MOZORG_CDN_HOSTNAME }}"
+          --sitemap-url="https://${{ secrets.MOZORG_CDN_HOSTNAME }}/sitemap.xml"
           --batch="${{ matrix.batch }}"
           --export-cache
       - name: Upload scan output files
@@ -76,7 +58,6 @@ jobs:
           retention-days: 5
 
   run_on_us_origin:
-    needs: build_sitemap_json
     strategy:
       matrix:
         batch: ["1_8", "2_8", "3_8", "4_8", "5_8", "6_8", "7_8", "8_8"]
@@ -84,11 +65,6 @@ jobs:
     name: Check US origin server - batch ${{ matrix.batch }}
     steps:
       - uses: actions/checkout@v4
-      - name: Download sitemap
-        uses: actions/download-artifact@v4
-        with:
-          name: sitemap_json
-          path: sitemap/
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -97,7 +73,8 @@ jobs:
       - name: Run checker
         run: >
           python bin/scan_site.py
-          --hostname="${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}"
+          --sitemap-url="https://${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}/sitemap.xml"
+          --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload scan output files
         uses: actions/upload-artifact@v4
@@ -107,7 +84,6 @@ jobs:
           retention-days: 15
 
   run_on_eu_origin:
-    needs: build_sitemap_json
     strategy:
       matrix:
         batch: ["1_8", "2_8", "3_8", "4_8", "5_8", "6_8", "7_8", "8_8"]
@@ -115,11 +91,6 @@ jobs:
     name: Check EU origin server - batch ${{ matrix.batch }}
     steps:
       - uses: actions/checkout@v4
-      - name: Download sitemap
-        uses: actions/download-artifact@v4
-        with:
-          name: sitemap_json
-          path: sitemap/
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -128,7 +99,8 @@ jobs:
       - name: Run checker
         run: >
           python bin/scan_site.py
-          --hostname="${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}"
+          --sitemap-url="https://${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}/sitemap.xml"
+          --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload scan output files
         uses: actions/upload-artifact@v4
