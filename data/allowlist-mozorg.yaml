@@ -2135,3 +2135,6 @@ allowed_outbound_url_literals:
   - https://www.arthur.ai/
   - https://www.w3.org/TR/clear-site-data/#clear-cache
   - https://blog.monotonous.org/2025/03/06/New-Contrast-Control-Settings/
+  - https://soloist.ai/?utm_source=mozilla&utm_medium=cards_join_the_movement&utm_campaign=mozilla_homepage
+  - https://bsky.app/intent/compose?text=Eg+st%C3%B8ttar+visjonen+om+ein+betre%2C+sunnare+internett+fr%C3%A5+Mozilla%2C+vil+du+bli+med+meg%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
+  - https://fxdx.dev/network-override-in-firefox-devtools/
