@@ -2194,3 +2194,4 @@ allowed_outbound_url_literals:
   - https://cybernews.com/security/people-data-labs-data-leak/
   - https://dfr.oregon.gov/business/licensing/data-broker-registry/pages/index.aspx
   - https://www.ftc.gov/news-events/news/press-releases/2019/07/equifax-pay-575-million-part-settlement-ftc-cfpb-states-related-2017-data-breach
+  - https://soloist.ai/?utm_source=mozilla&utm_medium=top_bar&utm_campaign=mozilla_homepage
