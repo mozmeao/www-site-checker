@@ -2195,3 +2195,10 @@ allowed_outbound_url_literals:
   - https://dfr.oregon.gov/business/licensing/data-broker-registry/pages/index.aspx
   - https://www.ftc.gov/news-events/news/press-releases/2019/07/equifax-pay-575-million-part-settlement-ftc-cfpb-states-related-2017-data-breach
   - https://soloist.ai/?utm_source=mozilla&utm_medium=top_bar&utm_campaign=mozilla_homepage
+  - https://www.equifax.com/personal/credit-report-services/credit-freeze/
+  - https://www.experian.com/help/credit-freeze/
+  - https://www.experian.com/help/fraud-alert/
+  - https://www.identitytheft.gov/
+  - https://eligibility.equifaxbreachsettlement.com/en/Eligibility
+  - https://www.transunion.com/fraud-alerts
+  - https://www.transunion.com/credit-freeze
