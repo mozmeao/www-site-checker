@@ -2204,3 +2204,4 @@ allowed_outbound_url_literals:
   - https://www.transunion.com/credit-freeze
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+%C3%89+super+r%C3%A1pido+e+f%C3%A1cil+mudar+do+Chrome+para+o+Firefox.+Experimente%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
   - https://pl.wikipedia.org/wiki/Kolofon
+  - https://github.com/w3c/webauthn/wiki/Explainer:-WebAuthn-Large-Blob-Extension
