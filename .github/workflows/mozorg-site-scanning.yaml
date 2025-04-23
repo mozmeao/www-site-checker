@@ -41,7 +41,7 @@ jobs:
       - name: Run checker
         run: >
           python bin/scan_site.py
-          --sitemap-url="https://${{ secrets.MOZORG_CDN_HOSTNAME }}/sitemap.xml"
+          --sitemap-url="https://${{ secrets.MOZORG_CDN_HOSTNAME }}/all-urls.xml"
           --batch="${{ matrix.batch }}"
           --export-cache
       - name: Upload scan output files
@@ -73,7 +73,7 @@ jobs:
       - name: Run checker
         run: >
           python bin/scan_site.py
-          --sitemap-url="https://${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}/sitemap.xml"
+          --sitemap-url="https://${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}/all-urls.xml"
           --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload scan output files
@@ -99,7 +99,7 @@ jobs:
       - name: Run checker
         run: >
           python bin/scan_site.py
-          --sitemap-url="https://${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}/sitemap.xml"
+          --sitemap-url="https://${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}/all-urls.xml"
           --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload scan output files
