@@ -2207,3 +2207,5 @@ allowed_outbound_url_literals:
   - https://github.com/w3c/webauthn/wiki/Explainer:-WebAuthn-Large-Blob-Extension
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+gjer+det+raskt+og+enkelt+%C3%A5+byte+fr%C3%A5+Chrome.+Pr%C3%B8v+det%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
   - https://bsky.app/intent/compose?text=%EC%A0%80%EB%8A%94+Mozilla%EC%9D%98+%EA%B1%B4%EA%B0%95%ED%95%98%EA%B3%A0+%EB%82%98%EC%9D%80+%EC%9D%B8%ED%84%B0%EB%84%B7%EC%97%90+%EB%8C%80%ED%95%9C+%EB%B9%84%EC%A0%84%EC%9D%84+%EC%A7%80%EC%A7%80%ED%95%A9%EB%8B%88%EB%8B%A4.+%EB%8F%99%EC%B0%B8%ED%95%98%EC%8B%9C%EA%B2%A0%EC%8A%B5%EB%8B%88%EA%B9%8C%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=he
+  - https://apps.apple.com/il/app/apple-store/id1489407738?pt=373246&ct=vpn-download-page&mt=8
