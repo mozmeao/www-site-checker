@@ -2213,3 +2213,5 @@ allowed_outbound_url_literals:
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+D+arurad+nezzeh+ticki+teddi%E1%B8%8D+si+Chrome+ar+Firefox%2C+yessefk+ad+t%C9%9Ber%E1%B8%8De%E1%B8%8D%C2%A0%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
   - https://www.truthfinder.com/
   - https://oag.ca.gov/privacy/ccpa#sectioni
+  - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+tekee+Chromesta+vaihtamisen+todella+nopeaksi.+Kokeile%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://bsky.app/intent/compose?text=Tuen+Mozillan+visiota+paremmasta%2C+terveemm%C3%A4st%C3%A4+Internetist%C3%A4.+Tuletko+mukaan%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
