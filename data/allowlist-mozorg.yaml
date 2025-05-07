@@ -2220,3 +2220,5 @@ allowed_outbound_url_literals:
   - https://bsky.app/intent/compose?text=Tuen+Mozillan+visiota+paremmasta%2C+terveemm%C3%A4st%C3%A4+Internetist%C3%A4.+Tuletko+mukaan%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+%D0%93%D1%83%D0%B7%D0%B0%D1%88%D1%82%D0%B0%D0%BD+%D0%B0%D0%B7+%C2%ABChrome%C2%BB+%D0%B1%D0%B0+%D0%B1%D1%80%D0%B0%D1%83%D0%B7%D0%B5%D1%80%D0%B8+%C2%ABFirefox%C2%BB+%D0%B2%D0%BE%D2%9B%D0%B5%D0%B0%D0%BD+%D1%85%D0%B5%D0%BB%D0%B5+%D0%B7%D1%83%D0%B4+%D0%B2%D0%B0+%D0%BE%D1%81%D0%BE%D0%BD+%D...+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+%D0%B4%D0%BE%D0%B7%D0%B2%D0%BE%D0%BB%D1%8F%D1%94+%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%B4%D1%96+%D1%88%D0%B2%D0%B8%D0%B4%D0%BA%D0%BE+%D0%BF%D0%B5%D1%80%D0%B5%D0%B9%D1%82%D0%B8+%D0%B7+Chrome.+%D0%A1%D0%BF%D1%80%D0%BE%D0%B1%D1%83%D0%B9%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://www.beenverified.com/
+  - https://www.intelius.com/
