@@ -2223,3 +2223,5 @@ allowed_outbound_url_literals:
   - https://www.beenverified.com/
   - https://www.intelius.com/
   - https://www.instantcheckmate.com/
+  - https://bsky.app/intent/compose?text=%D8%A3%D8%A4%D9%8A%D9%91%D8%AF+%D8%B1%D8%A4%D9%8A%D8%A9+%D8%A5%D9%86%D8%AA%D8%B1%D9%86%D8%AA+%D8%A3%D9%81%D8%B6%D9%84+%D9%88%D8%B5%D8%AD%D9%91%D9%8A+%D9%85%D9%86+Mozilla%D8%8C+%D9%87%D9%84+%D8%B3%D9%8E%D8%AA%D9%86%D8%B6%D9%85+%D8%A5%D9%84%D9%8A%D9%91%D8%9F+https%3A%2F%2Fmzl.la%2Fmanifesto
+  - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+%D9%8A%D9%8E%D8%AC%D8%B9%D9%84+%D8%A7%D9%84%D8%A7%D9%86%D8%AA%D9%82%D8%A7%D9%84+%D9%85%D9%86+Chrome+%D9%81%D9%8A+%D9%85%D9%86%D8%AA%D9%87%D9%89+%D8%A7%D9%84%D8%B3%D8%B1%D8%B9%D8%A9.+%D8%AC%D8%B1%D9%91%D8%A8%D9%87%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
