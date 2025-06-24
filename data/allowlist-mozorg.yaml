@@ -2234,3 +2234,4 @@ allowed_outbound_url_literals:
   - https://localmess.github.io/
   - https://mozilla.formstack.com/forms/inbound_partnership_requests
   - https://mozillafoundation.org/?form=pencil-banner-mid-year
+  - https://github.com/chromium/content_analysis_sdk
