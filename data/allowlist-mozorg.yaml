@@ -2237,3 +2237,4 @@ allowed_outbound_url_literals:
   - https://github.com/chromium/content_analysis_sdk
   - https://www.forbes.com/sites/daveywinder/2025/05/23/184162718-passwords-and-logins-leaked---apple-facebook-snapchat/
   - https://www.forbes.com/sites/daveywinder/2025/06/19/16-billion-apple-facebook-google-passwords-leaked---change-yours-now/
+  - https://bsky.app/intent/compose?text=Podr%C5%BEavam+viziju+boljeg+i+zdravijeg+interneta+organizacije+Mozilla.+Ho%C4%87e%C5%A1+mi+se+pridru%C5%BEiti%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
