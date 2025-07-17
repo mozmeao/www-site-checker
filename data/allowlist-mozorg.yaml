@@ -16,7 +16,7 @@ allowed_outbound_url_regexes:
   # === Mozilla-run things ===
   - '^https?:\/\/[^\/]+.mozilla.org($|\/(.*))'
   - '^https?:\/\/[^\/]+.mozilla.com($|\/(.*))'
-  - '^https?:\/\/[^\/]+.firefox.com($|\/(.*))'
+  - '^https?:\/\/[^\/]+.firefox.com($|\?(.*)|\/(.*))'
 
   - '^https?:\/\/[^\/]+.mozilla.design($|\/(.*))'
   - '^https?:\/\/(www\.){0,1}mozillians.org($|\/(.*))'
