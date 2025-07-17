@@ -2241,3 +2241,6 @@ allowed_outbound_url_literals:
   - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=nb
   - https://twitter.com/@h3xr4bb1t
   - https://twitter.com/@ljp_tw
+  - https://www.nationofchange.org/2024/10/10/americans-report-more-spam-calls-in-2024-than-2023/
+  - https://www.firefox.com?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=firefox
+  - https://cybermaterial.com/nine-out-of-ten-emails-were-spam-in-2024/?utm_source=chatgpt.com
