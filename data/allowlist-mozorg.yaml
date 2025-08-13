@@ -2450,3 +2450,5 @@ allowed_outbound_url_literals:
   - https://apps.apple.com/nl/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=firefox-facebook-container&mt=8
   - https://apps.apple.com/es/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=products&mt=8
   - https://apps.apple.com/cl/app/apple-store/id1055677337?mz_pr=focus&pt=373246&ct=firefox-browsers-mobile-focus&mt=8
+  - https://apps.apple.com/bg/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-download-page&mt=8
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=bg
