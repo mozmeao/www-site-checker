@@ -2456,3 +2456,4 @@ allowed_outbound_url_literals:
   - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=ro
   - https://bsky.app/intent/compose?text=Sus%C8%9Bin+viziunea+Mozilla+pentru+un+internet+mai+bun+%C8%99i+mai+s%C4%83n%C4%83tos.+Vrei+s%C4%83+mi+te+al%C4%83turi%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Trecerea+de+la+Chrome+la+Firefox+este+foarte+rapid%C4%83.+%C3%8Encearc%C4%83-l+%C8%99i+tu%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://attackanddefense.dev/2025/04/09/hardening-the-firefox-frontend-with-content-security-policies.html
