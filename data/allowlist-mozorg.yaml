@@ -2462,3 +2462,21 @@ allowed_outbound_url_literals:
   - https://www.mozillafestival.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
   - https://flathub.org/apps/org.mozilla.vpn/?utm_medium=referral&utm_source=www.mozilla.org-vpn-download-page&utm_campaign=vpn-download-page
   - https://www.mozillafoundation.org/newsletter/unsubscribe/
+  - https://www.youtube.com/@mozilla_ads
+  - https://www.youtube.com/watch?v=HiZGWrN1zrU?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://www.youtube.com/watch?v=XbZPQKFIyoE?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://www.fastcompany.com/91289057/mozilla-browser-not-backed-by-billionaires?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://bsky.app/profile/mozilla_ads
+  - https://www.axios.com/2025/09/30/tony-haile-new-startup-filament?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://www.theatlantic.com/ideas/archive/2025/10/validation-ai-raffi-krikorian/684764/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://www.theguardian.com/technology/2025/oct/28/firefox-ai-internet-anthony-enzor-demeo?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://techcrunch.com/2025/07/30/germ-brings-end-to-end-encrypted-messages-to-bluesky/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://datacollective.mozillafoundation.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://archive.is/kj2u7?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://www.youtube.com/playlist?list=PLFlAJDI87Jg2Wat96mCddVn7ObIPDRkvO
+  - https://www.youtube.com/watch?v=W5AEfgY6kq4?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://blog.thunderbird.net/2025/04/thundermail-and-thunderbird-pro-services/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://www.techtarget.com/searchenterpriseai/news/366629900/Mozillaai-CEO-Dickerson-talks-open-source-AI-advantages?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://siliconangle.com/2025/08/22/mozilla-ai-charts-new-course-turn-toward-profitability/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://www.youtube.com/watch?v=fIVj45F9dfI&utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://www.instagram.com/mozilla_ads/
