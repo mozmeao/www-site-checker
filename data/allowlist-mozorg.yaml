@@ -2481,3 +2481,4 @@ allowed_outbound_url_literals:
   - https://www.youtube.com/watch?v=fIVj45F9dfI&utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
   - https://www.instagram.com/mozilla_ads/
   - https://mozillafoundation.org/?form=eoy25-moco-banner
+  - https://www.mozillafoundation.org/what-we-do/grantmaking/fellowship/
