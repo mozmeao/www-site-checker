@@ -32,6 +32,7 @@ allowed_outbound_url_regexes:
   - '^https:\/\/irlpodcast.org\/(.*)'
   - '^https:\/\/(www.|blog.){0,1}mozilla.ai\/(.*)'
   - '^https:\/\/mozilla.vc\/(.*)'
+  - '^https?:\/\/(www.){0,1}mozillafoundation.org($|\/(.*))'
 
   # === Mozilla on Github
 
