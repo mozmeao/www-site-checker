@@ -2496,3 +2496,4 @@ allowed_outbound_url_literals:
   - https://www.youtube.com/watch?v=IY2EsEtajfY
   - https://www.axios.com/2025/11/14/mozilla-ai-age?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
   - https://www.perplexity.ai/hub/legal/privacy-policy
+  - https://transcend-cdn.com/cm/d556c3a1-e57c-4bdf-a490-390a1aebf6dd/airgap.js
