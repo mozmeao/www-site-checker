@@ -331,11 +331,19 @@ def main():
         _print("No artifact detected")
         return
 
-    github_urls = raise_prs_or_issues(output_path)
-
     _action_url = (
         f"{GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}/"
     )
+
+    try:
+        github_urls = raise_prs_or_issues(output_path)
+    except OSError as ose:
+        _msg = f"Problem raising new PR or Issue: {ose}.\nDetails and artifacts at at {_action_url}"
+        _print(_msg)
+        ping_slack(_msg)
+        # we want to fail hard here, because it needs looking at.
+        sys.exit(1)
+
     message = "Unexpected outbound URL found when scanning site content.\nDetails and output: {}".format(
         _action_url
     )
