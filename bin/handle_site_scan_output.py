@@ -339,6 +339,9 @@ def main():
         github_urls = raise_prs_or_issues(output_path)
     except OSError as ose:
         _msg = f"Problem raising new PR or Issue: {ose}.\nDetails and artifacts at at {_action_url}"
+        if "Artifact list too long" in str(ose):
+            _msg = f"Problem raising new PR or Issue - too many entries to handle in one go, so needs manual curation.\nDetails and artifacts at at {_action_url}"
+
         _print(_msg)
         ping_slack(_msg)
         # we want to fail hard here, because it needs looking at.
