@@ -3,9 +3,9 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 relevant_hostnames:
-  - !ENV ${MOZORG_CDN_HOSTNAME}
-  - !ENV ${MOZORG_US_ORIGIN_HOSTNAME}
-  - !ENV ${MOZORG_EU_ORIGIN_HOSTNAME}
+  - !ENV ${FXC_CDN_HOSTNAME}
+  - !ENV ${FXC_US_ORIGIN_HOSTNAME}
+  - !ENV ${FXC_EU_ORIGIN_HOSTNAME}
   - localhost:8000
   - localhost:8080
 
