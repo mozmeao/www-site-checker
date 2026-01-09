@@ -45,9 +45,9 @@ allowed_outbound_url_regexes:
   # === Mobile downloads ===
 
   # App Store links for Firefox and related apps
-  - '^https:\/\/apps.apple.com\/(?:\w{2,3}\/)?app\/apple-store\/id989804926\?pt=373246(?:&[a-z_\-]+=[a-z_\-\d]+)+$'  # Firefox iOS
-  - '^https:\/\/apps.apple.com\/(?:\w{2,3}\/)?app\/apple-store\/id1055677337\?pt=373246(?:&[a-z_\-]+=[a-z_\-\d]+)+$'  # Focus iOS
-  - '^https:\/\/apps.apple.com\/(?:\w{2,3}\/)?app\/apple-store\/id1073435754\?pt=373246(?:&[a-z_\-]+=[a-z_\-\d]+)+$'  # Klar iOS
+  - '^https:\/\/apps.apple.com\/(?:\w{2,3}\/)?app\/apple-store\/id989804926(?:\?[a-z_\-]+=[a-z_\-\d]+(?:&[a-z_\-]+=[a-z_\-\d]+)*)?$'  # Firefox iOS
+  - '^https:\/\/apps.apple.com\/(?:\w{2,3}\/)?app\/apple-store\/id1055677337(?:\?[a-z_\-]+=[a-z_\-\d]+(?:&[a-z_\-]+=[a-z_\-\d]+)*)?$'  # Focus iOS
+  - '^https:\/\/apps.apple.com\/(?:\w{2,3}\/)?app\/apple-store\/id1073435754(?:\?[a-z_\-]+=[a-z_\-\d]+(?:&[a-z_\-]+=[a-z_\-\d]+)*)?$'  # Klar iOS
 
   # Play Store links
   - '^https:\/\/play\.google\.com\/store\/apps\/details\?id=org.mozilla.(firefox|firefox_beta|fenix)($|&hl=[a-z]{2}|&referrer=.*)'
@@ -347,3 +347,4 @@ allowed_outbound_url_literals:
   - https://youtu.be/CqGZtCZVDZ0
   - https://youtu.be/F-nFQryDB0s
   - https://youtube.com/MozillaDeveloper
+  - https://www.youtube.com/watch?v=3c1sMUC6W70
