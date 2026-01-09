@@ -1,0 +1,8 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+# URLs which won't be discovered via the sitemap, but which we want to check anyway
+# Start with an empty list and expand as needed
+
+extra_urls_to_check: []
