@@ -151,7 +151,7 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     """Update the allowlist with the candidate URLs for a PR"""
     output = ""
     allowlist_path = os.environ.get("ALLOWLIST_FILEPATH")
-    timestamp = datetime.datetime.utcnow().isoformat(timespec="seconds")
+    timestamp = datetime.datetime.now(datetime.UTC).isoformat(timespec="seconds")
     unexpected_urls_structured = _build_structured_url_list_for_pr_description(
         pr_candidates
     )
@@ -191,7 +191,9 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
         yaml.dump(data, fp)
 
     # 2. Commit it to git on the new branch
-    os.system(f'git commit --all -m "Automatic allowlist updates: {timestamp}"')
+    # Only add the specific allowlist file to avoid committing unrelated changes
+    os.system(f'git add "{allowlist_path}"')
+    os.system(f'git commit -m "Automatic allowlist updates: {timestamp}"')
 
     # 3. Push the branch up to origin
     os.system(f"git push origin {branchname}")

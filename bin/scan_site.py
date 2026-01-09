@@ -367,7 +367,7 @@ def _create_http_error_issue(url: str, status_code: int, retry_count: int = 0) -
 
 **Error:** HTTP {status_code} {info["name"]}
 
-**Timestamp:** {datetime.datetime.utcnow().isoformat()}Z
+**Timestamp:** {datetime.datetime.now(datetime.UTC).isoformat()}Z
 
 This page was skipped during the scan. {info["description"]}
 
@@ -482,7 +482,9 @@ def _dump_unexpected_urls_to_files(
     """
     _output_path = get_output_path()
     _now = (
-        datetime.datetime.utcnow().isoformat(timespec="seconds").replace(":", "-")
+        datetime.datetime.now(datetime.UTC)
+        .isoformat(timespec="seconds")
+        .replace(":", "-")
     )  # Github actions doesn't like colons in filenames
     _base_filename = (
         f"{UNEXPECTED_URLS_FILENAME_FRAGMENT}_{hostname}_{batch_label}_{_now}.txt"
