@@ -2,67 +2,57 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-# NB this workflow needs a cache of HTML documents, emitted by the main
-# site-scanning workflow for the CDN origin only
-
-name: Check www.mozilla.org CDN for geo stability
-
-env:
-  SLACK_NOTIFICATION_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATION_WEBHOOK_URL }}
+name: "Firefox CDN Geo-Code Check"
 
 on:
   workflow_run:
-    workflows:
-      - www.mozilla.org site scanning
+    workflows: ["Firefox site scanning"]
     types:
       - completed
+
 jobs:
   check_geo_from_cache:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
+
       - name: Download page cache
         uses: actions/github-script@v7
         with:
           script: |
-            console.log("Getting all artifacts");
             let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
                owner: context.repo.owner,
                repo: context.repo.repo,
                run_id: context.payload.workflow_run.id,
             });
-
-            console.log("Filtering to the ones we care about here");
-            let matchedArtifacts = allArtifacts.data.artifacts.filter((artifact) => {
-              return artifact.name.includes("html-cache");
+            let matchArtifacts = allArtifacts.data.artifacts.filter((artifact) => {
+              return artifact.name.includes('html-cache-firefox')
             });
-
-            for (let i=0; i < matchedArtifacts.length; i++){
-              artifact = matchedArtifacts[i];
-              console.log("Downloading artifact", artifact);
+            let fs = require('fs');
+            for (const [i, artifact] of matchArtifacts.entries()) {
               let download = await github.rest.actions.downloadArtifact({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                artifact_id: artifact.id,
-                archive_format: 'zip',
+                 owner: context.repo.owner,
+                 repo: context.repo.repo,
+                 artifact_id: artifact.id,
+                 archive_format: 'zip',
               });
-              let fs = require('fs');
-              // ${process.env.GITHUB_WORKSPACE}/page_cache already exists because it's in the repo
               fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/page_cache/html-cache_${i}.zip`, Buffer.from(download.data));
-              console.log("Done");
-            };
+            }
+
       - name: Unzip page cache
         run: |
           cd page_cache
           unzip -o '*.zip'
-          cd ..
-          ls -la page_cache/
+
       - name: Install requirements
         run: pip install -r requirements.txt
-      - name: Scan the dumped cache for geo-code consistency
+
+      - name: Scan the dumped cache
         run: python bin/check_for_cdn_geo_consistency.py
         env:
+          SLACK_NOTIFICATION_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATION_WEBHOOK_URL }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
