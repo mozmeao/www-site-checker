@@ -1,0 +1,132 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+name: "Firefox site scanning"
+
+on:
+  push:
+    branches-ignore:
+      - "dependabot/**"
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3,15 * * *" # 03:17 UTC and 15:17 every day
+
+env:
+  SENTRY_DSN: https://45ad5d426da7480081831c053ca02cac@o1069899.ingest.sentry.io/6249535
+  SLACK_NOTIFICATION_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATION_WEBHOOK_URL }}
+  FXC_CDN_HOSTNAME: ${{ secrets.FXC_CDN_HOSTNAME }}
+  FXC_US_ORIGIN_HOSTNAME: ${{ secrets.FXC_US_ORIGIN_HOSTNAME }}
+  FXC_EU_ORIGIN_HOSTNAME: ${{ secrets.FXC_EU_ORIGIN_HOSTNAME }}
+  MEAO_IDENTITY_EMAIL: ${{ secrets.MEAO_IDENTITY_EMAIL }}
+  ALLOWLIST_FILEPATH: data/allowlist-firefox.yaml
+  EXTRA_URLS_FILEPATH: data/extra-urls-firefox.yaml
+  USER_AGENT: Mozilla/5.0 (Automated; https://github.com/mozmeao/www-site-checker) CheckerBot/1.0
+
+jobs:
+  run_on_cdn:
+    strategy:
+      matrix:
+        batch: ["1_8", "2_8", "3_8", "4_8", "5_8", "6_8", "7_8", "8_8"]
+    runs-on: ubuntu-latest
+    name: Check Firefox CDN - batch ${{ matrix.batch }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: >
+          python bin/scan_site.py
+          --sitemap-url="https://${{ secrets.FXC_CDN_HOSTNAME }}/all-urls.xml"
+          --batch="${{ matrix.batch }}"
+          --export-cache
+      - name: Upload scan output files
+        uses: actions/upload-artifact@v4
+        with:
+          name: scan-results-${{ matrix.batch }}-firefox-CDN
+          path: output
+          retention-days: 15
+      - name: Upload page-cache
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-cache-firefox-${{ matrix.batch }}
+          path: page_cache
+          retention-days: 5
+
+  run_on_us_origin:
+    strategy:
+      matrix:
+        batch: ["1_8", "2_8", "3_8", "4_8", "5_8", "6_8", "7_8", "8_8"]
+    runs-on: ubuntu-latest
+    name: Check Firefox US origin server - batch ${{ matrix.batch }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: >
+          python bin/scan_site.py
+          --sitemap-url="https://${{ secrets.FXC_US_ORIGIN_HOSTNAME }}/all-urls.xml"
+          --maintain-hostname
+          --batch="${{ matrix.batch }}"
+      - name: Upload scan output files
+        uses: actions/upload-artifact@v4
+        with:
+          name: scan-results-${{ matrix.batch }}-firefox-US-origin
+          path: output
+          retention-days: 15
+
+  run_on_eu_origin:
+    strategy:
+      matrix:
+        batch: ["1_8", "2_8", "3_8", "4_8", "5_8", "6_8", "7_8", "8_8"]
+    runs-on: ubuntu-latest
+    name: Check Firefox EU origin server - batch ${{ matrix.batch }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run checker
+        run: >
+          python bin/scan_site.py
+          --sitemap-url="https://${{ secrets.FXC_EU_ORIGIN_HOSTNAME }}/all-urls.xml"
+          --maintain-hostname
+          --batch="${{ matrix.batch }}"
+      - name: Upload scan output files
+        uses: actions/upload-artifact@v4
+        with:
+          name: scan-results-${{ matrix.batch }}-firefox-EU-origin
+          path: output
+          retention-days: 15
+
+  alert_if_report_files_exist:
+    runs-on: ubuntu-latest
+    needs:
+      - run_on_cdn
+      - run_on_us_origin
+      - run_on_eu_origin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Download all artifacts, if they exist
+        uses: actions/download-artifact@v4
+        with:
+          path: output
+          merge-multiple: true
+      - name: Handle the scan results
+        run: python bin/handle_site_scan_output.py
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

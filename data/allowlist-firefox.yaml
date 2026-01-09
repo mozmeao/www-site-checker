@@ -1,0 +1,349 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+relevant_hostnames:
+  - !ENV ${FXC_CDN_HOSTNAME}
+  - !ENV ${FXC_US_ORIGIN_HOSTNAME}
+  - !ENV ${FXC_EU_ORIGIN_HOSTNAME}
+  - localhost:8000
+  - localhost:8080
+
+allowed_outbound_url_regexes:
+  # === Broad, trusted cases ===
+  - '^(\/|#).*' # Relative URLs and in-page anchors are OK
+
+  # === Mozilla-run things ===
+  - '^https?:\/\/[^\/]+.mozilla.org($|\/(.*))'
+  - '^https?:\/\/[^\/]+.mozilla.com($|\/(.*))'
+  - '^https?:\/\/[^\/]+.firefox.com($|\?(.*)|\/(.*))'
+
+  - '^https?:\/\/[^\/]+.mozilla.design($|\/(.*))'
+  - '^https?:\/\/(www\.){0,1}mozillians.org($|\/(.*))'
+  - '^https?:\/\/assets.mozilla.net\/(.*)'
+  - '^https?:\/\/bugzil.la\/(\d*)$'
+  - '^https:\/\/getpocket.com\/(.*)'
+  - '^https:\/\/(www.){0,1}fakespot\.com\/(.*)'
+  - '^https?:\/\/mzl.la\/(.*)'
+  - '^https?:\/\/searchfox.org\/(.*)'
+  - '^https?:\/\/videos.cdn.mozilla.net\/(.*)'
+  - '^https?:\/\/donate.mozilla.org\?presets=.+'
+  - '^https:\/\/www.thunderbird.net\/(.*)'
+  - '^https:\/\/irlpodcast.org\/(.*)'
+  - '^https:\/\/(www.|blog.){0,1}mozilla.ai\/(.*)'
+  - '^https:\/\/mozilla.vc\/(.*)'
+  - '^https?:\/\/(www.){0,1}mozillafoundation.org($|\/(.*))'
+
+  # === Mozilla on Github ===
+  - '^https:\/\/github.com\/(mozilla|mozmeao|mozilla-mobile|mozilla-services|mozilla-tw)\/.*'
+  - '^https?:\/\/mozilla.github.io($|\/(.*))'
+  - '^https?:\/\/mozilladevelopers.github.io($|\/(.*))'
+
+  # === Mozilla on wordpress ===
+  - '^https?:\/\/mozillagfx.wordpress.com($|\/(.*))'
+
+  # === Mobile downloads ===
+
+  # App Store links for Firefox and related apps
+  - '^https:\/\/apps.apple.com\/(?:\w{2,3}\/)?app\/apple-store\/id989804926\?pt=373246(?:&[a-z_\-]+=[a-z_\-\d]+)+$'  # Firefox iOS
+  - '^https:\/\/apps.apple.com\/(?:\w{2,3}\/)?app\/apple-store\/id1055677337\?pt=373246(?:&[a-z_\-]+=[a-z_\-\d]+)+$'  # Focus iOS
+  - '^https:\/\/apps.apple.com\/(?:\w{2,3}\/)?app\/apple-store\/id1073435754\?pt=373246(?:&[a-z_\-]+=[a-z_\-\d]+)+$'  # Klar iOS
+
+  # Play Store links
+  - '^https:\/\/play\.google\.com\/store\/apps\/details\?id=org.mozilla.(firefox|firefox_beta|fenix)($|&hl=[a-z]{2}|&referrer=.*)'
+  - '^https:\/\/play\.google\.com\/store\/apps\/details\?id=org\.mozilla\.klar(?:&[a-z_\-]+=[\w_\-\d\.%]+)+$'
+  - '^https:\/\/play\.google\.com\/store\/apps\/details\?id=org\.mozilla\.focus(?:&[a-z_\-]+=[\w_\-\d\.%]+)+$'
+
+  # mailto links to Mozilla
+  - "^mailto:[^@]+@mozilla.(com|org)$"
+
+allowed_outbound_url_literals:
+  # Internals
+  - "about:plugins"
+
+  # Relative paths
+  - "../"
+
+  # Links not needing a regex rule (yet?)
+  - http://andreasgal.com/2014/10/14/openh264-now-in-firefox/
+  - http://blog.monotonous.org/2015/09/15/firefox-for-android-accessibility-refresh/
+  - http://blogs.adobe.com/webplatform/2014/04/01/new-canvas-features/
+  - http://bugzil.la/1021265
+  - http://bugzil.la/1040250
+  - http://bugzil.la/1086936
+  - http://bugzil.la/1093863
+  - http://dblohm7.ca/blog/2014/06/17/asynchronous-plugin-initialization-an-introduction/
+  - http://dev.w3.org/csswg/css-counter-styles/#the-counter-style-rule
+  - http://dev.w3.org/csswg/css-font-loading/
+  - http://developer.android.com/reference/android/provider/Browser.html#EXTRA_APPLICATION_ID
+  - http://disconnect.me/
+  - http://facebook.github.io/zstd/
+  - http://github.com/tc39/proposal-error-capturestacktrace
+  - http://graphite.sil.org/
+  - http://jandemooij.nl/blog/2015/12/29/wx-jit-code-enabled-in-firefox/
+  - http://jtgi.me/adding-presets-to-firefox-dev-tools/
+  - http://lucasr.org/2014/12/03/new-tablet-ui-for-firefox-on-android/
+  - http://mpeg.chiariglione.org/standards/mpeg-4/open-font-format/text-isoiec-cd-14496-22-3rd-edition
+  - http://msujaws.wordpress.com/2014/05/27/experimenting-with-context-menus/
+  - http://msujaws.wordpress.com/2014/08/01/faster-and-snappier-searches-now-in-firefox-aurora/
+  - http://msujaws.wordpress.com/2014/08/27/new-in-firefox-nightly-recommended-and-easy-theme-switching-through-customize-mode/
+  - http://muizelaar.blogspot.ca/2015/03/performance-and-feature-improvements-in.html
+  - http://www.erahm.org/2019/03/13/doubling-the-number-of-content-processes-in-firefox/
+  - http://www.google.com/design/spec/components/snackbars-toasts.html
+  - http://www.janbambas.cz/new-firefox-http-cache-enabled/
+  - http://www.morbo.org/2017/11/linux-sandboxing-improvements-in.html
+  - http://www.pinterest.com
+  - http://www.softwareishard.com/blog/har-12-spec/
+  - http://youtu.be/t3NKmmWfklU
+  - https://0patch.zendesk.com/hc/en-us/articles/360011227079-Mozilla-Firefox-73-can-crash-upon-launching-when-0patch-Agent-is-installed
+  - https://appgallery.huawei.com/app/C115133357
+  - https://apps.apple.com/app/id1314000270
+  - https://apps.apple.com/us/app/apple-store/id1055677337?mz_pr=focus&pt=373246&ct=app-store-banner&mt=8
+  - https://apps.apple.com/us/app/apple-store/id1055677337?mz_pr=focus&pt=373246&ct=firefox-browsers-mobile-focus&mt=8
+  - https://apps.apple.com/us/app/apple-store/id1055677337?mz_pr=focus&pt=373246&ct=firefox-browsers-mobile&mt=8
+  - https://apps.apple.com/us/app/apple-store/id989804926
+  - https://apps.apple.com/us/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=app-store-banner&mt=8
+  - https://apps.apple.com/us/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=firefox-browsers-mobile-get-app&mt=8
+  - https://apps.apple.com/us/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=firefox-browsers-mobile-ios&mt=8
+  - https://apps.apple.com/us/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=firefox-browsers-mobile&mt=8
+  - https://apps.apple.com/us/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=firefox-home&mt=8
+  - https://apps.apple.com/us/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=firefox-release-notes&mt=8
+  - https://apps.microsoft.com/detail/9MVZQVXJBQ9V
+  - https://ashughes.com/?p=426
+  - https://bitsup.blogspot.com/2015/03/opportunistic-encryption-for-firefox.html
+  - https://blog.cloudflare.com/early-hints/
+  - https://blog.llvm.org/posts/2021-01-05-stack-clash-protection/
+  - https://blog.monotonous.org/2025/03/06/New-Contrast-Control-Settings/
+  - https://blog.unicode.org/2025/09/unicode-170-release-announcement.html
+  - https://bsky.app/profile/firefox.com
+  - https://bsky.app/profile/firefoxbeta.bsky.social
+  - https://bsky.app/profile/firefoxnightly.bsky.social
+  - https://bugs.chromium.org/p/chromium/issues/detail?id=1379879
+  - https://bugzil.la/1573830
+  - https://bugzil.la/1595119
+  - https://bugzil.la/1739381
+  - https://bugzil.la/1743334
+  - https://bugzil.la/1785953
+  - https://bugzil.la/1786402
+  - https://bugzil.la/1787280
+  - https://bugzil.la/1788765
+  - https://bugzil.la/1788769
+  - https://bugzil.la/1788776
+  - https://bugzil.la/1788780
+  - https://bugzil.la/1788901
+  - https://bugzil.la/1788927
+  - https://bugzil.la/1788931
+  - https://bugzil.la/1789765
+  - https://compat.spec.whatwg.org/#webkitcssmatrix-interface
+  - https://datatracker.ietf.org/doc/draft-ietf-tls-esni/
+  - https://datatracker.ietf.org/doc/html/rfc9842
+  - https://datatracker.ietf.org/doc/rfc9460/
+  - https://developer.android.com/about/versions/13/features#themed-app-icons
+  - https://developer.android.com/develop/ui/views/touch-and-input/image-keyboard
+  - https://developer.android.com/guide/components/activities/recents#url-sharing
+  - https://developer.chrome.com/multidevice/android/intents
+  - https://developers.google.com/safe-browsing/reference
+  - https://developers.google.com/safe-browsing/reference/Local.List.Mode
+  - https://developers.google.com/speed/webp/
+  - https://disconnect.me/trackerprotection
+  - https://docs.flutter.dev/platform-integration/web/wasm
+  - https://dolske.wordpress.com/2017/06/15/photon-engineering-newsletter-6/
+  - https://drafts.csswg.org/css-shapes-1/#funcdef-basic-shape-path
+  - https://drafts.csswg.org/css-shapes-2/#funcdef-shape
+  - https://drafts.csswg.org/css-shapes-2/#interpolating-shape
+  - https://drafts.csswg.org/css-shapes-2/#shape-function
+  - https://drafts.csswg.org/css-text-4/#text-autospace-property
+  - https://drafts.csswg.org/css-text-decor-4/#text-decoration-inset-property
+  - https://drafts.csswg.org/css-values/#valdef-length-vb
+  - https://drafts.csswg.org/css-values/#valdef-length-vi
+  - https://drafts.csswg.org/css-values/#viewport-variants
+  - https://drafts.csswg.org/css-viewport/#interactive-widget-section
+  - https://drafts.csswg.org/css-viewport/#zoom-property
+  - https://drafts.csswg.org/scroll-animations-1/
+  - https://drafts.fxtf.org/css-masking-1/#the-clip-path
+  - https://drafts.fxtf.org/motion-1/#offset-path-property
+  - https://dutherenverseauborddelatable.wordpress.com/2014/06/26/firefox-the-browser-that-has-your-backup/
+  - https://en.wikipedia.org/wiki/Address_space_layout_randomization
+  - https://en.wikipedia.org/wiki/ARPANET
+  - https://en.wikipedia.org/wiki/AV1
+  - https://en.wikipedia.org/wiki/Browser_wars
+  - https://en.wikipedia.org/wiki/Firefox
+  - https://en.wikipedia.org/wiki/History_of_the_Internet
+  - https://en.wikipedia.org/wiki/History_of_the_web_browser
+  - https://en.wikipedia.org/wiki/Internet_Explorer
+  - https://en.wikipedia.org/wiki/Internet_Explorer#Market_adoption_and_usage_share
+  - https://en.wikipedia.org/wiki/Mosaic_(web_browser)
+  - https://en.wikipedia.org/wiki/Mozilla
+  - https://en.wikipedia.org/wiki/Netscape_(web_browser)
+  - https://en.wikipedia.org/wiki/Zstd
+  - https://encoding.spec.whatwg.org/
+  - https://extensions.gnome.org/extension/4691/pip-on-top/
+  - https://extensionworkshop.com/documentation/develop/web-ext-command-reference/#devtools
+  - https://extensionworkshop.com/documentation/publish/site-permission-add-on/
+  - https://fedidcg.github.io/FedCM/
+  - https://firefox-dev.tools/
+  - https://flathub.org/apps/details/org.mozilla.firefox
+  - https://fs.spec.whatwg.org/
+  - https://fxdx.dev/firefox-devtools-custom-object-formatters/
+  - https://fxdx.dev/network-override-in-firefox-devtools/
+  - https://fxdx.dev/rules-view-enter-key/
+  - https://gecko.readthedocs.org/en/latest/mobile/android/fennec/defaultdomains.html#domain-auto-completion
+  - https://github.com/annevk/orb
+  - https://github.com/AOMediaCodec/av1-avif
+  - https://github.com/chromium/content_analysis_sdk
+  - https://github.com/firebug/firebug.next/issues/177
+  - https://github.com/pocmo/speed-dial
+  - https://github.com/privacycg/CHIPS
+  - https://github.com/tc39/proposal-arraybuffer-base64
+  - https://github.com/tc39/proposal-arraybuffer-transfer
+  - https://github.com/tc39/proposal-change-array-by-copy
+  - https://github.com/tc39/proposal-class-fields#private-fields
+  - https://github.com/tc39/proposal-joint-iteration
+  - https://github.com/tc39/proposal-upsert
+  - https://github.com/unicode-org/icu/releases/tag/release-78.1
+  - https://github.com/w3c/webauthn/wiki/Explainer:-WebAuthn-Conditional-UI
+  - https://github.com/w3c/webauthn/wiki/Explainer:-WebAuthn-Large-Blob-Extension
+  - https://github.com/w3c/webauthn/wiki/Explainer%3A-WebAuthn-Conditional-UI
+  - https://github.com/w3c/webcomponents/
+  - https://github.com/w3c/webtransport/blob/main/explainer.md
+  - https://github.com/w3ctag/design-principles/issues/463
+  - https://github.com/WebAssembly/gc/blob/main/proposals/gc/Overview.md
+  - https://github.com/WebAssembly/tail-call/blob/main/proposals/tail-call/Overview.md
+  - https://globalprivacycontrol.org/
+  - https://google.com/
+  - https://groups.google.com/a/mozilla.org/g/dev-platform/c/M6erM0SjPTM
+  - https://groups.google.com/forum/#!msg/mozilla.governance/xs7Sfyxc4As/vIsztD7jha8J
+  - https://hal.inria.fr/hal-01652021/document
+  - https://help.getpocket.com/article/1149-firefox-home-layout-tests-faq
+  - https://help.opera.com/opera-tutorials/how-do-i-update-my-opera-browser/
+  - https://home.cern/topics/birth-web
+  - https://html.spec.whatwg.org/#custom-elements
+  - https://html.spec.whatwg.org/#the-popover-attribute
+  - https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-reactions
+  - https://html.spec.whatwg.org/multipage/custom-elements.html#custom-state-pseudo-class
+  - https://html.spec.whatwg.org/multipage/embedded-content.html#event-media-cuechange
+  - https://html.spec.whatwg.org/multipage/semantics.html#pragma-directives:navigate
+  - https://html.spec.whatwg.org/multipage/semantics.html#pragma-directives%3Anavigate
+  - https://html.spec.whatwg.org/multipage/workers.html#workeroptions
+  - https://jrmuizel.github.io/twitch/volume.html
+  - https://kotlinlang.org/docs/wasm-overview.html#browser-support
+  - https://letsencrypt.org/
+  - https://localmess.github.io/
+  - https://mastodon.social/@FirefoxNightly
+  - https://matthew.noorenberghe.com/blog/2016/08/filling-saved-http-logins-over-https-same-domain
+  - https://matthew.noorenberghe.com/blog/2019/05/password-manager-improvements-firefox-67
+  - https://medium.com/@antlam/a-new-mobile-tabs-tray-327ac262eacb
+  - https://medium.com/@antlam/firefox-for-android-looks-a-bit-different-8ae8eba41b1f
+  - https://medium.com/@antlam/firefox-for-android-on-tablets-f67edc83dd46
+  - https://medium.com/@antlam/open-multiple-links-1ce475c47de3
+  - https://medium.com/@antlam/share-to-firefox-245984b2da33
+  - https://medium.com/@ddprrt/tales-from-the-browser-wars-mozilla-stomps-internet-explorer-799035887cb1
+  - https://medium.com/@pastith/feeling-safer-online-with-firefox-b9fe13af6600
+  - https://medium.com/@pastith/feeling-safer-online-with-firefox-b9fe13af6600#0594
+  - https://medium.com/@seanwhite/webvr-shipping-today-in-firefox-d54d490a2072
+  - https://medium.com/mozilla-tech/a-quantum-leap-for-the-web-a3b7174b3c12
+  - https://medium.com/mozilla-tech/master-css-grid-with-firefox-devtools-e3420a8d58fd
+  - https://medium.com/mozilla-tech/mozilla-celebrates-release-of-free-high-quality-video-compression-technology-av1-in-firefox-65-7c95f2b7e56
+  - https://medium.com/mozilla-tech/open-for-business-firefox-quantum-is-ready-for-it-622c74fe13fe
+  - https://medium.com/mozilla-tech/the-search-for-the-goldilocks-browser-and-why-firefox-may-be-just-right-for-you-1f520506aa35
+  - https://mikeconley.ca/blog/2018/01/11/making-tab-switching-faster-in-firefox-with-tab-warming/
+  - https://miketaylr.com/posts/2015/03/contenteditable-paste.html
+  - https://mozilla-europe.myspreadshop.ie/say+hi+to+kit!?collection=cJvxXDyZTi
+  - https://mozilla-na.myspreadshop.com/say+hi+to+kit!?collection=pFGwhvwYfR
+  - https://mozilla.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=d2328a37-8dad-4658-8c78-b26c0170fbb1
+  - https://mozvr.com/
+  - https://play.google.com/store/apps/details?id=mozilla.lockbox
+  - https://privacycg.github.io/storage-access-headers/
+  - https://sensor-js.xyz/
+  - https://snapcraft.io/firefox
+  - https://spidermonkey.dev/blog/2025/04/11/shipping-temporal.html
+  - https://support.apple.com/guide/mac-help/create-a-passkey-mchl4af65d1a/mac
+  - https://support.apple.com/guide/mac-help/use-voice-control-commands-mh40719/mac
+  - https://support.apple.com/HT204416
+  - https://support.google.com/chrome/answer/13355898#zippy=%2Cmanage-ad-topics
+  - https://support.google.com/chrome/answer/13355898#zippy=%2Cmanage-site-suggested-ads
+  - https://support.google.com/chrome/answer/95414
+  - https://support.microsoft.com/en-us/help/4474419/sha-2-code-signing-support-update
+  - https://support.microsoft.com/help/13443/windows-which-operating-system
+  - https://support.microsoft.com/windows/change-mouse-settings-e81356a4-0e74-fe38-7d01-9d79fbf8712b
+  - https://svgwg.org/specs/animations/#DiscardElement
+  - https://svgwg.org/specs/paths/#DOMInterfaces
+  - https://tc39.es/proposal-temporal/docs/
+  - https://transcend-cdn.com/cm/d556c3a1-e57c-4bdf-a490-390a1aebf6dd/airgap.js
+  - https://twitter.com/firefoxbeta
+  - https://twitter.com/FirefoxBeta
+  - https://twitter.com/FirefoxNightly
+  - https://twitter.com/FirefoxNightly/status/1081108965256318976
+  - https://twitter.com/mnoorenberghe/status/1108447892702789632
+  - https://url.spec.whatwg.org/#dom-url-parse
+  - https://w3c.github.io/fingerprinting-guidance/
+  - https://w3c.github.io/IndexedDB/
+  - https://w3c.github.io/media-capabilities/#mediacapabilitieskeysystemconfiguration
+  - https://w3c.github.io/mst-content-hint/#degradation-preference-when-encoding
+  - https://w3c.github.io/pointerevents/#dfn-fire-a-pointer-event
+  - https://w3c.github.io/webappsec-csp/#external-hash
+  - https://w3c.github.io/webdriver-bidi/
+  - https://w3c.github.io/webrtc-extensions/#rtcrtpreceiver-jitterbuffertarget-attributes
+  - https://w3c.github.io/webrtc-pc/#dom-rtcpeerconnectionstate
+  - https://w3c.github.io/webrtc-pc/#dom-rtcrtpsender-setstreams
+  - https://w3c.github.io/webrtc-pc/#dom-rtcsctptransport
+  - https://w3c.github.io/webtransport
+  - https://w3ctag.github.io/unsanctioned-tracking/
+  - https://wasmio.tech/sessions/flutter-dart-and-wasm-gc-a-new-model-for-web-applications/
+  - https://web.dev/articles/passkey-form-autofill
+  - https://webcompat.com
+  - https://webtransparency.cs.princeton.edu/webcensus/
+  - https://whattrainisitnow.com/beta/
+  - https://wicg.github.io/aom/aria-reflection-explainer.html#reflecting-element-references
+  - https://wikipedia.org/wiki/HTTP_cookie
+  - https://wikipedia.org/wiki/URL
+  - https://wingolog.org/archives/2014/11/14/generators-in-firefox-now-twenty-two-times-faster
+  - https://www.adobe.com/products/flashplayer.html
+  - https://www.apple.com/legal/internet-services/itunes/testflight/sren/terms.html
+  - https://www.apple.com/rosetta/index.html
+  - https://www.apple.com/safari/docs/Safari_White_Paper_Nov_2019.pdf
+  - https://www.blog.google/products/chrome/building-a-more-private-web
+  - https://www.cnbc.com/2018/07/12/private-web-browsing-not-as-private-as-you-think-research.html
+  - https://www.cosic.esat.kuleuven.be/fpdetective/#paper
+  - https://www.franziskuskiefer.de/post/aes-gcm-speedup/
+  - https://www.fxsitecompat.com/en-CA/docs/2016/service-workers-have-been-disabled-in-firefox-45-esr/
+  - https://www.fxsitecompat.dev/en-CA/docs/2020/text-exceeding-maxlength-will-no-longer-be-truncated-when-pasted-into-input-or-textarea/
+  - https://www.instagram.com/firefox/
+  - https://www.microsoft.com/en-ca/download/details.aspx?id=36805
+  - https://www.microsoft.com/en-ca/windows/microsoft-edge
+  - https://www.microsoft.com/en-us/download/details.aspx?id=10109
+  - https://www.microsoft.com/en-us/p/av1-video-extension/9mvzqvxjbq9v?activetab%3Dpivot:overviewtab
+  - https://www.microsoft.com/en-us/p/av1-video-extension/9mvzqvxjbq9v?activetab=pivot:overviewtab
+  - https://www.microsoft.com/playready/
+  - https://www.mux.com/video-glossary/eme-encrypted-media-extensions
+  - https://www.pinterest.com
+  - https://www.qwant.com/
+  - https://www.reddit.com/r/kde/comments/osjt3p/firefox_wayland_pip_workaround_or_how_i_learned/
+  - https://www.tiktok.com/@firefox
+  - https://www.torproject.org/
+  - https://www.w3.org/International/questions/qa-html-dir#reportingdirection
+  - https://www.w3.org/TR/clear-site-data/#clear-cache
+  - https://www.w3.org/TR/css-cascade-5/#conditional-import
+  - https://www.w3.org/TR/css-color-5/#contrast-color
+  - https://www.w3.org/TR/filter-effects-1/#tainted-filter-primitives
+  - https://www.w3.org/TR/SVG2/types.html#__svg__SVGGraphicsElement__getBBox
+  - https://www.w3.org/TR/WCAG21/#text-alternatives
+  - https://www.w3.org/TR/webgpu/
+  - https://www.w3.org/TR/webmidi/
+  - https://www.w3.org/TR/webrtc-stats/#dom-rtcmediasourcestats
+  - https://www.w3.org/TR/webrtc-stats/#dom-rtcpeerconnectionstats
+  - https://www.w3.org/TR/webrtc/#dom-rtcrtptransceiver-setcodecpreferences
+  - https://www.youtube.com/@firefox/podcasts
+  - https://www.youtube.com/@firefox/podcasts?utm_source=www.firefox.com&utm_medium=referral&utm_campaign=nav&utm_content=resources
+  - https://www.youtube.com/user/firefoxchannel
+  - https://www.youtube.com/watch?v=T2jykykN3yc
+  - https://www.youtube.com/watch?v=t3NKmmWfklU
+  - https://www.youtube.com/watch?v=Un3u4wuGT8Q
+  - https://www.zdnet.com/article/before-the-web-the-internet-in-1991/
+  - https://x.com/firefoxbeta
+  - https://x.com/FirefoxNightly
+  - https://x.com/FirefoxSupport/status/1844367670696869980
+  - https://xiph.org/flac/
+  - https://youtu.be/CqGZtCZVDZ0
+  - https://youtu.be/F-nFQryDB0s
+  - https://youtube.com/MozillaDeveloper
