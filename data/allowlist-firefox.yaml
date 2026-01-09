@@ -349,3 +349,5 @@ allowed_outbound_url_literals:
   - https://youtube.com/MozillaDeveloper
   - https://www.youtube.com/watch?v=3c1sMUC6W70
   - https://www.youtube.com/watch?v=3c1sMUC6W70&t=2s
+  - https://www.youtube.com/watch?v=ZAyAjesU8xU&t=5s
+  - https://developer.mozilla.orgdocs/Web/API/Navigation_API
