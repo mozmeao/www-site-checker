@@ -17,10 +17,12 @@ import logging
 import math
 import os
 import re
+import subprocess
 import time
 from collections import defaultdict
 from functools import cache
-from typing import Dict, Iterable, List, Tuple
+from hashlib import sha512
+from typing import Dict, Iterable, List, Optional, Tuple
 from urllib.parse import quote, urlparse
 
 import click
@@ -241,12 +243,168 @@ def _page_content_is_cacheable(url):
     return False
 
 
+# Module-level cache for GitHub issues (prevents multiple API calls per scan run)
+_GITHUB_ISSUES_CACHE = None
+
+
+def _get_hashed_value_for_http_error(url: str, status_code: int) -> str:
+    """Create fingerprint for HTTP error issue.
+
+    Args:
+        url: The failing URL (redacted, just path/query)
+        status_code: HTTP status code
+
+    Returns:
+        First 32 chars of SHA512 hash
+    """
+    # Combine URL and status code for unique fingerprint
+    fingerprint_input = f"{url}-{status_code}"
+    return sha512(fingerprint_input.encode("utf-8")).hexdigest()[:32]
+
+
+def _get_current_github_issues() -> List:
+    """Fetch list of open issues from GitHub API (cached per process)."""
+    global _GITHUB_ISSUES_CACHE
+
+    # Return cached results if available
+    if _GITHUB_ISSUES_CACHE is not None:
+        return _GITHUB_ISSUES_CACHE
+
+    github_repo = os.environ.get("GITHUB_REPOSITORY", "mozmeao/www-site-checker")
+    api_url = f"https://api.github.com/repos/{github_repo}/issues"
+
+    try:
+        response = requests.get(api_url)
+        response.raise_for_status()
+        _GITHUB_ISSUES_CACHE = response.json()
+        return _GITHUB_ISSUES_CACHE
+    except requests.RequestException as e:
+        click.echo(f"Warning: Could not fetch existing issues: {e}")
+        return []
+
+
+def _matching_http_error_issue_exists(url: str, status_code: int) -> bool:
+    """Check if an issue already exists for this HTTP error.
+
+    Args:
+        url: The failing URL (redacted)
+        status_code: HTTP status code
+
+    Returns:
+        True if matching issue exists, False otherwise
+    """
+    fingerprint = _get_hashed_value_for_http_error(url, status_code)
+    current_issues = _get_current_github_issues()
+
+    for issue in current_issues:
+        body = issue.get("body", "")
+        if body and fingerprint in body:
+            return True
+
+    return False
+
+
+def _strip_hostname_from_url(url: str) -> str:
+    """Strip scheme and hostname from URL, returning just the path and query string."""
+    parsed = urlparse(url)
+    result = parsed.path
+    if parsed.query:
+        result += f"?{parsed.query}"
+    if parsed.fragment:
+        result += f"#{parsed.fragment}"
+    return result if result else "/"
+
+
+def _create_http_error_issue(url: str, status_code: int, retry_count: int = 0) -> None:
+    """Create a GitHub issue for a URL that returns an HTTP error.
+
+    Args:
+        url: The URL that failed
+        status_code: The HTTP status code (e.g., 404, 502)
+        retry_count: Number of retries attempted (0 if not retried)
+    """
+    redacted_url = _strip_hostname_from_url(url)
+
+    # Check if issue already exists
+    if _matching_http_error_issue_exists(redacted_url, status_code):
+        click.echo(
+            f"Skipping issue creation - existing {status_code} issue for {redacted_url} already exists"
+        )
+        return
+
+    # Map status codes to error names and descriptions
+    error_info = {
+        404: {
+            "name": "Not Found",
+            "description": "Please verify if this URL should exist or be removed from the sitemap.",
+        },
+        502: {
+            "name": "Bad Gateway",
+            "description": "Please investigate the server issue.",
+        },
+        503: {
+            "name": "Service Unavailable",
+            "description": "Please investigate the server availability issue.",
+        },
+    }
+
+    info = error_info.get(
+        status_code,
+        {
+            "name": f"Error {status_code}",
+            "description": "Please investigate this HTTP error.",
+        },
+    )
+
+    try:
+        retry_text = f" after {retry_count} retries" if retry_count > 0 else ""
+        fingerprint = _get_hashed_value_for_http_error(redacted_url, status_code)
+
+        issue_title = f"{status_code} {info['name']} error on {redacted_url}"
+        issue_body = f"""A {status_code} {info["name"]} error occurred when attempting to scan this URL{retry_text}.
+
+**URL:** {redacted_url}
+
+**Error:** HTTP {status_code} {info["name"]}
+
+**Timestamp:** {datetime.datetime.utcnow().isoformat()}Z
+
+This page was skipped during the scan. {info["description"]}
+
+--
+
+Fingerprint: {fingerprint}"""
+
+        # Escape quotes in the issue body for shell command
+        issue_body_escaped = issue_body.replace('"', '\\"').replace("$", "\\$")
+
+        command = f'gh issue create --title "{issue_title}" --body "{issue_body_escaped}" --label "bug"'
+        result = subprocess.run(
+            command,
+            shell=True,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        click.echo(f"Created issue for {status_code} error: {result.stdout.strip()}")
+    except subprocess.CalledProcessError as e:
+        click.echo(
+            f"Failed to create issue for {status_code} error on {url}: {e.stderr}"
+        )
+        sentry_sdk.capture_exception(e)
+    except Exception as e:
+        click.echo(
+            f"Unexpected error creating issue for {status_code} error on {url}: {e}"
+        )
+        sentry_sdk.capture_exception(e)
+
+
 def _get_url_with_retry(
     url: str,
     try_count: int = 0,
     limit: int = URL_RETRY_LIMIT,
     cache_html: bool = True,
-) -> requests.Response:
+) -> Optional[requests.Response]:
     exceptions_to_retry = (
         ChunkedEncodingError,
         ConnectionError,
@@ -268,17 +426,44 @@ def _get_url_with_retry(
         return resp
 
     except exceptions_to_retry as re:
+        # Extract status code if this is an HTTPError
+        status_code = None
+        if (
+            isinstance(re, HTTPError)
+            and hasattr(re, "response")
+            and re.response is not None
+        ):
+            status_code = re.response.status_code
+
+        # For 404 errors, don't retry - just create an issue and continue
+        if status_code == 404:
+            click.echo(f"404 Not Found error for {url}. Creating issue and continuing.")
+            _create_http_error_issue(url, status_code, retry_count=0)
+            return None
+
         if try_count < limit:
             click.echo(
                 f"Waiting {URL_RETRY_WAIT_SECONDS} seconds before retrying, following {re}"
             )
             time.sleep(URL_RETRY_WAIT_SECONDS)
-            return _get_url_with_retry(url, try_count=try_count + 1)
-        else:
-            click.echo(
-                f"Max retries ({URL_RETRY_LIMIT}) reached. Raising exception {re}"
+            return _get_url_with_retry(
+                url, try_count=try_count + 1, limit=limit, cache_html=cache_html
             )
-            raise re
+        else:
+            # Max retries reached
+            if status_code in (502, 503):
+                # Create a GitHub issue for server errors and continue
+                click.echo(
+                    f"Max retries ({URL_RETRY_LIMIT}) reached with {status_code} error for {url}. Creating issue and continuing."
+                )
+                _create_http_error_issue(url, status_code, retry_count=URL_RETRY_LIMIT)
+                return None
+            else:
+                # For other errors, raise the exception
+                click.echo(
+                    f"Max retries ({URL_RETRY_LIMIT}) reached. Raising exception {re}"
+                )
+                raise re
 
 
 def _dump_unexpected_urls_to_files(
@@ -413,6 +598,12 @@ def _check_pages_for_outbound_links(urls: List[str], allowlist_config: Dict) -> 
     for page_url in urls:
         click.echo(f"Checking {page_url}")
         resp = _get_url_with_retry(page_url)
+
+        # Skip this page if we got a None response (e.g., 502 error after retries)
+        if resp is None:
+            click.echo(f"Skipping {page_url} due to previous error")
+            continue
+
         html_content = resp.text
         soup = BeautifulSoup(html_content, "html5lib")
         anchor_tags = soup.find_all("a")
@@ -471,6 +662,13 @@ def _get_urls_from_sitemap(
     )
 
     resp = _get_url_with_retry(sitemap_url)
+
+    # If we couldn't fetch the sitemap (e.g., 502 error), return empty list
+    if resp is None:
+        click.echo(
+            f"Could not fetch sitemap at {sitemap_url}, returning empty URL list"
+        )
+        return urls
 
     sitemap_xml = resp.text
     soup = BeautifulSoup(sitemap_xml, "lxml")
