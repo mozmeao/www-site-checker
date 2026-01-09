@@ -4,7 +4,7 @@
 
 # If you rename this workflow, make sure you update the name in the workflow_run
 # ref in mozorg-cdn-ge-code-check.yaml
-name: "Site scanning"
+name: "www.mozilla.org site scanning"
 on:
   push:
     branches-ignore:
