@@ -421,7 +421,12 @@ def _get_url_with_retry(
             click.echo(f"Pulling down {url}")
             resp = requests.get(url, headers=headers, allow_redirects=False)
             resp.raise_for_status()
-            if cache_html and _page_content_is_cacheable(url):
+            # Don't cache redirects - they have no useful HTML content
+            if resp.status_code >= 300 and resp.status_code < 400:
+                click.echo(
+                    f"Skipping cache for redirect response (HTTP {resp.status_code})"
+                )
+            elif cache_html and _page_content_is_cacheable(url):
                 PAGE_CONTENT_CACHE[url] = resp.content.decode()
         return resp
 
