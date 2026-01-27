@@ -2506,3 +2506,9 @@ allowed_outbound_url_literals:
   - https://apps.apple.com/kz/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=firefox-facebook-container&mt=8
   - https://apps.apple.com/kz/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-download-page&mt=8
   - https://apps.apple.com/kz/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=firefox-browsers-mobile-get-app&mt=8
+  - https://soloist.ai/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://soloist.ai/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=products
+  - https://0din.ai/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=products
+  - https://soloist.ai/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=products
+  - https://0din.ai/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://0din.ai/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=products
