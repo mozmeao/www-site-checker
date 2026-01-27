@@ -33,6 +33,8 @@ allowed_outbound_url_regexes:
   - '^https:\/\/(www.|blog.){0,1}mozilla.ai\/(.*)'
   - '^https:\/\/mozilla.vc\/(.*)'
   - '^https?:\/\/(www.){0,1}mozillafoundation.org($|\/(.*))'
+  - '^https:\/\/soloist\.ai\/\?utm_source.*'
+  - '^https:\/\/0din\.ai\/\?utm_source=.*'
 
   # === Mozilla on Github
 
