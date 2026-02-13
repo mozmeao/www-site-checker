@@ -352,3 +352,4 @@ allowed_outbound_url_literals:
   - https://www.youtube.com/watch?v=ZAyAjesU8xU&t=5s
   - https://developer.mozilla.orgdocs/Web/API/Navigation_API
   - https://specifications.freedesktop.org/basedir/latest/
+  - https://w3c.github.io/mediacapture-fromelement/#html-media-element-media-capture-extensions
