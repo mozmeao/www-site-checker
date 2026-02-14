@@ -353,3 +353,9 @@ allowed_outbound_url_literals:
   - https://developer.mozilla.orgdocs/Web/API/Navigation_API
   - https://specifications.freedesktop.org/basedir/latest/
   - https://w3c.github.io/mediacapture-fromelement/#html-media-element-media-capture-extensions
+  - https://www.securitee.org/files/pspray_dimva2019.pdf
+  - https://w3c.github.io/fingerprinting-guidance/#introduction
+  - https://www.w3.org/2001/tag/doc/unsanctioned-tracking/
+  - https://www.chromium.org/Home/chromium-privacy/privacy-sandbox/
+  - https://petsymposium.org/2016/files/papers/OpenWPM_1_million_site_tracking_measurement.pdf
+  - https://webkit.org/tracking-prevention/
