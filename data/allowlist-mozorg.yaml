@@ -2512,3 +2512,7 @@ allowed_outbound_url_literals:
   - https://stateof.mozilla.org?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
   - https://www.linkedin.com/in/abhishek-kumar-003933375/
   - https://en.wikipedia.org/wiki/Denial-of-service_attack
+  - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-ZZZZ
+  - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-xxxx
+  - http://nvd.nist.gov/nvd.cfm?cvename=CVE-2006-xxxx
+  - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-xxxx
