@@ -2512,3 +2512,6 @@ allowed_outbound_url_literals:
   - https://stateof.mozilla.org?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
   - https://www.linkedin.com/in/abhishek-kumar-003933375/
   - https://en.wikipedia.org/wiki/Denial-of-service_attack
+  - https://tabstack.ai/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=m24-homepage
+  - https://tabstack.ai/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=nav&utm_content=products
+  - https://tabstack.ai/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=products
