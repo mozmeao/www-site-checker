@@ -353,3 +353,8 @@ allowed_outbound_url_literals:
   - https://developer.mozilla.orgdocs/Web/API/Navigation_API
   - https://specifications.freedesktop.org/basedir/latest/
   - https://w3c.github.io/mediacapture-fromelement/#html-media-element-media-capture-extensions
+  - https://www.w3.org/2001/tag/doc/unsanctioned-tracking/
+  - https://webkit.org/tracking-prevention/
+  - https://w3c.github.io/fingerprinting-guidance/#introduction
+  - https://www.chromium.org/Home/chromium-privacy/privacy-sandbox/
+  - https://pdfa.org/accessible-math-in-pdf-finally/#:~:text=Implications%20for%20PDF%20viewers
