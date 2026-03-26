@@ -2,7 +2,7 @@
 beautifulsoup4==4.14.3
 certifi>=2025.4.26
 click==8.3.0
-django==5.2.10
+django>=5.0.14,<6
 html5lib==1.1
 feedparser==6.0.11
 lxml==6.0.2
