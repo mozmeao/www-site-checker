@@ -13,6 +13,7 @@ import sys
 from hashlib import sha512
 from typing import Dict, List
 
+import pyaml_env
 import requests
 import ruamel.yaml
 from django.core.exceptions import ValidationError
@@ -55,7 +56,7 @@ def _load_template(filepath):
 MAX_ISSUE_TITLE_URL_LENGTH = 20  # 20 + length of ISSUE_TITLE_TEMPLATE's string == 50
 ISSUE_TITLE_TEMPLATE = "Malformed hyperlink found: {malformed_url}..."
 ISSUE_BODY_TEMPLATE = _load_template("issue_template.txt")
-PR_TITLE_TEMPLATE = "Automatic updates to allowlist - {timestamp}"
+PR_TITLE_TEMPLATE = "[www-site-checker:{service_main_domain}] Automatic updates to allowlist - {timestamp}"
 PR_BODY_TEMPLATE = _load_template("pr_template.txt")
 
 
@@ -151,7 +152,11 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     """Update the allowlist with the candidate URLs for a PR"""
     output = ""
     allowlist_path = os.environ.get("ALLOWLIST_FILEPATH")
-    timestamp = datetime.datetime.now(datetime.UTC).isoformat(timespec="seconds")
+    now = datetime.datetime.now(datetime.UTC)
+    branch_timestamp = now.strftime("%Y%m%d-%H%M%S")
+    display_timestamp = now.strftime("%Y-%m-%d %H:%M UTC")
+    allowlist_config = pyaml_env.parse_config(allowlist_path)
+    service_main_domain = allowlist_config["service_main_domain"]
     unexpected_urls_structured = _build_structured_url_list_for_pr_description(
         pr_candidates
     )
@@ -173,9 +178,7 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     os.system(f'git config user.email "{MEAO_IDENTITY_EMAIL}"')
     os.system('git config user.name "www-site-checker bot"')
 
-    branchname = (
-        f'update-{allowlist_path.replace("/","-")}--{timestamp.replace(":","-")}'
-    )
+    branchname = f'update-{allowlist_path.replace("/","-")}--{branch_timestamp}'
     os.system(f"git switch -c {branchname}")
 
     # 1. Update the allowlist
@@ -193,13 +196,15 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     # 2. Commit it to git on the new branch
     # Only add the specific allowlist file to avoid committing unrelated changes
     os.system(f'git add "{allowlist_path}"')
-    os.system(f'git commit -m "Automatic allowlist updates: {timestamp}"')
+    os.system(f'git commit -m "Automatic allowlist updates: {display_timestamp}"')
 
     # 3. Push the branch up to origin
     os.system(f"git push origin {branchname}")
 
     # 4. Prepare the Pull Request
-    pr_title = PR_TITLE_TEMPLATE.format(timestamp=timestamp)
+    pr_title = PR_TITLE_TEMPLATE.format(
+        service_main_domain=service_main_domain, timestamp=display_timestamp
+    )
     pr_body = PR_BODY_TEMPLATE.format(
         unexpected_urls_structured=unexpected_urls_structured,
         fingerprint=_get_hashed_value(pr_candidates),
