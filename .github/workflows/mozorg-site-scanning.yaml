@@ -2,13 +2,20 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-# If you rename this workflow, make sure you update the name in the workflow_run
+# If you rename this workflow, make sure you update the name in the workflow_run
 # ref in mozorg-cdn-ge-code-check.yaml
 name: "www.mozilla.org site scanning"
 on:
   workflow_dispatch:
   schedule:
     - cron: "32 2,14 * * *" # 02:32 UTC and 14:32 every day
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
 
 env:
   SENTRY_DSN: https://45ad5d426da7480081831c053ca02cac@o1069899.ingest.sentry.io/6249535
@@ -30,16 +37,20 @@ jobs:
     name: Check main CDN - batch ${{ matrix.batch }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: "3.13"
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Run checker
+        env:
+          BATCH: ${{ matrix.batch }}
         run: >
           python bin/scan_site.py
-          --sitemap-url="https://${{ secrets.MOZORG_CDN_HOSTNAME }}/all-urls.xml"
-          --batch="${{ matrix.batch }}"
+          --sitemap-url="https://$MOZORG_CDN_HOSTNAME/all-urls.xml"
+          --batch="$BATCH"
           --export-cache
       - name: Upload scan output files
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
@@ -62,17 +73,21 @@ jobs:
     name: Check US origin server - batch ${{ matrix.batch }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: "3.13"
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Run checker
+        env:
+          BATCH: ${{ matrix.batch }}
         run: >
           python bin/scan_site.py
-          --sitemap-url="https://${{ secrets.MOZORG_US_ORIGIN_HOSTNAME }}/all-urls.xml"
+          --sitemap-url="https://$MOZORG_US_ORIGIN_HOSTNAME/all-urls.xml"
           --maintain-hostname
-          --batch="${{ matrix.batch }}"
+          --batch="$BATCH"
       - name: Upload scan output files
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
@@ -88,17 +103,21 @@ jobs:
     name: Check EU origin server - batch ${{ matrix.batch }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: "3.13"
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Run checker
+        env:
+          BATCH: ${{ matrix.batch }}
         run: >
           python bin/scan_site.py
-          --sitemap-url="https://${{ secrets.MOZORG_EU_ORIGIN_HOSTNAME }}/all-urls.xml"
+          --sitemap-url="https://$MOZORG_EU_ORIGIN_HOSTNAME/all-urls.xml"
           --maintain-hostname
-          --batch="${{ matrix.batch }}"
+          --batch="$BATCH"
       - name: Upload scan output files
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
@@ -107,13 +126,20 @@ jobs:
           retention-days: 15
 
   alert_if_report_files_exist:
+    name: Alert if report files exist
     runs-on: ubuntu-latest
     needs:
       - run_on_cdn
       - run_on_us_origin
       - run_on_eu_origin
+    permissions:
+      contents: write  # needed to push allowlist update branches
+      pull-requests: write  # needed to open allowlist update PRs
+      issues: write  # needed to file scan result issues
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: "3.13"

@@ -8,6 +8,13 @@ on:
   schedule:
     - cron: "03 2,14 * * *" # 02:03 UTC and 14:03 every day
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
 env:
   FXC_CDN_HOSTNAME: ${{ secrets.FXC_CDN_HOSTNAME }}
   FXC_US_ORIGIN_HOSTNAME: ${{ secrets.FXC_US_ORIGIN_HOSTNAME }}
@@ -16,9 +23,12 @@ env:
 
 jobs:
   run_checks:
+    name: Run checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: "3.13"
@@ -29,19 +39,19 @@ jobs:
         if: always()
         run: >
           python bin/validate_feeds.py
-          --hostname="${{ env.FXC_CDN_HOSTNAME }}"
+          --hostname="$FXC_CDN_HOSTNAME"
       - name: "Check US origin feeds"
         id: us_origin
         if: always()
         run: >
           python bin/validate_feeds.py
-          --hostname="${{ env.FXC_US_ORIGIN_HOSTNAME }}"
+          --hostname="$FXC_US_ORIGIN_HOSTNAME"
       - name: "Check EU origin feeds"
         id: eu_origin
         if: always()
         run: >
           python bin/validate_feeds.py
-          --hostname="${{ env.FXC_EU_ORIGIN_HOSTNAME }}"
+          --hostname="$FXC_EU_ORIGIN_HOSTNAME"
       - name: Report on failures
         if: steps.cdn.outcome == 'failure' || steps.us_origin.outcome == 'failure' || steps.eu_origin.outcome == 'failure'
         run: exit 1

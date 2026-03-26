@@ -8,14 +8,24 @@ on:
   schedule:
     - cron: "5 0/3 * * *" # At minute 5 past every 3rd hour from 0 through 23.
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
 env:
   HOSTNAME: ${{ secrets.MOZORG_CDN_HOSTNAME }}
 
 jobs:
   run_robots_txt_check:
+    name: Run robots.txt check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - name: Check robots.txt on main CDN
         shell: bash
         run: bin/robots_check.sh

@@ -4,17 +4,28 @@
 
 name: "Check www.firefox.com CDN for geo stability"
 
-on:
+permissions:
+  contents: read
+  actions: read  # needed to download artifacts from the completed workflow_run
+
+on: # zizmor: ignore[dangerous-triggers]
   workflow_run:
     workflows: ["www.firefox.com site scanning"]
     types:
       - completed
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.workflow_run.id }}
+  cancel-in-progress: true
+
 jobs:
   check_geo_from_cache:
+    name: Check geo from cache
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
