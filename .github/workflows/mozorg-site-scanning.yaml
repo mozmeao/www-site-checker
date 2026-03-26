@@ -29,8 +29,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Check main CDN - batch ${{ matrix.batch }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: "3.13"
       - name: Install requirements
@@ -42,13 +42,13 @@ jobs:
           --batch="${{ matrix.batch }}"
           --export-cache
       - name: Upload scan output files
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
           name: scan-results-${{ matrix.batch }}-CDN
           path: output
           retention-days: 15
       - name: Upload page-cache
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
           name: html-cache-${{ matrix.batch }}
           path: page_cache
@@ -61,8 +61,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Check US origin server - batch ${{ matrix.batch }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: "3.13"
       - name: Install requirements
@@ -74,7 +74,7 @@ jobs:
           --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload scan output files
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
           name: scan-results-${{ matrix.batch }}-US-origin
           path: output
@@ -87,8 +87,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Check EU origin server - batch ${{ matrix.batch }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: "3.13"
       - name: Install requirements
@@ -100,7 +100,7 @@ jobs:
           --maintain-hostname
           --batch="${{ matrix.batch }}"
       - name: Upload scan output files
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
           name: scan-results-${{ matrix.batch }}-EU-origin
           path: output
@@ -113,14 +113,14 @@ jobs:
       - run_on_us_origin
       - run_on_eu_origin
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: "3.13"
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Download all artifacts, if they exist
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           path: output
           merge-multiple: true
