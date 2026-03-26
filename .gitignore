@@ -1,7 +1,9 @@
 __pycache__/*
 *.pyc
 .cache
-.claude
+.claude/*
+!.claude/skills
+!.claude/skills/**
 .coverage
 .docker-build*
 .DS_Store
@@ -17,3 +19,4 @@ output/*
 page_cache/*
 AGENT.md
 CLAUDE.md
+
