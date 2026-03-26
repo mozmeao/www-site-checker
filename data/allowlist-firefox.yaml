@@ -359,3 +359,4 @@ allowed_outbound_url_literals:
   - https://www.chromium.org/Home/chromium-privacy/privacy-sandbox/
   - https://pdfa.org/accessible-math-in-pdf-finally/#:~:text=Implications%20for%20PDF%20viewers
   - https://youtu.be/AtuzapfqF1M
+  - https://ericportis.com/posts/2023/auto-sizes-pretty-much-requires-width-and-height/
