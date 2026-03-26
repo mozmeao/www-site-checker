@@ -258,9 +258,9 @@ coverage[toml]==7.13.5 \
     --hash=sha256:f70c9ab2595c56f81a89620e22899eea8b212a4041bd728ac6f4a28bf5d3ddd0 \
     --hash=sha256:fbabfaceaeb587e16f7008f7795cd80d20ec548dc7f94fbb0d4ec2e038ce563f
     # via pytest-cov
-django==5.2.12 \
-    --hash=sha256:4853482f395c3a151937f6991272540fcbf531464f254a347bf7c89f53c8cff7 \
-    --hash=sha256:6b809af7165c73eff5ce1c87fdae75d4da6520d6667f86401ecf55b681eb1eeb
+django==6.0.3 \
+    --hash=sha256:2e5974441491ddb34c3f13d5e7a9f97b07ba03bf70234c0a9c68b79bbb235bc3 \
+    --hash=sha256:90be765ee756af8a6cbd6693e56452404b5ad15294f4d5e40c0a55a0f4870fe1
     # via -r requirements.in
 feedparser==6.0.11 \
     --hash=sha256:0be7ee7b395572b19ebeb1d6aafb0028dee11169f1c934e0ed67d54992f4ad45 \
