@@ -2547,3 +2547,23 @@ allowed_outbound_url_literals:
   - https://bsky.app/intent/compose?text=%E0%B8%89%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%99%E0%B8%B1%E0%B8%9A%E0%B8%AA%E0%B8%99%E0%B8%B8%E0%B8%99%E0%B8%A7%E0%B8%B4%E0%B8%AA%E0%B8%B1%E0%B8%A2%E0%B8%97%E0%B8%B1%E0%B8%A8%E0%B8%99%E0%B9%8C%E0%B9%83%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%97%E0%B8%B3%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%AD%E0%B8%B4%E0%B8%99%E0%B9%80%E0%B8%97%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B9%80%E0%B8%99%E0%B9%87%E0%B8%95%E0%B8%94%E0%B8%B5%E0%B8%82%E0%B8%B6%E0%B9%89%E0%B8%99%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%AA%E0%B8%A1%E0%B8%9A%E0%B8%B9%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%82%E0%B8%B6%E0%B9%89%E0%B8%99%E0%B8%88%E0%B8%B2%E0%B8%81+Mozilla+%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%88%E0%B8%B0%E0%B8%A3%E0%B9%88%E0%B8%A7%E0%B8%A1%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B8%89%E0%B8%B1%E0%B8%99%E0%B9%84%E0%B8%AB%E0%B8%A1%3F+https%3A%2F%2Fmzl.la%2Fmanifesto
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+%E3%81%A7%E3%81%AF%E3%80%81Chrome+%E3%81%8B%E3%82%89%E3%81%AE%E5%88%87%E3%82%8A%E6%9B%BF%E3%81%88%E3%82%92%E8%B6%85%E9%AB%98%E9%80%9F%E3%81%AA%E3%82%82%E3%81%AE%E3%81%A8%E3%81%AA%E3%81%A3%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%80%82%E3%81%9C%E3%81%B2%E3%81%8A%E8%A9%A6%E3%81%97%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
   - https://bsky.app/intent/compose?text=%D9%85%D9%86+%D8%A7%D8%B2+%DB%8C%DA%A9+%D9%86%D8%B3%D8%AE%D9%87+%D8%A8%D9%87%D8%AA%D8%B1+%D9%88+%D8%B3%D8%A7%D9%84%D9%85%D8%AA%D8%B1+%D8%A7%DB%8C%D9%86%D8%AA%D8%B1%D9%86%D8%AA+%D8%AA%D9%88%D8%B3%D8%B7+%40mozilla+%D8%AD%D9%85%D8%A7%DB%8C%D8%AA+%D9%85%DB%8C%DA%A9%D9%86%D9%85%D8%8C+%D8%A8%D9%87+%D9%85%D9%86+%D9%85%D9%84%D8%AD%D9%82+%D9%85%DB%8C%D8%B4%D9%88%DB%8C%D8%AF%D8%9F+https%3A%2F%2Fmzl.la%2Fmanifesto
+  - https://www.destinationcrm.com/Articles/ReadArticle.aspx?ArticleID=169140
+  - https://www.destinationcrm.com/Articles/CRM-News/CRM-Across-the-Wire/Anonym-and-Snap-Partner-to-Unlock-Advertisers-First-Party-Data-171732.aspx
+  - https://energycommerce.house.gov/events/innovation-data-and-commerce-subcommittee-hearing-promoting-u-s-innovation-and-individual-liberty-through-a-national-standard-for-data-privacy
+  - https://martechpod.com/episode/mozillas-privacy-friendly-ad-targeting/
+  - https://www.linkedin.com/in/grahammudd/
+  - https://www.linkedin.com/company/anonym-co/
+  - https://www.linkedin.com/in/brsmallwood
+  - https://www.adexchanger.com/privacy/programmatic-vets-are-behind-a-wave-of-new-startups-built-for-a-privacy-first-web/
+  - https://www.adexchanger.com/adexchanger-talks/the-privacy-utility-trade-off/
+  - https://www.wsj.com/articles/former-facebook-execs-launch-startup-adding-to-efforts-to-improve-ad-measurement-cdfd6b3f?st=2m4l2kgut9ct12h&reflink=desktopwebshare_permalink
+  - https://newyork2024.advertisingweek.com/aw/schedule/session/-58-2024-10-07-1020-session
+  - https://iapp.org/conference/global-privacy-summit/
+  - https://www.adexchanger.com/investment/ad-tech-ma-went-from-weak-sauce-to-hot-sauce-in-2025/
+  - https://influencermarketinghub.com/uefa-tiktok-campaign/
+  - https://www.linkedin.com/in/tgreasby
+  - https://mobilemarketingreads.com/top-adtech-ma-deals-2024/
+  - https://www.adexchanger.com/ad-exchange-news/metas-graham-mudd-to-depart-and-found-his-own-privacy-startup/
+  - https://marketingtechginsights.com/anonym-brings-privacy-protected-measurement-to-pinterest-advertisers/
+  - https://ppc.land/anonym-brings-privacy-protected-measurement-to-pinterest-advertisers/
+  - https://www.linkedin.com/in/jessegoranson/
