@@ -132,9 +132,9 @@ jobs:
       - run_on_us_origin
       - run_on_eu_origin
     permissions:
-      contents: write  # needed to push allowlist update branches
-      pull-requests: write  # needed to open allowlist update PRs
-      issues: write  # needed to file scan result issues
+      contents: write # needed to push allowlist update branches
+      pull-requests: write # needed to open allowlist update PRs
+      issues: write # needed to file scan result issues
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -149,6 +149,11 @@ jobs:
         with:
           path: output
           merge-multiple: true
+      - name: Authenticate git for pushes
+        run: |
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Handle the scan results
         run: python bin/handle_site_scan_output.py
         env:
