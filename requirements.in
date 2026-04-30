@@ -5,7 +5,7 @@ click==8.3.2
 django>=5.0.14,<7
 html5lib==1.1
 feedparser==6.0.12
-lxml==6.0.4
+lxml==6.1.0
 pyaml-env==1.2.2
 PyYAML==6.0.3
 requests>=2.33.1
