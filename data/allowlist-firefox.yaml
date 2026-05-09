@@ -363,3 +363,6 @@ allowed_outbound_url_literals:
   - https://youtu.be/AtuzapfqF1M
   - https://ericportis.com/posts/2023/auto-sizes-pretty-much-requires-width-and-height/
   - https://inria.hal.science/hal-01652021/document
+  - https://www.w3.org/TR/fingerprinting-guidance/
+  - https://web.dev/learn/privacy/fingerprinting
+  - https://coveryourtracks.eff.org/
