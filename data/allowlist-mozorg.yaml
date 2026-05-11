@@ -49,8 +49,9 @@ allowed_outbound_url_regexes:
   # pages linked to from our own security advisories - eg https://www.mozilla.org/en-US/security/advisories/mfsa2006-50/ -> mfsa2006-01.html
   - '^mfsa\d{4}-\d{2}(.html){0,1}$'
 
-  # mailto links to Mozilla itself
+  # mailto links to Mozilla itself, or Anonym
   - "^mailto:[^@]+@mozilla.(com|org)$"
+  - "^mailto:[^@]+@anonymco.com$"
 
   # === Mobile downloads
 
