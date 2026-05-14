@@ -17,11 +17,9 @@ import logging
 import math
 import os
 import re
-import subprocess
 import time
 from collections import defaultdict
 from functools import cache
-from hashlib import sha512
 from typing import Dict, Iterable, List, Optional, Tuple
 from urllib.parse import quote, urlparse
 
@@ -32,7 +30,12 @@ from bs4 import BeautifulSoup
 from pyaml_env import parse_config
 from requests.exceptions import ChunkedEncodingError, ConnectionError, HTTPError
 from sentry_sdk.integrations.logging import LoggingIntegration
-from utils import _get_configuration_path, get_output_path
+
+# Awkward hack to allow importing into tests
+try:
+    from utils import _get_configuration_path, get_output_path
+except ImportError:
+    from .utils import _get_configuration_path, get_output_path
 
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
@@ -54,6 +57,10 @@ if SENTRY_DSN:
 
 DEFAULT_BATCH__NOOP = "1_1"  # By default treat all URLs as a single batch
 UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
+HTTP_ERRORS_FILENAME_FRAGMENT = "http_errors_for"
+
+# Collected during the scan run; flushed to disk by _dump_http_errors_to_file()
+_HTTP_ERRORS: List[Dict] = []
 URL_RETRY_LIMIT = 3
 URL_RETRY_WAIT_SECONDS = 4
 
@@ -203,12 +210,14 @@ def check_for_unexpected_urls(
     click.echo("Checking pages for unexpected URLs")
     url_results = _check_pages_for_outbound_links(urls_to_check, allowlist_config)
 
+    batch_label = "all" if batch == DEFAULT_BATCH__NOOP else batch.split("_")[0]
+
     if url_results:
         click.echo(f"Unexpected outbound URLs found on {hostname}!")
         _dump_unexpected_urls_to_files(
             results=url_results,
             hostname=hostname,
-            batch_label="all" if batch == DEFAULT_BATCH__NOOP else batch.split("_")[0],
+            batch_label=batch_label,
         )
         if SENTRY_DSN:
             message = f"Unexpected oubound URLs found on {hostname} - see Github Action in {GITHUB_REPOSITORY} for output data"
@@ -218,6 +227,8 @@ def check_for_unexpected_urls(
             )
     else:
         click.echo("Checks completed and no unexpected outbound URLs found")
+
+    _dump_http_errors_to_file(hostname=hostname, batch_label=batch_label)
 
 
 def _get_batched_urls(urls_to_check: List[str], batch: str) -> List[str]:
@@ -243,65 +254,27 @@ def _page_content_is_cacheable(url):
     return False
 
 
-# Module-level cache for GitHub issues (prevents multiple API calls per scan run)
-_GITHUB_ISSUES_CACHE = None
+def _dump_http_errors_to_file(hostname: str, batch_label: str) -> None:
+    """Write HTTP errors collected during this scan run to a JSON file in the output directory.
 
-
-def _get_hashed_value_for_http_error(url: str, status_code: int) -> str:
-    """Create fingerprint for HTTP error issue.
-
-    Args:
-        url: The failing URL (redacted, just path/query)
-        status_code: HTTP status code
-
-    Returns:
-        First 32 chars of SHA512 hash
+    The file is picked up by handle_site_scan_output.py (which runs in a later job
+    that has the GH_TOKEN / issues:write permission needed to open GitHub issues).
     """
-    # Combine URL and status code for unique fingerprint
-    fingerprint_input = f"{url}-{status_code}"
-    return sha512(fingerprint_input.encode("utf-8")).hexdigest()[:32]
+    if not _HTTP_ERRORS:
+        return
 
+    _output_path = get_output_path()
+    _now = (
+        datetime.datetime.now(datetime.UTC)
+        .isoformat(timespec="seconds")
+        .replace(":", "-")
+    )
+    filename = f"{HTTP_ERRORS_FILENAME_FRAGMENT}_{hostname}_{batch_label}_{_now}.json"
+    filepath = os.path.join(_output_path, filename)
 
-def _get_current_github_issues() -> List:
-    """Fetch list of open issues from GitHub API (cached per process)."""
-    global _GITHUB_ISSUES_CACHE
-
-    # Return cached results if available
-    if _GITHUB_ISSUES_CACHE is not None:
-        return _GITHUB_ISSUES_CACHE
-
-    github_repo = os.environ.get("GITHUB_REPOSITORY", "mozmeao/www-site-checker")
-    api_url = f"https://api.github.com/repos/{github_repo}/issues"
-
-    try:
-        response = requests.get(api_url)
-        response.raise_for_status()
-        _GITHUB_ISSUES_CACHE = response.json()
-        return _GITHUB_ISSUES_CACHE
-    except requests.RequestException as e:
-        click.echo(f"Warning: Could not fetch existing issues: {e}")
-        return []
-
-
-def _matching_http_error_issue_exists(url: str, status_code: int) -> bool:
-    """Check if an issue already exists for this HTTP error.
-
-    Args:
-        url: The failing URL (redacted)
-        status_code: HTTP status code
-
-    Returns:
-        True if matching issue exists, False otherwise
-    """
-    fingerprint = _get_hashed_value_for_http_error(url, status_code)
-    current_issues = _get_current_github_issues()
-
-    for issue in current_issues:
-        body = issue.get("body", "")
-        if body and fingerprint in body:
-            return True
-
-    return False
+    with open(filepath, "w") as fp:
+        json.dump(_HTTP_ERRORS, fp)
+    click.echo(f"{len(_HTTP_ERRORS)} HTTP error(s) written to {filepath}")
 
 
 def _strip_hostname_from_url(url: str) -> str:
@@ -315,88 +288,25 @@ def _strip_hostname_from_url(url: str) -> str:
     return result if result else "/"
 
 
-def _create_http_error_issue(url: str, status_code: int, retry_count: int = 0) -> None:
-    """Create a GitHub issue for a URL that returns an HTTP error.
+def _record_http_error(url: str, status_code: int) -> None:
+    """Record an HTTP error encountered during scanning.
 
-    Args:
-        url: The URL that failed
-        status_code: The HTTP status code (e.g., 404, 502)
-        retry_count: Number of retries attempted (0 if not retried)
+    Errors are collected in _HTTP_ERRORS and written to a file at the end of the
+    scan run by _dump_http_errors_to_file(). The file is then picked up by
+    handle_site_scan_output.py, which runs in a job with the necessary GitHub
+    permissions to open issues.
     """
     redacted_url = _strip_hostname_from_url(url)
-
-    # Check if issue already exists
-    if _matching_http_error_issue_exists(redacted_url, status_code):
-        click.echo(
-            f"Skipping issue creation - existing {status_code} issue for {redacted_url} already exists"
-        )
-        return
-
-    # Map status codes to error names and descriptions
-    error_info = {
-        404: {
-            "name": "Not Found",
-            "description": "Please verify if this URL should exist or be removed from the sitemap.",
-        },
-        502: {
-            "name": "Bad Gateway",
-            "description": "Please investigate the server issue.",
-        },
-        503: {
-            "name": "Service Unavailable",
-            "description": "Please investigate the server availability issue.",
-        },
-    }
-
-    info = error_info.get(
-        status_code,
+    _HTTP_ERRORS.append(
         {
-            "name": f"Error {status_code}",
-            "description": "Please investigate this HTTP error.",
-        },
+            "url": redacted_url,
+            "status_code": status_code,
+            "timestamp": datetime.datetime.now(datetime.UTC).isoformat(),
+        }
     )
-
-    try:
-        retry_text = f" after {retry_count} retries" if retry_count > 0 else ""
-        fingerprint = _get_hashed_value_for_http_error(redacted_url, status_code)
-
-        issue_title = f"{status_code} {info['name']} error on {redacted_url}"
-        issue_body = f"""A {status_code} {info["name"]} error occurred when attempting to scan this URL{retry_text}.
-
-**URL:** {redacted_url}
-
-**Error:** HTTP {status_code} {info["name"]}
-
-**Timestamp:** {datetime.datetime.now(datetime.UTC).isoformat()}Z
-
-This page was skipped during the scan. {info["description"]}
-
---
-
-Fingerprint: {fingerprint}"""
-
-        # Escape quotes in the issue body for shell command
-        issue_body_escaped = issue_body.replace('"', '\\"').replace("$", "\\$")
-
-        command = f'gh issue create --title "{issue_title}" --body "{issue_body_escaped}" --label "bug"'
-        result = subprocess.run(
-            command,
-            shell=True,
-            capture_output=True,
-            text=True,
-            check=True,
-        )
-        click.echo(f"Created issue for {status_code} error: {result.stdout.strip()}")
-    except subprocess.CalledProcessError as e:
-        click.echo(
-            f"Failed to create issue for {status_code} error on {url}: {e.stderr}"
-        )
-        sentry_sdk.capture_exception(e)
-    except Exception as e:
-        click.echo(
-            f"Unexpected error creating issue for {status_code} error on {url}: {e}"
-        )
-        sentry_sdk.capture_exception(e)
+    click.echo(
+        f"Recorded {status_code} error for {redacted_url} (issue will be opened after scan completes)"
+    )
 
 
 def _get_url_with_retry(
@@ -440,10 +350,10 @@ def _get_url_with_retry(
         ):
             status_code = re.response.status_code
 
-        # For 404 errors, don't retry - just create an issue and continue
+        # For 404 errors, don't retry - just record and continue
         if status_code == 404:
-            click.echo(f"404 Not Found error for {url}. Creating issue and continuing.")
-            _create_http_error_issue(url, status_code, retry_count=0)
+            click.echo(f"404 Not Found error for {url}. Recording for issue creation.")
+            _record_http_error(url, status_code)
             return None
 
         if try_count < limit:
@@ -457,11 +367,11 @@ def _get_url_with_retry(
         else:
             # Max retries reached
             if status_code in (502, 503):
-                # Create a GitHub issue for server errors and continue
+                # Record the server error for issue creation and continue
                 click.echo(
-                    f"Max retries ({URL_RETRY_LIMIT}) reached with {status_code} error for {url}. Creating issue and continuing."
+                    f"Max retries ({URL_RETRY_LIMIT}) reached with {status_code} error for {url}. Recording for issue creation."
                 )
-                _create_http_error_issue(url, status_code, retry_count=URL_RETRY_LIMIT)
+                _record_http_error(url, status_code)
                 return None
             else:
                 # For other errors, raise the exception
