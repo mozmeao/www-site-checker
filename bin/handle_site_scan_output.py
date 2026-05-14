@@ -18,7 +18,12 @@ import requests
 import ruamel.yaml
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
-from utils import _print, get_output_path, ping_slack
+
+# Awkward hack to allow importing into tests
+try:
+    from utils import _print, get_output_path, ping_slack
+except ImportError:
+    from .utils import _print, get_output_path, ping_slack
 
 GITHUB_ACTION = os.environ.get("GITHUB_ACTION", "NO-ACTION-IN-USE")
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
@@ -41,6 +46,7 @@ SITE_CHECKER_ISSUES_API_URL = os.environ.get(
 )
 
 UNEXPECTED_URLS_FILENAME_FRAGMENT = "unexpected_urls_for"
+HTTP_ERRORS_FILENAME_FRAGMENT = "http_errors_for"
 
 
 def _load_template(filepath):
@@ -105,6 +111,104 @@ def _is_valid_url(url: str) -> bool:
 
 def _get_hashed_value(iterable: List) -> str:
     return sha512("-".join(sorted(iterable)).encode("utf-8")).hexdigest()[:32]
+
+
+def _load_http_errors(output_path: str) -> List[Dict]:
+    """Load and deduplicate HTTP errors from all batch output files."""
+    seen: set = set()
+    errors = []
+    for filename in os.listdir(output_path):
+        if HTTP_ERRORS_FILENAME_FRAGMENT in filename and filename.endswith(".json"):
+            with open(os.path.join(output_path, filename)) as fp:
+                batch_errors = json.load(fp)
+            for error in batch_errors:
+                key = (error["url"], error["status_code"])
+                if key not in seen:
+                    seen.add(key)
+                    errors.append(error)
+    return errors
+
+
+_HTTP_ERROR_LABELS: Dict = {
+    404: (
+        "Not Found",
+        "Please verify if this URL should exist or be removed from the sitemap.",
+    ),
+    502: ("Bad Gateway", "Please investigate the server issue."),
+    503: ("Service Unavailable", "Please investigate the server availability issue."),
+}
+
+
+def _create_http_error_issues(http_errors: List[Dict], action_url: str) -> List[str]:
+    """Create one consolidated GitHub issue per HTTP status code for errors found during scanning.
+
+    A single issue is opened per status code (e.g. one for all 404s), listing every
+    affected URL. The fingerprint is derived from the full sorted set of URLs so that
+    an identical set of failures on the next run won't re-open an already-open issue.
+    """
+    if not http_errors:
+        return []
+
+    output = []
+    current_issues = _get_current_github_issues()
+
+    # Group errors by status code, deduplicating URLs across batches/servers
+    errors_by_status: Dict[int, set] = {}
+    for error in http_errors:
+        errors_by_status.setdefault(error["status_code"], set()).add(error["url"])
+
+    for status_code, url_set in errors_by_status.items():
+        urls = sorted(url_set)
+        fingerprint = _get_hashed_value(urls)
+
+        already_exists = any(
+            fingerprint in (issue.get("body") or "") for issue in current_issues
+        )
+        if already_exists:
+            _print(
+                f"Skipping issue creation - existing {status_code} issue for this URL set already exists"
+            )
+            continue
+
+        error_name, description = _HTTP_ERROR_LABELS.get(
+            status_code, (f"Error {status_code}", "Please investigate this HTTP error.")
+        )
+
+        url_list = "\n".join(f"- {url}" for url in urls)
+        issue_title = f"{len(urls)} URL(s) returning {status_code} {error_name} errors"
+        issue_body = f"""{len(urls)} URL(s) returned a {status_code} {error_name} error during the latest site scan.
+
+**Error:** HTTP {status_code} {error_name}
+
+**Affected URLs:**
+{url_list}
+
+{description}
+
+**Scan details and artifacts:** {action_url}
+
+--
+
+Fingerprint: {fingerprint}"""
+
+        _print(f"Opening consolidated issue for {len(urls)} {status_code} error(s)")
+        result = subprocess.check_output(
+            [
+                "gh",
+                "issue",
+                "create",
+                "--title",
+                issue_title,
+                "--body",
+                issue_body,
+                "--label",
+                "bug",
+            ],
+            stderr=subprocess.STDOUT,
+        )
+        output.append(result.decode())
+
+    return output
 
 
 def _get_current_github_prs() -> List:
@@ -175,11 +279,11 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
         return output
 
     # 0. Make a new branch
-    os.system(f'git config user.email "{MEAO_IDENTITY_EMAIL}"')
-    os.system('git config user.name "www-site-checker bot"')
+    subprocess.run(["git", "config", "user.email", MEAO_IDENTITY_EMAIL], check=True)
+    subprocess.run(["git", "config", "user.name", "www-site-checker bot"], check=True)
 
     branchname = f'update-{allowlist_path.replace("/","-")}--{branch_timestamp}'
-    os.system(f"git switch -c {branchname}")
+    subprocess.run(["git", "switch", "-c", branchname], check=True)
 
     # 1. Update the allowlist
     yaml = ruamel.yaml.YAML()
@@ -195,11 +299,14 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
 
     # 2. Commit it to git on the new branch
     # Only add the specific allowlist file to avoid committing unrelated changes
-    os.system(f'git add "{allowlist_path}"')
-    os.system(f'git commit -m "Automatic allowlist updates: {display_timestamp}"')
+    subprocess.run(["git", "add", allowlist_path], check=True)
+    subprocess.run(
+        ["git", "commit", "-m", f"Automatic allowlist updates: {display_timestamp}"],
+        check=True,
+    )
 
     # 3. Push the branch up to origin
-    os.system(f"git push origin {branchname}")
+    subprocess.run(["git", "push", "origin", branchname], check=True)
 
     # 4. Prepare the Pull Request
     pr_title = PR_TITLE_TEMPLATE.format(
@@ -209,13 +316,21 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
         unexpected_urls_structured=unexpected_urls_structured,
         fingerprint=_get_hashed_value(pr_candidates),
     )
-    new_pr_command = (
-        f'gh pr create --head {branchname} --title "{pr_title}" --body "{pr_body}"'
-    )
     _print("Opening PR")
     try:
         output = subprocess.check_output(
-            new_pr_command, stderr=subprocess.STDOUT, shell=True
+            [
+                "gh",
+                "pr",
+                "create",
+                "--head",
+                branchname,
+                "--title",
+                pr_title,
+                "--body",
+                pr_body,
+            ],
+            stderr=subprocess.STDOUT,
         )
     except subprocess.CalledProcessError as e:
         _print(f"Failed to create PR: {e.output.decode()}")
@@ -273,10 +388,20 @@ def _open_new_issues(issue_candidates: List[str]) -> List[str]:
             ),
             fingerprint=_get_hashed_value([problematic_url]),
         )
-        new_issue_command = f'gh issue create --title "{issue_title}" --body "{issue_body}" --label "bug"'
         _print("Opening new issue")
         result = subprocess.check_output(
-            new_issue_command, stderr=subprocess.STDOUT, shell=True
+            [
+                "gh",
+                "issue",
+                "create",
+                "--title",
+                issue_title,
+                "--body",
+                issue_body,
+                "--label",
+                "bug",
+            ],
+            stderr=subprocess.STDOUT,
         )
         output.append(result.decode())
 
@@ -318,23 +443,24 @@ def raise_prs_or_issues(output_path: str) -> Dict:
 
 
 def main():
-    """Look for a report of unexpected URLs found during the scan.
-    If we find one, alert via Slack.
+    """Look for reports of unexpected URLs or HTTP errors found during the scan.
+    If we find any, alert via Slack.
 
     Note that a separate Sentry ping is sent up when the unexpected
     URLs are found, so the Slack message isn't the only alert.
     """
     message = ""
     output_path = get_output_path()
-    artifact_found = False
+    unexpected_urls_found = False
+    http_errors_found = False
 
-    # Do we have any artifacts available? If we _don't_, that's good news
     for filename in os.listdir(output_path):
         if UNEXPECTED_URLS_FILENAME_FRAGMENT in filename:
-            artifact_found = True
-            break
+            unexpected_urls_found = True
+        if HTTP_ERRORS_FILENAME_FRAGMENT in filename and filename.endswith(".json"):
+            http_errors_found = True
 
-    if not artifact_found:
+    if not unexpected_urls_found and not http_errors_found:
         _print("No artifact detected")
         return
 
@@ -342,28 +468,59 @@ def main():
         f"{GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/actions/runs/{GITHUB_RUN_ID}/"
     )
 
-    try:
-        github_urls = raise_prs_or_issues(output_path)
-    except OSError as ose:
-        _msg = f"Problem raising new PR or Issue: {ose}.\nDetails and artifacts at at {_action_url}"
-        if "Artifact list too long" in str(ose):
-            _msg = f"Problem raising new PR or Issue - too many entries to handle in one go, so needs manual curation.\nDetails and artifacts at at {_action_url}"
+    github_urls: Dict = {"pr_url": "", "issue_urls": [], "http_error_issue_urls": []}
 
-        _print(_msg)
-        ping_slack(_msg)
-        # we want to fail hard here, because it needs looking at.
-        sys.exit(1)
+    if unexpected_urls_found:
+        try:
+            result = raise_prs_or_issues(output_path)
+            github_urls["pr_url"] = result.get("pr_url", "")
+            github_urls["issue_urls"] = result.get("issue_urls", [])
+        except OSError as ose:
+            _msg = f"Problem raising new PR or Issue: {ose}.\nDetails and artifacts at at {_action_url}"
+            if "Artifact list too long" in str(ose):
+                _msg = f"Problem raising new PR or Issue - too many entries to handle in one go, so needs manual curation.\nDetails and artifacts at at {_action_url}"
 
-    message = "Unexpected outbound URL found when scanning site content.\nDetails and output: {}".format(
-        _action_url
-    )
+            _print(_msg)
+            ping_slack(_msg)
+            # we want to fail hard here, because it needs looking at.
+            sys.exit(1)
+
+    if http_errors_found:
+        http_errors = _load_http_errors(output_path)
+        github_urls["http_error_issue_urls"] = _create_http_error_issues(
+            http_errors, _action_url
+        )
+
+    if unexpected_urls_found and http_errors_found:
+        message = "Unexpected outbound URL(s) and HTTP error(s) found when scanning site content.\nDetails and output: {}".format(
+            _action_url
+        )
+    elif unexpected_urls_found:
+        message = "Unexpected outbound URL found when scanning site content.\nDetails and output: {}".format(
+            _action_url
+        )
+    else:
+        message = "HTTP error(s) found when scanning site content.\nDetails and output: {}".format(
+            _action_url
+        )
+
     if github_urls.get("pr_url"):
         message += "\nPR to amend allowlist: {}".format(github_urls["pr_url"])
     if github_urls.get("issue_urls"):
         message += "\nIssue(s) opened: \n{}".format(
             "\n".join(github_urls["issue_urls"])
         )
-    if not github_urls.get("pr_url") and not github_urls.get("issue_urls"):
+    if github_urls.get("http_error_issue_urls"):
+        message += "\nHTTP error issue(s) opened: \n{}".format(
+            "\n".join(github_urls["http_error_issue_urls"])
+        )
+    if not any(
+        [
+            github_urls.get("pr_url"),
+            github_urls.get("issue_urls"),
+            github_urls.get("http_error_issue_urls"),
+        ]
+    ):
         message += "\nNB: No new Issues or PRs opened - there will be existing ones on www-site-checker"
 
     _print(message)
