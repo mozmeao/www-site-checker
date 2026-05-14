@@ -491,7 +491,11 @@ def main():
             http_errors, _action_url
         )
 
-    if unexpected_urls_found:
+    if unexpected_urls_found and http_errors_found:
+        message = "Unexpected outbound URL(s) and HTTP error(s) found when scanning site content.\nDetails and output: {}".format(
+            _action_url
+        )
+    elif unexpected_urls_found:
         message = "Unexpected outbound URL found when scanning site content.\nDetails and output: {}".format(
             _action_url
         )
