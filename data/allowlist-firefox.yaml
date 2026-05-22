@@ -367,3 +367,4 @@ allowed_outbound_url_literals:
   - https://web.dev/learn/privacy/fingerprinting
   - https://coveryourtracks.eff.org/
   - https://github.com/whatwg/html/issues/12304
+  - https://jpegxl.info/
