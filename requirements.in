@@ -11,7 +11,7 @@ PyYAML==6.0.3
 requests>=2.33.1
 ruamel.yaml==0.19.1
 sentry-sdk>=2.60.0
-slack_sdk>=3.39.0
+slack_sdk>=3.42.0
 sqlparse>=0.5.5
 urllib3>=2.7.0  # Security bump
 
