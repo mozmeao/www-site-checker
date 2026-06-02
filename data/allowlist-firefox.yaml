@@ -368,3 +368,4 @@ allowed_outbound_url_literals:
   - https://coveryourtracks.eff.org/
   - https://github.com/whatwg/html/issues/12304
   - https://jpegxl.info/
+  - https://en.wikipedia.org/wiki/Qualified_website_authentication_certificate
