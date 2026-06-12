@@ -2601,3 +2601,7 @@ allowed_outbound_url_literals:
   - https://datacollective.mozillafoundation.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-9
   - https://datacollective.mozillafoundation.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-13
   - https://datacollective.mozillafoundation.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-5
+  - https://www.cnbc.com/2026/01/27/mozilla-building-an-ai-rebel-alliance-to-take-on-openai-anthropic-.html
+  - https://newsletter.ownersnotrenters.com/
+  - https://octonous.com/
+  - https://blog.thunderbird.net/2025/04/thundermail-and-thunderbird-pro-services/
