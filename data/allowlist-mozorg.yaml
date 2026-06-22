@@ -2616,3 +2616,7 @@ allowed_outbound_url_literals:
   - https://blog.thunderbird.net/2025/04/thundermail-and-thunderbird-pro-services/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-11
   - https://blog.thunderbird.net/2025/04/thundermail-and-thunderbird-pro-services/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-6
   - https://blog.thunderbird.net/2025/04/thundermail-and-thunderbird-pro-services/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-13
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox&utm_source=https://mozmeao-www-error-page.netlify.app&utm_medium=referral
+  - https://play.google.com/store/apps/details?id=org.mozilla.fenix&utm_source=https://mozmeao-www-error-page.netlify.app&utm_medium=referral
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox_beta&utm_source=https://mozmeao-www-error-page.netlify.app&utm_medium=referral
+  - https://apps.apple.com/us/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=firefox-all&mt=8
