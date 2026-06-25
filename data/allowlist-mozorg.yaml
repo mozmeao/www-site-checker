@@ -2617,3 +2617,11 @@ allowed_outbound_url_literals:
   - https://blog.thunderbird.net/2025/04/thundermail-and-thunderbird-pro-services/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-6
   - https://blog.thunderbird.net/2025/04/thundermail-and-thunderbird-pro-services/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-13
   - https://apps.apple.com/us/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=firefox-all&mt=8
+  - https://mozilladatacollective.com/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=manifesto
+  - https://thunderbird.net/
+  - https://mozilladatacollective.com/
+  - https://www.mozilla.ai?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=manifesto
+  - https://mozilla.vc?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=manifesto
+  - https://github.com/mozilla?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=manifesto
+  - https://mozilla.org/
+  - https://www.instagram.com/team.ginger/
