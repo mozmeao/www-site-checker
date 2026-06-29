@@ -2625,3 +2625,16 @@ allowed_outbound_url_literals:
   - https://github.com/mozilla?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=manifesto
   - https://mozilla.org/
   - https://www.instagram.com/team.ginger/
+  - https://www.etsi.org/deliver/etsi_en/319400_319499/31941102/02.06.01_60/en_31941102v020501p.pdf
+  - https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.05.01_60/en_31941101v010401p.pdf
+  - https://www.ccadb.org/policy#52-audit-statement-content
+  - https://www.cpacanada.ca/-/media/site/operational/ep-education-pld/docs/01618-ms-24-3854_webtrust---smime-v1-0-8.pdf?rev=dcf8805708bd452e8eacabd5b3a6da36&hash=74691CF3D86A8798E82FDCD1F7A9AC90
+  - https://www.etsi.org/deliver/etsi_en/319400_319499/31941102/02.06.01_60/en_31941102v020601p.pdf
+  - https://www.ccadb.org/policy#53-audit-firm-and-audit-team-qualifications
+  - https://www.ccadb.org/policy#5-audit-disclosures
+  - https://www.cpacanada.ca/-/media/site/operational/ep-education-pld/docs/01618-ms-24-3854_webtrust---extended-validation-tls-v2-0-1.pdf?rev=4299171bd40b44058236d9cffffdd751&hash=235168A20251244ADE0490CEFA39A898
+  - https://www.cpacanada.ca/-/media/site/operational/ep-education-pld/docs/01618-ms-24-3852_webtrust---tls-baseline-v29.pdf?rev=e0678ebc91614665b1b2d0a25a50d9bf&hash=5837E2C482F5162302AA0A61A1EE6B38
+  - https://www.cpacanada.ca/-/media/site/operational/ms-member-services/docs/webtrust/01618-ms_webtrust_tls-baseline-v210.pdf?rev=9569e6d25b894b6a8ef89b2a58fc4115&hash=C71DB49770F1735E9C55DE3036E92B18
+  - https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.05.01_60/en_31941101v010501p.pdf
+  - https://www.cpacanada.ca/-/media/site/operational/ms-member-services/docs/webtrust/01618-ms_web-trust-network-security_version-2-0-5.pdf?rev=0ec68ce03b414276abfdc9aa85474093&hash=D02630C1D7B904701FE518EF863EE0E9
+  - https://www.etsi.org/committee/esi
