@@ -370,3 +370,6 @@ allowed_outbound_url_literals:
   - https://jpegxl.info/
   - https://en.wikipedia.org/wiki/Qualified_website_authentication_certificate
   - https://drafts.csswg.org/css-link-params-1/
+  - https://github.com/tc39/proposal-iterator-join
+  - https://www.rfc-editor.org/rfc/rfc9369
+  - https://www.rfc-editor.org/rfc/rfc9368
