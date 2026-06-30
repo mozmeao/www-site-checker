@@ -1,0 +1,80 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+# NB this workflow needs a cache of HTML documents, emitted by the main
+# site-scanning workflow for the CDN origin only
+
+name: "Check www.firefox.com for broken outbound links"
+
+permissions:
+  contents: read
+  actions: read  # needed to download artifacts from the completed workflow_run
+
+env:
+  SLACK_NOTIFICATION_WEBHOOK_URL: ${{ secrets.SLACK_NOTIFICATION_WEBHOOK_URL }}
+
+on: # zizmor: ignore[dangerous-triggers]
+  workflow_run:
+    workflows:
+      - www.firefox.com site scanning
+    types:
+      - completed
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.workflow_run.id }}
+  cancel-in-progress: true
+
+jobs:
+  check_outbound_links:
+    name: Check outbound links from cache
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read  # needed to download artifacts from the completed workflow_run
+      issues: write  # needed to file broken-link issues
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.13"
+      - name: Download page cache
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          script: |
+            let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: context.payload.workflow_run.id,
+            });
+            let matchedArtifacts = allArtifacts.data.artifacts.filter((artifact) => {
+              return artifact.name.includes('html-cache-firefox');
+            });
+            let fs = require('fs');
+            for (const [i, artifact] of matchedArtifacts.entries()) {
+              let download = await github.rest.actions.downloadArtifact({
+                 owner: context.repo.owner,
+                 repo: context.repo.repo,
+                 artifact_id: artifact.id,
+                 archive_format: 'zip',
+              });
+              fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/page_cache/html-cache_${i}.zip`, Buffer.from(download.data));
+            }
+      - name: Unzip page cache
+        run: |
+          cd page_cache
+          unzip -o '*.zip'
+          ls -la
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Check outbound links
+        env:
+          FXC_CDN_HOSTNAME: ${{ secrets.FXC_CDN_HOSTNAME }}
+          USER_AGENT: Mozilla/5.0 (Automated; https://github.com/mozmeao/www-site-checker) CheckerBot/1.0
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          python bin/check_links_in_cached_pages.py
+          --site-label=www.firefox.com
+          --in-scope-hostname="$FXC_CDN_HOSTNAME"
