@@ -373,3 +373,4 @@ allowed_outbound_url_literals:
   - https://github.com/tc39/proposal-iterator-join
   - https://www.rfc-editor.org/rfc/rfc9369
   - https://www.rfc-editor.org/rfc/rfc9368
+  - https://github.com/tc39/proposal-iterator-chunking
