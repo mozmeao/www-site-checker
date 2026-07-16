@@ -232,6 +232,7 @@ allowed_outbound_url_literals:
   - https://letsencrypt.org/
   - https://localmess.github.io/
   - https://mastodon.social/@FirefoxNightly
+  - https://mastodon.social/@FirefoxOfficial
   - https://matthew.noorenberghe.com/blog/2016/08/filling-saved-http-logins-over-https-same-domain
   - https://matthew.noorenberghe.com/blog/2019/05/password-manager-improvements-firefox-67
   - https://medium.com/@antlam/a-new-mobile-tabs-tray-327ac262eacb
