@@ -375,3 +375,4 @@ allowed_outbound_url_literals:
   - https://www.rfc-editor.org/rfc/rfc9368
   - https://github.com/tc39/proposal-iterator-chunking
   - https://groups.google.com/a/mozilla.org/g/firefox-dev/c/dXvMLkzyFqM
+  - https://mastodon.social/@FirefoxOfficial
