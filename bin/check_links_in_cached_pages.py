@@ -278,11 +278,12 @@ def _open_issue_for_status_code(
             "create",
             "--title",
             title,
-            "--body",
-            body,
+            "--body-file",
+            "-",
             "--label",
             "bug",
         ],
+        input=body.encode(),
         stderr=subprocess.STDOUT,
     )
     return result.decode().strip()

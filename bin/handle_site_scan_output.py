@@ -199,11 +199,12 @@ Fingerprint: {fingerprint}"""
                 "create",
                 "--title",
                 issue_title,
-                "--body",
-                issue_body,
+                "--body-file",
+                "-",
                 "--label",
                 "bug",
             ],
+            input=issue_body.encode(),
             stderr=subprocess.STDOUT,
         )
         output.append(result.decode())
@@ -327,9 +328,10 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
                 branchname,
                 "--title",
                 pr_title,
-                "--body",
-                pr_body,
+                "--body-file",
+                "-",
             ],
+            input=pr_body.encode(),
             stderr=subprocess.STDOUT,
         )
     except subprocess.CalledProcessError as e:
@@ -396,11 +398,12 @@ def _open_new_issues(issue_candidates: List[str]) -> List[str]:
                 "create",
                 "--title",
                 issue_title,
-                "--body",
-                issue_body,
+                "--body-file",
+                "-",
                 "--label",
                 "bug",
             ],
+            input=issue_body.encode(),
             stderr=subprocess.STDOUT,
         )
         output.append(result.decode())
