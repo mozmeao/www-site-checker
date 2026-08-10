@@ -15,6 +15,7 @@ status code (404 / 5xx) listing the dead links and the pages they appear on.
 import json
 import os
 import subprocess
+import tempfile
 import time
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -271,21 +272,23 @@ def _open_issue_for_status_code(
     )
 
     _print(f"Opening issue for {len(urls)} {status_code} error(s) on {site_label}")
-    result = subprocess.check_output(
-        [
-            "gh",
-            "issue",
-            "create",
-            "--title",
-            title,
-            "--body-file",
-            "-",
-            "--label",
-            "bug",
-        ],
-        input=body.encode(),
-        stderr=subprocess.STDOUT,
-    )
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".md") as f:
+        f.write(body)
+        f.flush()
+        result = subprocess.check_output(
+            [
+                "gh",
+                "issue",
+                "create",
+                "--title",
+                title,
+                "--body-file",
+                f.name,
+                "--label",
+                "bug",
+            ],
+            stderr=subprocess.STDOUT,
+        )
     return result.decode().strip()
 
 

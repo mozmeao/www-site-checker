@@ -10,6 +10,7 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 from hashlib import sha512
 from typing import Dict, List
 
@@ -192,21 +193,23 @@ def _create_http_error_issues(http_errors: List[Dict], action_url: str) -> List[
 Fingerprint: {fingerprint}"""
 
         _print(f"Opening consolidated issue for {len(urls)} {status_code} error(s)")
-        result = subprocess.check_output(
-            [
-                "gh",
-                "issue",
-                "create",
-                "--title",
-                issue_title,
-                "--body-file",
-                "-",
-                "--label",
-                "bug",
-            ],
-            input=issue_body.encode(),
-            stderr=subprocess.STDOUT,
-        )
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".md") as f:
+            f.write(issue_body)
+            f.flush()
+            result = subprocess.check_output(
+                [
+                    "gh",
+                    "issue",
+                    "create",
+                    "--title",
+                    issue_title,
+                    "--body-file",
+                    f.name,
+                    "--label",
+                    "bug",
+                ],
+                stderr=subprocess.STDOUT,
+            )
         output.append(result.decode())
 
     return output
@@ -319,21 +322,23 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     )
     _print("Opening PR")
     try:
-        output = subprocess.check_output(
-            [
-                "gh",
-                "pr",
-                "create",
-                "--head",
-                branchname,
-                "--title",
-                pr_title,
-                "--body-file",
-                "-",
-            ],
-            input=pr_body.encode(),
-            stderr=subprocess.STDOUT,
-        )
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".md") as f:
+            f.write(pr_body)
+            f.flush()
+            output = subprocess.check_output(
+                [
+                    "gh",
+                    "pr",
+                    "create",
+                    "--head",
+                    branchname,
+                    "--title",
+                    pr_title,
+                    "--body-file",
+                    f.name,
+                ],
+                stderr=subprocess.STDOUT,
+            )
     except subprocess.CalledProcessError as e:
         _print(f"Failed to create PR: {e.output.decode()}")
         sys.exit(e.returncode)
@@ -391,21 +396,23 @@ def _open_new_issues(issue_candidates: List[str]) -> List[str]:
             fingerprint=_get_hashed_value([problematic_url]),
         )
         _print("Opening new issue")
-        result = subprocess.check_output(
-            [
-                "gh",
-                "issue",
-                "create",
-                "--title",
-                issue_title,
-                "--body-file",
-                "-",
-                "--label",
-                "bug",
-            ],
-            input=issue_body.encode(),
-            stderr=subprocess.STDOUT,
-        )
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".md") as f:
+            f.write(issue_body)
+            f.flush()
+            result = subprocess.check_output(
+                [
+                    "gh",
+                    "issue",
+                    "create",
+                    "--title",
+                    issue_title,
+                    "--body-file",
+                    f.name,
+                    "--label",
+                    "bug",
+                ],
+                stderr=subprocess.STDOUT,
+            )
         output.append(result.decode())
 
     return output
