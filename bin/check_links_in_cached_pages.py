@@ -207,6 +207,9 @@ def _get_current_github_issues() -> List:
 
 
 GITHUB_BODY_LIMIT = 65536
+# Worst-case suffix added to fingerprint and title when chunking: "-99 (part 99 of 99)"
+_CHUNK_SIZING_FINGERPRINT_SUFFIX = "-99"
+_CHUNK_SIZING_TITLE_SUFFIX = " (part 99 of 99)"
 
 
 def _build_issue_body(
@@ -216,12 +219,25 @@ def _build_issue_body(
     action_url: str,
     in_scope_hostname: str,
     fingerprint: str,
+    chunk_label: str = "",
 ) -> str:
     label = ERROR_STATUS_LABELS.get(status_code, f"HTTP {status_code}")
     urls = sorted({r["url"] for r in error_records})
     pages_by_url = {r["url"]: r["containing_pages"] for r in error_records}
 
-    footer = [
+    lines = [
+        f"{len(urls)} outbound link(s) returned {status_code} {label} when checked "
+        f"from the cached HTML for **{site_label}**{chunk_label}.",
+        "",
+        "**Affected URLs:**",
+    ]
+    for url in urls:
+        lines.append(f"- {url}")
+        lines.append("  Found on:")
+        for page_url in pages_by_url.get(url, []):
+            redacted = _redact_page_url(page_url, in_scope_hostname)
+            lines.append(f"  - {redacted}")
+    lines += [
         "",
         f"**Scan details and artifacts:** {action_url}",
         "",
@@ -229,48 +245,42 @@ def _build_issue_body(
         "",
         f"Fingerprint: {fingerprint}",
     ]
-    header = [
-        f"{len(urls)} outbound link(s) returned {status_code} {label} when checked "
-        f"from the cached HTML for **{site_label}**.",
-        "",
-        "**Affected URLs:**",
-    ]
+    return "\n".join(lines)
 
-    # Full body with "Found on" pages
-    url_lines = []
-    for url in urls:
-        url_lines.append(f"- {url}")
-        url_lines.append("  Found on:")
-        for page_url in pages_by_url.get(url, []):
-            redacted = _redact_page_url(page_url, in_scope_hostname)
-            url_lines.append(f"  - {redacted}")
-    body = "\n".join(header + url_lines + footer)
-    if len(body) <= GITHUB_BODY_LIMIT:
-        return body
 
-    # Drop "Found on" detail to save space
-    url_lines = [f"- {url}" for url in urls]
-    body = "\n".join(
-        header + ["_(Found-on details omitted — body too long)_"] + url_lines + footer
-    )
-    if len(body) <= GITHUB_BODY_LIMIT:
-        return body
+def _chunk_error_records(
+    error_records: List[Dict],
+    site_label: str,
+    status_code: int,
+    action_url: str,
+    in_scope_hostname: str,
+    base_fingerprint: str,
+) -> List[List[Dict]]:
+    """Split records into chunks whose bodies each fit within GITHUB_BODY_LIMIT."""
+    sizing_fp = base_fingerprint + _CHUNK_SIZING_FINGERPRINT_SUFFIX
+    sizing_label = _CHUNK_SIZING_TITLE_SUFFIX
 
-    # Truncate the URL list to fit
-    footer_len = len("\n".join(footer)) + 1
-    note = "_(list truncated — see scan artifacts for full results)_"
-    budget = GITHUB_BODY_LIMIT - len("\n".join(header)) - len(note) - footer_len - 3
-    included = []
-    for url in urls:
-        line = f"- {url}"
-        if budget - len(line) - 1 < 0:
-            break
-        included.append(line)
-        budget -= len(line) + 1
-    omitted = len(urls) - len(included)
-    if omitted:
-        note = f"_(showing {len(included)} of {len(urls)} URLs — see scan artifacts for full results)_"
-    return "\n".join(header + [note] + included + footer)
+    chunks: List[List[Dict]] = []
+    current: List[Dict] = []
+    for record in sorted(error_records, key=lambda r: r["url"]):
+        candidate = current + [record]
+        body = _build_issue_body(
+            site_label,
+            status_code,
+            candidate,
+            action_url,
+            in_scope_hostname,
+            sizing_fp,
+            sizing_label,
+        )
+        if len(body) > GITHUB_BODY_LIMIT and current:
+            chunks.append(current)
+            current = [record]
+        else:
+            current = candidate
+    if current:
+        chunks.append(current)
+    return chunks
 
 
 def _open_issue_for_status_code(
@@ -280,48 +290,72 @@ def _open_issue_for_status_code(
     action_url: str,
     in_scope_hostname: str,
     current_issues: List[Dict],
-) -> Optional[str]:
+) -> List[str]:
     urls = sorted({r["url"] for r in error_records})
-    fingerprint = _site_scoped_fingerprint(site_label, urls)
-
-    if any(fingerprint in (issue.get("body") or "") for issue in current_issues):
-        _print(
-            f"Skipping {status_code} issue for {site_label}: fingerprint already in an open issue"
-        )
-        return None
-
+    base_fingerprint = _site_scoped_fingerprint(site_label, urls)
     label = ERROR_STATUS_LABELS.get(status_code, f"HTTP {status_code}")
-    title = (
-        f"{site_label}: {len(urls)} outbound link(s) returning {status_code} {label}"
-    )
-    body = _build_issue_body(
-        site_label=site_label,
-        status_code=status_code,
-        error_records=error_records,
-        action_url=action_url,
-        in_scope_hostname=in_scope_hostname,
-        fingerprint=fingerprint,
-    )
 
-    _print(f"Opening issue for {len(urls)} {status_code} error(s) on {site_label}")
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".md") as f:
-        f.write(body)
-        f.flush()
-        result = subprocess.check_output(
-            [
-                "gh",
-                "issue",
-                "create",
-                "--title",
-                title,
-                "--body-file",
-                f.name,
-                "--label",
-                "bug",
-            ],
-            stderr=subprocess.STDOUT,
+    chunks = _chunk_error_records(
+        error_records,
+        site_label,
+        status_code,
+        action_url,
+        in_scope_hostname,
+        base_fingerprint,
+    )
+    total = len(chunks)
+
+    opened = []
+    for i, chunk_records in enumerate(chunks, start=1):
+        fingerprint = base_fingerprint if total == 1 else f"{base_fingerprint}-{i}"
+        chunk_label = "" if total == 1 else f" (part {i} of {total})"
+
+        if any(fingerprint in (issue.get("body") or "") for issue in current_issues):
+            _print(
+                f"Skipping {status_code} issue{chunk_label} for {site_label}: "
+                "fingerprint already in an open issue"
+            )
+            continue
+
+        chunk_urls = sorted({r["url"] for r in chunk_records})
+        title = (
+            f"{site_label}: {len(chunk_urls)} outbound link(s) "
+            f"returning {status_code} {label}{chunk_label}"
         )
-    return result.decode().strip()
+        body = _build_issue_body(
+            site_label,
+            status_code,
+            chunk_records,
+            action_url,
+            in_scope_hostname,
+            fingerprint,
+            chunk_label,
+        )
+
+        _print(
+            f"Opening issue for {len(chunk_urls)} {status_code} "
+            f"error(s) on {site_label}{chunk_label}"
+        )
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".md") as f:
+            f.write(body)
+            f.flush()
+            result = subprocess.check_output(
+                [
+                    "gh",
+                    "issue",
+                    "create",
+                    "--title",
+                    title,
+                    "--body-file",
+                    f.name,
+                    "--label",
+                    "bug",
+                ],
+                stderr=subprocess.STDOUT,
+            )
+        opened.append(result.decode().strip())
+
+    return opened
 
 
 @click.command()
@@ -392,16 +426,16 @@ def main(
     current_issues = _get_current_github_issues()
     opened: List[str] = []
     for status, records in sorted(errors_by_status.items()):
-        issue_url = _open_issue_for_status_code(
-            site_label=site_label,
-            status_code=status,
-            error_records=records,
-            action_url=action_url,
-            in_scope_hostname=in_scope_hostname,
-            current_issues=current_issues,
+        opened.extend(
+            _open_issue_for_status_code(
+                site_label=site_label,
+                status_code=status,
+                error_records=records,
+                action_url=action_url,
+                in_scope_hostname=in_scope_hostname,
+                current_issues=current_issues,
+            )
         )
-        if issue_url:
-            opened.append(issue_url)
 
     message_parts = [
         f"Broken outbound link(s) found while scanning {site_label}.",
