@@ -206,6 +206,9 @@ def _get_current_github_issues() -> List:
         return []
 
 
+GITHUB_BODY_LIMIT = 65536
+
+
 def _build_issue_body(
     site_label: str,
     status_code: int,
@@ -218,19 +221,7 @@ def _build_issue_body(
     urls = sorted({r["url"] for r in error_records})
     pages_by_url = {r["url"]: r["containing_pages"] for r in error_records}
 
-    lines = [
-        f"{len(urls)} outbound link(s) returned {status_code} {label} when checked "
-        f"from the cached HTML for **{site_label}**.",
-        "",
-        "**Affected URLs:**",
-    ]
-    for url in urls:
-        lines.append(f"- {url}")
-        lines.append("  Found on:")
-        for page_url in pages_by_url.get(url, []):
-            redacted = _redact_page_url(page_url, in_scope_hostname)
-            lines.append(f"  - {redacted}")
-    lines += [
+    footer = [
         "",
         f"**Scan details and artifacts:** {action_url}",
         "",
@@ -238,7 +229,48 @@ def _build_issue_body(
         "",
         f"Fingerprint: {fingerprint}",
     ]
-    return "\n".join(lines)
+    header = [
+        f"{len(urls)} outbound link(s) returned {status_code} {label} when checked "
+        f"from the cached HTML for **{site_label}**.",
+        "",
+        "**Affected URLs:**",
+    ]
+
+    # Full body with "Found on" pages
+    url_lines = []
+    for url in urls:
+        url_lines.append(f"- {url}")
+        url_lines.append("  Found on:")
+        for page_url in pages_by_url.get(url, []):
+            redacted = _redact_page_url(page_url, in_scope_hostname)
+            url_lines.append(f"  - {redacted}")
+    body = "\n".join(header + url_lines + footer)
+    if len(body) <= GITHUB_BODY_LIMIT:
+        return body
+
+    # Drop "Found on" detail to save space
+    url_lines = [f"- {url}" for url in urls]
+    body = "\n".join(
+        header + ["_(Found-on details omitted — body too long)_"] + url_lines + footer
+    )
+    if len(body) <= GITHUB_BODY_LIMIT:
+        return body
+
+    # Truncate the URL list to fit
+    footer_len = len("\n".join(footer)) + 1
+    note = "_(list truncated — see scan artifacts for full results)_"
+    budget = GITHUB_BODY_LIMIT - len("\n".join(header)) - len(note) - footer_len - 3
+    included = []
+    for url in urls:
+        line = f"- {url}"
+        if budget - len(line) - 1 < 0:
+            break
+        included.append(line)
+        budget -= len(line) + 1
+    omitted = len(urls) - len(included)
+    if omitted:
+        note = f"_(showing {len(included)} of {len(urls)} URLs — see scan artifacts for full results)_"
+    return "\n".join(header + [note] + included + footer)
 
 
 def _open_issue_for_status_code(
@@ -272,27 +304,23 @@ def _open_issue_for_status_code(
     )
 
     _print(f"Opening issue for {len(urls)} {status_code} error(s) on {site_label}")
-    try:
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".md") as f:
-            f.write(body)
-            f.flush()
-            result = subprocess.check_output(
-                [
-                    "gh",
-                    "issue",
-                    "create",
-                    "--title",
-                    title,
-                    "--body-file",
-                    f.name,
-                    "--label",
-                    "bug",
-                ],
-                stderr=subprocess.STDOUT,
-            )
-    except subprocess.CalledProcessError as e:
-        _print(f"gh issue create failed: {e.output.decode()}")
-        raise
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".md") as f:
+        f.write(body)
+        f.flush()
+        result = subprocess.check_output(
+            [
+                "gh",
+                "issue",
+                "create",
+                "--title",
+                title,
+                "--body-file",
+                f.name,
+                "--label",
+                "bug",
+            ],
+            stderr=subprocess.STDOUT,
+        )
     return result.decode().strip()
 
 
