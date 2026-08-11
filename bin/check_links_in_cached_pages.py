@@ -272,23 +272,27 @@ def _open_issue_for_status_code(
     )
 
     _print(f"Opening issue for {len(urls)} {status_code} error(s) on {site_label}")
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".md") as f:
-        f.write(body)
-        f.flush()
-        result = subprocess.check_output(
-            [
-                "gh",
-                "issue",
-                "create",
-                "--title",
-                title,
-                "--body-file",
-                f.name,
-                "--label",
-                "bug",
-            ],
-            stderr=subprocess.STDOUT,
-        )
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".md") as f:
+            f.write(body)
+            f.flush()
+            result = subprocess.check_output(
+                [
+                    "gh",
+                    "issue",
+                    "create",
+                    "--title",
+                    title,
+                    "--body-file",
+                    f.name,
+                    "--label",
+                    "bug",
+                ],
+                stderr=subprocess.STDOUT,
+            )
+    except subprocess.CalledProcessError as e:
+        _print(f"gh issue create failed: {e.output.decode()}")
+        raise
     return result.decode().strip()
 
 
