@@ -226,6 +226,11 @@ def _create_broken_links_gist(
     desc = (
         f"{len(error_records)} URL(s) returning {status_code} {label} on {site_label}"
     )
+    if not GIST_TOKEN:
+        raise RuntimeError(
+            "GIST_TOKEN environment variable is not set. "
+            "A GitHub PAT with the 'gist' scope is required to create gists."
+        )
     resp = requests.post(
         GITHUB_GISTS_API_URL,
         headers={
