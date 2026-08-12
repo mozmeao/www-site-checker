@@ -225,19 +225,13 @@ def _build_issue_body(
     urls = sorted({r["url"] for r in error_records})
     pages_by_url = {r["url"]: r["containing_pages"] for r in error_records}
 
-    lines = [
+    header = [
         f"{len(urls)} outbound link(s) returned {status_code} {label} when checked "
         f"from the cached HTML for **{site_label}**{chunk_label}.",
         "",
         "**Affected URLs:**",
     ]
-    for url in urls:
-        lines.append(f"- {url}")
-        lines.append("  Found on:")
-        for page_url in pages_by_url.get(url, []):
-            redacted = _redact_page_url(page_url, in_scope_hostname)
-            lines.append(f"  - {redacted}")
-    lines += [
+    footer = [
         "",
         f"**Scan details and artifacts:** {action_url}",
         "",
@@ -245,7 +239,42 @@ def _build_issue_body(
         "",
         f"Fingerprint: {fingerprint}",
     ]
-    return "\n".join(lines)
+    # Budget available for URL + Found-on lines (each line joined by "\n")
+    budget = GITHUB_BODY_LIMIT - len("\n".join(header)) - len("\n".join(footer)) - 2
+
+    url_lines: List[str] = []
+    for url in urls:
+        url_line = f"- {url}"
+        found_on_header = "  Found on:"
+        pages = pages_by_url.get(url, [])
+        page_lines = [f"  - {_redact_page_url(p, in_scope_hostname)}" for p in pages]
+
+        candidate = [url_line, found_on_header] + page_lines
+        candidate_len = sum(len(line) + 1 for line in candidate)
+
+        if candidate_len <= budget:
+            url_lines.extend(candidate)
+            budget -= candidate_len
+        else:
+            # Include the URL and as many Found-on lines as fit, noting omissions
+            url_lines.append(url_line)
+            budget -= len(url_line) + 1
+            url_lines.append(found_on_header)
+            budget -= len(found_on_header) + 1
+            included = 0
+            for pl in page_lines:
+                if budget - len(pl) - 1 < 0:
+                    break
+                url_lines.append(pl)
+                budget -= len(pl) + 1
+                included += 1
+            omitted = len(page_lines) - included
+            if omitted:
+                note = f"  - _({omitted} more page(s) not shown)_"
+                url_lines.append(note)
+                budget -= len(note) + 1
+
+    return "\n".join(header + url_lines + footer)
 
 
 def _chunk_error_records(
