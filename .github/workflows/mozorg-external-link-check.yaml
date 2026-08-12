@@ -76,6 +76,7 @@ jobs:
           MOZORG_CDN_HOSTNAME: ${{ secrets.MOZORG_CDN_HOSTNAME }}
           USER_AGENT: Mozilla/5.0 (Automated; https://github.com/mozmeao/www-site-checker) CheckerBot/1.0
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
         run: >
           python bin/check_links_in_cached_pages.py
           --site-label=www.mozilla.org
