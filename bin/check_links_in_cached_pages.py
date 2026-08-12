@@ -37,13 +37,12 @@ GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 GITHUB_SERVER_URL = os.environ.get("GITHUB_SERVER_URL", "NO-GITHUB")
 GITHUB_RUN_ID = os.environ.get("GITHUB_RUN_ID", "NO-RUN-NUMBER")
 USER_AGENT = os.environ.get("USER_AGENT")
-GIST_TOKEN = os.environ.get("GIST_TOKEN")
+BROKEN_LINKS_OUTPUT_DIR = os.environ.get("BROKEN_LINKS_OUTPUT_DIR", "/tmp")
 
 SITE_CHECKER_ISSUES_API_URL = os.environ.get(
     "SITE_CHECKER_ISSUES_API_URL",
     "https://api.github.com/repos/mozmeao/www-site-checker/issues",
 )
-GITHUB_GISTS_API_URL = "https://api.github.com/gists"
 
 PAGE_CACHE_DIR = "page_cache"
 REQUEST_TIMEOUT_SECONDS = 15
@@ -208,43 +207,26 @@ def _get_current_github_issues() -> List:
         return []
 
 
-def _create_broken_links_gist(
+def _write_broken_links_csv(
     site_label: str,
     status_code: int,
     error_records: List[Dict],
     in_scope_hostname: str,
 ) -> str:
-    """Upload a CSV of broken links to a secret GitHub gist and return the gist URL."""
-    label = ERROR_STATUS_LABELS.get(status_code, f"HTTP {status_code}")
+    """Write a CSV of broken links to BROKEN_LINKS_OUTPUT_DIR and return the path."""
     csv_lines = ["url,status_code,found_on_page"]
     for record in sorted(error_records, key=lambda r: r["url"]):
         for page in record["containing_pages"]:
             redacted = _redact_page_url(page, in_scope_hostname)
             csv_lines.append(f'"{record["url"]}",{status_code},"{redacted}"')
 
-    filename = f"broken-links-{site_label}-{status_code}.csv"
-    desc = (
-        f"{len(error_records)} URL(s) returning {status_code} {label} on {site_label}"
+    os.makedirs(BROKEN_LINKS_OUTPUT_DIR, exist_ok=True)
+    path = os.path.join(
+        BROKEN_LINKS_OUTPUT_DIR, f"broken-links-{site_label}-{status_code}.csv"
     )
-    if not GIST_TOKEN:
-        raise RuntimeError(
-            "GIST_TOKEN environment variable is not set. "
-            "A GitHub PAT with the 'gist' scope is required to create gists."
-        )
-    resp = requests.post(
-        GITHUB_GISTS_API_URL,
-        headers={
-            "Authorization": f"Bearer {GIST_TOKEN}",
-            "Accept": "application/vnd.github+json",
-        },
-        json={
-            "description": desc,
-            "public": False,
-            "files": {filename: {"content": "\n".join(csv_lines)}},
-        },
-    )
-    resp.raise_for_status()
-    return resp.json()["html_url"]
+    with open(path, "w") as f:
+        f.write("\n".join(csv_lines))
+    return path
 
 
 def _build_issue_body(
@@ -252,7 +234,6 @@ def _build_issue_body(
     status_code: int,
     error_records: List[Dict],
     action_url: str,
-    gist_url: str,
     fingerprint: str,
 ) -> str:
     label = ERROR_STATUS_LABELS.get(status_code, f"HTTP {status_code}")
@@ -262,7 +243,8 @@ def _build_issue_body(
             f"{n} outbound link(s) returned {status_code} {label} when checked "
             f"from the cached HTML for **{site_label}**.",
             "",
-            f"Full list of affected URLs (with pages they were found on): {gist_url}",
+            "Full list of affected URLs (with pages they were found on) is attached "
+            "as a CSV artifact on the scan run.",
             "",
             f"**Scan details and artifacts:** {action_url}",
             "",
@@ -292,16 +274,14 @@ def _open_issue_for_status_code(
         return None
 
     label = ERROR_STATUS_LABELS.get(status_code, f"HTTP {status_code}")
-    _print(f"Creating gist for {len(urls)} {status_code} error(s) on {site_label}")
-    gist_url = _create_broken_links_gist(
-        site_label, status_code, error_records, in_scope_hostname
-    )
+    _print(f"Writing CSV for {len(urls)} {status_code} error(s) on {site_label}")
+    _write_broken_links_csv(site_label, status_code, error_records, in_scope_hostname)
 
     title = (
         f"{site_label}: {len(urls)} outbound link(s) returning {status_code} {label}"
     )
     body = _build_issue_body(
-        site_label, status_code, error_records, action_url, gist_url, fingerprint
+        site_label, status_code, error_records, action_url, fingerprint
     )
 
     _print(f"Opening issue for {len(urls)} {status_code} error(s) on {site_label}")

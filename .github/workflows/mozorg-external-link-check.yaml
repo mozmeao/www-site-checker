@@ -76,8 +76,15 @@ jobs:
           MOZORG_CDN_HOSTNAME: ${{ secrets.MOZORG_CDN_HOSTNAME }}
           USER_AGENT: Mozilla/5.0 (Automated; https://github.com/mozmeao/www-site-checker) CheckerBot/1.0
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+          BROKEN_LINKS_OUTPUT_DIR: ${{ github.workspace }}/broken-links-output
         run: >
           python bin/check_links_in_cached_pages.py
           --site-label=www.mozilla.org
           --in-scope-hostname="$MOZORG_CDN_HOSTNAME"
+      - name: Upload broken-links CSV
+        if: always()
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        with:
+          name: broken-links-mozorg
+          path: broken-links-output/
+          if-no-files-found: ignore
