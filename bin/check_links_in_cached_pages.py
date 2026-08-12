@@ -16,6 +16,7 @@ import json
 import os
 import subprocess
 import tempfile
+import threading
 import time
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -49,6 +50,7 @@ REQUEST_TIMEOUT_SECONDS = 15
 RETRY_WAIT_SECONDS = 4
 MAX_RETRIES_FOR_5XX = 1
 DEFAULT_CONCURRENCY = 10
+MAX_CONCURRENCY_PER_DOMAIN = 2
 
 # Hrefs we never try to fetch
 SKIP_SCHEMES = ("mailto:", "tel:", "javascript:", "data:", "ftp:")
@@ -174,9 +176,18 @@ def _check_links_concurrently(
     concurrency: int,
 ) -> List[Dict]:
     """Check every link in parallel; return one record per reportable error."""
+    domain_semaphores: Dict[str, threading.Semaphore] = defaultdict(
+        lambda: threading.Semaphore(MAX_CONCURRENCY_PER_DOMAIN)
+    )
+
+    def check_with_throttle(url: str) -> Optional[int]:
+        hostname = urlparse(url).hostname or url
+        with domain_semaphores[hostname]:
+            return _check_url(url)
+
     errors: List[Dict] = []
     with ThreadPoolExecutor(max_workers=concurrency) as pool:
-        futures = {pool.submit(_check_url, url): url for url in links}
+        futures = {pool.submit(check_with_throttle, url): url for url in links}
         for future in as_completed(futures):
             url = futures[future]
             status = future.result()
