@@ -377,3 +377,13 @@ allowed_outbound_url_literals:
   - https://github.com/tc39/proposal-iterator-chunking
   - https://groups.google.com/a/mozilla.org/g/firefox-dev/c/dXvMLkzyFqM
   - https://datatracker.ietf.org/doc/rfc9842/
+  - https://www.rfc-editor.org/rfc/rfc9368.html
+  - https://www.geforcenow.com/
+  - https://mozilla.formstack.com/forms/enterprise_pre_launch_list
+  - https://www.reddit.com/r/firefox/comments/1f32tn8/mozilla_is_working_on_redesigning_the_settings/
+  - https://mozilla.formstack.com/forms/enterprise_pre_launch_list_de
+  - https://www.rfc-editor.org/rfc/rfc9369.html
+  - https://www.youtube.com/@trevornoah
+  - https://www.fastly.com/
+  - https://circuitpython.org/
+  - https://firefox.com/smart-window
