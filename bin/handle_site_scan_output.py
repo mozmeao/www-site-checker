@@ -30,6 +30,7 @@ GITHUB_ACTION = os.environ.get("GITHUB_ACTION", "NO-ACTION-IN-USE")
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 GITHUB_SERVER_URL = os.environ.get("GITHUB_SERVER_URL", "NO-GITHUB")
 GITHUB_RUN_ID = os.environ.get("GITHUB_RUN_ID", "NO-RUN-NUMBER")
+GH_TOKEN = os.environ.get("GH_TOKEN", "")
 
 RELATIVE_URL_REGEX = re.compile(r"^[^\/]+\/[^\/].*$|^\/[^\/].*$")
 
@@ -215,14 +216,32 @@ Fingerprint: {fingerprint}"""
     return output
 
 
+def _gh_get_all_pages(url: str) -> List:
+    """Authenticated, paginated GET against a GitHub REST list endpoint."""
+    headers = {"Authorization": f"Bearer {GH_TOKEN}"} if GH_TOKEN else {}
+    results: List = []
+    page = 1
+    while True:
+        resp = requests.get(
+            url, headers=headers, params={"per_page": 100, "page": page}
+        )
+        resp.raise_for_status()
+        batch = resp.json()
+        if not batch:
+            break
+        results.extend(batch)
+        page += 1
+    return results
+
+
 def _get_current_github_prs() -> List:
-    return json.loads(requests.get(SITE_CHECKER_PULL_REQUESTS_API_URL).content)
+    return _gh_get_all_pages(SITE_CHECKER_PULL_REQUESTS_API_URL)
 
 
 def _get_current_github_issues() -> List:
     # NB /issues also returns pull requests
     # https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-repository-issues
-    return json.loads(requests.get(SITE_CHECKER_ISSUES_API_URL).content)
+    return _gh_get_all_pages(SITE_CHECKER_ISSUES_API_URL)
 
 
 def _matching_github_entity_exists(

@@ -12,7 +12,6 @@ every <a>/<script>/<link> URL, fetches each one, and opens a GitHub issue per
 status code (404 / 5xx) listing the dead links and the pages they appear on.
 """
 
-import json
 import os
 import subprocess
 import tempfile
@@ -38,6 +37,7 @@ GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 GITHUB_SERVER_URL = os.environ.get("GITHUB_SERVER_URL", "NO-GITHUB")
 GITHUB_RUN_ID = os.environ.get("GITHUB_RUN_ID", "NO-RUN-NUMBER")
 USER_AGENT = os.environ.get("USER_AGENT")
+GH_TOKEN = os.environ.get("GH_TOKEN", "")
 BROKEN_LINKS_OUTPUT_DIR = os.environ.get("BROKEN_LINKS_OUTPUT_DIR", "/tmp")
 
 SITE_CHECKER_ISSUES_API_URL = os.environ.get(
@@ -210,12 +210,25 @@ def _site_scoped_fingerprint(site_label: str, urls: List[str]) -> str:
 
 
 def _get_current_github_issues() -> List:
+    headers = {"Authorization": f"Bearer {GH_TOKEN}"} if GH_TOKEN else {}
+    issues: List = []
+    page = 1
     try:
-        resp = requests.get(SITE_CHECKER_ISSUES_API_URL)
-        return json.loads(resp.content)
-    except (requests.RequestException, json.JSONDecodeError) as exc:
+        while True:
+            resp = requests.get(
+                SITE_CHECKER_ISSUES_API_URL,
+                headers=headers,
+                params={"per_page": 100, "page": page, "state": "open"},
+            )
+            resp.raise_for_status()
+            batch = resp.json()
+            if not batch:
+                break
+            issues.extend(batch)
+            page += 1
+    except (requests.RequestException, ValueError) as exc:
         _print(f"could not fetch current issues: {exc}")
-        return []
+    return issues
 
 
 def _write_broken_links_csv(
