@@ -86,7 +86,7 @@ def _assemble_results(output_path: str) -> set:
 
     # assume we have multiple output files, all scanning different sources of the website data
     for filename in os.listdir(output_path):
-        if filename.endswith(".json"):
+        if filename.endswith("_structured.json"):
             unexpected_url_data.update(
                 _load_results_json(os.path.join(output_path, filename))
             )
