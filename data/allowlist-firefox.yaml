@@ -387,3 +387,6 @@ allowed_outbound_url_literals:
   - https://www.fastly.com/
   - https://circuitpython.org/
   - https://firefox.com/smart-window
+  - https://datatracker.ietf.org/doc/draft-ietf-happy-happyeyeballs-v3/
+  - https://www.nvidia.com/fr-fr/geforce-now/
+  - https://www.nvidia.com/de-de/geforce-now/
