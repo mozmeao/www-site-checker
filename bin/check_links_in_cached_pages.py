@@ -202,11 +202,10 @@ def _check_links_concurrently(
     return errors
 
 
-def _site_scoped_fingerprint(site_label: str, urls: List[str]) -> str:
-    """Hash that scopes dedup to one site so a 404 on example.org/dead found
-    by mozorg doesn't suppress the same finding on firefox.com."""
-    parts = [site_label] + sorted(urls)
-    return sha512("-".join(parts).encode("utf-8")).hexdigest()[:32]
+def _site_scoped_fingerprint(site_label: str, status_code: int) -> str:
+    """Stable fingerprint for dedup: one open issue per site + status code."""
+    key = f"{site_label}-{status_code}"
+    return sha512(key.encode("utf-8")).hexdigest()[:32]
 
 
 def _get_current_github_issues() -> List:
@@ -288,7 +287,7 @@ def _open_issue_for_status_code(
     current_issues: List[Dict],
 ) -> Optional[str]:
     urls = sorted({r["url"] for r in error_records})
-    fingerprint = _site_scoped_fingerprint(site_label, urls)
+    fingerprint = _site_scoped_fingerprint(site_label, status_code)
 
     if any(fingerprint in (issue.get("body") or "") for issue in current_issues):
         _print(

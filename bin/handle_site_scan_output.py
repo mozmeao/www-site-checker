@@ -161,7 +161,7 @@ def _create_http_error_issues(http_errors: List[Dict], action_url: str) -> List[
 
     for status_code, url_set in errors_by_status.items():
         urls = sorted(url_set)
-        fingerprint = _get_hashed_value(urls)
+        fingerprint = _get_hashed_value([str(status_code)])
 
         already_exists = any(
             fingerprint in (issue.get("body") or "") for issue in current_issues
