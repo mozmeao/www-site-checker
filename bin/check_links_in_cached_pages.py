@@ -57,16 +57,11 @@ SKIP_SCHEMES = ("mailto:", "tel:", "javascript:", "data:", "ftp:")
 
 ERROR_STATUS_LABELS = {
     404: "Not Found",
-    500: "Internal Server Error",
-    501: "Not Implemented",
-    502: "Bad Gateway",
-    503: "Service Unavailable",
-    504: "Gateway Timeout",
 }
 
 
 def _is_reportable_status(status_code: int) -> bool:
-    return status_code == 404 or 500 <= status_code < 600
+    return status_code == 404
 
 
 def _filename_to_url(filename: str) -> str:
