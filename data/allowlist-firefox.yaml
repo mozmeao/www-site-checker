@@ -390,3 +390,5 @@ allowed_outbound_url_literals:
   - https://datatracker.ietf.org/doc/draft-ietf-happy-happyeyeballs-v3/
   - https://www.nvidia.com/fr-fr/geforce-now/
   - https://www.nvidia.com/de-de/geforce-now/
+  - https://geforcenow.com/?utm_source=firefox.com&utm_medium=referral&utm_campaign=firefox-gfn&utm_content=hero-cta
+  - https://play.geforcenow.com/
