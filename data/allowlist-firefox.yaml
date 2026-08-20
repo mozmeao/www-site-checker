@@ -392,3 +392,6 @@ allowed_outbound_url_literals:
   - https://www.nvidia.com/de-de/geforce-now/
   - https://geforcenow.com/?utm_source=firefox.com&utm_medium=referral&utm_campaign=firefox-gfn&utm_content=hero-cta
   - https://play.geforcenow.com/
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox_beta&utm_source=https://mozmeao-www-error-page.netlify.app&utm_medium=referral
+  - https://play.google.com/store/apps/details?id=org.mozilla.fenix&utm_source=https://mozmeao-www-error-page.netlify.app&utm_medium=referral
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox&utm_source=https://mozmeao-www-error-page.netlify.app&utm_medium=referral
