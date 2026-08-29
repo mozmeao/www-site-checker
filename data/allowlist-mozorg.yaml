@@ -2645,3 +2645,16 @@ allowed_outbound_url_literals:
   - https://fortune.com/2026/06/29/open-source-ai-mozilla-middle-powers-canada-eu-mark-surman/
   - https://www.theregister.com/software/2026/04/16/mozilla-takes-on-enterprise-ai-providers-with-thunderbolt/5228261
   - https://www.nytimes.com/2026/04/15/opinion/mythos-open-souce-internet.html
+  - https://apps.apple.com/fi/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-pricing-page&mt=8
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-landing-page&hl=fr
+  - https://apps.apple.com/ar/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-landing-page&mt=8
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-pricing-page&hl=fi
+  - https://apps.apple.com/fr/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-landing-page&mt=8
+  - https://apps.apple.com/es/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-pricing-page&mt=8
+  - https://apps.apple.com/mx/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-landing-page&mt=8
+  - https://apps.apple.com/es/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-landing-page&mt=8
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-landing-page&hl=es
+  - https://apps.apple.com/cl/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-pricing-page&mt=8
+  - https://apps.apple.com/cl/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-landing-page&mt=8
+  - https://apps.apple.com/ar/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-pricing-page&mt=8
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-pricing-page&hl=es
