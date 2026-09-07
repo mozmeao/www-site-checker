@@ -10,6 +10,7 @@ Supported checks:
 * Confirm robots.txt points to the correct sitemap, on the public domain, never an internal domain
 * Verify the geo code in the majority of HTML pages served via the CDN is stable, confirming appripriate CDN `Vary`-header configuration
 * Verify that RSS and Atom feeds are error-free
+* Verify the outbound URLs on the two static failover pages (see below) and check them for broken (404/5xx) links
 
 Roadmap for future checks and behaviour
 
@@ -104,6 +105,27 @@ If the checks were carried out in batches, there may be multiple pairs of output
 
 Running the checks locally will put files in the `output/` directory.
 Checks run via Github Actions will gave a `scan-results` archive in the artifacts section for the relevant run, which can be downloaded and inspected. You must be authenticated to access the artifact.
+
+## Static failover pages
+
+`www.mozilla.org` and `www.firefox.com` are each backed by a static failover page
+that's shown during an outage. These pages are hand-maintained and completely decoupled
+from the Bedrock/Springfield codebases, so their links can drift silently - a moved
+product URL, a renamed legal doc path, a decommissioned product - and nobody notices
+until the page is actually load-bearing during a real outage.
+
+These pages are checked independently of the main site scans, each with its own
+allowlist (`data/allowlist-mozorg-failover.yaml` and `data/allowlist-firefox-failover.yaml`)
+and its own pair of workflows (`*-failover-site-scanning.yaml` for the outbound-URL
+check, `*-failover-external-link-check.yaml` for the 404/5xx check). Because each page
+is a single, hand-authored page with no locale-prefixed URLs, the failover allowlists
+prefer exact-URL literals over broad per-domain regexes, so that any change to a linked
+URL - not just a change of domain - shows up as "unexpected" and gets flagged for review.
+
+The failover pages' hostnames are treated as secrets rather than being hardcoded: they're
+supplied via the `MOZORG_FAILOVER_HOSTNAME` and `FXC_FAILOVER_HOSTNAME` repo secrets, read
+into the allowlists with `!ENV` (as the main allowlists already do for CDN/origin
+hostnames).
 
 ## Adding to the default allowlist
 

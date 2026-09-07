@@ -1,0 +1,60 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+# Allowlist for the static failover page that stands in for www.firefox.com
+# during an outage. Its hostname isn't hardcoded here - it's read from the
+# FXC_FAILOVER_HOSTNAME env var (set from a repo secret in CI).
+#
+# This page is hand-maintained and decoupled from the Springfield codebase, so
+# unlike allowlist-firefox.yaml we deliberately use exact-URL literals rather
+# than broad per-domain regexes wherever possible, so that any drift (a moved
+# product page, a renamed support article, etc) shows up as an "unexpected
+# URL" here, prompting a human to check whether the failover page needs
+# updating too.
+#
+# The one exception is download.mozilla.org: this page links to every
+# supported product/os/locale combination (thousands of URLs), so those are
+# matched with a single regex rather than being listed individually.
+
+service_main_domain: !ENV ${FXC_FAILOVER_HOSTNAME}
+
+relevant_hostnames:
+  - !ENV ${FXC_FAILOVER_HOSTNAME}
+
+allowed_outbound_url_regexes:
+  - '^(\/|#).*' # Relative URLs and in-page anchors are OK
+  - '^data:.*' # Inlined favicons etc - not an outbound link to check
+
+  # Firefox download links, for every supported product/os/locale combination, e.g.:
+  # https://download.mozilla.org/?product=firefox-beta-latest-ssl&os=linux64-aarch64&lang=ach
+  - '^https:\/\/download\.mozilla\.org\/\?product=firefox(-beta|-devedition|-esr|-nightly)?(-msi)?-latest(-l10n)?-ssl&os=(linux|linux64|linux64-aarch64|osx|win|win64|win64-aarch64)&lang=[A-Za-z0-9.-]+$'
+
+allowed_outbound_url_literals:
+  - https://apps.apple.com/us/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=firefox-all&mt=8
+  - https://developer.mozilla.org/docs/Mozilla/Developer_guide/Source_Code
+  - !ENV 'https://play.google.com/store/apps/details?id=org.mozilla.fenix&utm_source=https://${FXC_FAILOVER_HOSTNAME}&utm_medium=referral'
+  - !ENV 'https://play.google.com/store/apps/details?id=org.mozilla.firefox_beta&utm_source=https://${FXC_FAILOVER_HOSTNAME}&utm_medium=referral'
+  - !ENV 'https://play.google.com/store/apps/details?id=org.mozilla.firefox&utm_source=https://${FXC_FAILOVER_HOSTNAME}&utm_medium=referral'
+  - https://support.mozilla.org/kb/choosing-firefox-cpu-architecture-windows-os
+  - !ENV 'https://support.mozilla.org/products/?utm_source=https://${FXC_FAILOVER_HOSTNAME}&utm_medium=referral&utm_campaign=need-help-link'
+  - https://www.firefox.com
+  - https://www.firefox.com/browsers/enterprise/
+  - https://www.firefox.com/channel/desktop/#beta
+  - https://www.firefox.com/channel/desktop/#nightly
+  - https://www.firefox.com/channel/desktop/developer/
+  - https://www.firefox.com/en-US/firefox/beta/notes/
+  - https://www.firefox.com/en-US/firefox/beta/system-requirements/
+  - https://www.firefox.com/en-US/firefox/notes/
+  - https://www.firefox.com/en-US/firefox/system-requirements/
+  - https://www.firefox.com/firefox/beta/notes/
+  - https://www.firefox.com/firefox/beta/system-requirements/
+  - https://www.firefox.com/firefox/developer/notes/
+  - https://www.firefox.com/firefox/developer/system-requirements/
+  - https://www.firefox.com/firefox/nightly/notes/
+  - https://www.firefox.com/firefox/nightly/system-requirements/
+  - https://www.firefox.com/firefox/notes/
+  - https://www.firefox.com/firefox/organizations/notes/
+  - https://www.firefox.com/firefox/organizations/system-requirements/
+  - https://www.firefox.com/firefox/system-requirements/
+  - https://www.mozilla.org/en-US/privacy/firefox/
