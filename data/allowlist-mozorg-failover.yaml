@@ -1,0 +1,52 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+# Allowlist for the static failover page that stands in for www.mozilla.org
+# during an outage. Its hostname isn't hardcoded here - it's read from the
+# MOZORG_FAILOVER_HOSTNAME env var (set from a repo secret in CI).
+#
+# This page is hand-maintained and decoupled from the Bedrock codebase, so
+# unlike allowlist-mozorg.yaml we deliberately use exact-URL literals rather
+# than broad per-domain regexes wherever possible. The page only links to a
+# couple of dozen fixed URLs, so any drift (a moved product page, a renamed
+# GitHub legal doc path, etc) should show up as an "unexpected URL" here,
+# prompting a human to check whether the failover page needs updating too.
+
+service_main_domain: !ENV ${MOZORG_FAILOVER_HOSTNAME}
+
+relevant_hostnames:
+  - !ENV ${MOZORG_FAILOVER_HOSTNAME}
+
+allowed_outbound_url_regexes:
+  - '^(\/|#).*' # Relative URLs and in-page anchors are OK
+  - '^data:.*' # Inlined favicons etc - not an outbound link to check
+
+allowed_outbound_url_literals:
+  - https://0din.ai
+  - https://blog.mozilla.org/category/mozilla/news/
+  - https://bsky.app/profile/firefox.com
+  - https://bsky.app/profile/mozilla.org
+  - https://bugzilla.mozilla.org
+  - https://developer.mozilla.org
+  - https://developer.mozilla.org/plus
+  - https://github.com/mozilla/bedrock/blob/main/bedrock/legal/templates/legal/impressum.html
+  - https://github.com/mozilla/legal-docs/blob/prod/en/
+  - https://github.com/mozilla/legal-docs/blob/prod/en/report_infringement.md
+  - https://github.com/mozilla/legal-docs/blob/prod/en/websites_privacy_notice.md
+  - https://monitor.mozilla.org
+  - https://pontoon.mozilla.org
+  - https://relay.firefox.com
+  - https://soloist.ai
+  - https://support.mozilla.org
+  - https://tabstack.ai
+  - https://www.firefox.com
+  - https://www.instagram.com/firefox/
+  - https://www.instagram.com/mozilla/
+  - https://www.linkedin.com/company/mozilla-corporation/
+  - https://www.mozilla.org/
+  - https://www.thunderbird.net
+  - https://www.tiktok.com/@firefox
+  - https://www.tiktok.com/@mozilla
+  - https://www.youtube.com/user/firefoxchannel
+  - mailto:security@mozilla.org

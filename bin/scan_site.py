@@ -68,6 +68,7 @@ URL_RETRY_WAIT_SECONDS = 4
 # Size wise, ballparking at 25Kb per page, with ~3500 pages per worker => 85MB
 PAGE_CONTENT_CACHE = dict()
 LOCALES_TO_CACHE = ("en-US",)
+CACHE_ALL_PAGES = False
 
 
 @click.command()
@@ -112,6 +113,16 @@ LOCALES_TO_CACHE = ("en-US",)
     default=False,
     help="If True, we'll export the cached pages as an artifact to {hostname}-cached-pages/batch{batch-id}, for other checks to use",
 )
+@click.option(
+    "--cache-all-pages/--no-cache-all-pages",
+    default=False,
+    help=(
+        "If True, cache every page checked, regardless of locale. Normally only pages "
+        "under a LOCALES_TO_CACHE path are cached; use this for sites with no "
+        "locale-prefixed URLs (eg single-page failover sites) that still need caching "
+        "for a later broken-link check"
+    ),
+)
 def run_checks(
     sitemap_url: str,
     maintain_hostname: bool,
@@ -120,9 +131,13 @@ def run_checks(
     allowlist: str,
     additional_urls_file: str,
     export_cache: bool,
+    cache_all_pages: bool,
 ) -> None:
     # Let's tidy up that variables we get from the input option
     specific_urls = specific_url
+
+    global CACHE_ALL_PAGES
+    CACHE_ALL_PAGES = cache_all_pages
 
     if not sitemap_url and not specific_urls:
         raise Exception("No sitemap or input URLs specified. Cannot proceed.")
@@ -248,6 +263,8 @@ def _get_batched_urls(urls_to_check: List[str], batch: str) -> List[str]:
 
 
 def _page_content_is_cacheable(url):
+    if CACHE_ALL_PAGES:
+        return True
     for locale in LOCALES_TO_CACHE:
         if f"/{locale}/" in url:
             return True
