@@ -37,6 +37,8 @@ allowed_outbound_url_regexes:
   - '^https?:\/\/(www.){0,1}mozillafoundation.org($|\/(.*))'
   - '^https:\/\/soloist\.ai\/\?utm_source.*'
   - '^https:\/\/0din\.ai\/\?utm_source=.*'
+  - '^https://otari.ai/$'
+  - '^https:\/\/otari\.ai\/\?utm_source=.*'
   - '^https:\/\/tabstack\.ai\/\?utm_source=.*'
 
   # === Mozilla on Github
@@ -2639,7 +2641,6 @@ allowed_outbound_url_literals:
   - https://www.cpacanada.ca/-/media/site/operational/ms-member-services/docs/webtrust/01618-ms_web-trust-network-security_version-2-0-5.pdf?rev=0ec68ce03b414276abfdc9aa85474093&hash=D02630C1D7B904701FE518EF863EE0E9
   - https://www.etsi.org/committee/esi
   - https://restofworld.org/2026/ai-data-collectives-mozilla/
-  - https://otari.ai/
   - https://www.marketplace.org/episode/2026/06/17/who-should-get-an-ai-kill-switch
   - https://stateofopensource.ai/
   - https://fortune.com/2026/06/29/open-source-ai-mozilla-middle-powers-canada-eu-mark-surman/
