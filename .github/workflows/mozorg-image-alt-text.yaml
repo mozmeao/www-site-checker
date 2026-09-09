@@ -44,6 +44,7 @@ jobs:
                owner: context.repo.owner,
                repo: context.repo.repo,
                run_id: context.payload.workflow_run.id,
+               per_page: 100,
             });
             // Match mozorg page cache only (e.g. html-cache-1_8); skip
             // html-cache-firefox-* so this workflow stays site-scoped.
