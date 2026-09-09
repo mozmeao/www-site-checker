@@ -8,26 +8,26 @@ from bin.check_links_in_cached_pages import (
     _build_issue_body,
     _check_url,
     _collect_links_from_cache,
-    _filename_to_url,
     _is_reportable_status,
     _redact_page_url,
     _site_scoped_fingerprint,
     _strip_fragment,
 )
+from bin.utils import filename_to_url
 
 
 class TestFilenameToUrl:
     def test_path_ending_in_slash_round_trips(self):
         # encoded form of https://www.mozilla.org/en-US/firefox/
         assert (
-            _filename_to_url("https%3A__www.mozilla.org_en-US_firefox_.html")
+            filename_to_url("https%3A__www.mozilla.org_en-US_firefox_.html")
             == "https://www.mozilla.org/en-US/firefox/"
         )
 
     def test_path_with_natural_html_extension_preserves_html(self):
         # encoded form of https://www.mozilla.org/en-US/security/advisories/mfsa2024-01.html
         assert (
-            _filename_to_url(
+            filename_to_url(
                 "https%3A__www.mozilla.org_en-US_security_advisories_mfsa2024-01.html"
             )
             == "https://www.mozilla.org/en-US/security/advisories/mfsa2024-01.html"
@@ -36,7 +36,7 @@ class TestFilenameToUrl:
     def test_path_without_html_or_slash(self):
         # encoded form of http://localhost:8000/en-US
         assert (
-            _filename_to_url("http%3A__localhost%3A8000_en-US")
+            filename_to_url("http%3A__localhost%3A8000_en-US")
             == "http://localhost:8000/en-US"
         )
 

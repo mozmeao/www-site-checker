@@ -21,7 +21,7 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from hashlib import sha512
 from typing import Dict, List, Optional, Set
-from urllib.parse import unquote, urljoin, urlparse, urlunparse
+from urllib.parse import urljoin, urlparse, urlunparse
 
 import click
 import requests
@@ -29,9 +29,9 @@ from bs4 import BeautifulSoup
 
 # Awkward hack to allow importing into tests
 try:
-    from utils import _print, load_html_pages, ping_slack
+    from utils import _print, filename_to_url, load_html_pages, ping_slack
 except ImportError:
-    from .utils import _print, load_html_pages, ping_slack
+    from .utils import _print, filename_to_url, load_html_pages, ping_slack
 
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "NO-REPOSITORY-IN-USE")
 GITHUB_SERVER_URL = os.environ.get("GITHUB_SERVER_URL", "NO-GITHUB")
@@ -64,22 +64,6 @@ def _is_reportable_status(status_code: int) -> bool:
     return status_code == 404
 
 
-def _filename_to_url(filename: str) -> str:
-    """Best-effort reverse of scan_site._export_cache filename encoding.
-
-    Encoding was: quote(url).replace("/", "_") + optional ".html" suffix on
-    paths that originally ended in "/". The "_.html" suffix is therefore the
-    tell that the original URL ended with a slash (since the trailing "/"
-    became "_" before ".html" was appended). A natural ".html" in the URL
-    path is preceded by "_" representing the prior "/", so it shows up as
-    "_foo.html" and we keep the ".html".
-    """
-    if filename.endswith("_.html"):
-        core = filename[: -len(".html")]
-        return unquote(core.replace("_", "/"))
-    return unquote(filename.replace("_", "/"))
-
-
 def _strip_fragment(url: str) -> str:
     parsed = urlparse(url)
     if parsed.fragment:
@@ -95,7 +79,7 @@ def _collect_links_from_cache(cache_dir: str) -> Dict[str, Set[str]]:
     _print(f"Loaded {len(pages)} cached HTML page(s) from {cache_dir}")
 
     for filename, html in pages.items():
-        page_url = _filename_to_url(filename)
+        page_url = filename_to_url(filename)
         soup = BeautifulSoup(html, "html5lib")
         for tag_name, attr in (
             ("a", "href"),
