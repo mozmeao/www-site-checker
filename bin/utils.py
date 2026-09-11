@@ -5,6 +5,7 @@
 import os
 import sys
 from typing import Dict
+from urllib.parse import unquote
 
 from slack_sdk.webhook import WebhookClient as SlackWebhookClient
 
@@ -36,6 +37,22 @@ def get_output_path(directory_name="output") -> os.PathLike:
     if str(working_dir).endswith("/bin"):
         path_components = [working_dir, ".."] + path_components
     return os.path.join("", *path_components)
+
+
+def filename_to_url(filename: str) -> str:
+    """Best-effort reverse of scan_site._export_cache filename encoding.
+
+    Encoding was: quote(url).replace("/", "_") + optional ".html" suffix on
+    paths that originally ended in "/". The "_.html" suffix is therefore the
+    tell that the original URL ended with a slash (since the trailing "/"
+    became "_" before ".html" was appended). A natural ".html" in the URL
+    path is preceded by "_" representing the prior "/", so it shows up as
+    "_foo.html" and we keep the ".html".
+    """
+    if filename.endswith("_.html"):
+        core = filename[: -len(".html")]
+        return unquote(core.replace("_", "/"))
+    return unquote(filename.replace("_", "/"))
 
 
 def load_html_pages(directory_name, extension=".html") -> Dict:
