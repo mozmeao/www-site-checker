@@ -392,3 +392,5 @@ allowed_outbound_url_literals:
   - https://www.nvidia.com/de-de/geforce-now/
   - https://geforcenow.com/?utm_source=firefox.com&utm_medium=referral&utm_campaign=firefox-gfn&utm_content=hero-cta
   - https://play.geforcenow.com/
+  - https://github.com/w3c/webauthn/blob/main/explainers/conditional-ui.md
+  - https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill-processing-model
