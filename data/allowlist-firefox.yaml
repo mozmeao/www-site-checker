@@ -394,3 +394,4 @@ allowed_outbound_url_literals:
   - https://play.geforcenow.com/
   - https://github.com/w3c/webauthn/blob/main/explainers/conditional-ui.md
   - https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill-processing-model
+  - https://developer.chrome.com/docs/capabilities/web-apis/fetch-streaming-requests
