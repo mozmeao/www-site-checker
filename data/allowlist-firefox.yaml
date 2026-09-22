@@ -395,3 +395,6 @@ allowed_outbound_url_literals:
   - https://github.com/w3c/webauthn/blob/main/explainers/conditional-ui.md
   - https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill-processing-model
   - https://developer.chrome.com/docs/capabilities/web-apis/fetch-streaming-requests
+  - https://0din.ai/assessment?utm_source=firefox.com&utm_medium=event&utm_campaign=2026-dwt-sgw
+  - https://0din.ai/downloads/datasheets/0DIN%20SUSFACTOR%20Paper.pdf?utm_source=firefox.com&utm_medium=event&utm_campaign=2026-dwt-sgw
+  - https://0din.ai/demo?utm_source=firefox.com&utm_medium=event&utm_campaign=2026-dwt-sgw
