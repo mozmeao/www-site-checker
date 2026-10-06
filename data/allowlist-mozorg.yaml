@@ -2737,3 +2737,12 @@ allowed_outbound_url_literals:
   - https://apps.apple.com/ro/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-landing-page&mt=8
   - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-landing-page&hl=nl
   - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-pricing-page&hl=ka
+  - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+%D8%A7%DB%8C%D9%86+%D8%A7%D9%85%DA%A9%D8%A7%D9%86+%D8%B1%D8%A7+%D8%AF%D8%A7%D8%B1%D8%AF+%D8%AA%D8%A7+%D8%A8%D9%87+%D8%B3%D8%B1%D8%B9%D8%AA+%D8%A7%D8%B2+Chrome+%D9%85%D9%87%D8%A7%D8%AC%D8%B1%D8%AA+%DA%A9%D9%86%DB%8C%D8%AF.+%D8%A7%D9%85%D8%AA%D8%AD%D8%A7%D9%86%D8%B4+%DA%A9%D9%86%DB%8C%D8%AF%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://datacollective.mozillafoundation.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-16
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=fa
+  - https://www.lemonde.fr/economy/article/2026/02/18/ai-summit-in-india-pushes-a-third-way-between-us-and-china_6750615_19.html
+  - https://datacollective.mozillafoundation.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-4
+  - https://datacollective.mozillafoundation.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-3
+  - https://datacollective.mozillafoundation.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-2
+  - https://datacollective.mozillafoundation.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-1
+  - https://datacollective.mozillafoundation.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-15
