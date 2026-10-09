@@ -2747,3 +2747,5 @@ allowed_outbound_url_literals:
   - https://datacollective.mozillafoundation.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-16
   - https://datacollective.mozillafoundation.org/?utm_source=www.mozilla.org&utm_medium=referral&utm_campaign=home-3
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+%D8%AC%D8%A7%D8%A8%D9%87%D8%AC%D8%A7%DB%8C%DB%8C+%D8%A7%D8%B2+Chrome+%D8%B1%D8%A7+%D8%A8%D8%B3%DB%8C%D8%A7%D8%B1+%D8%B3%D8%B1%DB%8C%D8%B9+%DA%A9%D8%B1%D8%AF%D9%87+%D8%A7%D8%B3%D8%AA.+%D8%A7%D9%85%D8%AA%D8%AD%D8%A7%D9%86%D8%B4+%DA%A9%D9%86%DB%8C%D8%AF%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://apps.apple.com/us/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-landing-page&mt=8
+  - https://apps.apple.com/us/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-pricing-page&mt=8
