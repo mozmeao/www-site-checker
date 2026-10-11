@@ -13,7 +13,7 @@ ruamel.yaml==0.19.1
 sentry-sdk>=2.68.0
 slack_sdk>=3.43.0
 sqlparse>=0.6.0
-urllib3>=2.7.0  # Security bump
+urllib3>=2.8.0  # Security bump
 
 # test reqs
 pytest>=9.1.1
