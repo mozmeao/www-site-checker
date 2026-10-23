@@ -406,3 +406,6 @@ allowed_outbound_url_literals:
   - https://github.com/mozilla-firefox/firefox
   - https://drafts.csswg.org/css-anchor-position-1/#determining
   - https://www.facebook.com/firefox
+  - https://www.youtube.com/watch?v=62oufxMeHq4
+  - https://www.youtube.com/watch?v=QRWAz6rgfnw
+  - https://www.youtube.com/watch?v=l7tQ1v4TCeY
