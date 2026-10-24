@@ -2796,3 +2796,5 @@ allowed_outbound_url_literals:
   - https://apps.apple.com/tw/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-landing-page&mt=8
   - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-pricing-page&hl=tg
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+Chrome+%DA%A9%D9%86%D9%88%DA%BA+%D8%B3%D9%88%D8%A6%DA%86+%DA%A9%D8%B1%DD%A8+%DA%A9%D9%88%DA%BA+%D8%A7%D8%B5%D9%84+%D9%88%DA%86+%D8%AA%DA%A9%DA%BE%DB%8C%D8%B1%D8%A7+%D8%A8%DD%A8%DB%8C%D9%86%D8%AF%DB%92%DB%94+%D8%A7%DB%8C%DA%BA+%DA%A9%D9%88%DA%BA+%D8%A7%D8%B2%D9%85%D8%A7%D8%A4%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
+  - https://apps.apple.com/lv/app/apple-store/id1489407738?mz_pr=vpn&pt=373246&ct=vpn-download-page&mt=8
+  - https://play.google.com/store/apps/details?id=org.mozilla.firefox.vpn&referrer=utm_source%3Dwww.mozilla.org%26utm_medium%3Dreferral%26utm_campaign%3Dvpn-download-page&hl=lv
