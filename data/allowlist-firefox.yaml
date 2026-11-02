@@ -409,3 +409,5 @@ allowed_outbound_url_literals:
   - https://www.youtube.com/watch?v=62oufxMeHq4
   - https://www.youtube.com/watch?v=QRWAz6rgfnw
   - https://www.youtube.com/watch?v=l7tQ1v4TCeY
+  - https://drafts.csswg.org/css-values-5/#replace-an-arbitrary-substitution-function
+  - https://github.com/w3c/csswg-drafts/issues/8510#issuecomment-6438888621
