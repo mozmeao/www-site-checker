@@ -2801,3 +2801,4 @@ allowed_outbound_url_literals:
   - https://apps.apple.com/lv/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=products&mt=8
   - https://bsky.app/intent/compose?text=%F0%9F%94%A5+Firefox+padara+p%C4%81rsl%C4%93g%C5%A1anos+no+Chrome+%C4%BCoti+%C4%81tru.+Izm%C4%93%C4%A3iniet%21+https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
   - https://apps.apple.com/lv/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=firefox-browsers-mobile-get-app&mt=8
+  - https://en.wikipedia.org/wiki/User-Agent_header
