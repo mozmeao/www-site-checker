@@ -16,5 +16,5 @@ sqlparse>=0.6.0
 urllib3>=2.8.0  # Security bump
 
 # test reqs
-pytest>=9.1.1
+pytest>=9.2.0
 pytest-cov>=7.0.0
