@@ -763,9 +763,9 @@ slack-sdk==3.46.0 \
     --hash=sha256:25215ca293d2954ed759b87573b4c833cb3f82ebff371355936515c688411dbb \
     --hash=sha256:6286d89da97ea193c853609131515e6f1b3edf86866d6e5aad0dba9dcf1cb72d
     # via -r requirements.in
-soupsieve==2.9 \
-    --hash=sha256:a2b2c76d67df2382d245409fd71e321a571717e58463efa32ace87dcadac2c12 \
-    --hash=sha256:acee8417325c5653e1377dc31eccad59eb82cbc65942afe6174c53b3aaad63fc
+soupsieve==4.0 \
+    --hash=sha256:5e7494bfce90e06676cfb4c5c2cf22243e98e5cf24646bb1ecdda46d318550a0 \
+    --hash=sha256:ccd6470b256394ac44b08b86fd94b30a17d335a5335c8a3d15565f7b03d3c8cf
     # via beautifulsoup4
 sqlparse==0.6.1 \
     --hash=sha256:3be5a72d04c873d690d7c6dedd33d6fae2ef82759881ceec02fc2efd0cba564f \
