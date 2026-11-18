@@ -414,3 +414,5 @@ allowed_outbound_url_literals:
   - https://drafts.csswg.org/css-values-5/#ident
   - https://drafts.css-houdini.org/css-typed-om/
   - https://drafts.csswg.org/css-values-5/#inherit-notation
+  - https://w3c.github.io/push-api/#declarative-push-message
+  - https://github.com/tc39/proposal-regexp-buffer-boundaries
