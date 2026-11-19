@@ -161,8 +161,9 @@ def _create_http_error_issues(http_errors: List[Dict], action_url: str) -> List[
     """Create one consolidated GitHub issue per HTTP status code for errors found during scanning.
 
     A single issue is opened per status code (e.g. one for all 404s), listing every
-    affected URL. The fingerprint is derived from the full sorted set of URLs so that
-    an identical set of failures on the next run won't re-open an already-open issue.
+    affected URL. The fingerprint is derived from the status code alone, not the URL
+    set, because the set of failing URLs varies between runs; this way a new issue
+    isn't opened while one for the same status code is still open.
     """
     if not http_errors:
         return []
@@ -184,7 +185,7 @@ def _create_http_error_issues(http_errors: List[Dict], action_url: str) -> List[
         )
         if already_exists:
             _print(
-                f"Skipping issue creation - existing {status_code} issue for this URL set already exists"
+                f"Skipping issue creation - an open {status_code} issue already exists"
             )
             continue
 
