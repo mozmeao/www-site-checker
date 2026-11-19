@@ -22,10 +22,20 @@ from django.core.validators import URLValidator
 
 # Awkward hack to allow importing into tests
 try:
-    from mailto_links import is_mailto, is_valid_mailto, render_mailto_details
+    from mailto_links import (
+        is_mailto,
+        is_valid_mailto,
+        make_single_line_inert,
+        render_mailto_details,
+    )
     from utils import _print, get_output_path, ping_slack
 except ImportError:
-    from .mailto_links import is_mailto, is_valid_mailto, render_mailto_details
+    from .mailto_links import (
+        is_mailto,
+        is_valid_mailto,
+        make_single_line_inert,
+        render_mailto_details,
+    )
     from .utils import _print, get_output_path, ping_slack
 
 GITHUB_ACTION = os.environ.get("GITHUB_ACTION", "NO-ACTION-IN-USE")
@@ -268,7 +278,13 @@ def _matching_github_entity_exists(
     return False
 
 
-def _build_structured_url_list_for_pr_description(pr_candidates: List[str]) -> str:
+# GitHub rejects PR/Issue bodies over 65536 characters
+MAX_GITHUB_BODY_LENGTH = 65536
+
+
+def _build_structured_url_list_for_pr_description(
+    pr_candidates: List[str], include_mailto_details: bool = True
+) -> str:
     """Returns a Markdown-format bulleted list of unexpected URLs with the page(s)
     that refernce them as nested bulleted lists"""
 
@@ -280,11 +296,41 @@ def _build_structured_url_list_for_pr_description(pr_candidates: List[str]) -> s
         output += f"* {url}\nFound in:\n"
         for referencing_url in containing_pages:
             output += f"  * {referencing_url}\n"
-        mailto_details = render_mailto_details(url, containing_pages, indent="  ")
+        mailto_details = (
+            render_mailto_details(url, containing_pages, indent="  ")
+            if include_mailto_details
+            else ""
+        )
         if mailto_details:
             output += f"\n{mailto_details}\n\n"
     output += "\n"
     return output
+
+
+def _build_pr_body(pr_candidates: List[str]) -> str:
+    fingerprint = _get_hashed_value(pr_candidates)
+    pr_body = PR_BODY_TEMPLATE.format(
+        unexpected_urls_structured=_build_structured_url_list_for_pr_description(
+            pr_candidates
+        ),
+        fingerprint=fingerprint,
+    )
+    if len(pr_body) <= MAX_GITHUB_BODY_LENGTH:
+        return pr_body
+
+    # Too long for GitHub, which would make PR creation (and everything after
+    # it) fail, so fall back to the plain list without decoded mailto: content
+    _print("PR body too long - omitting decoded mailto: content")
+    return PR_BODY_TEMPLATE.format(
+        unexpected_urls_structured=(
+            "\n_Decoded mailto: content omitted: it would make this PR"
+            " description too long for GitHub._\n"
+            + _build_structured_url_list_for_pr_description(
+                pr_candidates, include_mailto_details=False
+            )
+        ),
+        fingerprint=fingerprint,
+    )
 
 
 def _update_allowlist(pr_candidates: List[str]) -> str:
@@ -296,10 +342,6 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     display_timestamp = now.strftime("%Y-%m-%d %H:%M UTC")
     allowlist_config = pyaml_env.parse_config(allowlist_path)
     service_main_domain = allowlist_config["service_main_domain"]
-    unexpected_urls_structured = _build_structured_url_list_for_pr_description(
-        pr_candidates
-    )
-
     if not pr_candidates:
         _print("No candidate URLs to add to the allowlist")
         return output
@@ -347,10 +389,7 @@ def _update_allowlist(pr_candidates: List[str]) -> str:
     pr_title = PR_TITLE_TEMPLATE.format(
         service_main_domain=service_main_domain, timestamp=display_timestamp
     )
-    pr_body = PR_BODY_TEMPLATE.format(
-        unexpected_urls_structured=unexpected_urls_structured,
-        fingerprint=_get_hashed_value(pr_candidates),
-    )
+    pr_body = _build_pr_body(pr_candidates)
     _print("Opening PR")
     try:
         with tempfile.NamedTemporaryFile(mode="w", suffix=".md") as f:
@@ -414,7 +453,9 @@ def _open_new_issues(issue_candidates: List[str]) -> List[str]:
             continue
 
         issue_title = ISSUE_TITLE_TEMPLATE.format(
-            malformed_url=problematic_url[:MAX_ISSUE_TITLE_URL_LENGTH],
+            malformed_url=make_single_line_inert(
+                problematic_url[:MAX_ISSUE_TITLE_URL_LENGTH]
+            ),
         )
         containing_pages = sorted(
             _get_containing_pages_for_url(problematic_url, redact_domain=True)
@@ -423,8 +464,12 @@ def _open_new_issues(issue_candidates: List[str]) -> List[str]:
             problematic_url, containing_pages, include_problems=True
         )
         issue_body = ISSUE_BODY_TEMPLATE.format(
-            malformed_url=problematic_url,
-            containing_page_urls="\n".join(containing_pages),
+            # Both of these go into indented code blocks in the template, so
+            # must not contain anything that could break out of them
+            malformed_url=make_single_line_inert(problematic_url),
+            containing_page_urls="\n    ".join(
+                make_single_line_inert(page) for page in containing_pages
+            ),
             mailto_details=f"{mailto_details}\n\n" if mailto_details else "",
             fingerprint=_get_hashed_value([problematic_url]),
         )

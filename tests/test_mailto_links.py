@@ -8,6 +8,8 @@ import pytest
 
 from bin import handle_site_scan_output
 from bin.handle_site_scan_output import (
+    MAX_GITHUB_BODY_LENGTH,
+    _build_pr_body,
     _build_structured_url_list_for_pr_description,
     _is_valid_url,
     _open_new_issues,
@@ -19,6 +21,7 @@ from bin.mailto_links import (
     is_valid_mailto,
     mailto_problems,
     render_mailto_details,
+    make_single_line_inert,
     render_untrusted_text,
 )
 
@@ -90,6 +93,11 @@ class TestIsValidMailto:
             ("mailto:?body=hi%F3%A0%81%81", "invisible"),  # Unicode tag char
             ("mailto:?body=hi%00", "control"),
             ("mailto:?body=hi%EF%BB%BF", "invisible"),  # BOM
+            # Mail-header injection: line breaks only belong in the body
+            ("mailto:?subject=Hi%0D%0ABcc:%20x%40example.com", "line break"),
+            ("mailto:?subject=Hi%0ABcc:%20x%40example.com", "line break"),
+            ("mailto:?subject=Hi%E2%80%A8there", "line break"),  # U+2028
+            ("mailto:?cc=a%40mozilla.org%0D%0ABcc:b%40mozilla.org", "invalid email"),
         ],
     )
     def test_invalid(self, url, expected_problem):
@@ -194,6 +202,18 @@ class TestRenderUntrustedText:
 
     def test_indent(self):
         assert render_untrusted_text("a\nb", indent="  ") == "  > a\\\n  > b"
+
+
+class TestMakeSingleLineInert:
+    def test_line_breaks_and_hidden_chars_made_visible(self):
+        assert (
+            make_single_line_inert("a\r\nb\tc\u2028d\u202ee\U000e0041")
+            == "a[U+000D][U+000A]b[U+0009]c[U+2028]d[U+202E]e[U+E0041]"
+        )
+
+    def test_ordinary_text_unchanged(self):
+        url = "mailto:?subject=P%C4%81rsl%C4%93gties&body=Pārslēgties می\u200cخواهم"
+        assert make_single_line_inert(url) == url
 
 
 class TestRenderMailtoDetails:
@@ -318,3 +338,54 @@ class TestHandleSiteScanOutputIntegration:
 
         assert "    /en-US/\n\nThis cannot be fixed" in captured["body"]
         assert "mailto" not in captured["body"]
+
+    def test_issue_body_cannot_break_out_of_code_blocks(self, results_cache):
+        bad_url = "javascript:x\n\n# Injected @octocat \u202e"
+        results_cache["https://www.mozilla.org/en-US/a/"] = [bad_url]
+        results_cache["https://www.mozilla.org/en-US/b/"] = [bad_url]
+        captured = {}
+
+        def fake_check_output(cmd, **kwargs):
+            captured["title"] = cmd[cmd.index("--title") + 1]
+            with open(cmd[cmd.index("--body-file") + 1]) as fp:
+                captured["body"] = fp.read()
+            return b"https://github.com/org/repo/issues/1\n"
+
+        with (
+            patch(
+                "bin.handle_site_scan_output._get_current_github_issues",
+                return_value=[],
+            ),
+            patch("subprocess.check_output", side_effect=fake_check_output),
+        ):
+            _open_new_issues([bad_url])
+
+        body = captured["body"]
+        assert "    javascript:x[U+000A][U+000A]# Injected @octocat [U+202E]\n" in body
+        assert "    /en-US/a/\n    /en-US/b/\n" in body
+        assert "\u202e" not in body
+        assert "\n#" not in body
+        assert "\n" not in captured["title"]
+
+
+class TestPrBodyLength:
+    def test_includes_mailto_details_when_short(self, results_cache):
+        results_cache["https://www.mozilla.org/lv/x/"] = [LATVIAN_SHARE_LINK]
+        body = _build_pr_body([LATVIAN_SHARE_LINK])
+        assert "Decoded mailto: content" in body
+        assert "omitted" not in body
+
+    def test_drops_mailto_details_rather_than_exceed_github_limit(self, results_cache):
+        # The raw URLs alone fit, but not with their decoded content as well
+        urls = [f"mailto:?subject={i}{'a' * 1800}&body={'b' * 1800}" for i in range(15)]
+        assert sum(len(url) for url in urls) < MAX_GITHUB_BODY_LENGTH
+        for i, url in enumerate(urls):
+            results_cache[f"https://www.mozilla.org/de/{i}/"] = [url]
+
+        body = _build_pr_body(urls)
+
+        assert len(body) <= MAX_GITHUB_BODY_LENGTH
+        assert "Decoded mailto: content omitted" in body
+        assert "**Decoded mailto: content**" not in body
+        for url in urls:
+            assert f"* {url}\n" in body

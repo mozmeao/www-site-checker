@@ -45,7 +45,8 @@ _POSSIBLE_MENTION = re.compile(r"(?<![A-Za-z0-9._+-])@")
 _ALLOWED_FORMAT_CHARS = frozenset({"­", "‌", "‍", "‎", "‏"})
 
 # Code points that are effectively line breaks
-_LINE_BREAKS = re.compile(r"\r\n|[\r  \x85]")
+_LINE_BREAKS = re.compile(r"\r\n|[\r\u2028\u2029\x85]")
+_ANY_LINE_BREAK_CHAR = re.compile(r"[\r\n\u2028\u2029\x85]")
 
 _LOCALE_SEGMENT = re.compile(r"^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$")
 
@@ -141,10 +142,17 @@ def mailto_problems(url: str) -> List[str]:
 
             if key in ADDRESS_HEADERS:
                 problems.extend(_check_addresses(raw_value, f"'{key}' header"))
-            elif any(_is_suspicious_char(c) for c in _strict_decode(raw_value)):
+                continue
+
+            value = _strict_decode(raw_value)
+            if any(_is_suspicious_char(c) for c in value):
                 problems.append(
                     f"'{key}' contains control, bidi-override or invisible characters"
                 )
+            elif key != "body" and _ANY_LINE_BREAK_CHAR.search(value):
+                # Line breaks only belong in the body. Elsewhere they're an
+                # attempt at mail-header injection (eg "Hi%0D%0ABcc:%20...")
+                problems.append(f"'{key}' contains a line break")
     except UnicodeDecodeError:
         return ["percent-encoded text is not valid UTF-8"]
 
@@ -199,6 +207,19 @@ def _escape_markdown_line(line: str) -> str:
 def _make_suspicious_chars_visible(text: str) -> str:
     return "".join(
         f"[U+{ord(char):04X}]" if _is_suspicious_char(char) else char for char in text
+    )
+
+
+def make_single_line_inert(text: str) -> str:
+    """Make arbitrary untrusted text safe to show on one line of an indented
+    Markdown code block (or an Issue title): line breaks, tabs, control,
+    bidi-override and invisible characters are all shown as [U+XXXX], so the
+    text can't break out of the code block or hide anything."""
+    return "".join(
+        f"[U+{ord(char):04X}]"
+        if _is_suspicious_char(char) or char == "\t" or _ANY_LINE_BREAK_CHAR.match(char)
+        else char
+        for char in text
     )
 
 
