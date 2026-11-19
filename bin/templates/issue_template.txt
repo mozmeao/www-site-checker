@@ -6,7 +6,7 @@ URL of page(s) with this malformed link in it:
 
     {containing_page_urls}
 
-This cannot be fixed via an automatic pull request - it needs to be checked and remedied.
+{mailto_details}This cannot be fixed via an automatic pull request - it needs to be checked and remedied.
 
 Keep on rocking the free Web,
 

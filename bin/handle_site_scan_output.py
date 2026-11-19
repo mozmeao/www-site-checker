@@ -22,8 +22,10 @@ from django.core.validators import URLValidator
 
 # Awkward hack to allow importing into tests
 try:
+    from mailto_links import is_mailto, is_valid_mailto, render_mailto_details
     from utils import _print, get_output_path, ping_slack
 except ImportError:
+    from .mailto_links import is_mailto, is_valid_mailto, render_mailto_details
     from .utils import _print, get_output_path, ping_slack
 
 GITHUB_ACTION = os.environ.get("GITHUB_ACTION", "NO-ACTION-IN-USE")
@@ -99,7 +101,11 @@ def _assemble_results(output_path: str) -> set:
 
 
 def _is_valid_url(url: str) -> bool:
-    "Is the given URL a valid absolute or relative URL?"
+    "Is the given URL a valid absolute or relative URL, or a well-formed mailto: link?"
+
+    if is_mailto(url):
+        # Django's URLValidator rejects all mailto: links, so they need their own check
+        return is_valid_mailto(url)
 
     url_validator = URLValidator()
     try:
@@ -267,10 +273,16 @@ def _build_structured_url_list_for_pr_description(pr_candidates: List[str]) -> s
     that refernce them as nested bulleted lists"""
 
     output = "\n"
-    for url in pr_candidates:
+    for url in sorted(pr_candidates):
+        containing_pages = sorted(
+            _get_containing_pages_for_url(url, redact_domain=True)
+        )
         output += f"* {url}\nFound in:\n"
-        for referencing_url in _get_containing_pages_for_url(url, redact_domain=True):
+        for referencing_url in containing_pages:
             output += f"  * {referencing_url}\n"
+        mailto_details = render_mailto_details(url, containing_pages, indent="  ")
+        if mailto_details:
+            output += f"\n{mailto_details}\n\n"
     output += "\n"
     return output
 
@@ -404,14 +416,16 @@ def _open_new_issues(issue_candidates: List[str]) -> List[str]:
         issue_title = ISSUE_TITLE_TEMPLATE.format(
             malformed_url=problematic_url[:MAX_ISSUE_TITLE_URL_LENGTH],
         )
+        containing_pages = sorted(
+            _get_containing_pages_for_url(problematic_url, redact_domain=True)
+        )
+        mailto_details = render_mailto_details(
+            problematic_url, containing_pages, include_problems=True
+        )
         issue_body = ISSUE_BODY_TEMPLATE.format(
             malformed_url=problematic_url,
-            containing_page_urls="\n".join(
-                _get_containing_pages_for_url(
-                    problematic_url,
-                    redact_domain=True,
-                ),
-            ),
+            containing_page_urls="\n".join(containing_pages),
+            mailto_details=f"{mailto_details}\n\n" if mailto_details else "",
             fingerprint=_get_hashed_value([problematic_url]),
         )
         _print("Opening new issue")
