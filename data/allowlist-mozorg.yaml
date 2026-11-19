@@ -2803,3 +2803,4 @@ allowed_outbound_url_literals:
   - https://apps.apple.com/lv/app/apple-store/id989804926?mz_pr=firefox_mobile&pt=373246&ct=firefox-browsers-mobile-get-app&mt=8
   - https://en.wikipedia.org/wiki/User-Agent_header
   - https://thunderbolt.io
+  - mailto:?subject=P%C4%81rsl%C4%93gties%20uz%20Firefox&body=Hei%2C%0D%0A%0D%0AFirefox%20padara%20p%C4%81rsl%C4%93g%C5%A1anos%20no%20Chrome%20%C4%BCoti%20%C4%81tru.%20Man%20tas%20%C4%BCoti%20pat%C4%ABk%2C%20un%20jums%20vajadz%C4%93tu%20to%20izm%C4%93%C4%A3in%C4%81t.%0D%0A%0D%0AApskati%20to%20un%20pazi%C5%86o%20man%20savu%20viedokli%3A%20https%3A%2F%2Fwww.mozilla.org%2Ffirefox%2Fswitch%2F
