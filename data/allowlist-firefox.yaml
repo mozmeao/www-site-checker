@@ -417,3 +417,4 @@ allowed_outbound_url_literals:
   - https://w3c.github.io/push-api/#declarative-push-message
   - https://github.com/tc39/proposal-regexp-buffer-boundaries
   - https://x.com/firefox
+  - https://w3c.github.io/mse-byte-stream-format-mpeg-audio/
