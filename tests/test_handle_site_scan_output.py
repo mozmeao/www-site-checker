@@ -73,7 +73,9 @@ class TestCreateHttpErrorIssues:
 
     def test_skips_when_fingerprint_already_in_open_issue(self):
         errors = [{"url": "/gone/", "status_code": 404, "timestamp": "T"}]
-        fingerprint = _get_hashed_value(["/gone/"])
+        # Fingerprint is per status code, not per URL set, so an open 404
+        # issue blocks a new one even if the failing URLs have changed
+        fingerprint = _get_hashed_value(["404"])
         existing_issues = [{"body": f"Some text\n\nFingerprint: {fingerprint}"}]
 
         with (
@@ -103,7 +105,10 @@ class TestCreateHttpErrorIssues:
         captured = []
 
         def fake_check_output(cmd, **kwargs):
-            captured.append(cmd)
+            # The body is passed via a temp file (to avoid ARG_MAX limits),
+            # which is deleted after the call, so read it now
+            with open(cmd[cmd.index("--body-file") + 1]) as fp:
+                captured.append(fp.read())
             return b"https://github.com/org/repo/issues/99\n"
 
         with (
@@ -116,8 +121,7 @@ class TestCreateHttpErrorIssues:
             _create_http_error_issues(errors, "https://actions/run/42")
 
         assert len(captured) == 1
-        args = captured[0]
-        body = args[args.index("--body") + 1]
+        body = captured[0]
         assert "/en-US/missing/" in body
         assert "/fr/missing/" in body
         assert "https://actions/run/42" in body

@@ -45,9 +45,11 @@ class TestIsReportableStatus:
     def test_404_is_reportable(self):
         assert _is_reportable_status(404) is True
 
-    def test_5xx_is_reportable(self):
+    def test_5xx_not_reportable(self):
+        # Only 404s are reported: 5xx from third-party sites are usually
+        # transient and were too noisy to act on
         for code in (500, 502, 503, 504, 599):
-            assert _is_reportable_status(code) is True
+            assert _is_reportable_status(code) is False
 
     def test_2xx_3xx_not_reportable(self):
         for code in (200, 201, 204, 301, 302, 304):
@@ -96,16 +98,22 @@ class TestRedactPageUrl:
 
 
 class TestSiteScopedFingerprint:
-    def test_different_site_labels_produce_different_hashes_for_same_urls(self):
-        urls = ["https://example.org/dead"]
-        mozorg_fp = _site_scoped_fingerprint("www.mozilla.org", urls)
-        firefox_fp = _site_scoped_fingerprint("www.firefox.com", urls)
+    # Fingerprint is site + status code, not the URL set, because the set of
+    # failing URLs varies between runs and would defeat dedup
+    def test_different_site_labels_produce_different_hashes(self):
+        mozorg_fp = _site_scoped_fingerprint("www.mozilla.org", 404)
+        firefox_fp = _site_scoped_fingerprint("www.firefox.com", 404)
         assert mozorg_fp != firefox_fp
 
-    def test_url_order_does_not_affect_hash(self):
-        assert _site_scoped_fingerprint(
-            "site", ["b", "a", "c"]
-        ) == _site_scoped_fingerprint("site", ["a", "b", "c"])
+    def test_different_status_codes_produce_different_hashes(self):
+        assert _site_scoped_fingerprint("site", 404) != _site_scoped_fingerprint(
+            "site", 500
+        )
+
+    def test_stable_for_same_site_and_status_code(self):
+        assert _site_scoped_fingerprint("site", 404) == _site_scoped_fingerprint(
+            "site", 404
+        )
 
 
 class TestCollectLinksFromCache:
@@ -212,7 +220,7 @@ class TestCheckUrl:
 
 
 class TestBuildIssueBody:
-    def test_body_includes_urls_pages_action_url_and_fingerprint(self):
+    def test_body_summarises_errors_and_links_to_artifacts(self):
         records = [
             {
                 "url": "https://example.org/dead",
@@ -228,13 +236,12 @@ class TestBuildIssueBody:
             status_code=404,
             error_records=records,
             action_url="https://gh/actions/run/42",
-            in_scope_hostname="www.mozilla.org",
             fingerprint="abc123",
         )
-        assert "https://example.org/dead" in body
-        # in-scope hostnames are redacted to path-only
-        assert "/en-US/firefox/" in body
-        assert "/en-US/about/" in body
+        # The URL list itself goes in a CSV artifact, not the issue body
+        assert "1 outbound link(s) returned 404" in body
+        assert "CSV artifact" in body
+        assert "https://example.org/dead" not in body
         assert "https://gh/actions/run/42" in body
         assert "Fingerprint: abc123" in body
         assert "www.mozilla.org" in body

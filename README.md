@@ -29,7 +29,13 @@ to auto format your code according to our style and check for errors for every c
 
 ### Tests
 
-TO COME
+With your virtualenv active and `requirements.txt` installed, run:
+
+```bash
+python -m pytest
+```
+
+Tests run in CI on every pull request and on pushes to `main` (see `.github/workflows/tests.yaml`).
 
 ----
 ## Outbound link-checker - specific instructions
