@@ -2,11 +2,11 @@
 
 _CURRENT STATUS_: Beta
 
-This project contains tooling designed to check on the state of the mozilla.org website in various ways.
+This project contains tooling designed to check on the state of the www.mozilla.org and www.firefox.com in various ways.
 
 Supported checks:
 
-* Verify all outbound URLs found on `www.mozilla.org`. Verification is done by domain and or an allow-list and exceptions are reported loudly.
+* Verify all outbound URLs found on the domain. Verification is done by domain and or an allow-list and exceptions are reported loudly.
 * Confirm robots.txt points to the correct sitemap, on the public domain, never an internal domain
 * Verify the geo code in the majority of HTML pages served via the CDN is stable, confirming appripriate CDN `Vary`-header configuration
 * Verify that RSS and Atom feeds are error-free
