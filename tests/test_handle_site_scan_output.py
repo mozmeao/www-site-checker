@@ -3,13 +3,136 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import json
-from unittest.mock import patch
+from unittest.mock import call, patch
+
+import pytest
+from requests import HTTPError, Response
 
 from bin.handle_site_scan_output import (
+    SITE_CHECKER_ISSUES_API_URL,
+    SITE_CHECKER_PULL_REQUESTS_API_URL,
     _create_http_error_issues,
+    _get_current_github_issues,
+    _get_current_github_prs,
     _get_hashed_value,
     _load_http_errors,
 )
+
+
+def _github_response(status, payload, headers=None):
+    response = Response()
+    response.status_code = status
+    response.headers.update(headers or {})
+    response._content = json.dumps(payload).encode()
+    return response
+
+
+class TestGitHubLookup:
+    @pytest.mark.parametrize(
+        "lookup, url",
+        [
+            (_get_current_github_issues, SITE_CHECKER_ISSUES_API_URL),
+            (_get_current_github_prs, SITE_CHECKER_PULL_REQUESTS_API_URL),
+        ],
+    )
+    def test_retries_same_page_with_existing_authentication(self, lookup, url):
+        first = {"body": "first page"}
+        second = {"body": "second page"}
+        token = "test-token"
+        with (
+            patch("bin.handle_site_scan_output.GH_TOKEN", token),
+            patch(
+                "requests.get",
+                side_effect=[
+                    _github_response(200, [first]),
+                    _github_response(
+                        429, {"message": "Rate limit exceeded"}, {"Retry-After": "7"}
+                    ),
+                    _github_response(200, [second]),
+                    _github_response(200, []),
+                ],
+            ) as get,
+            patch("time.sleep") as sleep,
+        ):
+            assert lookup() == [first, second]
+
+        assert get.call_args_list == [
+            call(
+                url,
+                headers={"Authorization": "Bearer " + token},
+                params={"per_page": 100, "page": page},
+            )
+            for page in [1, 2, 2, 3]
+        ]
+        sleep.assert_called_once_with(7)
+
+    def test_uses_primary_rate_limit_reset(self):
+        with (
+            patch(
+                "requests.get",
+                side_effect=[
+                    _github_response(
+                        403,
+                        {"message": "Forbidden"},
+                        {"X-RateLimit-Remaining": "0", "X-RateLimit-Reset": "1030"},
+                    ),
+                    _github_response(200, []),
+                ],
+            ),
+            patch("time.time", return_value=1000),
+            patch("time.sleep") as sleep,
+        ):
+            assert _get_current_github_issues() == []
+
+        sleep.assert_called_once_with(30)
+
+    def test_backs_off_three_times_then_raises(self):
+        limited = _github_response(
+            403, {"message": "You have exceeded a secondary rate limit."}
+        )
+        with (
+            patch("requests.get", return_value=limited) as get,
+            patch("time.sleep") as sleep,
+            pytest.raises(HTTPError) as error,
+        ):
+            _get_current_github_issues()
+
+        assert error.value.response is limited
+        assert get.call_count == 4
+        assert sleep.call_args_list == [call(60), call(120), call(240)]
+
+    @pytest.mark.parametrize(
+        "status, headers",
+        [(401, {}), (403, {}), (429, {"Retry-After": "3600"})],
+    )
+    def test_does_not_retry_other_errors_or_over_budget_waits(self, status, headers):
+        with (
+            patch(
+                "requests.get",
+                return_value=_github_response(
+                    status, {"message": "Forbidden"}, headers
+                ),
+            ) as get,
+            patch("time.sleep") as sleep,
+            pytest.raises(HTTPError),
+        ):
+            _get_current_github_issues()
+
+        get.assert_called_once()
+        sleep.assert_not_called()
+
+    def test_does_not_treat_an_error_object_as_a_list(self):
+        with (
+            patch(
+                "requests.get",
+                side_effect=[
+                    _github_response(200, {"message": "Unexpected response"}),
+                    _github_response(200, []),
+                ],
+            ),
+            pytest.raises(ValueError, match="expected a list of objects"),
+        ):
+            _get_current_github_issues()
 
 
 class TestLoadHttpErrors:

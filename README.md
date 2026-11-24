@@ -112,6 +112,13 @@ If the checks were carried out in batches, there may be multiple pairs of output
 Running the checks locally will put files in the `output/` directory.
 Checks run via Github Actions will gave a `scan-results` archive in the artifacts section for the relevant run, which can be downloaded and inspected. You must be authenticated to access the artifact.
 
+When processing scan results, `bin/handle_site_scan_output.py` uses `GH_TOKEN`
+(already supplied by the scan workflows) to look up existing GitHub issues and
+PRs. The lookup retries a rate-limited page up to three times, using GitHub's
+`Retry-After` or quota reset header when available and waiting 60, 120, then 240
+seconds otherwise. If GitHub asks for a wait longer than five minutes, or the
+retries run out, the lookup fails rather than risking duplicate issues or PRs.
+
 ## Static failover pages
 
 `www.mozilla.org` and `www.firefox.com` are each backed by a static failover page
