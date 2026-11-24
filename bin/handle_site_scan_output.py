@@ -11,6 +11,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 from hashlib import sha512
 from typing import Dict, List
 
@@ -233,17 +234,71 @@ Fingerprint: {fingerprint}"""
     return output
 
 
+def _github_rate_limit_delay(response: requests.Response, backoff: int) -> int | None:
+    if response.status_code not in (403, 429):
+        return None
+
+    retry_after = response.headers.get("Retry-After")
+    quota_exhausted = response.headers.get("X-RateLimit-Remaining") == "0"
+    if response.status_code == 403 and retry_after is None and not quota_exhausted:
+        try:
+            payload = response.json()
+        except requests.exceptions.JSONDecodeError:
+            return None
+        message = payload.get("message") if isinstance(payload, dict) else None
+        if not isinstance(message, str) or "rate limit" not in message.lower():
+            return None
+
+    if retry_after is not None:
+        try:
+            seconds = int(retry_after)
+            if seconds >= 0:
+                return seconds
+        except ValueError:
+            pass
+
+    if quota_exhausted:
+        try:
+            reset = int(response.headers.get("X-RateLimit-Reset", ""))
+            seconds = reset - int(time.time())
+            if seconds > 0:
+                return seconds
+        except ValueError:
+            pass
+
+    return backoff
+
+
 def _gh_get_all_pages(url: str) -> List:
     """Authenticated, paginated GET against a GitHub REST list endpoint."""
     headers = {"Authorization": f"Bearer {GH_TOKEN}"} if GH_TOKEN else {}
     results: List = []
     page = 1
     while True:
-        resp = requests.get(
-            url, headers=headers, params={"per_page": 100, "page": page}
-        )
+        # GitHub recommends at least a minute for secondary limits without timing headers.
+        for backoff in (60, 120, 240, None):
+            resp = requests.get(
+                url, headers=headers, params={"per_page": 100, "page": page}
+            )
+            if backoff is None:
+                break
+            delay = _github_rate_limit_delay(resp, backoff)
+            if delay is None:
+                break
+            if delay > 300:
+                _print(
+                    f"GitHub API rate limited; {delay}s wait exceeds the 300s retry limit"
+                )
+                break
+            _print(f"GitHub API rate limited; retrying page {page} in {delay}s")
+            time.sleep(delay)
+
         resp.raise_for_status()
         batch = resp.json()
+        if not isinstance(batch, list) or any(
+            not isinstance(item, dict) for item in batch
+        ):
+            raise ValueError("Invalid GitHub API response: expected a list of objects")
         if not batch:
             break
         results.extend(batch)
